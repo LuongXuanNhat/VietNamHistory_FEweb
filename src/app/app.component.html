@@ -312,7 +312,10 @@
     
     <a *ngIf="isadminuser" style="color: white;" routerLink="/user" title="User">User</a>
     <div class="spacer"></div>
-    <a style="color: white;" routerLink="/login">Đăng xuất</a>
+    <a *ngIf="isLoggedIn(); else loginLink" style="color: white;" (click)="logout()">Đăng xuất</a>
+    <ng-template #loginLink>
+    <a routerLink="/login" style="color: white;">Đăng nhập</a>
+    </ng-template>
 </div>
 
 <div class="container">

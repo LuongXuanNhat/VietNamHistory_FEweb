@@ -1,11 +1,11 @@
-@import '~@angular/material/theming';
+// @import '~@angular/material/theming';
 
-// Create a custom Material theme
-$custom-typography: mat-typography-config(
-  $font-family: 'Be Vietnam, Montserrat, sans-serif',
+// // Create a custom Material theme
+// $custom-typography: mat-typography-config(
+//   $font-family: 'Be Vietnam, Montserrat, sans-serif',
 
-);
+// );
 
-// Include Angular Material pre-built themes and set your custom typography
-@include mat-core();
-@include angular-material-theme($custom-typography);
+// // Include Angular Material pre-built themes and set your custom typography
+// @include mat-core();
+// @include angular-material-theme($custom-typography);

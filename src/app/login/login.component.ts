@@ -26,8 +26,9 @@ export class LoginComponent {
     if(this.loginform.valid){
       this.service.GetByCode(this.loginform.value).subscribe( (res: any) => {
         const resultObj = res.resultObj;
+        sessionStorage.setItem('access_token', resultObj);
         this.toastr.success('Đăng nhập thành công');
-          this.router.navigate(['']);
+        this.router.navigate(['']);
       },
       (error: any) => {
         const message = error.error.message; 

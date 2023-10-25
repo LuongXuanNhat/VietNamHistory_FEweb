@@ -29,11 +29,14 @@ export class AuthService {
   }
 
   IsLoggedIn(){
-    return sessionStorage.getItem('username')!=null;
+    return sessionStorage.getItem('access_token') != null;
   }
 
   GetUserRole(){
     return sessionStorage.getItem('userrole')!=null?sessionStorage.getItem('userrole')?.toString():'';
+  }
+  LogOut(){
+    return 
   }
 }
 

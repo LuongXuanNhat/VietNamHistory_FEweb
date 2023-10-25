@@ -12,18 +12,12 @@ export class AppComponent implements OnInit, DoCheck{
   username: string = '';
   ismenurequired = false;
   isadminuser = false;
+  token: any;
   constructor(private router : Router, private service: AuthService){
 
   }
 
   ngOnInit() {
-    const storedUsername = sessionStorage.getItem('username');
-    // Lấy giá trị từ sessionStorage
-    if (storedUsername !== null) {
-      this.username = storedUsername;
-    } else {
-      this.username = "Giá trị không tồn tại";
-    }
   }
 
   ngDoCheck(): void {
@@ -38,5 +32,13 @@ export class AppComponent implements OnInit, DoCheck{
       } else {
         this.isadminuser = false;
       }
+  }
+
+  isLoggedIn(){
+    return this.service.IsLoggedIn();
+  }
+
+  logout(){
+    
   }
 }
