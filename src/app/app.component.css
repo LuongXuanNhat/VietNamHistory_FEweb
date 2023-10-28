@@ -1,0 +1,36 @@
+.btn-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+}
+.img-user{
+    border-radius: 50%;
+    width: 64px !important;
+    height: 64px;
+    object-fit: cover; 
+    overflow: hidden;
+}
+.img-user-small{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    object-fit: cover; 
+    overflow: hidden;
+    position: absolute;
+}
+.category-menu{
+    width: 50%;
+}
+.img-user-medium{
+    border-radius: 50%;
+    width: auto !important;
+    height: auto !important;
+    font-size: 64px !important;
+}
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

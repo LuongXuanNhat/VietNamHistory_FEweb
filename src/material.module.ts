@@ -10,7 +10,8 @@ import { MatSortModule } from '@angular/material/sort'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     exports: [
@@ -24,7 +25,9 @@ import { MatIconModule } from '@angular/material/icon';
         MatSortModule,
         MatDialogModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatTabsModule,
+        MatMenuModule
     ]
 })
 export class MaterialModule {

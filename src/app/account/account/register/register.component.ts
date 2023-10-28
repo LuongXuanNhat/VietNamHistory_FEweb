@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms'
 import { ToastrService} from 'ngx-toastr'
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../../service/auth.service';
 import { Router } from '@angular/router';
 
 
@@ -30,11 +30,16 @@ export class RegisterComponent {
           (res: any) => {
               const resultObj = res.resultObj;
               this.toastr.success('Vui lòng nhập mã xác nhận được gửi đến email của bạn','Đăng ký thành công');
-              this.router.navigate(['login']);
+              
+              this.router.navigate(['/home']);
           },
           (error: any) => {
             const message = error.error.message; 
-            this.toastr.error(message);
+            if(message == null){
+              this.toastr.error("Lỗi kết nối đến server! Xin lỗi vì sự cố này");
+            } else {
+              this.toastr.error(message);
+            }
           }
         );
       } else {

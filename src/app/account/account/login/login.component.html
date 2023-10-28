@@ -3,6 +3,9 @@
         <mat-card-header>
             <h1>Đăng nhập</h1>
         </mat-card-header>
+        <mat-card-subtitle>
+            <span>admin@gmail.com</span>
+        </mat-card-subtitle>
         <mat-card-content>
             <form class="example-form" [formGroup]="loginform" (ngSubmit)="proceedlogin()">
                 <mat-form-field class="example-full-width">
@@ -17,11 +20,12 @@
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
-                
-                <div style="justify-content: space-around; display: flex;">
+                <div style="justify-content: space-between; display: flex; top: -24px;" class="po-re">
+                    <a mat-raised-button (click)="openDialog()" class=" underline-none text-black" color="accent">Quên mật khẩu</a>
+                    <a routerLink="/register" class=" underline-none text-black" color="accent">Quay lại đăng ký</a>
+                </div>
+                <div style="justify-content: space-around; display: flex;" class="mt-1">
                     <button mat-raised-button color="primary" >Đăng nhập</button>
-                    <a routerLink="/register"  color="accent">Quay lại đăng ký</a>
-
                 </div>
 
             </form>

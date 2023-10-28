@@ -42,7 +42,6 @@
     height: 60px;
     display: flex;
     align-items: center;
-    background-color: #1976d2;
     color: white;
     font-weight: 600;
   }
@@ -301,21 +300,68 @@
     }
   }
 </style>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Toolbar -->
-<div class="toolbar" *ngIf="ismenurequired" role="banner">
+<div class="toolbar body font" role="banner">
   <img
     width="40"
     alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    src="../assets/NguoiKeSu_min.png"
   />
     
-    <a *ngIf="isadminuser" style="color: white;" routerLink="/user" title="User">User</a>
-    <div class="spacer"></div>
-    <a *ngIf="isLoggedIn(); else loginLink" style="color: white;" (click)="logout()">Đăng xuất</a>
-    <ng-template #loginLink>
-    <a routerLink="/login" style="color: white;">Đăng nhập</a>
-    </ng-template>
+    <a *ngIf="isadminuser" routerLink="/user" title="User">User</a>
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+      <div class=" category-menu" >
+        <mat-tab-group >
+          <mat-tab *ngFor="let obj of objectList" [label]="obj.categoryname" [routerLink]="obj.url">
+          </mat-tab> 
+        </mat-tab-group>
+      </div>
+      <div style="display: flex;">
+        <button mat-icon-button >
+          <mat-icon matBadge="1" matBadgeColor="warn" style="color: black;">notifications</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn(); else loginLink" class="btn-user" >
+          <img *ngIf="avatar; else avatarcommon" [src]="avatar" alt="ảnh đại diện" class="img-user-small">
+
+          <ng-template #avatarcommon>
+            <mat-icon style="color: black;">account_circle</mat-icon>
+          </ng-template>
+        </button>
+        
+  
+        <mat-menu #menu="matMenu" >
+          <div style="padding: 8px 16px; border-bottom: 1px solid #e6e6e6;" class="flex-center fs">
+            <img *ngIf="avatar; else avatarBig"  src="{{avatar}}" class="img-user">
+            <ng-template #avatarBig >
+              <img src="../assets/Icon/user.png">
+            </ng-template>
+            <div class="pl-1">
+              <p style="width: 170px;" class="ellipsis"><strong>{{username}}</strong></p>
+              <p style="width: 170px;" class="ellipsis" [title]="email">{{email}}</p>
+            </div>
+          </div>
+          <button mat-menu-item routerLink="/account">
+            <mat-icon >settings</mat-icon>
+            <a class="fs co-black" >Cài đặt tài khoản</a>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>home</mat-icon>
+            <span class="fs">Bài viết</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <a class="fs co-red" >Đăng xuất</a>
+          </button>
+          
+        </mat-menu>
+      </div>
+      <ng-template #loginLink>
+        <button mat-raised-button color="primary" routerLink="/register" >Đăng ký</button>
+        <button mat-button routerLink="/login" >Đăng nhập</button>
+      </ng-template>
+    </div>
+ 
 </div>
 
 <div class="container">
@@ -325,5 +371,4 @@
   <!-- Footer -->
 
 </div>
-
 
