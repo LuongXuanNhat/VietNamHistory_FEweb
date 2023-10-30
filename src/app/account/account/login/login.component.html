@@ -1,0 +1,35 @@
+<div style="width: 100%; margin-top: 100px;" class="form-register" >
+    <mat-card class="form-register font">
+        <mat-card-header>
+            <h1>Đăng nhập</h1>
+        </mat-card-header>
+        <mat-card-subtitle>
+            <span>admin@gmail.com</span>
+        </mat-card-subtitle>
+        <mat-card-content>
+            <form class="example-form" [formGroup]="loginform" (ngSubmit)="proceedlogin()">
+                <mat-form-field class="example-full-width">
+                <mat-label>Tên tài khoản</mat-label>
+                <input matInput placeholder="Ví dụ: 'luongxuannhat'" formControlName="Email" >
+                </mat-form-field>
+                
+                <mat-form-field class="example-full-width">
+                    <mat-label>Mật khẩu</mat-label>
+                    <input matInput type="password" [type]="hide ? 'password' : 'text'" formControlName="Password">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div style="justify-content: space-between; display: flex; top: -24px;" class="po-re">
+                    <a style="cursor: pointer;" (click)="forgetPassword()" class=" underline-none text-black" color="accent">Quên mật khẩu</a>
+                    <a routerLink="/register" class=" underline-none text-black" color="accent">Quay lại đăng ký</a>
+                </div>
+                <div style="justify-content: space-around; display: flex;" class="mt-1">
+                    <button mat-raised-button color="primary" >Đăng nhập</button>
+                </div>
+
+            </form>
+            
+        </mat-card-content>
+    </mat-card>
+</div>  

@@ -1,8 +1,122 @@
-/* You can add global styles to this file, and also import other style files */
+/* // @import '../node_modules/@angular/material/theming';
+// $custom-typography: mat-typography-config(
+//   $font-family: 'Be Vietnam'
+// );
+// @include mat-core;
+
+// @font-face {
+//   font-family: 'Be Vietnam'; 
+//   src: url('./assets/be-vietnam/bevietnamregular.ttf') format('truetype'); 
+// } */
+
+
+
+
+
+
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif; }
+body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; }
 
+
+
+.boder-50{
+    border-radius: 50%;
+}
 .font {
-    font-family: "Be Vietnam", "Montserrat";
+    font-family: Be Vietnam, "Montserrat", sans-serif !important;
+}
+
+.text-white {
+    color: white !important;
+}
+.mat-tab-label {
+    font-family: "Be Vietnam", "Montserrat" !important;
+    color: white !important;
+    padding: 0 8px;
+}
+
+.dis-block{
+    display: block;
+}
+.dis-inline{
+    display: inline;
+}
+.dis-flex{
+    display: flex;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pl{
+    padding-left: 8px;;
+}
+.pl-1{
+    padding-left: 16px;
+}
+.pl-2{
+    padding-left: 32px;
+}
+.pl-3{
+    padding-left: 48px;
+}
+.fs{
+    font-size: 14px;
+}
+.text-red {
+    color: rgb(233, 52, 52) !important;
+}
+.text-black {
+    color: rgb(0, 0, 0) !important;
+}
+.underline-none {
+    text-decoration: none !important;
+}
+.w-100 {
+    width: 100%;
+}
+.w-50 {
+    width: 50%;
+}
+.w-40 {
+    width: 40%;
+}
+.mt-60 {
+    margin-top: 60px !important;
+}
+.mt-1 {
+    margin-top: 16px;
+}
+.mt-2 {
+    margin-top: 32px;
+}
+.pt{
+    padding-top: 8px;
+}
+.pt-1{
+    padding-top: 16px;
+}
+.pt-2{
+    padding-top: 32px;
+}
+
+.po-re{
+    position: relative;
+}
+.po-ab{
+    position: absolute;
+}
+.pb-1{
+    padding-bottom: 16px;
+}
+.bb{
+    border-bottom: 1px solid rgb(192, 192, 192);
+}
+
+
+/* COLOR  */
+.co-primary {
+    color: #4069E5FF;
 }
