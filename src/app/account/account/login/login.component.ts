@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from '../../../service/user.service';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import { ForgetpassComponent } from '../../forgetpass/forgetpass.component';
 
 @Component({
   selector: 'app-login',
@@ -74,8 +75,17 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.hide = !this.hide;
   }
-
-  openDialog(){
-    
+  forgetPassword(){
+    this.openDialog('100ms', '600ms');
+  }
+  openDialog(enteranimation: any, exitanimation: any){
+    const popup = this.dialog.open(ForgetpassComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '30%'
+    });
+    // popup.afterClosed().subscribe(res => {
+    //   this.LoadUser();
+    // });
   }
 }

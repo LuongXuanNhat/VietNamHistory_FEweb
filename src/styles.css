@@ -35,6 +35,10 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     color: white !important;
     padding: 0 8px;
 }
+
+.dis-block{
+    display: block;
+}
 .dis-inline{
     display: inline;
 }
@@ -70,11 +74,23 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .underline-none {
     text-decoration: none !important;
 }
+.w-100 {
+    width: 100%;
+}
+.w-50 {
+    width: 50%;
+}
+.w-40 {
+    width: 40%;
+}
 .mt-60 {
-    margin-top: 60px;
+    margin-top: 60px !important;
 }
 .mt-1 {
     margin-top: 16px;
+}
+.mt-2 {
+    margin-top: 32px;
 }
 .pt{
     padding-top: 8px;

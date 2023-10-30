@@ -15,6 +15,11 @@ import { IntroduceComponent } from './account/introduce/introduce.component';
 import { IndexComponent } from './home/index/index.component';
 import { AccountComponent } from './account/account/account.component';
 import { ForgetpassComponent } from './account/forgetpass/forgetpass.component';
+import { CategoryComponent } from './account/category/category.component';
+import { UpdateuserinforComponent } from './account/updateuserinfor/updateuserinfor.component';
+import { ChangeemailComponent } from './account/changeemail/changeemail.component';
+import { ChangepasswordComponent } from './account/changepassword/changepassword.component';
+import { UpdateaccountComponent } from './account/updateaccount/updateaccount.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,11 @@ import { ForgetpassComponent } from './account/forgetpass/forgetpass.component';
     IndexComponent,
     AccountComponent,
     ForgetpassComponent,
+    CategoryComponent,
+    UpdateuserinforComponent,
+    ChangeemailComponent,
+    ChangepasswordComponent,
+    UpdateaccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +44,7 @@ import { ForgetpassComponent } from './account/forgetpass/forgetpass.component';
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 2000,
       positionClass: 'toast-top-right', 
       preventDuplicates: true, 
       closeButton: true, 

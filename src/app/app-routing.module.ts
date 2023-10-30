@@ -6,12 +6,14 @@ import { LoginComponent } from './account/account/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './service/auth/auth.interceptor';
 import { AccountComponent } from './account/account/account.component';
+import { UpdateuserinforComponent } from './account/updateuserinfor/updateuserinfor.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'account', component:AccountComponent},
+  {path: 'account/updateuserinfor', component:UpdateuserinforComponent},
 
   // {path: 'user', component:UserlisttingComponent, canActivate:[AuthGuard]},
 ];

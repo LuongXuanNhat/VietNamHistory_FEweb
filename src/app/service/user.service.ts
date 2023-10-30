@@ -17,4 +17,6 @@ export class UserService {
   UpdateAvatar(formData: any){
     return this.http.post(this.apiurl + '/user/image' , formData, { responseType: 'text' });
   }
+
+  
 }

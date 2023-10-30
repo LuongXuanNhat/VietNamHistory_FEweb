@@ -39,5 +39,17 @@ export class AuthService {
   LogOut(){
     return this.http.get(this.apiurl + "/Logout");
   }
+
+  ForgetPassword(email: any){
+    return this.http.get(this.apiurl + '/ForgetPassword?email=' + email);
+  }
+
+  ConfirmCode(email: any){
+    return this.http.get(this.apiurl + '/ForgetPassword/ConfirmCode?email=' + email);
+  }
+
+  ResetPassword(inputdata: any){
+    return this.http.post(this.apiurl + '/ResetPassword', inputdata);
+  }
 }
 

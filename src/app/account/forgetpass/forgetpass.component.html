@@ -1,0 +1,54 @@
+<h1 mat-dialog-title style="text-align: center;">Quên mật khẩu</h1>
+
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper class="font">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Nhập email của tài khoản</ng-template>
+        <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" >
+          </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" (click)="GetCode()" >Gửi</button>
+          <button mat-raised-button [disabled]="!step1Completed" (click)="Step()" #continue >Tiếp theo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [completed]="step1Completed" >
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Nhập mã xác nhận</ng-template>
+        <mat-form-field class="w-100">
+          <mat-label>Mã xác nhận</mat-label>
+          <input matInput formControlName="code" placeholder="12345"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button matStepperPrevious>Quay lại</button>
+          <button mat-raised-button color="primary" (click)="ConfirmCode()" matStepperNext>Tiếp theo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" [completed]="step2Completed" *ngIf="step2Completed">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Cài lại mật khẩu</ng-template>
+          <mat-form-field class="w-100">
+            <mat-label>Mật khẩu mới</mat-label>
+            <input matInput type="password" [type]="hide ? 'password' : 'text'" placeholder="Ví dụ: 'Mk5manh/'" formControlName="password">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Nhập lại mật khẩu</mat-label>
+            <input type="password" matInput [(ngModel)]="confirmPass" [ngModelOptions]="{ standalone: true }">
+        </mat-form-field>
+          <div>
+            <button mat-raised-button matStepperPrevious>Quay lại</button>
+            <button mat-raised-button color="primary" (click)="ResetPassword()" matStepperNext>Cài lại mật khẩu</button>
+          </div>
+        </form>
+    </mat-step>
+</mat-stepper>
+<div mat-dialog-actions style="justify-content: end;">
+<button mat-raised-button (click)="onNoClick()">Hủy</button>
+</div>
