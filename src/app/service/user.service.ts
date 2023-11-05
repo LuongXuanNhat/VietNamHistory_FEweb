@@ -18,5 +18,11 @@ export class UserService {
     return this.http.post(this.apiurl + '/user/image' , formData, { responseType: 'text' });
   }
 
-  
+  GetUserDetail(){
+    return this.http.get(this.apiurl + '/user');
+  }
+
+  UpdateUser(request: any){
+    return this.http.put(this.apiurl + '/user', request);
+  }
 }

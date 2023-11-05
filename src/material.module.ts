@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { MatCardModule } from '@angular/material/card'
@@ -13,8 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
     exports: [
@@ -34,6 +37,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
         FormsModule,
         MatStepperModule,
         MatGridListModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatAutocompleteModule
     ]
 })
 export class MaterialModule {

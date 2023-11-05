@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from '../../../service/user.service';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { ForgetpassComponent } from '../../forgetpass/forgetpass.component';
+import { SessionService } from 'src/app/service/session/session.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ import { ForgetpassComponent } from '../../forgetpass/forgetpass.component';
 export class LoginComponent {
   constructor (private builder: FormBuilder, private  toastr: ToastrService,private userService: UserService,
     private service: AuthService, private router: Router,private jwtHelper: JwtHelperService 
-    ,private dialog: MatDialog){
+    ,private dialog: MatDialog, private sessionService: SessionService){
   }
   userdata: any;
   hide = true;
@@ -33,7 +34,7 @@ export class LoginComponent {
     if(this.loginform.valid){
       this.service.Login(this.loginform.value).subscribe( (res: any) => {
         const resultObj = res.resultObj;
-        sessionStorage.setItem('access_token', resultObj);
+        this.sessionService.setToken(resultObj);
         if(res.resultObj){
           const decodedToken = this.jwtHelper.decodeToken(res.resultObj);
           const email = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
@@ -42,9 +43,9 @@ export class LoginComponent {
           const uri = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/uri'];
 
           // Lưu thông tin vào sessionStorage
-          sessionStorage.setItem('email', email);
-          sessionStorage.setItem('role', role);
-          sessionStorage.setItem('name', name);
+          this.sessionService.setEmail(email);
+          this.sessionService.setName(name);
+          this.sessionService.setRole(role);
           this.userService.GetImage().subscribe(
             (data: string) => {
               if(data !== ''){
@@ -87,5 +88,13 @@ export class LoginComponent {
     // popup.afterClosed().subscribe(res => {
     //   this.LoadUser();
     // });
+  }
+
+  loginWithFacebookProxy(){
+    this.service.loginWithFacebook();
+    var token = sessionStorage.getItem('access_token');
+    if(token != null){
+      
+    }
   }
 }

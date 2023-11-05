@@ -7,7 +7,7 @@
             <span>admin@gmail.com</span>
         </mat-card-subtitle>
         <mat-card-content>
-            <form class="example-form" [formGroup]="loginform" (ngSubmit)="proceedlogin()">
+            <form [formGroup]="loginform" (ngSubmit)="proceedlogin()">
                 <mat-form-field class="example-full-width">
                 <mat-label>Tên tài khoản</mat-label>
                 <input matInput placeholder="Ví dụ: 'luongxuannhat'" formControlName="Email" >
@@ -27,9 +27,14 @@
                 <div style="justify-content: space-around; display: flex;" class="mt-1">
                     <button mat-raised-button color="primary" >Đăng nhập</button>
                 </div>
-
+                <span>hoặc</span>
+                
             </form>
-            
+            <div style="justify-content: space-around; display: flex;" class="mt-1">
+                <button  style="background-color: transparent; border: none;" (click)="loginWithFacebookProxy()" title="Đăng nhập bằng facebook">
+                    <img src="assets/Icon/facebook.png">
+                </button>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>  
