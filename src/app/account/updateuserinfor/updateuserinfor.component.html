@@ -1,16 +1,64 @@
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
-<p>updateuserinfor works!</p>
+<div class="font">
+    <div style="max-width: 700px;">
+        <div class="dis-flex" style="justify-content: space-between; align-items: center;">
+            <h2>Cập nhập thông tin</h2>
+            <button mat-button  class="pl-1" style="top: 3px;" (click)="toggleEditMode()" [title]="isEditMode ? 'Hủy' : 'Chỉnh sửa'">
+                <mat-icon>{{ isEditMode ? 'cancel' : 'edit' }}</mat-icon>
+            </button>
+        </div>
+        <form [formGroup]="userform" (ngSubmit)="updateuserinfor()" >
+            <mat-form-field class="w-100">
+            <mat-label>Tên tài khoản (mặc định)</mat-label>
+                <input matInput formControlName="Email" readonly>
+            </mat-form-field>
+            <div class="flex-center" >
+                <mat-form-field class="w-100">
+                    <mat-label>Họ và tên</mat-label>
+                    <input matInput formControlName="Fullname" [readonly]="!isEditMode">
+                </mat-form-field>
+                <mat-form-field class="pl-1 w-40">
+                    <mat-label>Ngày sinh</mat-label>
+                    <input matInput formControlName="DateOfBirth" [matDatepicker]="picker" [readonly]="!isEditMode">
+                    <mat-hint>dd/MM/yyyy</mat-hint>
+                    <mat-datepicker-toggle 
+                    matIconSuffix [for]="picker" *ngIf="isEditMode"></mat-datepicker-toggle>
+                    <mat-datepicker #picker ></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="flex-center">
+                <mat-form-field class="w-40">
+                    <mat-label>Giới tính</mat-label>
+                    <input type="text"
+                           matInput
+                           placeholder="Chọn giới tính"
+                           formControlName="Sex" 
+                           [readonly]="!isEditMode"
+                           [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option value="Nam">
+                        Nam
+                      </mat-option>
+                      <mat-option value="Nữ">
+                        Nữ
+                      </mat-option>
+                      <mat-option value="Không">
+                        Không
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                <mat-form-field class="pl-1 w-100">
+                    <mat-label>Số điện thoại</mat-label>
+                    <input matInput formControlName="PhoneNumber" [readonly]="!isEditMode">
+                </mat-form-field>
+            </div>
+            
+            <mat-form-field class="w-100">
+                <mat-label>Giới thiệu</mat-label>
+                <textarea  matInput formControlName="Introduction" [readonly]="!isEditMode"></textarea>
+            </mat-form-field>
+            <div style="justify-content: flex-end; display: flex;" class="mt-1">
+                <button mat-raised-button color="primary" *ngIf="isEditMode">Cập nhập</button>
+            </div>
+        </form>
+    </div>
+</div>

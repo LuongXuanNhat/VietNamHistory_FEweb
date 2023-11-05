@@ -17,9 +17,13 @@ import { AccountComponent } from './account/account/account.component';
 import { ForgetpassComponent } from './account/forgetpass/forgetpass.component';
 import { CategoryComponent } from './account/category/category.component';
 import { UpdateuserinforComponent } from './account/updateuserinfor/updateuserinfor.component';
-import { ChangeemailComponent } from './account/changeemail/changeemail.component';
-import { ChangepasswordComponent } from './account/changepassword/changepassword.component';
 import { UpdateaccountComponent } from './account/updateaccount/updateaccount.component';
+import { DiscoverComponent } from './discover/discover.component';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { ChangeemailComponent } from './account/updateaccount/changeemail/changeemail.component';
+import { ChangepasswordComponent } from './account/updateaccount/changepassword/changepassword.component';
+import { SessionService } from './service/session/session.service';
+import { CreatepostComponent } from './discover/createpost/createpost.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +37,11 @@ import { UpdateaccountComponent } from './account/updateaccount/updateaccount.co
     ForgetpassComponent,
     CategoryComponent,
     UpdateuserinforComponent,
+    UpdateaccountComponent,
+    DiscoverComponent,
     ChangeemailComponent,
     ChangepasswordComponent,
-    UpdateaccountComponent,
+    CreatepostComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,10 @@ import { UpdateaccountComponent } from './account/updateaccount/updateaccount.co
       },
     }),
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    SessionService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

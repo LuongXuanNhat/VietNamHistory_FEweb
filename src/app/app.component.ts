@@ -5,6 +5,9 @@ import { AccountList, Category } from './ObjectClass/Category';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './service/user.service';
+import { SessionService } from './service/session/session.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreatepostComponent } from './discover/createpost/createpost.component';
 
 
 @Component({
@@ -31,7 +34,8 @@ export class AppComponent implements OnInit, DoCheck{
   
 
   constructor(private router : Router, private service: AuthService, private overlayContainer: OverlayContainer,
-    private toastr: ToastrService, private userService: UserService){
+    private toastr: ToastrService, private userService: UserService, private sessionService: SessionService,
+    private dialog: MatDialog){
 
   }
 
@@ -52,13 +56,26 @@ export class AppComponent implements OnInit, DoCheck{
         this.isadminuser = false;
       }
   }
+  createPost(){
+    this.openDialog('100ms', '600ms');
+  }
+  openDialog(enteranimation: any, exitanimation: any){
+    const popup = this.dialog.open(CreatepostComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '60%'
+    });
+    // popup.afterClosed().subscribe(res => {
+    //   this.LoadUser();
+    // });
+  }
 
   isLoggedIn(){
-    this.token = sessionStorage.getItem('access_token');
+    this.token = this.sessionService.getToken();
     if(this.token){
-      this.avatar = sessionStorage.getItem('avatar');
-      this.username = sessionStorage.getItem('name');
-      this.email = sessionStorage.getItem('email');
+      this.avatar = this.sessionService.getAvatar();
+      this.username = this.sessionService.getName();
+      this.email = this.sessionService.getEmail();
       this.avatar = this.avatar === '' ? null : this.avatar;
     }
     return this.service.IsLoggedIn();
@@ -66,12 +83,12 @@ export class AppComponent implements OnInit, DoCheck{
 
   logout(){
     this.service.LogOut().subscribe( (res: any) => {
-      sessionStorage.removeItem('access_token');
-      sessionStorage.removeItem('email');
-      sessionStorage.removeItem('uri');
-      sessionStorage.removeItem('name');
-      sessionStorage.removeItem('role');
-      sessionStorage.removeItem('avatar');
+      this.sessionService.removeToken();
+      this.sessionService.removeEmail();
+      this.sessionService.removeName();
+      this.sessionService.removeAvatar();
+      this.sessionService.removeRole();
+      
       this.avatar = null;
       this.router.navigate(['/login']);
     },
