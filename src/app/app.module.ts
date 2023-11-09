@@ -11,6 +11,7 @@ import { RegisterComponent } from './account/account/register/register.component
 import { LoginComponent } from './account/account/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { IntroduceComponent } from './account/introduce/introduce.component';
 import { IndexComponent } from './home/index/index.component';
 import { AccountComponent } from './account/account/account.component';
@@ -49,9 +50,10 @@ import { CreatepostComponent } from './discover/createpost/createpost.component'
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CKEditorModule,
     ToastrModule.forRoot({
       timeOut: 2000,
-      positionClass: 'toast-top-right', 
+      positionClass: 'custom-toast', 
       preventDuplicates: true, 
       closeButton: true, 
     }),
@@ -64,10 +66,12 @@ import { CreatepostComponent } from './discover/createpost/createpost.component'
         allowedDomains: ['https://localhost:7138'],
       },
     }),
+    
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-    SessionService
+    SessionService,
+    
   ],
   bootstrap: [AppComponent]
 })

@@ -1,1 +1,99 @@
-<p>createpost works!</p>
+<div class="Post-Create-Card">
+    <mat-stepper linear #stepper>
+        <mat-step [editable]="isEditable">
+            <div style="margin-top: 8px;"></div>
+            <form [formGroup]="createpostform">
+                <ng-template matStepLabel>Nội dung câu chuyện</ng-template>
+                <mat-form-field class="w-100">
+                    <input style="font-size: 1.4em;" class="fw-5" matInput formControlName="Title" placeholder="Nhập tiêu đề ở đây..." required>
+                </mat-form-field>
+                <div>
+                    <ckeditor
+                        style="max-height: 650px; overflow: auto;"
+                        [editor]="Editor"
+                        [data]="createpostform.value.Content ?? ''"
+                        (editorChange)="onEditorChange($event)"
+                    ></ckeditor>
+                </div>
+                <div class="mt-1">
+                    <button mat-raised-button color="primary" matStepperNext >Tiếp theo</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [editable]="isEditable">
+            <ng-template matStepLabel>Trang trí</ng-template>
+            <form [formGroup]="createpostform">
+                <div style="margin-top: 8px;"></div>
+                <label class="image-upload-container btn btn-bwm font">
+                    <span class="mb">Chọn ảnh</span>
+                    <input #imageInput class="font" type="file" accept="image/*" (change)="onFileSelected(imageInput)">
+                </label>
+                <div class="image-card">
+                    <img [src]="selectedImage" alt="Selected Image" *ngIf="selectedImage">
+                </div>
+
+                <mat-form-field class=" w-100 mt-1">
+                    <mat-label>Chọn chủ đề</mat-label>
+                    <mat-chip-grid #chipGrid aria-label="Chọn 1 chủ đề">
+                        <mat-chip-row *ngFor="let title of choosetopic" (removed)="removeTopic(title)">
+                            {{title}}
+                            <button matChipRemove [attr.aria-label]="'remove ' + title">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    </mat-chip-grid>
+                    <input placeholder="Tìm kiếm chủ đề..." #topicInput [formControl]="topicCtrl"
+                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addTopic($event)"
+                        />
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedTopic($event)">
+                        <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
+                            {{topic}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class=" w-100">
+                    <mat-label>Gắn Hashtag</mat-label>
+                    <mat-chip-grid #chipGridTag aria-label="Hashtag làm cho các bài viết của bạn được dễ tìm thấy hơn">
+                        <mat-chip-row *ngFor="let title of chooseTag" (removed)="removeTag(title)">
+                            {{title}}
+                            <button matChipRemove [attr.aria-label]="'remove ' + title">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    </mat-chip-grid>
+                    <input placeholder="Gắn thẻ" #TagInput [formControl]="tagCtrl"
+                        [matChipInputFor]="chipGridTag" [matAutocomplete]="autoTag"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodesTag"
+                        (matChipInputTokenEnd)="addTag($event)"
+                        />
+                    <mat-autocomplete #autoTag="matAutocomplete" (optionSelected)="selectedTag($event)">
+                        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                            {{tag}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperPrevious>Quay lại</button>
+                    <button mat-raised-button color="primary" matStepperNext>Tiếp theo</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="createpostform">
+            <div style="margin-top: 8px;"></div>
+            <ng-template matStepLabel>Hoàn thành</ng-template>
+            <div *ngIf="Check(); else Invalid">
+                xem lại
+            </div>
+            <ng-template #Invalid>
+                <i class="text-red">*Vui lòng điền đầy đủ thông tin yêu cầu!</i>
+            </ng-template>
+            <div>
+                <button mat-button matStepperPrevious>Quay lại</button>
+                <button mat-raised-button color="primary" [disabled]="!Check()">Đăng</button>
+                <!-- <button mat-button (click)="stepper.reset()">Đăng</button> -->
+            </div>
+        </mat-step>
+    </mat-stepper>  
+</div>

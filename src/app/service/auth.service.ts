@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor(private http: HttpClient ) { }
-  apiurl = 'https://localhost:7138';
+  //  apiurl = 'http://vuanhpham25-001-site1.gtempurl.com';
+   apiurl = 'https://localhost:7138';
 
   GetAllRole(){
     return this.http.get('http://localhost:3000/role');

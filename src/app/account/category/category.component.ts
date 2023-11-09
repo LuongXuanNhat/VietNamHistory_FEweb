@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/ObjectClass/Category';
+import { Category } from 'src/app/ObjectClass/object';
 
 @Component({
   selector: 'app-category',

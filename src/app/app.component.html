@@ -318,12 +318,30 @@
     </mat-tab-group>
   </div>
   <div style="display: flex;">
-    <button mat-icon-button class="btn-create btn-Menu-Create" (click)="createPost()" >
+    <button mat-icon-button [matMenuTriggerFor]="menuCreate" title="Làm cái gì đó" >
       <mat-icon matBadge="1" matBadgeColor="warn" style="color: #3e50ca;">add_circle</mat-icon>
     </button>
+    <mat-menu #menuCreate="matMenu" style="z-index: 10;">
+      <button mat-menu-item (click)="createPost()">
+        <mat-icon>post_add</mat-icon>
+        <span>Tạo bài đọc</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>school</mat-icon>
+        <span>Tạo khóa học</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>forum</mat-icon>
+        <span>Đặt câu hỏi</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>receipt_long</mat-icon>
+        <span>Chia sẻ tài liệu</span>
+      </button>
+    </mat-menu>
 
     <button mat-icon-button >
-      <mat-icon matBadge="1" matBadgeColor="warn" style="color: black;">notifications</mat-icon>
+      <mat-icon matBadge="1" matBadgeColor="warn" style="color: #7d7d7d;">notifications</mat-icon>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn(); else loginLink" class="btn-user" >
       <img *ngIf="avatar; else avatarcommon" [src]="avatar" alt="ảnh đại diện" class="img-user-small">
@@ -333,22 +351,7 @@
       </ng-template>
     </button>
   </div>
-  <div class="menu-create" >
-    <div style="padding: 8px 16px; border-bottom: 1px solid #e6e6e6;" class="flex-center fs">
-    <button mat-menu-item routerLink="/account">
-      <mat-icon >settings</mat-icon>
-      <a class="fs co-black" >Cài đặt tài khoản</a>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>home</mat-icon>
-      <span class="fs">Bài viết</span>
-    </button>
-    <button mat-menu-item (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      <a class="fs co-red" >Đăng xuất</a>
-    </button>
-  </div>
-
+  
 
     <mat-menu #menu="matMenu" >
       <div style="padding: 8px 16px; border-bottom: 1px solid #e6e6e6;" class="flex-center fs">
@@ -379,6 +382,7 @@
     <button mat-raised-button color="primary" routerLink="/register" >Đăng ký</button>
     <button mat-button routerLink="/login" >Đăng nhập</button>
   </ng-template>
+</div>
 </div>
 
 

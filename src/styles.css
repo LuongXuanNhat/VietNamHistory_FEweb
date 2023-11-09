@@ -13,7 +13,10 @@
 
 
 
-
+.custom-toast {
+    top: 60px;
+    right: 12px;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; }
@@ -26,9 +29,20 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .font {
     font-family: Be Vietnam, "Montserrat", sans-serif !important;
 }
-
+fw-5{
+    font-weight: 500;
+}
 .text-white {
     color: white !important;
+}
+.text-red {
+    color: rgb(233, 52, 52) !important;
+}
+.text-black {
+    color: rgb(0, 0, 0) !important;
+}
+.underline-none {
+    text-decoration: none !important;
 }
 .mat-tab-label {
     font-family: "Be Vietnam", "Montserrat" !important;
@@ -65,15 +79,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .fs{
     font-size: 14px;
 }
-.text-red {
-    color: rgb(233, 52, 52) !important;
-}
-.text-black {
-    color: rgb(0, 0, 0) !important;
-}
-.underline-none {
-    text-decoration: none !important;
-}
+
 .w-100 {
     width: 100%;
 }
@@ -91,6 +97,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .mt-2 {
     margin-top: 32px;
+}
+.mb{
+    margin-bottom: 8px;
 }
 .pt{
     padding-top: 8px;

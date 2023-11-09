@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   constructor(private http: HttpClient ) { }
-  apiurl = 'https://localhost:7138';
+    //  apiurl = 'http://vuanhpham25-001-site1.gtempurl.com';
+    apiurl = 'https://localhost:7138';
 
   GetImage(){
     return this.http.get(this.apiurl + '/user/image', { responseType: 'text' });
