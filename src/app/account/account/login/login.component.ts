@@ -49,12 +49,14 @@ export class LoginComponent {
           this.userService.GetImage().subscribe(
             (data: string) => {
               if(data !== ''){
-                const avatar = 'data:image/jpeg;base64,' + data;
+                const avatar = data;
                 sessionStorage.setItem('avatar', avatar);
               }
             },
             error => {
               console.error('Lỗi khi gọi API', error);
+              console.log(error);
+        console.log(error.message);
             }
           );
         }

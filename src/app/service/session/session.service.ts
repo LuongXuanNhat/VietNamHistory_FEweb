@@ -5,8 +5,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SessionService {
-  private emailSubject = new BehaviorSubject<string>(''); // Giá trị mặc định là rỗng
+  private emailSubject = new BehaviorSubject<string>(''); 
   email$ = this.emailSubject.asObservable();
+  private descriptionUserSubject = new BehaviorSubject<string>(''); 
+  descriptionUser$ = this.descriptionUserSubject.asObservable();
 
   constructor() { }
 
@@ -25,6 +27,9 @@ export class SessionService {
   getAvatar(){
     return sessionStorage.getItem('avatar');
   }
+  getDescriptionUser(){
+    return sessionStorage.getItem('descriptionuser');
+  }
 
   setName(name: string) {
     sessionStorage.setItem('name', name);
@@ -42,6 +47,10 @@ export class SessionService {
   setAvatar(avatar: string) {
     sessionStorage.setItem('avatar', avatar);
   }
+  setDescriptionUser(descriptionUser: string) {
+    sessionStorage.setItem('description_user', descriptionUser);
+    this.descriptionUserSubject.next(descriptionUser);
+  }
 
   removeToken() {
     sessionStorage.removeItem('access_token');
@@ -57,5 +66,10 @@ export class SessionService {
   }
   removeRole() {
     sessionStorage.removeItem('role');
+  }
+
+
+  clearSessionStorage() {
+    sessionStorage.clear();
   }
 }

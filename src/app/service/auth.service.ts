@@ -7,11 +7,11 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor(private http: HttpClient ) { }
-  //  apiurl = 'http://vuanhpham25-001-site1.gtempurl.com';
-   apiurl = 'https://localhost:7138';
+    // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
+  apiurl = 'https://localhost:7138';
 
   GetAllRole(){
-    return this.http.get('http://localhost:3000/role');
+    return this.http.get( this.apiurl + '/role');
   }
 
   Login(inputdata: any){
@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   UpdateUser(code: any,inputdata: any){
-    return this.http.put('http://localhost:3000/user/' + code, inputdata);
+    return this.http.put(this.apiurl + 'user/' + code, inputdata);
   }
 
   IsLoggedIn(){

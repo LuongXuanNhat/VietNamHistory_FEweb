@@ -98,11 +98,7 @@ export class AppComponent implements OnInit, DoCheck{
 
   logout(){
     this.service.LogOut().subscribe( (res: any) => {
-      this.sessionService.removeToken();
-      this.sessionService.removeEmail();
-      this.sessionService.removeName();
-      this.sessionService.removeAvatar();
-      this.sessionService.removeRole();
+      this.sessionService.clearSessionStorage();
       
       this.avatar = null;
       this.router.navigate(['/login']);

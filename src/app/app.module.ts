@@ -25,6 +25,7 @@ import { ChangeemailComponent } from './account/updateaccount/changeemail/change
 import { ChangepasswordComponent } from './account/updateaccount/changepassword/changepassword.component';
 import { SessionService } from './service/session/session.service';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CreatepostComponent } from './discover/createpost/createpost.component'
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     SessionService,
+    [DatePipe],
     
   ],
   bootstrap: [AppComponent]

@@ -9,7 +9,8 @@ import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {NgFor, AsyncPipe} from '@angular/common';
+import {NgFor, AsyncPipe, DatePipe} from '@angular/common';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 
 @Component({
   selector: 'app-createpost',
@@ -30,11 +31,13 @@ export class CreatepostComponent {
     Content: [' ', Validators.required],
     Image: [null, Validators.required],
     TopicId: ['', Validators.required],
+    TopicName: ['', Validators.required],
     Tags: [[] as string[]]
   });
-
+  currentDate = this.service.getCurrentDate();
   isEditable = true;
   public Editor = ClassicEditor;
+  
   selectedImage: string | null = null;
   topics: Topic[] = [];
   listTopic: string[] = [];
@@ -61,8 +64,9 @@ export class CreatepostComponent {
     placeholder: 'Nhập nội dung ở đây...',
     language: 'vi',
   };
-  onEditorChange(event: any) {
-    this.createpostform.controls['Content'].setValue(event);
+  onEditorChange( { editor }: ChangeEvent )  {
+    // const data = editor.getData();
+    // this.createpostform.get('Content')?.setValue(data);
   }
 
   constructor(private _formBuilder: FormBuilder, public service: PublicserviceService) {
@@ -169,6 +173,7 @@ export class CreatepostComponent {
       const selectedTopic = this.topics.find(element => element.title === this.choosetopic[0]);
       if (selectedTopic) {
         this.createpostform.get('TopicId')?.setValue(selectedTopic.id);
+        this.createpostform.get('TopicName')?.setValue(selectedTopic.title);
       }
     }
     const tagsControl = this.createpostform.get('Tags');

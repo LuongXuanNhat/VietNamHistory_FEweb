@@ -11,8 +11,8 @@
                     <ckeditor
                         style="max-height: 650px; overflow: auto;"
                         [editor]="Editor"
-                        [data]="createpostform.value.Content ?? ''"
-                        (editorChange)="onEditorChange($event)"
+                        formControlName="Content"
+                        (change)="onEditorChange($event)"
                     ></ckeditor>
                 </div>
                 <div class="mt-1">
@@ -33,7 +33,6 @@
                 </div>
 
                 <mat-form-field class=" w-100 mt-1">
-                    <mat-label>Chọn chủ đề</mat-label>
                     <mat-chip-grid #chipGrid aria-label="Chọn 1 chủ đề">
                         <mat-chip-row *ngFor="let title of choosetopic" (removed)="removeTopic(title)">
                             {{title}}
@@ -42,6 +41,9 @@
                             </button>
                         </mat-chip-row>
                     </mat-chip-grid>
+                    <mat-label>
+                        <mat-icon matSuffix>new_label</mat-icon>
+                    </mat-label>
                     <input placeholder="Tìm kiếm chủ đề..." #topicInput [formControl]="topicCtrl"
                         [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -54,7 +56,6 @@
                     </mat-autocomplete>
                 </mat-form-field>
                 <mat-form-field class=" w-100">
-                    <mat-label>Gắn Hashtag</mat-label>
                     <mat-chip-grid #chipGridTag aria-label="Hashtag làm cho các bài viết của bạn được dễ tìm thấy hơn">
                         <mat-chip-row *ngFor="let title of chooseTag" (removed)="removeTag(title)">
                             {{title}}
@@ -63,6 +64,10 @@
                             </button>
                         </mat-chip-row>
                     </mat-chip-grid>
+
+                    <mat-label>
+                        <mat-icon matSuffix>tag</mat-icon>
+                    </mat-label>
                     <input placeholder="Gắn thẻ" #TagInput [formControl]="tagCtrl"
                         [matChipInputFor]="chipGridTag" [matAutocomplete]="autoTag"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodesTag"
@@ -83,8 +88,22 @@
         <mat-step [stepControl]="createpostform">
             <div style="margin-top: 8px;"></div>
             <ng-template matStepLabel>Hoàn thành</ng-template>
-            <div *ngIf="Check(); else Invalid">
-                xem lại
+            <div *ngIf="!Check(); else Invalid">
+                <div class="flex-center-sb">
+                    <mat-chip-set cdkDropListOrientation="horizontal">
+                        <mat-chip cdkDrag>{{createpostform.get('TopicName')?.value}}</mat-chip>
+                    </mat-chip-set>
+                    <span>
+                        {{currentDate}}
+                    </span>
+                </div>
+                <div>
+                    <h2>{{createpostform.get('Title')?.value}}</h2>
+                    <div>
+                        <div [innerHTML]="createpostform.get('Content')?.value"></div>
+                    </div>
+                </div>
+
             </div>
             <ng-template #Invalid>
                 <i class="text-red">*Vui lòng điền đầy đủ thông tin yêu cầu!</i>
