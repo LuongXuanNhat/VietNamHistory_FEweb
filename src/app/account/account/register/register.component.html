@@ -10,11 +10,11 @@
             <form class="font " [formGroup]="registerform" (ngSubmit)="proceedregisteration()">
                 <mat-form-field class="example-full-width">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="Ví dụ: 'admin@gmail.com'" formControlName="email" >
+                    <input matInput autocomplete="email" placeholder="Ví dụ: 'admin@gmail.com'" formControlName="email" >
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
                     <mat-label>Mật khẩu</mat-label>
-                    <input matInput type="password" [type]="hide ? 'password' : 'text'" placeholder="Ví dụ: 'Mk5manh/'" formControlName="password">
+                    <input matInput type="password" [type]="hide ? 'password' : 'text'" placeholder="Ví dụ: 'Mk5manh/'" autocomplete="password" formControlName="password">
                     <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>

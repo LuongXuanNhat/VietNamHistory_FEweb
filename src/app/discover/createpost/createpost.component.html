@@ -29,7 +29,10 @@
                     <input #imageInput class="font" type="file" accept="image/*" (change)="onFileSelected(imageInput)">
                 </label>
                 <div class="image-card">
-                    <img [src]="selectedImage" alt="Selected Image" *ngIf="selectedImage">
+                    <div class="po-ab">
+                        <i style="color: #aeaeae;">Ảnh bìa</i>
+                    </div>
+                    <img style="z-index: 1;" [src]="selectedImage" alt="Selected Image" *ngIf="selectedImage">
                 </div>
 
                 <mat-form-field class=" w-100 mt-1">
@@ -42,7 +45,7 @@
                         </mat-chip-row>
                     </mat-chip-grid>
                     <mat-label>
-                        <mat-icon matSuffix>new_label</mat-icon>
+                        <mat-icon matSuffix >new_label</mat-icon>
                     </mat-label>
                     <input placeholder="Tìm kiếm chủ đề..." #topicInput [formControl]="topicCtrl"
                         [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
@@ -88,7 +91,7 @@
         <mat-step [stepControl]="createpostform">
             <div style="margin-top: 8px;"></div>
             <ng-template matStepLabel>Hoàn thành</ng-template>
-            <div *ngIf="!Check(); else Invalid">
+            <div *ngIf="Check(); else Invalid">
                 <div class="flex-center-sb">
                     <mat-chip-set cdkDropListOrientation="horizontal">
                         <mat-chip cdkDrag>{{createpostform.get('TopicName')?.value}}</mat-chip>
@@ -103,6 +106,11 @@
                         <div [innerHTML]="createpostform.get('Content')?.value"></div>
                     </div>
                 </div>
+                <div>
+                    <mat-chip-set cdkDropList cdkDropListOrientation="horizontal">
+                        <mat-chip *ngFor="let tag of chooseTag" cdkDrag>{{ tag }}</mat-chip>
+                      </mat-chip-set>
+                </div>
 
             </div>
             <ng-template #Invalid>
@@ -110,7 +118,7 @@
             </ng-template>
             <div>
                 <button mat-button matStepperPrevious>Quay lại</button>
-                <button mat-raised-button color="primary" [disabled]="!Check()">Đăng</button>
+                <button mat-raised-button color="primary" [disabled]="!Check()" (click)="CreatePost()">Đăng</button>
                 <!-- <button mat-button (click)="stepper.reset()">Đăng</button> -->
             </div>
         </mat-step>

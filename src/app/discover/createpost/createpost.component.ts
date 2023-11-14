@@ -2,15 +2,17 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component,ViewChild, inject, ElementRef } from '@angular/core';
 import { FormControl,FormBuilder, Validators } from '@angular/forms';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Topic } from 'src/app/ObjectClass/object';
+import { CreatePostRequest, Topic } from 'src/app/ObjectClass/object';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {NgFor, AsyncPipe, DatePipe} from '@angular/common';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-createpost',
@@ -32,7 +34,7 @@ export class CreatepostComponent {
     Image: [null, Validators.required],
     TopicId: ['', Validators.required],
     TopicName: ['', Validators.required],
-    Tags: [[] as string[]]
+    Tag: [[] as string[]]
   });
   currentDate = this.service.getCurrentDate();
   isEditable = true;
@@ -69,7 +71,8 @@ export class CreatepostComponent {
     // this.createpostform.get('Content')?.setValue(data);
   }
 
-  constructor(private _formBuilder: FormBuilder, public service: PublicserviceService) {
+  constructor(private _formBuilder: FormBuilder, public service: PublicserviceService,
+    private router: Router, private  toastr: ToastrService, private dialogRef: MatDialogRef<CreatepostComponent>) {
     this.GetTopic();
     this.filteredTopics = this.topicCtrl.valueChanges.pipe(
       startWith(null),
@@ -176,13 +179,51 @@ export class CreatepostComponent {
         this.createpostform.get('TopicName')?.setValue(selectedTopic.title);
       }
     }
-    const tagsControl = this.createpostform.get('Tags');
-    if (tagsControl) {
-      tagsControl.patchValue(this.chooseTag);
+    const tags = this.createpostform.get('Tag');
+    if(tags) {
+      tags.setValue(this.chooseTag);
     }
-
+    
     if(this.createpostform.valid)
       return true;
     return false;
+  }
+
+  CreatePost(){
+    const formData = new FormData();
+    const createpost = this.createpostform;
+  
+    formData.append('Title', createpost.get('Title')?.value || '');
+    formData.append('Content', createpost.get('Content')?.value || '');
+    formData.append('Image', createpost.get('Image')?.value || '');
+    formData.append('TopicId', createpost.get('TopicId')?.value || '');
+    const tagValues = createpost.get('Tag')?.value;
+    if (Array.isArray(tagValues)) {
+      tagValues.forEach((tag, index) => {
+          formData.append(`Tag[${index}]`, tag);
+      });
+  }
+    
+    console.log(formData.get('Tag'));
+    this.service.CreatePost(formData).subscribe(
+      (data: any) => {
+        const post = data.resultObj;
+        this.router.navigate(['/discover', post.id], {
+          queryParams: {
+            postData: JSON.stringify(post)
+          }
+        });
+        this.dialogRef.close();
+      },
+      (error: any) => {
+        const message = error.error.message; 
+        if(message == null){
+          this.toastr.error("Lỗi kết nối đến server! Xin lỗi vì sự cố này");
+        } else {
+          this.toastr.error(message);
+          console.log(error);
+        }
+      }
+    )
   }
 }

@@ -303,19 +303,24 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Toolbar -->
 <div class="toolbar body font" role="banner">
-  <img
+  <a routerLink="/home">
+    <img
     width="40"
     alt="Angular Logo"
     src="../assets/NguoiKeSu_min.png"
   />
-    
+  </a>
 <a *ngIf="isadminuser" routerLink="/user" title="User">User</a>
 <div style="display: flex; justify-content: space-between; width: 100%;">
   <div class=" category-menu" >
-    <mat-tab-group >
-      <mat-tab *ngFor="let obj of objectList" [label]="obj.categoryname" [routerLink]="obj.url">
-      </mat-tab> 
-    </mat-tab-group>
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a mat-tab-link *ngFor="let obj of objectList" 
+      [routerLink]="[obj.url]" routerLinkActive #rla="routerLinkActive"
+      [routerLinkActiveOptions]="{exact:true}"
+      [active]="rla.isActive">
+        {{ obj.categoryname }}
+      </a>
+    </nav>
   </div>
   <div style="display: flex;">
     <button mat-icon-button [matMenuTriggerFor]="menuCreate" title="Làm cái gì đó" >
@@ -351,8 +356,6 @@
       </ng-template>
     </button>
   </div>
-  
-
     <mat-menu #menu="matMenu" >
       <div style="padding: 8px 16px; border-bottom: 1px solid #e6e6e6;" class="flex-center fs">
         <img *ngIf="avatar; else avatarBig"  src="{{avatar}}" class="img-user">
@@ -386,11 +389,10 @@
 </div>
 
 
-<div class="container">
-  <router-outlet>  </router-outlet>
+<div class="container" #tabPanel>
+  <router-outlet> </router-outlet>
   
 
   <!-- Footer -->
-
 </div>
 

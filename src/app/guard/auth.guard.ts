@@ -9,30 +9,13 @@ import { AuthService } from '../service/auth.service';
 })
 export class AuthGuard implements CanActivate {
   constructor(private service: AuthService, private router: Router,private tostr:ToastrService) { }
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-   
-    if (this.service.IsLoggedIn()) {
-      if (route.url.length > 0) {
-        let menu = route.url[0].path;
-        if (menu == 'user') {
-          if (this.service.GetUserRole() == 'admin') {
-            return true;
-          } else {
-            this.router.navigate(['']);
-              this.tostr.warning('You dont have access.')
-            return false;
-          }
-        }else{
-          return true;
-        }
-      } else {
-        return true;
-      }
-    }
-    else {
-      this.router.navigate(['login']);
+  
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.service.isAuthenticated()) {
+      return true;
+    } else {
+      this.tostr.warning('Bạn chưa đăng nhập')
+      this.router.navigate(['/login']);
       return false;
     }
   }

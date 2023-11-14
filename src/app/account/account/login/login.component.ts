@@ -59,8 +59,10 @@ export class LoginComponent {
         console.log(error.message);
             }
           );
+
+          this.service.login();
         }
-        this.router.navigate(['/home']);
+        this.router.navigate(['']);
       },
       (error: any) => {
         const message = error.error.message; 

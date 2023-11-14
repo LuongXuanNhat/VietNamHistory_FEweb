@@ -25,6 +25,7 @@ export class AppComponent implements OnInit, DoCheck{
   isadminuser = false;
   token: any;
   objectList: Category[] = [
+    { categoryname: 'Trang chủ', url: '' },
     { categoryname: 'Khám phá', url: '/discover' },
     { categoryname: 'Học sử', url: '/learn' },
     { categoryname: 'Luyện tập', url: '/practice' },
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit, DoCheck{
   logout(){
     this.service.LogOut().subscribe( (res: any) => {
       this.sessionService.clearSessionStorage();
-      
+      this.service.logout();
       this.avatar = null;
       this.router.navigate(['/login']);
     },

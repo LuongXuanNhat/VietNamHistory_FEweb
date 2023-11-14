@@ -26,6 +26,7 @@ import { ChangepasswordComponent } from './account/updateaccount/changepassword/
 import { SessionService } from './service/session/session.service';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
 import { DatePipe } from '@angular/common';
+import { PostdetailComponent } from './discover/postdetail/postdetail.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DatePipe } from '@angular/common';
     ChangeemailComponent,
     ChangepasswordComponent,
     CreatepostComponent,
+    PostdetailComponent,
   ],
   imports: [
     BrowserModule,

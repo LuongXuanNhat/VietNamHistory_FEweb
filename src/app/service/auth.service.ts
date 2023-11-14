@@ -7,8 +7,20 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor(private http: HttpClient ) { }
-    // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
+  // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
   apiurl = 'https://localhost:7138';
+  isLoggedIn = true;  // default false
+  login() {
+    this.isLoggedIn = true;
+  }
+
+  logout() {
+    this.isLoggedIn = false;
+  }
+
+  isAuthenticated(): boolean {
+    return this.isLoggedIn;
+  }
 
   GetAllRole(){
     return this.http.get( this.apiurl + '/role');

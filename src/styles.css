@@ -22,7 +22,9 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; }
 
 
-
+.bb{
+    border-bottom: 1px solid rgb(192, 192, 192);
+}
 .boder-50{
     border-radius: 50%;
 }
@@ -31,23 +33,6 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 fw-5{
     font-weight: 500;
-}
-.text-white {
-    color: white !important;
-}
-.text-red {
-    color: rgb(233, 52, 52) !important;
-}
-.text-black {
-    color: rgb(0, 0, 0) !important;
-}
-.underline-none {
-    text-decoration: none !important;
-}
-.mat-tab-label {
-    font-family: "Be Vietnam", "Montserrat" !important;
-    color: white !important;
-    padding: 0 8px;
 }
 
 .dis-block{
@@ -59,6 +44,7 @@ fw-5{
 .dis-flex{
     display: flex;
 }
+
 .flex-center{
     display: flex;
     justify-content: center;
@@ -69,6 +55,28 @@ fw-5{
     justify-content: space-between;
     align-items: center;
 }
+.icon-24{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.input-search {
+    flex: 1; 
+    padding-left: 12px;
+    border: none;
+    border-radius: 16px;
+}
+.input-search:focus-visible {
+    outline: none;
+}
+.mat-tab-label {
+    font-family: "Be Vietnam", "Montserrat" !important;
+    color: white !important;
+    padding: 0 8px;
+    font-size: 1rem;
+}
+
 .pl{
     padding-left: 8px;;
 }
@@ -81,8 +89,37 @@ fw-5{
 .pl-3{
     padding-left: 48px;
 }
+.plr-200{
+    padding: 0 200px;
+}
+.plr-24{
+    padding: 0 24px;
+}
+.plr-12{
+    padding: 0 12px;
+}
 .fs{
     font-size: 14px;
+}
+.text-2-line{
+    height: 41.6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.text-white {
+    color: white !important;
+}
+.text-red {
+    color: rgb(233, 52, 52) !important;
+}
+.text-black {
+    color: rgb(0, 0, 0) !important;
+}
+.underline-none {
+    text-decoration: none !important;
 }
 
 .w-100 {
@@ -125,9 +162,16 @@ fw-5{
 .pb-1{
     padding-bottom: 16px;
 }
-.bb{
-    border-bottom: 1px solid rgb(192, 192, 192);
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 16px;
+    width: 30em;
+    height: 30px;
 }
+
 
 
 /* COLOR  */

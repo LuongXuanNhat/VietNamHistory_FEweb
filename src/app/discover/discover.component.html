@@ -1,2 +1,50 @@
-<p>discover works!</p>
-<p>The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting</p>
+<div class="mt-60">
+    <div class="plr-200">
+        <div class="flex-center font">
+            
+            <div class="search-container">
+                <input type="text" matInput placeholder="Tìm kiếm" class="input-search font">
+                <mat-icon matSuffix style="padding-right: 12px;">search</mat-icon>
+              </div>
+        </div>
+        <div></div>
+        <div class="flex-center">
+            <span class="pl-1">demo</span>
+            <span class="pl-1">demo1</span>
+            <span class="pl-1">demo2</span>
+            <span class="pl-1">demo3</span>
+            <span class="pl-1">demo</span>
+            <span class="pl-1">demo1</span>
+            <span class="pl-1">demo2</span>
+            <span class="pl-1">demo3</span>
+        </div>
+        <div>
+            <div *ngFor="let post of posts" class="" style="display: inline-flex;">
+                <a class="card-post plr-12 font pt-2" (click)="postDetail(post.id)" >
+                    <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
+                    <h4 class="text-2-line">{{post.title}}</h4>
+                    <div class="dis-flex" >
+                        <img *ngIf="post.userShort.image !== ''; else avaterdefault" src="{{post.userShort.image}}" alt="" class="icon-24">
+                        <ng-template #avaterdefault >
+                            <img class="icon-24" src="../assets/Icon/user.png" alt="">
+                        </ng-template>
+                        <span class="pl-1" *ngIf="post.userShort.fullName !== ''; else fullname">{{post.userShort.fullName}}</span>
+                        <ng-template class="pl-1" #fullname>{{post.userShort.fullName}}</ng-template>
+                    </div>
+                    <div class="flex-center-sb">
+                        <div>
+                            {{post.viewNumber}} lượt xem
+                        </div>
+                        <div>
+                            <div *ngIf="post.updatedAt == null; else updateAt">{{post.createdAt}}</div>
+                            <ng-template #updateAt>{{post.updatedAt}}</ng-template>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        
+    </div>
+</div>
