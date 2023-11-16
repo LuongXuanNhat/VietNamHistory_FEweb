@@ -1,0 +1,13 @@
+<div style="text-align: center;">
+    <p style="margin-top: 4px;"><strong>Các bài viết liên quan</strong></p>
+</div>
+<div>
+    <div *ngFor="let post of posts"  style="display:flex;">
+        <a class="small-post-card plr-12 font pt-1" (click)="postDetail(post)" >
+            <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
+            <div style="display: inline-block;" class="pl">
+                <span class="text-3-line">{{post.title}}</span>
+            </div>
+        </a>
+    </div>
+</div>

@@ -13,6 +13,7 @@ import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DataService } from 'src/app/service/datashare/data.service';
 
 @Component({
   selector: 'app-createpost',
@@ -28,8 +29,10 @@ import { MatDialogRef } from '@angular/material/dialog';
   `,
 })
 export class CreatepostComponent {
+  postId: string = '';
+  
   createpostform = this._formBuilder.group({
-    Title: ['', Validators.required],
+    Title: ['', [Validators.required, Validators.maxLength(255)]],
     Content: [' ', Validators.required],
     Image: [null, Validators.required],
     TopicId: ['', Validators.required],
@@ -72,7 +75,8 @@ export class CreatepostComponent {
   }
 
   constructor(private _formBuilder: FormBuilder, public service: PublicserviceService,
-    private router: Router, private  toastr: ToastrService, private dialogRef: MatDialogRef<CreatepostComponent>) {
+    private router: Router, private  toastr: ToastrService, private dialogRef: MatDialogRef<CreatepostComponent>,
+    private dataService: DataService) {
     this.GetTopic();
     this.filteredTopics = this.topicCtrl.valueChanges.pipe(
       startWith(null),
@@ -202,17 +206,15 @@ export class CreatepostComponent {
       tagValues.forEach((tag, index) => {
           formData.append(`Tag[${index}]`, tag);
       });
-  }
+    }
     
-    console.log(formData.get('Tag'));
     this.service.CreatePost(formData).subscribe(
       (data: any) => {
-        const post = data.resultObj;
-        this.router.navigate(['/discover', post.id], {
-          queryParams: {
-            postData: JSON.stringify(post)
-          }
-        });
+        const postId = data.resultObj.subId;
+        this.router.navigate(['/discover', postId]);
+        setTimeout(() => {
+          this.triggerReloadDetailPage();
+        }, 0);
         this.dialogRef.close();
       },
       (error: any) => {
@@ -225,5 +227,8 @@ export class CreatepostComponent {
         }
       }
     )
+  }
+  triggerReloadDetailPage() {
+    this.dataService.triggerReloadDetailPage(this.postId);
   }
 }

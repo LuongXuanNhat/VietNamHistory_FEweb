@@ -1,29 +1,40 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { PublicserviceService } from '../service/publicservice.service';
-import { PostResponse } from '../ObjectClass/object';
-import { DataService } from  '../service/datashare/data.service'
+import { ActivatedRoute, Router } from '@angular/router';
+import { PostResponse } from 'src/app/ObjectClass/object';
+import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { format, parseISO } from 'date-fns';
+import { DataService } from 'src/app/service/datashare/data.service';
+
 
 @Component({
-  selector: 'app-discover',
-  templateUrl: './discover.component.html',
-  styleUrls: ['./discover.component.css']
+  selector: 'app-cardpostmore',
+  templateUrl: './cardpostmore.component.html',
+  styleUrls: ['./cardpostmore.component.css']
 })
-export class DiscoverComponent {
+export class CardpostmoreComponent {
   posts: PostResponse[] = [];
+  postId: string = '';
 
-  constructor(private router: Router, private service: PublicserviceService, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private router: Router, private publicService: PublicserviceService,
+    private dataService: DataService) {
     this.getPosts();
-    
+    this.route.params.subscribe(params => {
+      this.postId = params['postId'] ?? '';
+    });
+  }
+  triggerReloadDetailPage() {
+    this.dataService.triggerReloadDetailPage(this.postId);
   }
 
   postDetail(post: PostResponse) {
     const postId = post.subId;
     this.router.navigate(['/discover', postId]);
+    setTimeout(() => {
+      this.triggerReloadDetailPage();
+    }, 0);
   }
   getPosts(){
-    this.service.GetPost().subscribe(
+    this.publicService.GetPost().subscribe(
       (result: any) => {
         this.posts = result.resultObj;
         this.posts.forEach(element => {

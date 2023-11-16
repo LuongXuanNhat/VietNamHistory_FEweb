@@ -25,10 +25,11 @@ export interface CreatePostRequest {
 export interface PostResponse {
     id: string;
     title: string;
+    subId: string;
     content: string;
     image: string;
-    createdAt?: Date | string;
-    updatedAt?: Date | string;
+    createdAt: string ;
+    updatedAt: string | null;
     topicName: string;
     tags: TagDto[];
     userShort: UserShortDto;

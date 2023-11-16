@@ -1,3 +1,4 @@
+import { I } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -24,6 +25,9 @@ export class SessionService {
   getRole(){
     return sessionStorage.getItem('role');
   }
+  getUserId(){
+    return sessionStorage.getItem('id');
+  }
   getAvatar(){
     return sessionStorage.getItem('avatar');
   }
@@ -43,6 +47,9 @@ export class SessionService {
   }
   setRole(role: string) {
     sessionStorage.setItem('role', role);
+  }
+  setUserId(id: string){
+    sessionStorage.setItem('id', id);
   }
   setAvatar(avatar: string) {
     sessionStorage.setItem('avatar', avatar);

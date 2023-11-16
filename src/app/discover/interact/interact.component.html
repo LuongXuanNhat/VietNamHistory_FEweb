@@ -1,0 +1,29 @@
+<div style="position: fixed; ">
+    <div class="interact">
+        <button mat-icon-button (click)="toggleThumb()">
+            <span *ngIf="!isThumbUp" class="material-symbols-outlined">
+                thumb_up
+            </span>
+            <span *ngIf="isThumbUp" class="material-symbols-outlined">
+                recommend
+            </span>
+        </button>
+        <button mat-icon-button>
+            <span class="material-symbols-outlined">
+                forum
+            </span>
+        </button>
+        <button mat-icon-button>
+            <span class="material-symbols-outlined">
+                bookmark_add
+            </span>
+        </button>
+        <button mat-icon-button>
+            <span class="material-symbols-outlined">
+                error
+            </span>
+        </button>
+        
+        
+    </div>
+</div>

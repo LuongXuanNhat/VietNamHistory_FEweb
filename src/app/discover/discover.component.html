@@ -8,22 +8,22 @@
               </div>
         </div>
         <div></div>
-        <div class="flex-center">
-            <span class="pl-1">demo</span>
-            <span class="pl-1">demo1</span>
-            <span class="pl-1">demo2</span>
-            <span class="pl-1">demo3</span>
-            <span class="pl-1">demo</span>
-            <span class="pl-1">demo1</span>
-            <span class="pl-1">demo2</span>
-            <span class="pl-1">demo3</span>
+        <div class="flex-center mt-1">
+            <mat-chip-option >demo</mat-chip-option>
+            <mat-chip-option class="ml-1">demo1</mat-chip-option>
+            <mat-chip-option class="ml-1">demo2</mat-chip-option>
+            <mat-chip-option class="ml-1">demo3</mat-chip-option>
+            <mat-chip-option class="ml-1">demo</mat-chip-option>
+            <mat-chip-option class="ml-1">demo1</mat-chip-option>
+            <mat-chip-option class="ml-1">demo2</mat-chip-option>
+            <mat-chip-option class="ml-1">demo3</mat-chip-option>
         </div>
         <div>
             <div *ngFor="let post of posts" class="" style="display: inline-flex;">
-                <a class="card-post plr-12 font pt-2" (click)="postDetail(post.id)" >
+                <a class="card-post plr-12 font pt-1" (click)="postDetail(post)" >
                     <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
-                    <h4 class="text-2-line">{{post.title}}</h4>
-                    <div class="dis-flex" >
+                    <strong class="text-2-line">{{post.title}}</strong>
+                    <div class="dis-flex mt" >
                         <img *ngIf="post.userShort.image !== ''; else avaterdefault" src="{{post.userShort.image}}" alt="" class="icon-24">
                         <ng-template #avaterdefault >
                             <img class="icon-24" src="../assets/Icon/user.png" alt="">

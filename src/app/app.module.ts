@@ -27,6 +27,8 @@ import { SessionService } from './service/session/session.service';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
 import { DatePipe } from '@angular/common';
 import { PostdetailComponent } from './discover/postdetail/postdetail.component';
+import { CardpostmoreComponent } from './discover/cardpostmore/cardpostmore.component';
+import { InteractComponent } from './discover/interact/interact.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { PostdetailComponent } from './discover/postdetail/postdetail.component'
     ChangepasswordComponent,
     CreatepostComponent,
     PostdetailComponent,
+    CardpostmoreComponent,
+    InteractComponent,
   ],
   imports: [
     BrowserModule,

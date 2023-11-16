@@ -28,6 +28,14 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .boder-50{
     border-radius: 50%;
 }
+.card_more{
+    max-width: 280px;
+    max-height: 600px;
+    margin-left: auto;
+    border: 1px dashed #333;
+    border-radius: 8px;
+    margin: 8px;
+}
 .font {
     font-family: Be Vietnam, "Montserrat", sans-serif !important;
 }
@@ -50,6 +58,14 @@ fw-5{
     justify-content: center;
     align-items: center;
 }
+.flex-center-h{
+    display: flex;
+    align-items: center;
+}
+.flex-center-v{
+    display: flex;
+    justify-content: center;
+}
 .flex-center-sb{
     display: flex;
     justify-content: space-between;
@@ -70,11 +86,28 @@ fw-5{
 .input-search:focus-visible {
     outline: none;
 }
+.interact{
+    display: grid; 
+    margin-left: 100px;
+    margin-top: 40px;
+}
 .mat-tab-label {
     font-family: "Be Vietnam", "Montserrat" !important;
     color: white !important;
     padding: 0 8px;
     font-size: 1rem;
+}
+.ml {
+    margin-left: 8px;
+}
+.ml-1 {
+    margin-left: 16px;
+}
+.mt{
+    margin-top: 8px;
+}
+.mt-1{
+    margin-top: 16px;
 }
 
 .pl{
@@ -98,6 +131,12 @@ fw-5{
 .plr-12{
     padding: 0 12px;
 }
+.pr{
+    padding-right: 8px;
+}
+.pr-1{
+    padding-right: 16px;
+}
 .fs{
     font-size: 14px;
 }
@@ -108,7 +147,14 @@ fw-5{
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-
+.text-3-line{
+    height: 62.6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+}
 .text-white {
     color: white !important;
 }
@@ -162,7 +208,18 @@ fw-5{
 .pb-1{
     padding-bottom: 16px;
 }
-
+.small-post-card{
+    width: 276px !important;
+    height: 65px;
+    cursor: pointer;
+    display: inline-flex;
+}
+.small-post-card > .post-img{
+    width: 100px;
+    min-width: 100px;
+    height: 65px;
+    object-fit: cover;
+}
 .search-container {
     display: flex;
     align-items: center;

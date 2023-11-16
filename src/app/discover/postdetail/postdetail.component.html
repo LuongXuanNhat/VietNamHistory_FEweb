@@ -1,32 +1,43 @@
-<div class="mt-60 plr-200">
-    <div class="flex-center-sb">
-        <mat-chip-set cdkDropListOrientation="horizontal">
-            <mat-chip cdkDrag>{{postData?.topicName}}</mat-chip>
-        </mat-chip-set>
-        <div class="dis-flex" >
-            <ng-template #avaterdefault >
-                <img class="icon-24" src="../assets/Icon/user.png" alt="">
-            </ng-template>
-            <span  *ngIf="postData?.userShort?.fullName !== ''; else fullname">{{postData?.userShort?.fullName}}</span>
-            <ng-template class="pl-1" #fullname>{{postData?.userShort?.fullName}}</ng-template>
-            <img *ngIf="postData?.userShort?.image !== ''; else avaterdefault" src="{{postData?.userShort?.image}}" alt="" class="icon-24" style="margin-left: 8px;">
-        </div>
-    </div>
-    <div>
-        <h2>{{postData?.title}}</h2>
-        <div>
-            <div [innerHTML]="postData?.content"></div>
-            <div class="flex-center-sb">
-                <div >Lượt xem {{postData?.viewNumber}}</div>
-                <span>
-                    {{postData?.updatedAt ?? postData?.createdAt}} 
-                </span>
+<div class="po-re">
+    <app-interact></app-interact>
+</div>
+<div class="mt-60 plr-200 dis-flex">
+    <div style="flex-grow: 1;">
+        <div class="flex-center-sb">
+            <mat-chip-set cdkDropListOrientation="horizontal">
+                <mat-chip cdkDrag>{{postData?.topicName}}</mat-chip>
+            </mat-chip-set>
+            <div class="dis-flex" >
+                <ng-template #avaterdefault >
+                    <img class="icon-24" src="../assets/Icon/user.png" alt="">
+                </ng-template>
+                <span  class="pr">{{postData?.userShort?.fullName}}</span>
+                <img *ngIf="postData?.userShort?.image !== ''; else avaterdefault" src="{{postData?.userShort?.image}}" alt="" class="icon-24" style="margin-left: 8px;">
             </div>
         </div>
+        <div>
+            <h2>{{postData?.title}}</h2>
+            <div>
+                <div [innerHTML]="postData?.content"></div>
+                <div class="flex-center-sb">
+                    <div ><strong>Lượt xem: {{postData?.viewNumber}}</strong> </div>
+                    <div class="flex-center-h">
+                        <mat-icon matSuffix>today</mat-icon>
+                        {{postData?.updatedAt ?? postData?.createdAt}} 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <mat-chip-set cdkDropList cdkDropListOrientation="horizontal" >
+                <div class="flex-center-h">
+                    <mat-icon matSuffix>tag</mat-icon>
+                    <mat-chip *ngFor="let tag of postData?.tags" cdkDrag>{{tag.name}}</mat-chip>
+                </div>
+            </mat-chip-set>
+        </div>
     </div>
-    <div>
-        <mat-chip-set cdkDropList cdkDropListOrientation="horizontal">
-            <mat-chip *ngFor="let tag of postData?.tags" cdkDrag>{{tag.name}}</mat-chip>
-        </mat-chip-set>
-      </div>
+    <div class="card_more">
+        <app-cardpostmore></app-cardpostmore>
+    </div>
 </div>

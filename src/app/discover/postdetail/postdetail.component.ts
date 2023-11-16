@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PostResponse } from 'src/app/ObjectClass/object';
 import { format, parseISO } from 'date-fns';
+import { DataService } from 'src/app/service/datashare/data.service';
+import { PublicserviceService } from 'src/app/service/publicservice.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-postdetail',
@@ -9,34 +13,55 @@ import { format, parseISO } from 'date-fns';
   styleUrls: ['./postdetail.component.css']
 })
 export class PostdetailComponent implements OnInit {
+  reloadSubscription: Subscription | null = null;
   postData: PostResponse | null = null;
-
-  constructor(private route: ActivatedRoute) {}
-
+  posts: PostResponse[] = [];
+  postId: string = '';
+  constructor(private route: ActivatedRoute, private router: Router, private publicService: PublicserviceService,
+    private dataService: DataService) {
+      this.route.params.subscribe(params => {
+        this.postId = params['postId'] ?? '';
+      });
+      this.getDetail(this.postId);
+      this.getPosts();
+  }
+ 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const postDataString = params['postData'];
-      if (postDataString) {
-        try {
-          this.postData = JSON.parse(postDataString);
-          if (this.postData?.createdAt) {
-            this.postData.createdAt = typeof this.postData.createdAt === 'string'
-                ? parseISO(this.postData.createdAt)
-                : this.postData.createdAt;
-        
-            this.postData.createdAt = format(this.postData.createdAt, 'dd-MM-yyyy');
-          }
-          if(this.postData?.updatedAt){
-            this.postData.updatedAt = typeof this.postData.updatedAt === 'string'
-                ? parseISO(this.postData.updatedAt)
-                : this.postData.updatedAt;
-        
-            this.postData.updatedAt = format(this.postData.updatedAt, 'dd-MM-yyyy');
-          }
-        } catch (error) {
-          console.error('Error parsing postData:', error);
-        }
+    this.reloadSubscription = this.dataService.reloadDetailPage$.subscribe((postId: string | null) => {
+      if (postId !== null) {
+        this.getDetail(postId);
+        this.router.navigate([], { relativeTo: this.route });
       }
     });
   }
+  getDetail(postId: string){
+    this.publicService.GetPostDetail(this.postId).subscribe(
+      (data: any) => {
+        this.postData = data.resultObj;
+        if(this.postData){
+          const parsedDate = parseISO(this.postData.createdAt);
+          const parsedDate2 = parseISO(this.postData.updatedAt ?? "");
+
+          if (!isNaN(parsedDate.getTime())) {
+            this.postData.createdAt = format(parsedDate, 'dd-MM-yyyy');
+          }
+          if (!isNaN(parsedDate2.getTime())) {
+            this.postData.updatedAt = format(parsedDate2, 'dd-MM-yyyy');
+          }
+        }
+      }
+    )
+  }
+  getPosts(){
+    this.publicService.GetPost().subscribe(
+      (result: any) => {
+        this.posts = result.resultObj;
+        console.log(result)
+      },
+      (error) => {
+        console.error('Error fetching posts:', error);
+      }
+    )
+  }
+
 }

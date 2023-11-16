@@ -132,6 +132,7 @@ export class UpdateuserinforComponent implements OnInit {
         this.Introduction = data.introduction;
         this.PhoneNumber = data.phoneNumber;
         this.toastr.success("Đã cập nhập");
+        this.sessionService.setDescriptionUser(this.Introduction);
       },
       (error: any) => {
         console.error('Lỗi khi gọi API', error);
