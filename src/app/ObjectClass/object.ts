@@ -47,3 +47,8 @@ export interface PostResponse {
     fullName: string;
     image?: string;
   }
+  export interface ReportPost {
+    id: string;
+    title: string;
+    description: string;
+  }

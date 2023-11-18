@@ -12,7 +12,7 @@ export class UserService {
   apiurl = 'https://localhost:7138';
 
   GetImage(){
-    return this.http.get(this.apiurl + '/user/image', { responseType: 'text' });
+    return this.http.get(this.apiurl + '/user/image');
   }
 
   UpdateAvatar(formData: any){

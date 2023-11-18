@@ -47,9 +47,10 @@ export class LoginComponent {
           this.sessionService.setRole(role);
           this.sessionService.setUserId(id);
           this.userService.GetImage().subscribe(
-            (data: string) => {
+            (data: any) => {
               if(data !== ''){
-                const avatar = data;
+                console.log(data);
+                const avatar = data.resultObj;
                 sessionStorage.setItem('avatar', avatar);
               }
             },

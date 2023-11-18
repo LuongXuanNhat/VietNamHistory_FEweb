@@ -12,30 +12,44 @@ export class PublicserviceService {
   constructor(private http: HttpClient, private datePipe: DatePipe ) { }
   // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
   apiurl = 'https://localhost:7138';
-  LikeOrUnlike(data: any){
-    return this.http.post(this.apiurl + '/Post/Like', data);
-  }
+  
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);
-  }
-  getLike(data: any): Observable<boolean>{
-    return this.http.get(this.apiurl + '/Post/Like', data).pipe(
-      map((response: any) => {
-        return response.resultObj as boolean;
-      })
-    );
-  }
-  GetPostDetail(postId: string){
-    return this.http.get(this.apiurl + '/Post/' + postId);
   }
   getCurrentDate(): string {
     const currentDate = new Date();
     return this.datePipe.transform(currentDate, 'dd/MM/yyyy') || '';
+  }
+  getLike(postId: string, userId: string) {
+    const params = {
+        PostId: postId,
+        UserId: userId
+    };
+    return this.http.get(`${this.apiurl}/Post/Like`, { params });
+  }
+  GetPostDetail(postId: string){
+    return this.http.get(this.apiurl + '/Post/' + postId);
+  }
+  getSave(postId: string, userId: string) {
+    const params = {
+        PostId: postId,
+        UserId: userId
+    };
+    return this.http.get(`${this.apiurl}/Post/Save`, { params });
   }
   GetTopic(){
     return this.http.get(this.apiurl + "/Topic");
   }
   GetPost(){
     return this.http.get(this.apiurl + '/Post/Discover');
+  }
+  getReport(){
+    return this.http.get(this.apiurl + '/Report');
+  }
+  LikeOrUnlike(data: FormData): Observable<any>{
+    return this.http.post(`${this.apiurl}/Post/Like`, data);
+  }
+  SaveOrUnSave(data: FormData): Observable<any>{
+    return this.http.post(`${this.apiurl}/Post/Save`, data);
   }
 }

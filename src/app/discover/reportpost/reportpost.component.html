@@ -1,0 +1,17 @@
+<div >
+    <div class="flex-center-sb plr-24">
+        <h1  class="flex-center">Báo cáo bài đọc</h1>
+        <button mat-raised-button mat-dialog-close (click)="onSubmit()" >Gửi</button>
+    </div>
+    <div mat-dialog-content style="height: 300px;">
+        <mat-radio-group>
+            <mat-radio-button class="dis-block" *ngFor="let report of reports" [value]="report.id">{{report.title}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <span class="pt-1 ml-2">Mô tả thêm</span>
+    <div>
+        <textarea matLine="2" style="max-width: 90%;width: 90%;; border-radius: 4px; font-size: 1rem;" class="ml-2 font">
+        </textarea>
+    </div>
+    
+</div>

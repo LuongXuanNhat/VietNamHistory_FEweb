@@ -1,24 +1,38 @@
 <div style="position: fixed; ">
     <div class="interact">
-        <button mat-icon-button (click)="toggleThumb()">
-            <span *ngIf="!isThumbUp" class="material-symbols-outlined">
+        <button mat-icon-button *ngIf="!isThumbUp; else liked" (click)="toggleThumb()">
+            <span class="material-symbols-outlined"> 
                 thumb_up
             </span>
-            <span *ngIf="isThumbUp" class="material-symbols-outlined">
-                recommend
-            </span>
         </button>
+        <ng-template #liked>
+            <button mat-icon-button (click)="toggleThumb()" class="selected">
+                <span class="material-symbols-outlined selected-icon">
+                    thumb_up
+                </span>
+            </button>
+        </ng-template>
+
         <button mat-icon-button>
             <span class="material-symbols-outlined">
                 forum
             </span>
         </button>
-        <button mat-icon-button>
+
+        <button mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()">
             <span class="material-symbols-outlined">
                 bookmark_add
             </span>
         </button>
-        <button mat-icon-button>
+        <ng-template #saved >
+            <button mat-icon-button (click)="IsSave()" class="selected">
+                <span class="material-symbols-outlined selected-icon">
+                    bookmark_added
+                </span>
+            </button>
+        </ng-template>
+
+        <button mat-icon-button (click)="Report()">
             <span class="material-symbols-outlined">
                 error
             </span>

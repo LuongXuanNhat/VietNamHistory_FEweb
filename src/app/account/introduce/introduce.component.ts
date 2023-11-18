@@ -39,9 +39,9 @@ export class IntroduceComponent implements OnInit {
     this.userService.UpdateAvatar(formData).subscribe(
       (response: string) => {
         this.userService.GetImage().subscribe(
-          (data: string) => {
+          (data: any) => {
             if(data !== ''){
-              const img = data;
+              const img = data.resultObj;
               this.sessionService.setAvatar(img);
               this.avatar = img;
             }

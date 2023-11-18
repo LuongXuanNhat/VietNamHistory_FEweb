@@ -29,6 +29,7 @@ import { DatePipe } from '@angular/common';
 import { PostdetailComponent } from './discover/postdetail/postdetail.component';
 import { CardpostmoreComponent } from './discover/cardpostmore/cardpostmore.component';
 import { InteractComponent } from './discover/interact/interact.component';
+import { ReportpostComponent } from './discover/reportpost/reportpost.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { InteractComponent } from './discover/interact/interact.component';
     PostdetailComponent,
     CardpostmoreComponent,
     InteractComponent,
+    ReportpostComponent,
   ],
   imports: [
     BrowserModule,

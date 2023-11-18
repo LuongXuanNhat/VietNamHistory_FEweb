@@ -103,6 +103,9 @@ fw-5{
 .ml-1 {
     margin-left: 16px;
 }
+.ml-2 {
+    margin-left: 32px;
+}
 .mt{
     margin-top: 8px;
 }
@@ -207,6 +210,12 @@ fw-5{
 }
 .pb-1{
     padding-bottom: 16px;
+}
+.selected{
+    background-color: #7989f4 !important;
+}
+.selected > .selected-icon{
+    color: white;
 }
 .small-post-card{
     width: 276px !important;
