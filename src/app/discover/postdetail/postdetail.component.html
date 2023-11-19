@@ -30,7 +30,7 @@
         </div>
         <div>
             <mat-chip-set cdkDropList cdkDropListOrientation="horizontal" >
-                <div class="flex-center-h">
+                <div *ngIf="postData?.tags?.length" class="flex-center-h">
                     <mat-icon matSuffix>tag</mat-icon>
                     <mat-chip *ngFor="let tag of postData?.tags" cdkDrag>{{tag.name}}</mat-chip>
                 </div>

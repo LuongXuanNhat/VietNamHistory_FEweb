@@ -17,7 +17,9 @@ export class InteractComponent implements OnInit{
   isThumbUp: boolean | null = null;
   isSave: boolean | null = null;
   postId: string = '';
-  
+  likeNumber: number = 0;
+  saveNumber: number = 0;
+  commentNum: number = 0;
 
   constructor(private service: PublicserviceService, private dataService: DataService,
     private route: ActivatedRoute, private session: SessionService,private dialog: MatDialog,
@@ -43,6 +45,17 @@ export class InteractComponent implements OnInit{
           }
         );
       }
+      service.GetPostDetail(this.postId).subscribe(
+        (data: any) => {
+          console.log(data.resultObj);
+          this.likeNumber = data.resultObj.likeNumber;
+          this.saveNumber = data.resultObj.saveNumber;
+          this.commentNum = data.resultObj.commentNumber;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      )
       
   }
   ngOnInit() {
@@ -58,7 +71,8 @@ export class InteractComponent implements OnInit{
     formData.append('UserId', this.session.getUserId() ?? '');
     this.service.LikeOrUnlike(formData).subscribe(
       (data: any) => {
-        this.isThumbUp = data.resultObj;
+        this.isThumbUp = !this.isThumbUp;
+        this.likeNumber = data.resultObj;
       }
     )
   }
@@ -72,7 +86,8 @@ export class InteractComponent implements OnInit{
     formData.append('UserId', this.session.getUserId() ?? '');
     this.service.SaveOrUnSave(formData).subscribe(
       (data: any) => {
-        this.isSave = data.resultObj;
+        this.isSave = !this.isSave;
+        this.saveNumber = data.resultObj;
       }
     )
   }

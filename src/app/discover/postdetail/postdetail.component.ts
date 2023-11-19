@@ -56,7 +56,6 @@ export class PostdetailComponent implements OnInit {
     this.publicService.GetPost().subscribe(
       (result: any) => {
         this.posts = result.resultObj;
-        console.log(result)
       },
       (error) => {
         console.error('Error fetching posts:', error);

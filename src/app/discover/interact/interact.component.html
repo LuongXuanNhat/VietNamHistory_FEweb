@@ -1,21 +1,21 @@
 <div style="position: fixed; ">
     <div class="interact">
-        <button mat-icon-button *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-like">
-            <div class="likeNumber">
-                12
-            </div>
+        <button mat-icon-button *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-interact">
             <span class="material-symbols-outlined"> 
                 thumb_up
             </span>
+            <div class="likeNumber">
+                {{likeNumber}}
+            </div>
         </button>
         <ng-template #liked>
-            <button mat-icon-button (click)="toggleThumb()" class="selected btn-like">
-                <div class="likeNumber">
-                    12
-                </div>
+            <button mat-icon-button (click)="toggleThumb()" class="selected btn-interact">
                 <span class="material-symbols-outlined selected-icon">
                     thumb_up
                 </span>
+                <div class="likeNumber">
+                    {{likeNumber}}
+                </div>
             </button>
         </ng-template>
 
@@ -25,16 +25,22 @@
             </span>
         </button>
 
-        <button mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()">
+        <button mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()" class="btn-interact">
             <span class="material-symbols-outlined">
                 bookmark_add
             </span>
+            <div class="likeNumber">
+                {{saveNumber}}
+            </div>
         </button>
         <ng-template #saved >
-            <button mat-icon-button (click)="IsSave()" class="selected">
+            <button mat-icon-button (click)="IsSave()" class="selected btn-interact">
                 <span class="material-symbols-outlined selected-icon">
                     bookmark_added
                 </span>
+                <div class="likeNumber">
+                    {{saveNumber}}
+                </div>
             </button>
         </ng-template>
 

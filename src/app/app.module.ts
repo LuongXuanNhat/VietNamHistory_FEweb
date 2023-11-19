@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from 'src/material.module';
@@ -32,6 +32,9 @@ import { InteractComponent } from './discover/interact/interact.component';
 import { ReportpostComponent } from './discover/reportpost/reportpost.component';
 import { ChatComponent } from './discover/chat/chat.component';
 import { UpdatepostComponent } from './discover/updatepost/updatepost.component';
+import { HammerGestureConfigComponent } from './hammer-gesture-config/hammer-gesture-config.component';
+import { HammerModule, HammerGestureConfig  } from '@angular/platform-browser';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +59,7 @@ import { UpdatepostComponent } from './discover/updatepost/updatepost.component'
     ReportpostComponent,
     ChatComponent,
     UpdatepostComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -79,13 +83,14 @@ import { UpdatepostComponent } from './discover/updatepost/updatepost.component'
         allowedDomains: ['https://localhost:7138'],
       },
     }),
-    
+    HammerModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     SessionService,
     [DatePipe],
-    
+    HammerGestureConfig,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig }
   ],
   bootstrap: [AppComponent]
 })

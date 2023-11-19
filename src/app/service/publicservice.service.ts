@@ -27,8 +27,14 @@ export class PublicserviceService {
     };
     return this.http.get(`${this.apiurl}/Post/Like`, { params });
   }
+  getpostbytag(tag: string){
+    return this.http.get(this.apiurl + '/Post/FindByTag?tag=' + tag);
+  }
   GetPostDetail(postId: string){
     return this.http.get(this.apiurl + '/Post/' + postId);
+  }
+  GetTags(number: number){
+    return this.http.get(this.apiurl + '/Post/TopTag?numberTag=' + number);
   }
   getSave(postId: string, userId: string) {
     const params = {
@@ -48,6 +54,9 @@ export class PublicserviceService {
   }
   LikeOrUnlike(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Post/Like`, data);
+  }
+  ReportPost(data: any){
+    return this.http.post(`${this.apiurl}/Post/Report`, data);
   }
   SaveOrUnSave(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Post/Save`, data);

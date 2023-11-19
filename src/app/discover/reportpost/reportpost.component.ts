@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SessionService } from 'src/app/service/session/session.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { ReportPost } from 'src/app/ObjectClass/object';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reportpost',
@@ -24,7 +25,7 @@ export class ReportpostComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { SubId: string }
     ,private builder: FormBuilder, private session: SessionService,private service: PublicserviceService,
-     ){
+    private  toastr: ToastrService){
       this.reportform.get('PostId')?.setValue(data.SubId) ;
       this.GetReportPost();
   }
@@ -37,6 +38,13 @@ export class ReportpostComponent {
     )
   }
   onSubmit(){
-
+    console.log(this.reportform.value)
+    if(this.reportform.valid){
+      this.service.ReportPost(this.reportform.value).subscribe(
+        (data: any) =>{
+          this.toastr.success("Đã gửi báo cáo! Bạn sẽ sớm nhận được phản hồi!");
+        }
+      )
+    }
   }
 }
