@@ -28,6 +28,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .boder-50{
     border-radius: 50%;
 }
+.btn-like:hover .likeNumber{
+    display: block;
+}
 .card_more{
     max-width: 280px;
     max-height: 600px;
@@ -39,7 +42,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .font {
     font-family: Be Vietnam, "Montserrat", sans-serif !important;
 }
-fw-5{
+.fw-5{
     font-weight: 500;
 }
 
@@ -90,6 +93,9 @@ fw-5{
     display: grid; 
     margin-left: 100px;
     margin-top: 40px;
+}
+.likeNumber{
+    display: none;
 }
 .mat-tab-label {
     font-family: "Be Vietnam", "Montserrat" !important;

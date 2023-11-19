@@ -6,6 +6,7 @@ import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
 import { ReportpostComponent } from '../reportpost/reportpost.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-interact',
@@ -20,32 +21,36 @@ export class InteractComponent implements OnInit{
 
   constructor(private service: PublicserviceService, private dataService: DataService,
     private route: ActivatedRoute, private session: SessionService,private dialog: MatDialog,
-    ){
+    private  toastr: ToastrService, ){
       this.route.params.subscribe(params => {
         this.postId = params['postId'] ?? '';
-      });
-      this.service.getLike(this.postId, this.session.getUserId() || '').subscribe(
-        (result: any) => {
-            this.isThumbUp = result.resultObj;
-        },
-        (error: any) => {
-            console.error(error);
-        }
-      );
-      this.service.getSave(this.postId, this.session.getUserId() || '').subscribe(
-        (result: any) => {
-            this.isSave = result.resultObj;
-        },
-        (error: any) => {
-            console.error(error);
-        }
-      );
+      })
+      if(this.session.getUserId()){
+        this.service.getLike(this.postId, this.session.getUserId() || '').subscribe(
+          (result: any) => {
+              this.isThumbUp = result.resultObj;
+          },
+          (error: any) => {
+              console.error(error);
+          }
+        );
+        this.service.getSave(this.postId, this.session.getUserId() || '').subscribe(
+          (result: any) => {
+              this.isSave = result.resultObj;
+          },
+          (error: any) => {
+              console.error(error);
+          }
+        );
+      }
+      
   }
   ngOnInit() {
     
   }
   toggleThumb() {
     if(!this.session.getUserId()){
+      this.toastr.info("Bạn cần đăng nhập!");
       return;
     }
     const formData = new FormData();
@@ -59,6 +64,7 @@ export class InteractComponent implements OnInit{
   }
   IsSave(){
     if(!this.session.getUserId()){
+      this.toastr.info("Bạn cần đăng nhập!");
       return;
     }
     const formData = new FormData();
@@ -72,6 +78,10 @@ export class InteractComponent implements OnInit{
   }
   
   Report(){
+    if(!this.session.getUserId()){
+      this.toastr.info("Bạn cần đăng nhập!");
+      return;
+    }
     this.openDialog('10ms', '10ms');
   }
   openDialog(enteranimation: any, exitanimation: any){

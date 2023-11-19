@@ -30,6 +30,8 @@ import { PostdetailComponent } from './discover/postdetail/postdetail.component'
 import { CardpostmoreComponent } from './discover/cardpostmore/cardpostmore.component';
 import { InteractComponent } from './discover/interact/interact.component';
 import { ReportpostComponent } from './discover/reportpost/reportpost.component';
+import { ChatComponent } from './discover/chat/chat.component';
+import { UpdatepostComponent } from './discover/updatepost/updatepost.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { ReportpostComponent } from './discover/reportpost/reportpost.component'
     CardpostmoreComponent,
     InteractComponent,
     ReportpostComponent,
+    ChatComponent,
+    UpdatepostComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,18 @@
 <div style="position: fixed; ">
     <div class="interact">
-        <button mat-icon-button *ngIf="!isThumbUp; else liked" (click)="toggleThumb()">
+        <button mat-icon-button *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-like">
+            <div class="likeNumber">
+                12
+            </div>
             <span class="material-symbols-outlined"> 
                 thumb_up
             </span>
         </button>
         <ng-template #liked>
-            <button mat-icon-button (click)="toggleThumb()" class="selected">
+            <button mat-icon-button (click)="toggleThumb()" class="selected btn-like">
+                <div class="likeNumber">
+                    12
+                </div>
                 <span class="material-symbols-outlined selected-icon">
                     thumb_up
                 </span>
