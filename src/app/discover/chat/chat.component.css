@@ -1,0 +1,42 @@
+:host ::ng-deep .ck.ck-editor {
+    border: none !important;
+    outline: none !important;
+  }
+  
+  /* Remove CKEditor toolbar border */
+  :host ::ng-deep .ck.ck-toolbar {
+    border: none !important;
+  }
+  
+  /* Remove CKEditor content area outline */
+  :host ::ng-deep .ck.ck-content {
+    outline: none !important;
+  }
+
+  /* Ô nhập văn bản */
+  :host ::ng-deep .ck.ck-input {
+    outline: none !important;
+  }
+  :host ::ng-deep .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+    border: none !important;
+    border-color: transparent !important;
+  }
+  :host ::ng-deep .ck.ck-editor__main > .ck-editor__editable {
+    border: none !important;
+    border-color: transparent !important;
+  }
+  /* Remove box-shadow from CKEditor main editable area */
+  :host ::ng-deep .ck.ck-editor__main > .ck-editor__editable {
+    box-shadow: none !important;
+  }
+  
+  .content{
+    position: relative;
+    top: -12px;
+  }
+
+  /* Button Icon */
+  #btn-comment {
+    margin-right: 16px !important;
+    right: 16px !important;
+  }

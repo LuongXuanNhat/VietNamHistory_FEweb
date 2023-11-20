@@ -40,25 +40,30 @@ export class LoginComponent {
           const email = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
           const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
           const name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-          const uri = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/uri'];
-
+          const id = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
           // Lưu thông tin vào sessionStorage
           this.sessionService.setEmail(email);
           this.sessionService.setName(name);
           this.sessionService.setRole(role);
+          this.sessionService.setUserId(id);
           this.userService.GetImage().subscribe(
-            (data: string) => {
+            (data: any) => {
               if(data !== ''){
-                const avatar = 'data:image/jpeg;base64,' + data;
+                console.log(data);
+                const avatar = data.resultObj;
                 sessionStorage.setItem('avatar', avatar);
               }
             },
             error => {
               console.error('Lỗi khi gọi API', error);
+              console.log(error);
+        console.log(error.message);
             }
           );
+
+          this.service.login();
         }
-        this.router.navigate(['/home']);
+        this.router.navigate(['']);
       },
       (error: any) => {
         const message = error.error.message; 

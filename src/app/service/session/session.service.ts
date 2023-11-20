@@ -1,3 +1,4 @@
+import { I } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,8 +6,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SessionService {
-  private emailSubject = new BehaviorSubject<string>(''); // Giá trị mặc định là rỗng
+  private emailSubject = new BehaviorSubject<string>(''); 
   email$ = this.emailSubject.asObservable();
+  private descriptionUserSubject = new BehaviorSubject<string>(''); 
+  descriptionUser$ = this.descriptionUserSubject.asObservable();
 
   constructor() { }
 
@@ -22,8 +25,14 @@ export class SessionService {
   getRole(){
     return sessionStorage.getItem('role');
   }
+  getUserId(){
+    return sessionStorage.getItem('id');
+  }
   getAvatar(){
     return sessionStorage.getItem('avatar');
+  }
+  getDescriptionUser(){
+    return sessionStorage.getItem('descriptionuser');
   }
 
   setName(name: string) {
@@ -39,8 +48,15 @@ export class SessionService {
   setRole(role: string) {
     sessionStorage.setItem('role', role);
   }
+  setUserId(id: string){
+    sessionStorage.setItem('id', id);
+  }
   setAvatar(avatar: string) {
     sessionStorage.setItem('avatar', avatar);
+  }
+  setDescriptionUser(descriptionUser: string) {
+    sessionStorage.setItem('description_user', descriptionUser);
+    this.descriptionUserSubject.next(descriptionUser);
   }
 
   removeToken() {
@@ -57,5 +73,10 @@ export class SessionService {
   }
   removeRole() {
     sessionStorage.removeItem('role');
+  }
+
+
+  clearSessionStorage() {
+    sessionStorage.clear();
   }
 }

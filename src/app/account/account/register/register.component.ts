@@ -31,7 +31,7 @@ export class RegisterComponent {
               const resultObj = res.resultObj;
               this.toastr.success('Vui lòng nhập mã xác nhận được gửi đến email của bạn','Đăng ký thành công');
               
-              this.router.navigate(['/home']);
+              this.router.navigate(['/login']);
           },
           (error: any) => {
             const message = error.error.message; 

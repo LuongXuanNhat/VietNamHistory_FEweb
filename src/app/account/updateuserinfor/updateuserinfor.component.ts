@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators ,FormGroup} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SessionService } from 'src/app/service/session/session.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { UserService } from 'src/app/service/user.service';
 
 
 export class UpdateuserinforComponent implements OnInit {
-  constructor(private builder: FormBuilder, private  toastr: ToastrService,private userService: UserService){
+  constructor(private builder: FormBuilder, private  toastr: ToastrService
+    ,private userService: UserService, private sessionService: SessionService){
 
   }
   ngOnInit() {
@@ -58,6 +60,8 @@ export class UpdateuserinforComponent implements OnInit {
         this.Gender = this.CheckGender(data.gender);
         this.Introduction = data.introduction;
         this.PhoneNumber = data.phoneNumber;
+        
+        this.sessionService.setDescriptionUser(this.Introduction);
       },
       (error: any) => {
         console.error('Lỗi khi gọi API', error);
@@ -127,6 +131,8 @@ export class UpdateuserinforComponent implements OnInit {
         this.Gender = data.gender;
         this.Introduction = data.introduction;
         this.PhoneNumber = data.phoneNumber;
+        this.toastr.success("Đã cập nhập");
+        this.sessionService.setDescriptionUser(this.Introduction);
       },
       (error: any) => {
         console.error('Lỗi khi gọi API', error);

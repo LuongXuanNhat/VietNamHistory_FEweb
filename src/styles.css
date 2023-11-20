@@ -13,27 +13,50 @@
 
 
 
-
+.custom-toast {
+    top: 60px;
+    right: 12px;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; }
 
 
-
+.bb{
+    border-bottom: 1px solid rgb(192, 192, 192);
+}
 .boder-50{
     border-radius: 50%;
+}
+.btn-icon-small{
+    position: absolute !important;
+}
+.btn-interact{
+    display: flex !important;
+}
+.btn-interact:hover .likeNumber{
+    z-index: 2;
+    font-size: 10px;
+    display: block;
+    font-weight: 600;
+    background-color: white;
+    padding: 4px;
+    border-radius: 50%;
+    color: #3E50CA;
+}
+.card_more{
+    max-width: 280px;
+    max-height: 600px;
+    margin-left: auto;
+    border: 1px dashed #333;
+    border-radius: 8px;
+    margin: 8px;
 }
 .font {
     font-family: Be Vietnam, "Montserrat", sans-serif !important;
 }
-
-.text-white {
-    color: white !important;
-}
-.mat-tab-label {
-    font-family: "Be Vietnam", "Montserrat" !important;
-    color: white !important;
-    padding: 0 8px;
+.fw-5{
+    font-weight: 500;
 }
 
 .dis-block{
@@ -45,10 +68,71 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .dis-flex{
     display: flex;
 }
+
 .flex-center{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.flex-center-h{
+    display: flex;
+    align-items: center;
+}
+.flex-center-v{
+    display: flex;
+    justify-content: center;
+}
+.flex-center-sb{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon-24{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.input-search {
+    flex: 1; 
+    padding-left: 12px;
+    border: none;
+    border-radius: 16px;
+}
+.input-search:focus-visible {
+    outline: none;
+}
+.interact{
+    display: grid; 
+    margin-left: 100px;
+    margin-top: 40px;
+}
+.likeNumber{
+    display: none;
+}
+.mat-tab-label {
+    font-family: "Be Vietnam", "Montserrat" !important;
+    color: white !important;
+    padding: 0 8px;
+    font-size: 1rem;
+}
+.ml {
+    margin-left: 8px;
+}
+.ml-1 {
+    margin-left: 16px;
+}
+.ml-2 {
+    margin-left: 32px;
+}
+.mt{
+    margin-top: 8px;
+}
+.mt-1{
+    margin-top: 16px;
+}
+.pb {
+    padding-bottom: 8px;
 }
 .pl{
     padding-left: 8px;;
@@ -62,8 +146,47 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .pl-3{
     padding-left: 48px;
 }
+.plr-200{
+    padding: 0 200px;
+}
+.plr-1{
+    padding: 0 16px;
+}
+.plr-24{
+    padding: 0 24px;
+}
+.plr-12{
+    padding: 0 12px;
+}
+.pr{
+    padding-right: 8px;
+}
+.pr-1{
+    padding-right: 16px;
+}
 .fs{
     font-size: 14px;
+}
+.right-aligned-dialog{
+    margin-left: auto;
+}
+.text-2-line{
+    height: 41.6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.text-3-line{
+    height: 62.6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+}
+.text-white {
+    color: white !important;
 }
 .text-red {
     color: rgb(233, 52, 52) !important;
@@ -74,6 +197,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .underline-none {
     text-decoration: none !important;
 }
+
 .w-100 {
     width: 100%;
 }
@@ -91,6 +215,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .mt-2 {
     margin-top: 32px;
+}
+.mb{
+    margin-bottom: 8px;
 }
 .pt{
     padding-top: 8px;
@@ -111,9 +238,33 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .pb-1{
     padding-bottom: 16px;
 }
-.bb{
-    border-bottom: 1px solid rgb(192, 192, 192);
+.selected{
+    background-color: #7989f4 !important;
 }
+.selected > .selected-icon{
+    color: white;
+}
+.small-post-card{
+    width: 276px !important;
+    height: 65px;
+    cursor: pointer;
+    display: inline-flex;
+}
+.small-post-card > .post-img{
+    width: 100px;
+    min-width: 100px;
+    height: 65px;
+    object-fit: cover;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 16px;
+    width: 30em;
+    height: 30px;
+}
+
 
 
 /* COLOR  */

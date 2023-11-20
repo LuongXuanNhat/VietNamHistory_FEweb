@@ -29,5 +29,9 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "types": [
+    "hammerjs",
+    "node"
+  ]  
 }

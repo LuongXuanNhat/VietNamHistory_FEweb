@@ -10,12 +10,12 @@
             <form [formGroup]="loginform" (ngSubmit)="proceedlogin()">
                 <mat-form-field class="example-full-width">
                 <mat-label>Tên tài khoản</mat-label>
-                <input matInput placeholder="Ví dụ: 'luongxuannhat'" formControlName="Email" >
+                <input matInput placeholder="Ví dụ: 'luongxuannhat'" autocomplete="email" formControlName="Email" >
                 </mat-form-field>
                 
                 <mat-form-field class="example-full-width">
                     <mat-label>Mật khẩu</mat-label>
-                    <input matInput type="password" [type]="hide ? 'password' : 'text'" formControlName="Password">
+                    <input matInput type="password" autocomplete="password" [type]="hide ? 'password' : 'text'" formControlName="Password">
                     <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>

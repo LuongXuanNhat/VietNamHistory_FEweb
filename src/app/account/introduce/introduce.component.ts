@@ -19,13 +19,19 @@ export class IntroduceComponent implements OnInit {
     this.sessionService.email$.subscribe((newEmail) => {
       this.username = newEmail;
     });
+    this.sessionService.descriptionUser$.subscribe((newDescription) => {
+      this.description = newDescription;
+    });
+
     this.avatar = this.sessionService.getAvatar();
+    this.username = this.sessionService.getEmail();
+    this.description = this.sessionService.getDescriptionUser();
   }
   
   form: FormGroup;
   avatar: any;
   username: any;
-
+  description: any;
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const formData: FormData = new FormData();
@@ -33,9 +39,9 @@ export class IntroduceComponent implements OnInit {
     this.userService.UpdateAvatar(formData).subscribe(
       (response: string) => {
         this.userService.GetImage().subscribe(
-          (data: string) => {
+          (data: any) => {
             if(data !== ''){
-              const img = 'data:image/jpeg;base64,' + data;
+              const img = data.resultObj;
               this.sessionService.setAvatar(img);
               this.avatar = img;
             }
@@ -44,6 +50,7 @@ export class IntroduceComponent implements OnInit {
       },
       (error) => {
         this.toastr.error(error);
+        console.log(error);
       }
     );
   }

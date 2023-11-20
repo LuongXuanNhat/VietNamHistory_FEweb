@@ -18,6 +18,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
     exports: [
@@ -39,7 +41,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         MatGridListModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatChipsModule
     ]
 })
 export class MaterialModule {

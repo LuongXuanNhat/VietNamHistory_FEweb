@@ -11,17 +11,21 @@ import { UpdateaccountComponent } from './account/updateaccount/updateaccount.co
 import { IntroduceComponent } from './account/introduce/introduce.component';
 import { ChangeemailComponent } from './account/updateaccount/changeemail/changeemail.component';
 import { ChangepasswordComponent } from './account/updateaccount/changepassword/changepassword.component';
+import { AuthGuard } from './guard/auth.guard';
+import { PostdetailComponent } from './discover/postdetail/postdetail.component';
+import { DiscoverComponent } from './discover/discover.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'discover', component:AccountComponent},
+  {path: 'discover', component:DiscoverComponent},
+  { path: 'discover/:postId', component: PostdetailComponent},
   {
     path: 'account',
-    component: AccountComponent,
+    component: AccountComponent, canActivate: [AuthGuard] ,
     children: [
-      { path: '', redirectTo: 'updateuserinfor', pathMatch: 'full' },
+      { path: '', redirectTo: 'updateuserinfor', pathMatch: 'full',},
       { path: 'updateuserinfor', component: UpdateuserinforComponent },
       { path: 'updateaccount', component: UpdateaccountComponent },
       { path: 'introduce', component: IntroduceComponent },

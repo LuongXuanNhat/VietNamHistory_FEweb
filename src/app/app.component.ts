@@ -1,20 +1,21 @@
-import { Component, OnInit , DoCheck} from '@angular/core';
+import { Component, OnInit , DoCheck, ElementRef, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
-import { AccountList, Category } from './ObjectClass/Category';
+import { AccountList, Category } from './ObjectClass/object';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './service/user.service';
 import { SessionService } from './service/session/session.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
-
+import { MatMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit, DoCheck{
   title = 'VietNamHistory';
   username: any;
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit, DoCheck{
   isadminuser = false;
   token: any;
   objectList: Category[] = [
+    { categoryname: 'Trang chủ', url: '' },
     { categoryname: 'Khám phá', url: '/discover' },
     { categoryname: 'Học sử', url: '/learn' },
     { categoryname: 'Luyện tập', url: '/practice' },
@@ -32,7 +34,7 @@ export class AppComponent implements OnInit, DoCheck{
     { categoryname: 'Về chúng tôi', url: '/about' }
   ];
   
-
+  
   constructor(private router : Router, private service: AuthService, private overlayContainer: OverlayContainer,
     private toastr: ToastrService, private userService: UserService, private sessionService: SessionService,
     private dialog: MatDialog){
@@ -42,7 +44,16 @@ export class AppComponent implements OnInit, DoCheck{
   ngOnInit() {
     
   }
+  
+  isMenuOpen = false;
 
+  openMenu() {
+    this.isMenuOpen = true;
+  }
+
+  closeMenu() {
+    // this.isMenuOpen = false;
+  }
   ngDoCheck(): void {
       let curenturl = this.router.url;
       if(curenturl == '/login' || curenturl == '/register'){
@@ -57,7 +68,12 @@ export class AppComponent implements OnInit, DoCheck{
       }
   }
   createPost(){
-    this.openDialog('100ms', '600ms');
+    if(this.sessionService.getToken()){
+      this.openDialog('100ms', '600ms');
+    } else {
+      this.toastr.info("Bạn cần đăng nhập trước");
+      this.router.navigate(['/login']);
+    }
   }
   openDialog(enteranimation: any, exitanimation: any){
     const popup = this.dialog.open(CreatepostComponent, {
@@ -83,12 +99,8 @@ export class AppComponent implements OnInit, DoCheck{
 
   logout(){
     this.service.LogOut().subscribe( (res: any) => {
-      this.sessionService.removeToken();
-      this.sessionService.removeEmail();
-      this.sessionService.removeName();
-      this.sessionService.removeAvatar();
-      this.sessionService.removeRole();
-      
+      this.sessionService.clearSessionStorage();
+      this.service.logout();
       this.avatar = null;
       this.router.navigate(['/login']);
     },

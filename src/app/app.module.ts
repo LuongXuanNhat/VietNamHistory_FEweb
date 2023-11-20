@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from 'src/material.module';
@@ -11,6 +11,7 @@ import { RegisterComponent } from './account/account/register/register.component
 import { LoginComponent } from './account/account/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { IntroduceComponent } from './account/introduce/introduce.component';
 import { IndexComponent } from './home/index/index.component';
 import { AccountComponent } from './account/account/account.component';
@@ -24,6 +25,16 @@ import { ChangeemailComponent } from './account/updateaccount/changeemail/change
 import { ChangepasswordComponent } from './account/updateaccount/changepassword/changepassword.component';
 import { SessionService } from './service/session/session.service';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
+import { DatePipe } from '@angular/common';
+import { PostdetailComponent } from './discover/postdetail/postdetail.component';
+import { CardpostmoreComponent } from './discover/cardpostmore/cardpostmore.component';
+import { InteractComponent } from './discover/interact/interact.component';
+import { ReportpostComponent } from './discover/reportpost/reportpost.component';
+import { ChatComponent } from './discover/chat/chat.component';
+import { UpdatepostComponent } from './discover/updatepost/updatepost.component';
+import { HammerGestureConfigComponent } from './hammer-gesture-config/hammer-gesture-config.component';
+import { HammerModule, HammerGestureConfig  } from '@angular/platform-browser';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +53,13 @@ import { CreatepostComponent } from './discover/createpost/createpost.component'
     ChangeemailComponent,
     ChangepasswordComponent,
     CreatepostComponent,
+    PostdetailComponent,
+    CardpostmoreComponent,
+    InteractComponent,
+    ReportpostComponent,
+    ChatComponent,
+    UpdatepostComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,9 +67,10 @@ import { CreatepostComponent } from './discover/createpost/createpost.component'
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CKEditorModule,
     ToastrModule.forRoot({
       timeOut: 2000,
-      positionClass: 'toast-top-right', 
+      positionClass: 'custom-toast', 
       preventDuplicates: true, 
       closeButton: true, 
     }),
@@ -64,10 +83,14 @@ import { CreatepostComponent } from './discover/createpost/createpost.component'
         allowedDomains: ['https://localhost:7138'],
       },
     }),
+    HammerModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-    SessionService
+    SessionService,
+    [DatePipe],
+    HammerGestureConfig,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig }
   ],
   bootstrap: [AppComponent]
 })
