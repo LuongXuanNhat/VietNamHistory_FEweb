@@ -19,10 +19,13 @@
             </button>
         </ng-template>
 
-        <button mat-icon-button>
+        <button mat-icon-button (click)="comment()" class="btn-interact">
             <span class="material-symbols-outlined">
                 forum
             </span>
+            <div class="likeNumber">
+                {{commentNum}}
+            </div>
         </button>
 
         <button mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()" class="btn-interact">

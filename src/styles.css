@@ -28,6 +28,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .boder-50{
     border-radius: 50%;
 }
+.btn-icon-small{
+    position: absolute !important;
+}
 .btn-interact{
     display: flex !important;
 }
@@ -128,7 +131,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .mt-1{
     margin-top: 16px;
 }
-
+.pb {
+    padding-bottom: 8px;
+}
 .pl{
     padding-left: 8px;;
 }
@@ -144,6 +149,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .plr-200{
     padding: 0 200px;
 }
+.plr-1{
+    padding: 0 16px;
+}
 .plr-24{
     padding: 0 24px;
 }
@@ -158,6 +166,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .fs{
     font-size: 14px;
+}
+.right-aligned-dialog{
+    margin-left: auto;
 }
 .text-2-line{
     height: 41.6px;

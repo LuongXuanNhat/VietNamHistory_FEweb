@@ -26,6 +26,7 @@ export class DiscoverComponent  {
   selectTag(tag: string): void {
     if (this.selectedTag === tag) {
       this.selectedTag = null;
+      this.getPosts();
     } else {
       this.selectedTag = tag;
       this.service.getpostbytag(tag).subscribe(

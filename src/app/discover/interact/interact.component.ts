@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { ReportPost } from 'src/app/ObjectClass/object';
+import { CommentPostDto, ReportPost } from 'src/app/ObjectClass/object';
 import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
 import { ReportpostComponent } from '../reportpost/reportpost.component';
 import { ToastrService } from 'ngx-toastr';
+import { ChatComponent } from '../chat/chat.component';
 
 @Component({
   selector: 'app-interact',
@@ -47,7 +48,6 @@ export class InteractComponent implements OnInit{
       }
       service.GetPostDetail(this.postId).subscribe(
         (data: any) => {
-          console.log(data.resultObj);
           this.likeNumber = data.resultObj.likeNumber;
           this.saveNumber = data.resultObj.saveNumber;
           this.commentNum = data.resultObj.commentNumber;
@@ -56,7 +56,7 @@ export class InteractComponent implements OnInit{
           console.log(error);
         }
       )
-      
+      this.getComment();
   }
   ngOnInit() {
     
@@ -109,5 +109,28 @@ export class InteractComponent implements OnInit{
         SubId: this.postId
       }
     });
+  }
+  comment(){
+    this.openDialogComment('10ms', '10ms');
+  }
+  openDialogComment(enteranimation: any, exitanimation: any){
+    const popup = this.dialog.open(ChatComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '400px',
+      height: '100%',
+      data: {
+        SubId: this.postId
+      },
+      panelClass: 'right-aligned-dialog'
+    });
+  }
+  getComment(){
+    this.service.getPostComment(this.postId).subscribe(
+      (data: any) => {
+        const obj: CommentPostDto[] = data.resultObj;
+        this.commentNum = obj.length;
+      }
+    )
   }
 }

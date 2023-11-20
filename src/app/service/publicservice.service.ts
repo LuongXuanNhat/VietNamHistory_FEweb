@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CommentPostDto } from '../ObjectClass/object';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class PublicserviceService {
   
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);
+  }
+  CreatePostComment(data: CommentPostDto){
+    return this.http.post(this.apiurl + '/Post/Chat', data);
   }
   getCurrentDate(): string {
     const currentDate = new Date();
@@ -48,6 +52,9 @@ export class PublicserviceService {
   }
   GetPost(){
     return this.http.get(this.apiurl + '/Post/Discover');
+  }
+  getPostComment(postId: any){
+    return this.http.get(this.apiurl + '/Post/Chat?PostId=' + postId);
   }
   getReport(){
     return this.http.get(this.apiurl + '/Report');

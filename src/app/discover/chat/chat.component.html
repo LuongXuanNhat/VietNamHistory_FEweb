@@ -1,1 +1,63 @@
-<p>chat works!</p>
+<div class="plr-1 mt-1">
+    <div style="margin-bottom: 16px;">
+        <strong style="font-size: 24px;" >Thảo luận</strong>
+    </div>
+    <div *ngIf="userId; else login" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;border-radius: 4px;">
+        <div style="display: flex; align-items: center;" class="pb">
+            <img class="icon-24" [src]="imgUser || '../assets/Icon/user.png'" alt="">
+            <span class="pl">{{userName}}</span>
+        </div>
+        
+        <div style="font-size: 14px;">
+            <ckeditor
+                style="max-height: 650px; overflow: auto;"
+                [editor]="Editor"
+                [config]="editorConfig"
+                [(ngModel)]="createCommentContent"
+                (change)="onEditorChange($event)"
+            ></ckeditor>
+        </div>
+        <div class="mt">
+            <button mat-raised-button *ngIf="isCommented" (click)="sendComment()">Đăng</button>
+        </div>
+    </div>
+   
+    <ng-template #login class="pt">
+        <span>Đăng nhập để bình luận</span>
+    </ng-template>
+    <div *ngIf="comments?.length">
+        <div *ngFor="let comment of comments" style="font-size: 14px;">
+            <div class="mt-1">
+                <div>
+                    <div class="flex-center-sb">
+                        <div class="flex-center-h">
+                            <img class="icon-24" [src]="comment.userShort?.image || '../assets/Icon/user.png' " alt="">
+                            <span class="pl">{{comment.userShort?.fullName}}</span>
+                        </div>
+                        <button [matMenuTriggerFor]="menu" *ngIf="comment.userShort?.id === userId" mat-icon-button class="btn-icon-small" style="right: 16px;">
+                            <span class="material-symbols-outlined">
+                                more_horiz
+                            </span>
+                        </button>
+                        <div btn-comment>
+                            <mat-menu #menu="matMenu" >
+                                <button mat-menu-item>
+                                  <mat-icon>edit</mat-icon>
+                                  <span>Sửa</span>
+                                </button>
+                                <button mat-menu-item>
+                                  <mat-icon>delete</mat-icon>
+                                  <span>Xóa</span>
+                                </button>
+                                
+                            </mat-menu>
+                        </div>
+                    </div>
+                    <div style="left: 32px;">{{comment.updatedAt ?? comment.createdAt}}</div>
+                </div>
+                <div [innerHTML]="comment.content" class="content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

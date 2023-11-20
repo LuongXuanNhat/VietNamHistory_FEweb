@@ -52,3 +52,24 @@ export interface PostResponse {
     title: string;
     description: string;
   }
+
+  export interface CommentPostDto {
+    id?: string;
+    userId?: string;
+    postId: string;
+    userShort?: UserShortDto | null;
+    content: string;
+    createdAt: Date | string;
+    updatedAt?: Date | string | null;
+    subComment?: SubCommentDto[] | null;
+  }
+
+  export interface SubCommentDto {
+    id: string;
+    content?: string | null;
+    createdAt?: Date | null;
+    updatedAt?: Date | null;
+    userShort?: UserShortDto | null;
+  }
+ 
+  
