@@ -18,7 +18,7 @@
         <div>
             <h2>{{postData?.title}}</h2>
             <div>
-                <div [innerHTML]="postData?.content"></div>
+                <div [innerHTML]="postData?.content" style="overflow: auto;"></div>
                 <div class="flex-center-sb">
                     <div ><strong>Lượt xem: {{postData?.viewNumber}}</strong> </div>
                     <div class="flex-center-h">
@@ -32,7 +32,7 @@
             <mat-chip-set cdkDropList cdkDropListOrientation="horizontal" >
                 <div *ngIf="postData?.tags?.length" class="flex-center-h">
                     <mat-icon matSuffix>tag</mat-icon>
-                    <mat-chip *ngFor="let tag of postData?.tags" cdkDrag>{{tag.name}}</mat-chip>
+                    <mat-chip *ngFor="let tag of postData?.tags" cdkDrag (click)="findByTag(tag.name)">{{tag.name}}</mat-chip>
                 </div>
             </mat-chip-set>
         </div>

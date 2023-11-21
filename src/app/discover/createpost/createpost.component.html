@@ -17,6 +17,7 @@
                     <ckeditor
                         style="max-height: 650px; overflow: auto;"
                         [editor]="Editor"
+                        [config]="editorConfig"
                         formControlName="Content"
                         (change)="onEditorChange($event)"
                     ></ckeditor>
@@ -77,7 +78,7 @@
                     <mat-label>
                         <mat-icon matSuffix>tag</mat-icon>
                     </mat-label>
-                    <input placeholder="Gắn thẻ" #TagInput [formControl]="tagCtrl"
+                    <input placeholder="Gắn thẻ (không bắt buộc)" #TagInput [formControl]="tagCtrl"
                         [matChipInputFor]="chipGridTag" [matAutocomplete]="autoTag"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodesTag"
                         (matChipInputTokenEnd)="addTag($event)"

@@ -15,10 +15,25 @@
             </div>
             <button style="margin-left: 8px;" mat-icon-button class="scroll-button" (click)="scrollRight()"><span class="material-symbols-outlined">keyboard_arrow_right</span></button>
         </div>
-        <div>
+        <div style="text-align: center;">
             <div *ngFor="let post of posts" class="" style="display: inline-flex;">
-                <a class="card-post plr-12 font pt-1" (click)="postDetail(post)" >
+                <div>
+                    <button mat-icon-button *ngIf="!post.isSaved; else saved" (click)="IsSave(post, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;">
+                        <span class="material-symbols-outlined text-white">
+                            bookmark_add
+                        </span>
+                    </button>
+                    <ng-template #saved >
+                        <button mat-icon-button (click)="IsSave(post, $event)" class="selected btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;">
+                            <span class="material-symbols-outlined selected-icon text-white">
+                                bookmark_added
+                            </span>
+                        </button>
+                    </ng-template>
+                </div>
+                <a class="card-post plr-12 font pt-1" (click)="postDetail(post)">
                     <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
+                    
                     <strong class="text-2-line">{{post.title}}</strong>
                     <div class="dis-flex mt" >
                         <img *ngIf="post.userShort.image !== ''; else avaterdefault" src="{{post.userShort.image}}" alt="" class="icon-24">

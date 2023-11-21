@@ -1,10 +1,12 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PublicserviceService } from '../service/publicservice.service';
-import { PostResponse, TagDto } from '../ObjectClass/object';
+import { PostFpk, PostResponse, TagDto } from '../ObjectClass/object';
 import { DataService } from  '../service/datashare/data.service'
 import { format, parseISO } from 'date-fns';
 import { HammerGestureConfigComponent } from '../hammer-gesture-config/hammer-gesture-config.component';
+import { SessionService } from '../service/session/session.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-discover',
@@ -17,10 +19,20 @@ export class DiscoverComponent  {
   posts: PostResponse[] = [];
   tags: string[] = [];
   selectedTag: string | null = null;
+  isSave: boolean | null = null;
+  postFpk: PostFpk = {
+    userId : this.session.getUserId() ?? '',
+    postId : ''
+  }
+  postSaved: PostResponse[] = [];
 
-  constructor(private router: Router, private service: PublicserviceService, private dataService: DataService) {
+  constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
+    private session: SessionService, private toastr: ToastrService) {
     this.getPosts();
-    this.getTags();
+    this.getTags(20);
+    if(this.session.getUserId()){
+      this.GetSaved();
+    }
   }
 
   selectTag(tag: string): void {
@@ -54,8 +66,8 @@ export class DiscoverComponent  {
     }
   }
 
-  getTags(){
-    this.service.GetTags(10).subscribe(
+  getTags(numberTag: number){
+    this.service.GetTopTags(numberTag).subscribe(
       (data: any) => {
         this.tags = data.resultObj;
       }
@@ -98,4 +110,37 @@ export class DiscoverComponent  {
       }
     )
   }
+  IsSave(post:PostResponse, event: Event){
+    if(!this.session.getUserId()){
+      this.toastr.info("Bạn cần đăng nhập!");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('PostId', post.subId);
+    formData.append('UserId', this.session.getUserId() ?? '');
+    this.service.SaveOrUnSave(formData).subscribe(
+      (data: any) => {
+        post.isSaved = !post.isSaved;
+      }
+    )
+    event.stopPropagation();
+  }
+  GetSaved(){
+    this.service.GetMyPostSaved().subscribe(
+      (data: any)=>{
+        this.postSaved = data.resultObj;
+        this.posts.forEach(element => {
+          element.isSaved = this.checkSave(element);
+        });
+      }
+    )
+  }
+  checkSave(post:PostResponse): boolean{
+    if(this.postSaved.some(savedPost => savedPost.id === post.id)){
+      post.isSaved = true;
+      return true;
+    }
+    return false;
+  }
+
 }

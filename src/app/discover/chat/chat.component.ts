@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { format, parseISO } from 'date-fns';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -37,12 +39,11 @@ export class ChatComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { SubId: string }
   ,private builder: FormBuilder, private session: SessionService,private service: PublicserviceService,
-  private  toastr: ToastrService){
+  private  toastr: ToastrService,  private location: Location,private route: ActivatedRoute, private router: Router){
     this.postId = data.SubId;
     this.userId = session.getUserId();
     this.userName= session.getName();
     this.imgUser = session.getAvatar();
-    console.log(this.postId);
     this.GetChatPost();
 
     this.hubConnection = new HubConnectionBuilder()
@@ -57,9 +58,7 @@ export class ChatComponent {
       .catch(err => console.error('Error while establishing connection:', err));
 
     // Listen to SignalR events
-    this.hubConnection.on('ReceiveComment', (comment: CommentPostDto[]) => {
-      // Handle received comment
-      console.log('Received new comment:', comment);
+      this.hubConnection.on('ReceiveComment', (comment: CommentPostDto[]) => {
       this.GetChatPost(); // Update comments when a new comment is received
     });
   }
@@ -91,7 +90,6 @@ export class ChatComponent {
   onEditorChange(event: any) {
     this.isCommented = true;
     this.createCommentContent = event.editor.getData();
-    console.log(this.createCommentContent);
   }
   sendComment(){
     this.createComment.postId = this.postId;
@@ -110,5 +108,8 @@ export class ChatComponent {
       }
     )
   }
-  
+  loginUser(){
+    const currentUrl = this.router.url;
+    this.router.navigate(['/login'], { state: { redirect: currentUrl } });
+  }
 }

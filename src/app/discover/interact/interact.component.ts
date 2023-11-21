@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CommentPostDto, ReportPost } from 'src/app/ObjectClass/object';
 import { DataService } from 'src/app/service/datashare/data.service';
@@ -8,6 +8,7 @@ import { SessionService } from 'src/app/service/session/session.service';
 import { ReportpostComponent } from '../reportpost/reportpost.component';
 import { ToastrService } from 'ngx-toastr';
 import { ChatComponent } from '../chat/chat.component';
+import { Overlay } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-interact',
@@ -24,7 +25,7 @@ export class InteractComponent implements OnInit{
 
   constructor(private service: PublicserviceService, private dataService: DataService,
     private route: ActivatedRoute, private session: SessionService,private dialog: MatDialog,
-    private  toastr: ToastrService, ){
+    private  toastr: ToastrService,  private overlay: Overlay, ){
       this.route.params.subscribe(params => {
         this.postId = params['postId'] ?? '';
       })
@@ -114,6 +115,8 @@ export class InteractComponent implements OnInit{
     this.openDialogComment('10ms', '10ms');
   }
   openDialogComment(enteranimation: any, exitanimation: any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.hasBackdrop = false;
     const popup = this.dialog.open(ChatComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
@@ -122,7 +125,10 @@ export class InteractComponent implements OnInit{
       data: {
         SubId: this.postId
       },
-      panelClass: 'right-aligned-dialog'
+      panelClass: 'right-aligned-dialog', 
+      backdropClass: 'custom-backdrop',
+      // Enable scoll page
+      scrollStrategy: this.overlay.scrollStrategies.noop(),
     });
   }
   getComment(){

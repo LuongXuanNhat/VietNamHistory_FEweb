@@ -14,19 +14,14 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from 'src/app/service/datashare/data.service';
+import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
+
+
 
 @Component({
   selector: 'app-createpost',
   templateUrl: './createpost.component.html',
   styleUrls: ['./createpost.component.css'],
-  template: `
-    <ckeditor
-      [(ngModel)]="value"
-      [editor]="Editor"
-      [config]="editorConfig"
-      (change)="onEditorChange($event)"
-    ></ckeditor>
-  `,
 })
 export class CreatepostComponent {
   postId: string = '';
@@ -62,10 +57,7 @@ export class CreatepostComponent {
   @ViewChild('TagInput') TagInput!: ElementRef<HTMLInputElement>;
 
   public editorConfig = {
-    alignment: {
-      options: [ 'left','center', 'right' ]
-    },
-    toolbar: ['heading', '|', 'bold', 'italic','underline','textColor','fontSize', 'format', 'bulletedList', 'numberedList', 'link','image'],
+    toolbar: ['undo','redo', '|','heading', '|', 'bold', 'italic','bulletedList', 'numberedList', 'link','insertTable','blockQuote','mediaEmbed',],
     placeholder: 'Nhập nội dung ở đây...',
     language: 'vi',
   };
@@ -77,7 +69,8 @@ export class CreatepostComponent {
   constructor(private _formBuilder: FormBuilder, public service: PublicserviceService,
     private router: Router, private  toastr: ToastrService, private dialogRef: MatDialogRef<CreatepostComponent>,
     private dataService: DataService) {
-    this.GetTopic();
+    this.GetAllTopic();
+    this.GetAllTag();
     this.filteredTopics = this.topicCtrl.valueChanges.pipe(
       startWith(null),
       map((topic: string | null) => (topic ? this._filterTopic(topic) : this.listTopic.slice())),
@@ -112,7 +105,8 @@ export class CreatepostComponent {
     this.tagCtrl.setValue(null);
   }
   isDupplication(value: string): boolean {
-    return !this.listTag.includes(value);
+    if(value == '') return false;
+    return !this.chooseTag.includes(value);
   }
   removeTag(tag: string): void {
     const index = this.chooseTag.indexOf(tag);
@@ -152,7 +146,7 @@ export class CreatepostComponent {
     const tagValue = value.toLowerCase();
     return this.listTag.filter(fruit => fruit.toLowerCase().includes(tagValue));
   }
-  GetTopic(){
+  GetAllTopic(){
     this.service.GetTopic().subscribe(
       (data: any) => {
         this.topics = data.resultObj;
@@ -160,6 +154,13 @@ export class CreatepostComponent {
           this.listTopic.push(element.title);
           this.listTag.push(element.title);
         });
+      }
+    )
+  }
+  GetAllTag(){
+    this.service.GetAllTag().subscribe(
+      (data: any) => {
+        this.listTag = data.resultObj;
       }
     )
   }

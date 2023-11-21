@@ -322,7 +322,7 @@
       </a>
     </nav>
   </div>
-  <div style="display: flex;">
+  <div class="flex-center-h">
     <button mat-icon-button [matMenuTriggerFor]="menuCreate" title="Làm cái gì đó" >
       <mat-icon matBadge="1" matBadgeColor="warn" style="color: #3e50ca;">add_circle</mat-icon>
     </button>
@@ -360,7 +360,7 @@
       <div style="padding: 8px 16px; border-bottom: 1px solid #e6e6e6;" class="flex-center fs">
         <img *ngIf="avatar; else avatarBig"  src="{{avatar}}" class="img-user">
         <ng-template #avatarBig >
-          <img src="../assets/Icon/user-l.png">
+          <img src="../assets/Icon/user-l.png" class="img-user">
         </ng-template>
         <div class="pl-1">
           <p style="width: 170px;" class="ellipsis"><strong>{{username}}</strong></p>
@@ -381,9 +381,9 @@
       </button>
       
     </mat-menu>
-  <ng-template #loginLink>
+  <ng-template #loginLink class="">
     <button mat-raised-button color="primary" routerLink="/register" >Đăng ký</button>
-    <button mat-button routerLink="/login" >Đăng nhập</button>
+    <button mat-button (click)="loginUser()">Đăng nhập</button>
   </ng-template>
 </div>
 </div>

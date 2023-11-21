@@ -37,6 +37,7 @@ export class CardpostmoreComponent {
     this.publicService.GetPost().subscribe(
       (result: any) => {
         this.posts = result.resultObj;
+        this.posts = this.posts.slice(0, 7);
         this.posts.forEach(element => {
           if(element){
             const parsedDate = parseISO(element.createdAt);
@@ -56,5 +57,4 @@ export class CardpostmoreComponent {
       }
     )
   }
-
 }

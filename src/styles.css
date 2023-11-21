@@ -46,10 +46,10 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .card_more{
     max-width: 280px;
-    max-height: 600px;
+    max-height: 615px;
     margin-left: auto;
-    border: 1px dashed #333;
-    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 4px;
     margin: 8px;
 }
 .font {
@@ -132,7 +132,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     margin-top: 16px;
 }
 .pb {
-    padding-bottom: 8px;
+    padding-bottom: 8px !important;
 }
 .pl{
     padding-left: 8px;;
@@ -168,7 +168,10 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     font-size: 14px;
 }
 .right-aligned-dialog{
-    margin-left: auto;
+    margin-left: auto !important;
+}
+.custom-backdrop {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 .text-2-line{
     height: 41.6px;
@@ -233,7 +236,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     position: relative;
 }
 .po-ab{
-    position: absolute;
+    position: absolute !important;
 }
 .pb-1{
     padding-bottom: 16px;
@@ -259,7 +262,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .search-container {
     display: flex;
     align-items: center;
-    border: 1px solid;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 16px;
     width: 30em;
     height: 30px;

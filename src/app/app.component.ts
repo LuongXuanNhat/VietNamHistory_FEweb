@@ -114,5 +114,8 @@ export class AppComponent implements OnInit, DoCheck{
     })
     
   }
-
+  loginUser(){
+    const currentUrl = this.router.url;
+    this.router.navigate(['/login'], { state: { redirect: currentUrl } });
+  }
 }
