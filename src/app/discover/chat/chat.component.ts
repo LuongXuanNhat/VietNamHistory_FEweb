@@ -47,7 +47,7 @@ export class ChatComponent {
     this.GetChatPost();
 
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:7138/commentHub')
+      .withUrl(service.getChatSignRl())
       .build();
 
     this.hubConnection
