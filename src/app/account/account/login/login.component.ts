@@ -8,6 +8,7 @@ import { UserService } from '../../../service/user.service';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { ForgetpassComponent } from '../../forgetpass/forgetpass.component';
 import { SessionService } from 'src/app/service/session/session.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import { SessionService } from 'src/app/service/session/session.service';
 export class LoginComponent {
   constructor (private builder: FormBuilder, private  toastr: ToastrService,private userService: UserService,
     private service: AuthService, private router: Router,private jwtHelper: JwtHelperService 
-    ,private dialog: MatDialog, private sessionService: SessionService){
+    ,private dialog: MatDialog, private sessionService: SessionService, private location: Location){
   }
   userdata: any;
   hide = true;
@@ -49,7 +50,6 @@ export class LoginComponent {
           this.userService.GetImage().subscribe(
             (data: any) => {
               if(data !== ''){
-                console.log(data);
                 const avatar = data.resultObj;
                 sessionStorage.setItem('avatar', avatar);
               }
@@ -57,13 +57,16 @@ export class LoginComponent {
             error => {
               console.error('Lỗi khi gọi API', error);
               console.log(error);
-        console.log(error.message);
+              console.log(error.message);
             }
           );
 
           this.service.login();
         }
-        this.router.navigate(['']);
+        const previousState = this.location.getState() as { redirect: string, navigationId: number };
+        const redirectTo = previousState.redirect !== '/' ? previousState.redirect : '/home';
+        this.router.navigateByUrl(redirectTo);
+
       },
       (error: any) => {
         const message = error.error.message; 

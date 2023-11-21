@@ -23,7 +23,8 @@
     </div>
    
     <ng-template #login class="pt">
-        <span>Đăng nhập để bình luận</span>
+        <span class="pr">Đăng nhập để bình luận </span>
+        <button mat-raised-button color="primary" (click)="loginUser()">Đăng nhập</button>
     </ng-template>
     <div *ngIf="comments?.length">
         <div *ngFor="let comment of comments" style="font-size: 14px;">

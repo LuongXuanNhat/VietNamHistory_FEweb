@@ -31,14 +31,20 @@ export class PublicserviceService {
     };
     return this.http.get(`${this.apiurl}/Post/Like`, { params });
   }
+  GetMyPostSaved(){
+    return this.http.get(this.apiurl + '/Post/MyPostSaved');
+  }
   getpostbytag(tag: string){
     return this.http.get(this.apiurl + '/Post/FindByTag?tag=' + tag);
   }
   GetPostDetail(postId: string){
     return this.http.get(this.apiurl + '/Post/' + postId);
   }
-  GetTags(number: number){
-    return this.http.get(this.apiurl + '/Post/TopTag?numberTag=' + number);
+  GetTopTags(number: number){
+    return this.http.get(this.apiurl + '/HashTag/TopTag?numberTag=' + number);
+  }
+  GetAllTag(){
+    return this.http.get(this.apiurl + '/HashTag');
   }
   getSave(postId: string, userId: string) {
     const params = {

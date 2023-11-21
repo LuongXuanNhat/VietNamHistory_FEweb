@@ -37,6 +37,7 @@ export interface PostResponse {
     commentNumber: number;
     likeNumber: number;
     saveNumber: number;
+    isSaved: boolean;
   }
   export interface TagDto {
     id: string;
@@ -70,6 +71,11 @@ export interface PostResponse {
     createdAt?: Date | null;
     updatedAt?: Date | null;
     userShort?: UserShortDto | null;
+  }
+
+  export interface PostFpk {
+    postId: string;
+    userId: string;
   }
  
   

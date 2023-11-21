@@ -34,7 +34,8 @@ import { ChatComponent } from './discover/chat/chat.component';
 import { UpdatepostComponent } from './discover/updatepost/updatepost.component';
 import { HammerGestureConfigComponent } from './hammer-gesture-config/hammer-gesture-config.component';
 import { HammerModule, HammerGestureConfig  } from '@angular/platform-browser';
-
+import { OverlayModule, ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { SearchpageComponent } from './discover/searchpage/searchpage.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { HammerModule, HammerGestureConfig  } from '@angular/platform-browser';
     ReportpostComponent,
     ChatComponent,
     UpdatepostComponent,
+    SearchpageComponent,
 
   ],
   imports: [
@@ -83,14 +85,18 @@ import { HammerModule, HammerGestureConfig  } from '@angular/platform-browser';
         allowedDomains: ['https://localhost:7138'],
       },
     }),
-    HammerModule
+    HammerModule,
+    OverlayModule,
+
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     SessionService,
     [DatePipe],
     HammerGestureConfig,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig }
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
+    { provide: ScrollStrategyOptions, useClass: ScrollStrategyOptions },
+    
   ],
   bootstrap: [AppComponent]
 })

@@ -62,5 +62,7 @@ export class PostdetailComponent implements OnInit {
       }
     )
   }
-
+  findByTag(tagName: string){
+    
+  }
 }
