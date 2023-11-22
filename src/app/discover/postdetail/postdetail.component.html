@@ -9,7 +9,7 @@
             </mat-chip-set>
             <div class="dis-flex" >
                 <ng-template #avaterdefault >
-                    <img class="icon-24" src="../assets/Icon/user.png" alt="">
+                    <img class="icon-24" src="assets/Icon/user.png" alt="">
                 </ng-template>
                 <span  class="pr">{{postData?.userShort?.fullName}}</span>
                 <img *ngIf="postData?.userShort?.image !== ''; else avaterdefault" src="{{postData?.userShort?.image}}" alt="" class="icon-24" style="margin-left: 8px;">
