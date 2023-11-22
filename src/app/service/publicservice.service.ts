@@ -11,8 +11,8 @@ import { CommentPostDto } from '../ObjectClass/object';
 export class PublicserviceService {
 
   constructor(private http: HttpClient, private datePipe: DatePipe ) { }
-  // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
-   apiurl = 'https://localhost:7138';
+  apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
+  // apiurl = 'https://localhost:7138';
   
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);
