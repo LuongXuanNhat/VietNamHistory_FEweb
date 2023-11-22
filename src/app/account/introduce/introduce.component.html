@@ -5,7 +5,7 @@
         <mat-card-header style="display: block; text-align: center;" >
             <img *ngIf="avatar; else avatarBig"  src="{{avatar}}"  class="boder-50 img-user">
             <ng-template #avatarBig>
-                <img src="../assets/Icon/user-l.png">
+                <img src="assets/Icon/user-l.png">
             </ng-template>
             <form [formGroup]="form"  enctype="multipart/form-data">
                 <div class="po-re" style="height: 8px;">
