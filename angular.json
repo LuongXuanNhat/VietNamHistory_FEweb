@@ -48,7 +48,8 @@
                 }
                 
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/VietNamHistory_FEweb/"
             },
             "development": {
               "buildOptimizer": false,
