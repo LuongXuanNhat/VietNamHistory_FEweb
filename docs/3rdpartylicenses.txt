@@ -266,6 +266,9 @@ licenses; we recommend you read them, as their terms may differ from the
 terms above.
 
 
+ngx-clipboard
+MIT
+
 ngx-toastr
 MIT
 The MIT License (MIT)
@@ -290,6 +293,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+ngx-window-token
+MIT
 
 rxjs
 Apache-2.0
