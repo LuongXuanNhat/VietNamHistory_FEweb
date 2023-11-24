@@ -17,7 +17,7 @@
     <div style="text-align: center; margin-top: 48px;">
         <div *ngFor="let post of posts" class="" style="display: inline-flex;">
             <div>
-                <button mat-mini-fab (click)="IsSave(post, $event)" class=" po-ab" style="margin-top: 4px; margin-left: 12px;background-color: #00000073 ;">
+                <button mat-icon-button matTooltip="Bỏ lưu" matTooltipPosition="right" mat-mini-fab (click)="IsSave(post, $event)" class=" po-ab" style="margin-top: 4px; margin-left: 12px;background-color: #00000073 ;">
                     <mat-icon class="material-symbols-outlined text-white">
                         close
                     </mat-icon>

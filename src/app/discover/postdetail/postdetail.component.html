@@ -32,7 +32,7 @@
             <mat-chip-set cdkDropList cdkDropListOrientation="horizontal" >
                 <div *ngIf="postData?.tags?.length" class="flex-center-h">
                     <mat-icon matSuffix>tag</mat-icon>
-                    <mat-chip *ngFor="let tag of postData?.tags" cdkDrag (click)="findByTag(tag.name)">
+                    <mat-chip matTooltip="Tìm kiếm tag này" matTooltipPosition="right" *ngFor="let tag of postData?.tags" cdkDrag (click)="findByTag(tag.name)">
                         <span style="cursor: pointer;">
                             {{tag.name}}
                         </span></mat-chip>

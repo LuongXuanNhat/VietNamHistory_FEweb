@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient ) { }
-  // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
-  apiurl = 'https://localhost:7138';
+  constructor(private http: HttpClient,private authservice: AuthService ) { }
+  apiurl = this.authservice.getApiUrl();
 
   GetImage(){
     return this.http.get(this.apiurl + '/user/image');

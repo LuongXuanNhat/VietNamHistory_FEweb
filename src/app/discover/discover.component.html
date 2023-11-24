@@ -20,7 +20,7 @@
         <div style="text-align: center;">
             <div *ngFor="let post of posts" class="" style="display: inline-flex;">
                 <div>
-                    <button mat-mini-fab *ngIf="!post.isSaved; else saved" (click)="IsSave(post, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;background-color: #00000073 ;">
+                    <button matTooltip="Lưu vào xem sau" matTooltipPosition="right" mat-mini-fab *ngIf="!post.isSaved; else saved" (click)="IsSave(post, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;background-color: #00000073 ;">
                         <mat-icon class="material-symbols-outlined text-white">
                             bookmark_add
                         </mat-icon>

@@ -4,17 +4,16 @@ import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CommentPostDto } from '../ObjectClass/object';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicserviceService {
 
-  constructor(private http: HttpClient, private datePipe: DatePipe ) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe ,private authservice: AuthService) { }
   url = "http://localhost:4200/VietNamHistory_FEweb";
-
-  // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
-   apiurl = 'https://localhost:7138';
+  apiurl = this.authservice.getApiUrl();
   
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);

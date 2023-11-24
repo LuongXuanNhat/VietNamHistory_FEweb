@@ -34,7 +34,7 @@
                 <div>
                     <div class="flex-center-sb">
                         <div class="flex-center-h">
-                            <img class="icon-24" [src]="comment.userShort?.image || '../assets/Icon/user.png' " alt="">
+                            <img class="icon-24" [src]="comment.userShort?.image || 'assets/Icon/user.png' " alt="">
                             <strong class="pl">{{comment.userShort?.fullName}}</strong>
                         </div>
                         <button [matMenuTriggerFor]="menu" *ngIf="comment.userShort?.id === userId" mat-icon-button class="btn-icon-small" style="right: 16px;">
