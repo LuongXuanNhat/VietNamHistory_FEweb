@@ -1,0 +1,8 @@
+.seleted{
+    background-color: #3E50CA;
+    color: white;
+}
+.btn-interact{
+    display: flex !important;
+    left: 22px; position: fixed;
+}

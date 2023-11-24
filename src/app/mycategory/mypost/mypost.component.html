@@ -1,0 +1,76 @@
+<div class="plr-200">
+    <div class="interact">
+        <button matTooltip="Bài viết của tôi" matTooltipPosition="right"
+            mat-icon-button class="btn-interact seleted" style="top: 100px;">
+            <span class="material-symbols-outlined " > 
+                post
+            </span>
+        </button>
+        <button matTooltip="Bài viết đã lưu" matTooltipPosition="right" 
+            mat-icon-button class="btn-interact" style="top: 148px;" routerLink="/mycategory/postsaved">
+            <span class="material-symbols-outlined"> 
+                bookmark_added
+            </span>
+        </button>
+        
+    </div>
+    <div style="min-width: 400px; max-width: 1000px;">
+        <table mat-table [dataSource]="dataSource" matSort class="font">
+            <!-- Image Column -->
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Ảnh bìa </th>
+              <td mat-cell *matCellDef="let post"> <img [src]="post.image" (click)="postDetail(post)" loading="lazy" class="card-mypost" style="cursor: pointer; border-radius: 2px;"/> </td>
+            </ng-container>
+
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header > Tiêu đề </th>
+              <td mat-cell *matCellDef="let post" style="cursor: pointer;" class="font"> 
+                <a (click)="postDetail(post)" class="text-5-line">
+                <strong>{{ post.title }}</strong>
+                </a>
+                <button class="mr text-white" style="border-radius: 2px; background-color:#ED7D2D ; border: none;" (click)="updatePost(post)">Sửa</button>
+                <button class="text-white" style="border-radius: 2px; background-color:#DE3B40 ; border: none;">Xóa</button>
+              </td>
+            </ng-container>
+      
+            <!-- Created At Column -->
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 110px;"> Ngày viết </th>
+              <td mat-cell *matCellDef="let post"> {{ post.createdAt }} </td>
+            </ng-container>
+      
+            <!-- Updated At Column -->
+            <ng-container matColumnDef="updatedAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 110px;"> Ngày sửa </th>
+              <td mat-cell *matCellDef="let post"> {{ post.updatedAt }} </td>
+            </ng-container>
+            
+            <!-- View Number Column -->
+            <ng-container matColumnDef="viewNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lượt xem </th>
+                <td mat-cell *matCellDef="let post"> {{ post.viewNumber }} </td>
+            </ng-container>
+
+            <!-- View Number Column -->
+            <ng-container matColumnDef="likeNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Thích </th>
+                <td mat-cell *matCellDef="let post"> {{ post.likeNumber }} </td>
+            </ng-container>
+
+            <!-- View Number Column -->
+            <ng-container matColumnDef="commentNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Bình luận </th>
+                <td mat-cell *matCellDef="let post"> {{ post.commentNumber }} </td>
+            </ng-container>
+
+            <!-- View Number Column -->
+            <ng-container matColumnDef="saveNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lưu </th>
+                <td mat-cell *matCellDef="let post"> {{ post.saveNumber }} </td>
+            </ng-container>
+            <tr style="height: 48px;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    </div>
+</div>

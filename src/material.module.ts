@@ -20,6 +20,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatChipsModule} from '@angular/material/chips';
+import { MatRippleModule } from '@angular/material/core';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     exports: [
@@ -43,8 +45,15 @@ import {MatChipsModule} from '@angular/material/chips';
         MatNativeDateModule,
         MatAutocompleteModule,
         MatFormFieldModule,
-        MatChipsModule
-    ]
+        MatChipsModule,
+        MatTooltipModule
+    ],
+    imports: [
+        MatRippleModule,
+        MatTooltipModule,
+        MatButtonModule,
+        MatSortModule
+      ],
 })
 export class MaterialModule {
 

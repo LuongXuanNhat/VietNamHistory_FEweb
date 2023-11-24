@@ -1,7 +1,7 @@
 <div class="po-re">
     <app-interact></app-interact>
 </div>
-<div class="mt-60 plr-200 dis-flex">
+<div class="mt-50 plr-200 dis-flex">
     <div style="flex-grow: 1;">
         <div class="flex-center-sb">
             <mat-chip-set cdkDropListOrientation="horizontal">
@@ -32,7 +32,10 @@
             <mat-chip-set cdkDropList cdkDropListOrientation="horizontal" >
                 <div *ngIf="postData?.tags?.length" class="flex-center-h">
                     <mat-icon matSuffix>tag</mat-icon>
-                    <mat-chip *ngFor="let tag of postData?.tags" cdkDrag (click)="findByTag(tag.name)">{{tag.name}}</mat-chip>
+                    <mat-chip *ngFor="let tag of postData?.tags" cdkDrag (click)="findByTag(tag.name)">
+                        <span style="cursor: pointer;">
+                            {{tag.name}}
+                        </span></mat-chip>
                 </div>
             </mat-chip-set>
         </div>

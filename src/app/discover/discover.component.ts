@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   providers: [HammerGestureConfigComponent],
 })
 export class DiscoverComponent  {
+  keyWord!: string | null;
   @ViewChild('innerContainer') innerContainer!: ElementRef;
   posts: PostResponse[] = [];
   tags: string[] = [];
@@ -91,24 +92,27 @@ export class DiscoverComponent  {
     this.service.GetPost().subscribe(
       (result: any) => {
         this.posts = result.resultObj;
-        this.posts.forEach(element => {
-          if(element){
-            const parsedDate = parseISO(element.createdAt);
-            const parsedDate2 = parseISO(element.updatedAt ?? "");
-
-            if (!isNaN(parsedDate.getTime())) {
-              element.createdAt = format(parsedDate, 'dd-MM-yyyy');
-            }
-            if (!isNaN(parsedDate2.getTime())) {
-              element.updatedAt = format(parsedDate2, 'dd-MM-yyyy');
-            }
-          }
-        });
+        this.ConvertDate();
       },
       (error) => {
         console.error('Error fetching posts:', error);
       }
     )
+  }
+  ConvertDate() {
+    this.posts.forEach(element => {
+      if(element){
+        const parsedDate = parseISO(element.createdAt);
+        const parsedDate2 = parseISO(element.updatedAt ?? "");
+
+        if (!isNaN(parsedDate.getTime())) {
+          element.createdAt = format(parsedDate, 'dd-MM-yyyy');
+        }
+        if (!isNaN(parsedDate2.getTime())) {
+          element.updatedAt = format(parsedDate2, 'dd-MM-yyyy');
+        }
+      }
+    });
   }
   IsSave(post:PostResponse, event: Event){
     if(!this.session.getUserId()){
@@ -143,4 +147,10 @@ export class DiscoverComponent  {
     return false;
   }
 
+  search(){
+    if(this.keyWord){
+      this.dataService.changeKeyword(this.keyWord);
+      this.router.navigate(['/search-posts']);
+    }
+  }
 }

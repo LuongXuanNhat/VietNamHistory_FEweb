@@ -3,42 +3,44 @@
         <div class="flex-center font">
             
             <div class="search-container">
-                <input type="text" matInput placeholder="Tìm kiếm" class="input-search font">
-                <mat-icon matSuffix style="padding-right: 12px;">search</mat-icon>
-              </div>
+                <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
+                <button class="btn-search" (click)="search()">
+                    <mat-icon matSuffix matRipple style="padding-right: 12px;">search</mat-icon>
+                </button>
+            </div>
         </div>
         <div></div>
         <div class="flex-container">
             <button mat-icon-button class="scroll-button" (click)="scrollLeft()"><span class="material-symbols-outlined">keyboard_arrow_left</span></button>
             <div mat-chip-listbox class="inner-container" #innerContainer >
-              <mat-chip-option  class="ml-1 mat-chip-tag" *ngFor="let tag of tags" [selected]="selectedTag === tag" (click)="selectTag(tag)">{{tag}}</mat-chip-option>
+              <mat-chip-option style="margin-bottom: 4px;"  class="ml-1 mat-chip-tag" *ngFor="let tag of tags" [selected]="selectedTag === tag" (click)="selectTag(tag)">{{tag}}</mat-chip-option>
             </div>
             <button style="margin-left: 8px;" mat-icon-button class="scroll-button" (click)="scrollRight()"><span class="material-symbols-outlined">keyboard_arrow_right</span></button>
         </div>
         <div style="text-align: center;">
             <div *ngFor="let post of posts" class="" style="display: inline-flex;">
                 <div>
-                    <button mat-icon-button *ngIf="!post.isSaved; else saved" (click)="IsSave(post, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;">
-                        <span class="material-symbols-outlined text-white">
+                    <button mat-mini-fab *ngIf="!post.isSaved; else saved" (click)="IsSave(post, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;background-color: #00000073 ;">
+                        <mat-icon class="material-symbols-outlined text-white">
                             bookmark_add
-                        </span>
+                        </mat-icon>
                     </button>
                     <ng-template #saved >
-                        <button mat-icon-button (click)="IsSave(post, $event)" class="selected btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;">
-                            <span class="material-symbols-outlined selected-icon text-white">
+                        <button mat-mini-fab (click)="IsSave(post, $event)" class="selected btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;">
+                            <mat-icon class="material-symbols-outlined selected-icon text-white" color="primary">
                                 bookmark_added
-                            </span>
+                            </mat-icon>
                         </button>
                     </ng-template>
                 </div>
                 <a class="card-post plr-12 font pt-1" (click)="postDetail(post)">
                     <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
                     
-                    <strong class="text-2-line">{{post.title}}</strong>
+                    <strong class="text-2-line" style="text-align: start;">{{post.title}}</strong>
                     <div class="dis-flex mt" >
                         <img *ngIf="post.userShort.image !== ''; else avaterdefault" src="{{post.userShort.image}}" alt="" class="icon-24">
                         <ng-template #avaterdefault >
-                            <img class="icon-24" src="../assets/Icon/user.png" alt="">
+                            <img class="icon-24" src="assets/Icon/user.png" alt="">
                         </ng-template>
                         <span class="pl-1" *ngIf="post.userShort.fullName !== ''; else fullname">{{post.userShort.fullName}}</span>
                         <ng-template class="pl-1" #fullname>{{post.userShort.fullName}}</ng-template>

@@ -52,7 +52,22 @@
                 error
             </span>
         </button>
-        
-        
+        <button mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
+            <span class="material-symbols-outlined">
+                content_copy
+            </span>
+        </button>
+        <div *ngIf="canEditDelete()">
+            <button mat-icon-button (click)="updatePost()">
+                <span class="material-symbols-outlined">
+                    edit
+                </span>
+            </button>
+            <button mat-icon-button  style="display: block;">
+                <span class="material-symbols-outlined">
+                    delete
+                </span>
+            </button>
+        </div>
     </div>
 </div>

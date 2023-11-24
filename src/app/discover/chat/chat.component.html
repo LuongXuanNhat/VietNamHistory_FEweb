@@ -4,8 +4,8 @@
     </div>
     <div *ngIf="userId; else login" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;border-radius: 4px;">
         <div style="display: flex; align-items: center;" class="pb">
-            <img class="icon-24" [src]="imgUser || '../assets/Icon/user.png'" alt="">
-            <span class="pl">{{userName}}</span>
+            <img class="icon-24" [src]="imgUser || 'assets/Icon/user.png'" alt="">
+            <strong class="pl">{{userName}}</strong>
         </div>
         
         <div style="font-size: 14px;">
@@ -15,10 +15,12 @@
                 [config]="editorConfig"
                 [(ngModel)]="createCommentContent"
                 (change)="onEditorChange($event)"
+                (paste)="onPaste($event)"
             ></ckeditor>
         </div>
         <div class="mt">
-            <button mat-raised-button *ngIf="isCommented" (click)="sendComment()">Đăng</button>
+            <button mat-raised-button color="primary" *ngIf="isCommented" (click)="sendComment()">Đăng</button>
+            <button mat-button *ngIf="isCommented" (click)="cancelComment()">Hủy</button>
         </div>
     </div>
    
@@ -33,7 +35,7 @@
                     <div class="flex-center-sb">
                         <div class="flex-center-h">
                             <img class="icon-24" [src]="comment.userShort?.image || '../assets/Icon/user.png' " alt="">
-                            <span class="pl">{{comment.userShort?.fullName}}</span>
+                            <strong class="pl">{{comment.userShort?.fullName}}</strong>
                         </div>
                         <button [matMenuTriggerFor]="menu" *ngIf="comment.userShort?.id === userId" mat-icon-button class="btn-icon-small" style="right: 16px;">
                             <span class="material-symbols-outlined">
@@ -42,7 +44,7 @@
                         </button>
                         <div btn-comment>
                             <mat-menu #menu="matMenu" >
-                                <button mat-menu-item>
+                                <button mat-menu-item (click)="editComment(comment.id ?? '')">
                                   <mat-icon>edit</mat-icon>
                                   <span>Sửa</span>
                                 </button>
@@ -57,6 +59,28 @@
                     <div style="left: 32px;">{{comment.updatedAt ?? comment.createdAt}}</div>
                 </div>
                 <div [innerHTML]="comment.content" class="content">
+                </div>
+            </div>
+            <div *ngIf="isCheckEdit(comment.id ?? '')" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;border-radius: 4px;">
+                <div style="display: flex; align-items: center;" class="pb">
+                    <img class="icon-24" [src]="imgUser || 'assets/Icon/user.png'" alt="">
+                    <strong class="pl">{{userName}}</strong>
+                </div>
+                
+                <div style="font-size: 14px;">
+                    <ckeditor
+                        style="max-height: 650px; overflow: auto;"
+                        [editor]="Editor"
+                        [config]="editorConfig"
+                        [(ngModel)]="contentUpdate"
+                        (change)="onEditChange($event)"
+                        (paste)="onPaste($event)"
+                    ></ckeditor>
+                </div>
+                <div class="mt">
+                    <button mat-raised-button color="primary" *ngIf="isUpdateCommented" (click)="submitEdited()">Cập nhập</button>
+                    <button mat-button *ngIf="isCheckEdit(comment.id ?? '')" (click)="cancelEditComment()">Hủy</button>
+
                 </div>
             </div>
         </div>

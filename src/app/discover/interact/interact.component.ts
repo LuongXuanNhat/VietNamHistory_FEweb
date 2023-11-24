@@ -9,6 +9,9 @@ import { ReportpostComponent } from '../reportpost/reportpost.component';
 import { ToastrService } from 'ngx-toastr';
 import { ChatComponent } from '../chat/chat.component';
 import { Overlay } from '@angular/cdk/overlay';
+import { UpdatepostComponent } from '../updatepost/updatepost.component';
+import { ClipboardService } from 'ngx-clipboard';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-interact',
@@ -19,13 +22,16 @@ export class InteractComponent implements OnInit{
   isThumbUp: boolean | null = null;
   isSave: boolean | null = null;
   postId: string = '';
+  currentUrl: string = '';
   likeNumber: number = 0;
   saveNumber: number = 0;
   commentNum: number = 0;
+  userIdOfPost: string = '';
 
   constructor(private service: PublicserviceService, private dataService: DataService,
     private route: ActivatedRoute, private session: SessionService,private dialog: MatDialog,
-    private  toastr: ToastrService,  private overlay: Overlay, ){
+    private  toastr: ToastrService,  private overlay: Overlay, private clipboardService: ClipboardService,
+    private location: Location ){
       this.route.params.subscribe(params => {
         this.postId = params['postId'] ?? '';
       })
@@ -58,9 +64,12 @@ export class InteractComponent implements OnInit{
         }
       )
       this.getComment();
+      this.currentUrl = this.location.path();
   }
   ngOnInit() {
-    
+    this.dataService.currentPostOfUserId.subscribe(userId => {
+      this.userIdOfPost = userId ?? this.userIdOfPost;
+    });
   }
   toggleThumb() {
     if(!this.session.getUserId()){
@@ -120,7 +129,7 @@ export class InteractComponent implements OnInit{
     const popup = this.dialog.open(ChatComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
-      width: '400px',
+      width: '414px',
       height: '100%',
       data: {
         SubId: this.postId
@@ -138,5 +147,26 @@ export class InteractComponent implements OnInit{
         this.commentNum = obj.length;
       }
     )
+  }
+
+  updatePost(){
+    this.dataService.changeSubId(this.postId);
+    this.openDialogUpdatePost('100ms', '600ms');
+  }
+  openDialogUpdatePost(enteranimation: any, exitanimation: any){
+    const popup = this.dialog.open(UpdatepostComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '60%'
+    });
+  }
+  copyToClipboard() {
+    this.clipboardService.copy(this.service.getUrl() + this.currentUrl);
+    this.toastr.info("Đã sao chép đường link");
+  }
+  canEditDelete(){
+    if(this.session.getUserId() == this.userIdOfPost)
+      return true;
+    return false;
   }
 }

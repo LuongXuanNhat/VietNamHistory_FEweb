@@ -1,0 +1,50 @@
+<div class="plr-200">
+    <div class="interact">
+        <button matTooltip="Bài viết của tôi" matTooltipPosition="right"
+            mat-icon-button class="btn-interact " style="top: 100px;" routerLink="/mycategory/post">
+            <span class="material-symbols-outlined " > 
+                post
+            </span>
+        </button>
+        <button matTooltip="Bài viết đã lưu" matTooltipPosition="right" 
+            mat-icon-button class="btn-interact seleted" style="top: 148px;" >
+            <span class="material-symbols-outlined"> 
+                bookmark_added
+            </span>
+        </button>
+        
+    </div>
+    <div style="text-align: center; margin-top: 48px;">
+        <div *ngFor="let post of posts" class="" style="display: inline-flex;">
+            <div>
+                <button mat-mini-fab (click)="IsSave(post, $event)" class=" po-ab" style="margin-top: 4px; margin-left: 12px;background-color: #00000073 ;">
+                    <mat-icon class="material-symbols-outlined text-white">
+                        close
+                    </mat-icon>
+                </button>
+            </div>
+            <a class="card-post font pt-1" (click)="postDetail(post)" style="padding: 0 10px;">
+                <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
+                
+                <strong class="text-2-line" style="text-align: start;">{{post.title}}</strong>
+                <div class="dis-flex mt" >
+                    <img *ngIf="post.userShort.image !== ''; else avaterdefault" src="{{post.userShort.image}}" alt="" class="icon-24">
+                    <ng-template #avaterdefault >
+                        <img class="icon-24" src="assets/Icon/user.png" alt="">
+                    </ng-template>
+                    <span class="pl-1" *ngIf="post.userShort.fullName !== ''; else fullname">{{post.userShort.fullName}}</span>
+                    <ng-template class="pl-1" #fullname>{{post.userShort.fullName}}</ng-template>
+                </div>
+                <div class="flex-center-sb">
+                    <div>
+                        {{post.viewNumber}} lượt xem
+                    </div>
+                    <div>
+                        <div *ngIf="post.updatedAt == null; else updateAt">{{post.createdAt}}</div>
+                        <ng-template #updateAt>{{post.updatedAt}}</ng-template>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

@@ -38,6 +38,7 @@ export class PostdetailComponent implements OnInit {
     this.publicService.GetPostDetail(this.postId).subscribe(
       (data: any) => {
         this.postData = data.resultObj;
+        this.dataService.changePostOfUserId(this.postData?.userShort.id ?? '');
         if(this.postData){
           const parsedDate = parseISO(this.postData.createdAt);
           const parsedDate2 = parseISO(this.postData.updatedAt ?? "");
@@ -63,6 +64,7 @@ export class PostdetailComponent implements OnInit {
     )
   }
   findByTag(tagName: string){
-    
+    this.dataService.changeKeyword('#'+tagName);
+      this.router.navigate(['/search-posts']);
   }
 }

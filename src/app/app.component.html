@@ -35,11 +35,12 @@
   }
 
   .toolbar {
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 50px;
     display: flex;
     align-items: center;
     color: white;
@@ -371,15 +372,37 @@
         <mat-icon >settings</mat-icon>
         <a class="fs co-black" >Cài đặt tài khoản</a>
       </button>
-      <button mat-menu-item>
-        <mat-icon>home</mat-icon>
-        <span class="fs">Bài viết</span>
+      <button mat-menu-item [matMenuTriggerFor]="category">
+        <mat-icon>category</mat-icon>
+        <span class="fs">Danh mục</span>
       </button>
       <button mat-menu-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         <a class="fs co-red" >Đăng xuất</a>
       </button>
       
+    </mat-menu>
+    <mat-menu #category="matMenu">
+      <button mat-menu-item routerLink="/mycategory/post">
+        <mat-icon>menu_book</mat-icon>
+        <span class="fs">Bài viết</span>
+      </button>
+      <button mat-menu-item disabled routerLink="/mycategory/post">
+        <mat-icon>local_library</mat-icon>
+        <span class="fs">Bài học</span>
+      </button>
+      <button mat-menu-item disabled routerLink="/mycategory/post">
+        <mat-icon>edit_square</mat-icon>
+        <span class="fs">Bài tập</span>
+      </button>
+      <button mat-menu-item routerLink="/mycategory/question">
+        <mat-icon>live_help</mat-icon>
+        <span class="fs">Câu hỏi</span>
+      </button>
+      <button mat-menu-item routerLink="/mycategory/document">
+        <mat-icon>receipt_long</mat-icon>
+        <span class="fs">Tài liệu</span>
+      </button>
     </mat-menu>
   <ng-template #loginLink class="">
     <button mat-raised-button color="primary" routerLink="/register" >Đăng ký</button>

@@ -21,4 +21,22 @@ export class DataService {
   triggerReloadDetailPage(postId: string) {
     this.reloadDetailPageSource.next(postId);
   }
+
+  private keywordSource = new BehaviorSubject<string>('');
+  currentKeyword = this.keywordSource.asObservable();
+  changeKeyword(keyword: string) {
+    this.keywordSource.next(keyword);
+  }
+
+  private PostOfUserId = new BehaviorSubject<string>('');
+  currentPostOfUserId = this.PostOfUserId.asObservable();
+  changePostOfUserId(userId: string) {
+    this.PostOfUserId.next(userId);
+  }
+
+  private subId = new BehaviorSubject<string>('');
+  currentSubId = this.subId.asObservable();
+  changeSubId(subId: string) {
+    this.subId.next(subId);
+  }
 }

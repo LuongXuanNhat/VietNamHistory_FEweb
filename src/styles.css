@@ -44,6 +44,12 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     border-radius: 50%;
     color: #3E50CA;
 }
+.btn-search {
+    cursor: pointer;
+    display: contents;
+    border: none;
+    background-color: transparent;
+}
 .card_more{
     max-width: 280px;
     max-height: 615px;
@@ -51,6 +57,39 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border-radius: 4px;
     margin: 8px;
+}
+.card-post{
+    display: inline-block;
+    width: 254px !important;
+    height: 320px;
+    cursor: pointer;
+}
+.card-post:hover{
+    border-radius: 4px;
+    box-shadow: 0 26px 58px 0 rgba(0, 0, 0, .22), 0 5px 14px 0 rgba(0, 0, 0, .18);
+}
+.card-post > .post-img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.card-postt {
+    bottom: 0px;
+    padding: 0 8px;
+    color: white !important;
+    width: 85.5%;
+}
+.card-post-search {
+    display: inline-flex;
+}
+.card-post-search > .post-img{
+    width: 254px;
+    height: 350px;
+    object-fit: cover;
+}
+.card-post-search .post-img:hover{
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.12), 0 4px 4px rgba(0,0,0,0.12), 0 8px 8px rgba(0,0,0,0.12), 0 16px 16px rgba(0,0,0,0.12);
+    cursor: pointer;
 }
 .font {
     font-family: Be Vietnam, "Montserrat", sans-serif !important;
@@ -125,11 +164,26 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .ml-2 {
     margin-left: 32px;
 }
+.mb{
+    margin-bottom: 8px;
+}
 .mt{
     margin-top: 8px;
 }
-.mt-1{
+.mt-1 {
     margin-top: 16px;
+}
+.mt-2 {
+    margin-top: 32px;
+}
+.mt-50 {
+    margin-top: 50px !important;
+}
+.mt-60 {
+    margin-top: 60px !important;
+}
+.mr {
+    margin-right: 8px;
 }
 .pb {
     padding-bottom: 8px !important;
@@ -188,6 +242,14 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     overflow: hidden;
     position: relative;
 }
+.text-5-line{
+    height: 100px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+}
 .text-white {
     color: white !important;
 }
@@ -209,18 +271,6 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .w-40 {
     width: 40%;
-}
-.mt-60 {
-    margin-top: 60px !important;
-}
-.mt-1 {
-    margin-top: 16px;
-}
-.mt-2 {
-    margin-top: 32px;
-}
-.mb{
-    margin-bottom: 8px;
 }
 .pt{
     padding-top: 8px;
@@ -273,4 +323,42 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 /* COLOR  */
 .co-primary {
     color: #4069E5FF;
+}
+
+
+
+.flex-container {
+    display: flex;
+    overflow-x: hidden;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.inner-container {
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển động */
+}
+.inner-container:hover {
+    overflow: auto;
+    overflow-x: auto;
+}
+/* Hiển thị thanh cuộn tùy chỉnh cho các trình duyệt hỗ trợ -webkit- */
+.inner-container::-webkit-scrollbar {
+    margin-top: 4px !important;
+    height: 4px;
+}
+
+.inner-container::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Màu của thanh cuộn */
+}
+
+.inner-container::-webkit-scrollbar-track {
+    background-color: transparent; /* Màu nền của thanh cuộn */
+}
+
+/* Ẩn đầu cuối của thanh cuộn */
+.inner-container::-webkit-scrollbar-start,
+.inner-container::-webkit-scrollbar-end {
+    display: none;
 }

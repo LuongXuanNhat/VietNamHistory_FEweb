@@ -14,13 +14,19 @@ import { ChangepasswordComponent } from './account/updateaccount/changepassword/
 import { AuthGuard } from './guard/auth.guard';
 import { PostdetailComponent } from './discover/postdetail/postdetail.component';
 import { DiscoverComponent } from './discover/discover.component';
+import { SearchpageComponent } from './discover/searchpage/searchpage.component';
+import { MycategoryComponent } from './mycategory/mycategory.component';
+import { MyquestionComponent } from './mycategory/myquestion/myquestion.component';
+import { MydocumentComponent } from './mycategory/mydocument/mydocument.component';
+import { MypostComponent } from './mycategory/mypost/mypost.component';
+import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'discover', component:DiscoverComponent},
-  { path: 'discover/:postId', component: PostdetailComponent},
+  {path: 'discover/:postId', component: PostdetailComponent},
   {
     path: 'account',
     component: AccountComponent, canActivate: [AuthGuard] ,
@@ -31,6 +37,18 @@ const routes: Routes = [
       { path: 'introduce', component: IntroduceComponent },
       { path: 'changeemail', component: ChangeemailComponent },
       { path: 'changepassword', component: ChangepasswordComponent },
+    ]
+  },
+  {path: 'search-posts', component: SearchpageComponent},
+  {path: 'mycategory', 
+    component: MycategoryComponent, canActivate: [AuthGuard] ,
+    children: [
+      { path: '', redirectTo: 'post', pathMatch: 'full',},
+      { path: 'post', component: MypostComponent },
+      { path: 'question', component: MyquestionComponent },
+      { path: 'document', component: MydocumentComponent },
+      { path: 'postsaved', component: MypostsavedComponent },
+      // { path: 'exercise', component: UpdateuserinforComponent },
     ]
   },
 

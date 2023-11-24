@@ -1,0 +1,55 @@
+.Post-Create-Card{
+    max-height: 650px;
+    height: 620px;
+    min-height: 100px;
+    overflow: auto;
+}
+
+ /* Style for the custom file input */
+ .image-upload-container {
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    padding: 8px 0px;
+}
+
+/* Style for the input inside the container */
+.image-upload-container input[type="file"] {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Style for the label inside the container */
+.image-upload-container span {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 10px;
+}
+
+/* Hover effect for the label */
+.image-upload-container:hover span {
+    background-color: #0056b3;
+}
+.image-card {
+    width: 100%;
+    height: 300px;
+    min-height: 50px;
+    border: 8px dashed #ccc;
+    border-width: 1px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.img-cover {
+    max-width: 600px;
+    object-fit: cover;
+    max-height: 300px;
+}

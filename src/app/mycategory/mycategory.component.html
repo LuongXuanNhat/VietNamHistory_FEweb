@@ -1,0 +1,38 @@
+<div class="mt-50 pl-1">
+  <div style="height: 48px;position: fixed;" class="flex-center">
+      <button mat-menu-item [matMenuTriggerFor]="category" >
+        <mat-icon>category</mat-icon>
+        <strong style="font-size: 20px;padding-right: 4px; display: flex;">Danh mục
+          <span class="material-symbols-outlined" >
+            keyboard_arrow_down
+          </span>
+        </strong>
+        
+      </button>
+      <mat-menu #category="matMenu">
+        <button mat-menu-item routerLink="/mycategory/post">
+          <mat-icon>menu_book</mat-icon>
+          <span class="fs">Bài viết</span>
+        </button>
+        <button mat-menu-item disabled routerLink="/mycategory/post">
+          <mat-icon>local_library</mat-icon>
+          <span class="fs">Bài học</span>
+        </button>
+        <button mat-menu-item disabled routerLink="/mycategory/post">
+          <mat-icon>edit_square</mat-icon>
+          <span class="fs">Bài tập</span>
+        </button>
+        <button mat-menu-item routerLink="/mycategory/question">
+          <mat-icon>live_help</mat-icon>
+          <span class="fs">Câu hỏi</span>
+        </button>
+        <button mat-menu-item routerLink="/mycategory/document">
+          <mat-icon>receipt_long</mat-icon>
+          <span class="fs">Tài liệu</span>
+        </button>
+      </mat-menu>
+  </div>
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet></router-outlet>
+  </mat-tab-nav-panel>
+</div>

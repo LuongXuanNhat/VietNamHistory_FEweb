@@ -11,8 +11,10 @@ import { CommentPostDto } from '../ObjectClass/object';
 export class PublicserviceService {
 
   constructor(private http: HttpClient, private datePipe: DatePipe ) { }
-  apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
-  // apiurl = 'https://localhost:7138';
+  url = "http://localhost:4200/VietNamHistory_FEweb";
+
+  // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
+   apiurl = 'https://localhost:7138';
   
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);
@@ -34,6 +36,9 @@ export class PublicserviceService {
     };
     return this.http.get(`${this.apiurl}/Post/Like`, { params });
   }
+  GetMyPost(){
+    return this.http.get(this.apiurl + '/Post/MyPost');
+  }
   GetMyPostSaved(){
     return this.http.get(this.apiurl + '/Post/MyPostSaved');
   }
@@ -45,6 +50,9 @@ export class PublicserviceService {
   }
   GetTopTags(number: number){
     return this.http.get(this.apiurl + '/HashTag/TopTag?numberTag=' + number);
+  }
+  getUrl(): string{
+    return this.url;
   }
   GetAllTag(){
     return this.http.get(this.apiurl + '/HashTag');
@@ -71,10 +79,20 @@ export class PublicserviceService {
   LikeOrUnlike(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Post/Like`, data);
   }
+  postSearch(keyWord: string){
+    keyWord = encodeURIComponent(keyWord);
+    return this.http.get(this.apiurl + '/Post/Search?keyWord=' + keyWord);
+  }
   ReportPost(data: any){
     return this.http.post(`${this.apiurl}/Post/Report`, data);
   }
   SaveOrUnSave(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Post/Save`, data);
+  }
+  UpdatePost(data: FormData){
+    return this.http.put(this.apiurl + '/Post', data);
+  }
+  UpdatePostComment(data: CommentPostDto){
+    return this.http.put(this.apiurl + '/Post/Chat', data);
   }
 }

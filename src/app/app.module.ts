@@ -36,6 +36,12 @@ import { HammerGestureConfigComponent } from './hammer-gesture-config/hammer-ges
 import { HammerModule, HammerGestureConfig  } from '@angular/platform-browser';
 import { OverlayModule, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { SearchpageComponent } from './discover/searchpage/searchpage.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { MycategoryComponent } from './mycategory/mycategory.component';
+import { MypostComponent } from './mycategory/mypost/mypost.component';
+import { MydocumentComponent } from './mycategory/mydocument/mydocument.component';
+import { MyquestionComponent } from './mycategory/myquestion/myquestion.component';
+import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +67,11 @@ import { SearchpageComponent } from './discover/searchpage/searchpage.component'
     ChatComponent,
     UpdatepostComponent,
     SearchpageComponent,
+    MycategoryComponent,
+    MypostComponent,
+    MydocumentComponent,
+    MyquestionComponent,
+    MypostsavedComponent,
 
   ],
   imports: [
@@ -82,12 +93,13 @@ import { SearchpageComponent } from './discover/searchpage/searchpage.component'
         tokenGetter: () => {
           return sessionStorage.getItem('access_token');
         },
-        allowedDomains: ['https://localhost:7138'],
+        allowedDomains: ['https://localhost:7138', 'https://vuanhpham25-001-site1.gtempurl.com'],
       },
     }),
     HammerModule,
     OverlayModule,
-
+    ClipboardModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
