@@ -137,9 +137,9 @@ export class ChatComponent {
     
     this.service.CreatePostComment(this.createComment).subscribe(
       (data: any)=>{
-        this.GetChatPost();
+        this.cancelComment();
+        this.comments = this.ConvertChatDate(data.resultObj);
         this.hubConnection.invoke('SendComment', this.createComment);
-        this.createCommentContent = '';
       },
       error => {
         console.log(error);
@@ -187,6 +187,17 @@ export class ChatComponent {
       this.contentUpdate = foundComment.content;
       this.isEdit = id;
     }
+  }
+  deleteComment(id: string){
+    this.service.deleteComment(id).subscribe(
+      (data: any) => {
+        this.comments = this.ConvertChatDate(data.resultObj);
+        this.hubConnection.invoke('SendComment', this.updateComment);
+      },
+      (error: any) => {
+        this.toastr.error("Lỗi: "+error);
+      }
+    )
   }
   isCheckEdit(id: string): boolean{
     return this.isEdit == id;

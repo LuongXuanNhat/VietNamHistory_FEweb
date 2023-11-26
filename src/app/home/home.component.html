@@ -1,1 +1,11 @@
-
+<div class="mt-60 plr-200">
+    <div class="header-banner">
+        <button (click)="onPrevClick()">Previous</button>
+        <mat-carousel [timings]="5000" [autoplay]="true" interval="5000" animation="slide">
+            <mat-carousel-slide *ngFor="let image of images; let i = index">
+              <img [src]="image" alt="Image {{ i + 1 }}" />
+            </mat-carousel-slide>
+          </mat-carousel>
+          <button (click)="onNextClick()">Next</button>
+    </div>
+</div>

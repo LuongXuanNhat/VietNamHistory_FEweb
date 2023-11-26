@@ -48,7 +48,7 @@
                                   <mat-icon>edit</mat-icon>
                                   <span>Sửa</span>
                                 </button>
-                                <button mat-menu-item>
+                                <button mat-menu-item (click)="deleteComment(comment.id ?? '')">
                                   <mat-icon>delete</mat-icon>
                                   <span>Xóa</span>
                                 </button>

@@ -94,4 +94,11 @@ export class PublicserviceService {
   UpdatePostComment(data: CommentPostDto){
     return this.http.put(this.apiurl + '/Post/Chat', data);
   }
+  deleteComment(id: string){
+    return this.http.delete(this.apiurl + '/Post/Chat?idComment=' + id);
+  }
+  getRandomPost(quantity: number){
+    return this.http.get(this.apiurl + '/Post/RandomArticle?quantity=' + quantity);
+  }
+  
 }

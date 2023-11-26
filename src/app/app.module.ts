@@ -42,6 +42,7 @@ import { MypostComponent } from './mycategory/mypost/mypost.component';
 import { MydocumentComponent } from './mycategory/mydocument/mydocument.component';
 import { MyquestionComponent } from './mycategory/myquestion/myquestion.component';
 import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.component';
+import { ForumComponent } from './forum/forum.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.compo
     MydocumentComponent,
     MyquestionComponent,
     MypostsavedComponent,
+    ForumComponent,
 
   ],
   imports: [

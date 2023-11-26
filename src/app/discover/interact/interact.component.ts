@@ -38,7 +38,7 @@ export class InteractComponent implements OnInit{
       if(this.session.getUserId()){
         this.service.getLike(this.postId, this.session.getUserId() || '').subscribe(
           (result: any) => {
-              this.isThumbUp = result.resultObj;
+              this.isThumbUp = result.resultObj.check;
           },
           (error: any) => {
               console.error(error);
@@ -46,7 +46,7 @@ export class InteractComponent implements OnInit{
         );
         this.service.getSave(this.postId, this.session.getUserId() || '').subscribe(
           (result: any) => {
-              this.isSave = result.resultObj;
+              this.isSave = result.resultObj.check;
           },
           (error: any) => {
               console.error(error);
@@ -81,8 +81,10 @@ export class InteractComponent implements OnInit{
     formData.append('UserId', this.session.getUserId() ?? '');
     this.service.LikeOrUnlike(formData).subscribe(
       (data: any) => {
-        this.isThumbUp = !this.isThumbUp;
-        this.likeNumber = data.resultObj;
+        console.log(data.resultObj);
+        const obj = data.resultObj;
+        this.isThumbUp = obj.check;
+        this.likeNumber = obj.quantity;
       }
     )
   }
@@ -96,8 +98,9 @@ export class InteractComponent implements OnInit{
     formData.append('UserId', this.session.getUserId() ?? '');
     this.service.SaveOrUnSave(formData).subscribe(
       (data: any) => {
-        this.isSave = !this.isSave;
-        this.saveNumber = data.resultObj;
+        const obj = data.resultObj;
+        this.isSave = obj.check;
+        this.saveNumber = obj.quantity;
       }
     )
   }

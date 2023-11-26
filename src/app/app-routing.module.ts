@@ -20,6 +20,7 @@ import { MyquestionComponent } from './mycategory/myquestion/myquestion.componen
 import { MydocumentComponent } from './mycategory/mydocument/mydocument.component';
 import { MypostComponent } from './mycategory/mypost/mypost.component';
 import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.component';
+import { ForumComponent } from './forum/forum.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -51,6 +52,7 @@ const routes: Routes = [
       // { path: 'exercise', component: UpdateuserinforComponent },
     ]
   },
+  {path: 'forum', component:ForumComponent},
 
 ];
 

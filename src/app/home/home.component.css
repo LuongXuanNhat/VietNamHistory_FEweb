@@ -1,0 +1,11 @@
+.header-banner {
+    display: flex;
+    position: relative;
+    height: 470px;
+    background-color: #ccc;
+}
+.img-banner {
+    max-width: 1100px;
+    height: auto;
+    object-fit: cover;
+}
