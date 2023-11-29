@@ -78,4 +78,16 @@ export interface PostResponse {
     userId: string;
   }
  
+  // export class QuestionResponseDto {
+  //   id: string = '';
+  //   title: string = '';
+  //   content: string = '';
+  //   createAt?: Date | null;
+  //   updateAt?: Date | null;
+  //   tags?: TagDto[] = [];
+  //   userShort?: UserShortDto | null;
+  //   viewNumber: number = 0;
+  //   commentNumber: number = 0;
+  //   saveNumber: number = 0;
+  // }
   

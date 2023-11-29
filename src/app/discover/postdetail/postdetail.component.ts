@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './postdetail.component.html',
   styleUrls: ['./postdetail.component.css']
 })
-export class PostdetailComponent implements OnInit {
+export class PostdetailComponent implements OnInit{
   reloadSubscription: Subscription | null = null;
   postData: PostResponse | null = null;
   posts: PostResponse[] = [];
@@ -22,19 +22,19 @@ export class PostdetailComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.postId = params['postId'] ?? '';
       });
-      this.getDetail(this.postId);
+      this.getDetail();
       this.getPosts();
   }
- 
-  ngOnInit() {
+  ngOnInit(){
     this.reloadSubscription = this.dataService.reloadDetailPage$.subscribe((postId: string | null) => {
-      if (postId !== null) {
-        this.getDetail(postId);
-        this.router.navigate([], { relativeTo: this.route });
+      if(postId != '' && postId)  {
+        this.postId = postId;
+        this.router.navigate([], {relativeTo: this.route});
+        this.getDetail();
       }
     });
   }
-  getDetail(postId: string){
+  getDetail(){
     this.publicService.GetPostDetail(this.postId).subscribe(
       (data: any) => {
         this.postData = data.resultObj;
@@ -59,7 +59,7 @@ export class PostdetailComponent implements OnInit {
         this.posts = result.resultObj;
       },
       (error) => {
-        console.error('Error fetching posts:', error);
+        console.error('Lỗi: ', error);
       }
     )
   }

@@ -133,7 +133,7 @@ export class ChatComponent {
     this.createComment.postId = this.postId;
     this.createComment.createdAt = new Date();
     this.createComment.userId = this.userId ?? '';
-    this.createComment.content = this.createCommentContent;
+    this.createComment.content = this.createCommentContent.trim();
     
     this.service.CreatePostComment(this.createComment).subscribe(
       (data: any)=>{
@@ -152,7 +152,7 @@ export class ChatComponent {
       return;
     }
 
-    this.updateComment.content = this.contentUpdate;
+    this.updateComment.content = this.contentUpdate?.trim();
     this.updateComment.createdAt = new Date();
     this.updateComment.updatedAt = new Date();
     if(this.contentUpdate.trim() == ''){

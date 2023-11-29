@@ -1,11 +1,35 @@
 <div class="mt-60 plr-200">
     <div class="header-banner">
-        <button (click)="onPrevClick()">Previous</button>
-        <mat-carousel [timings]="5000" [autoplay]="true" interval="5000" animation="slide">
-            <mat-carousel-slide *ngFor="let image of images; let i = index">
-              <img [src]="image" alt="Image {{ i + 1 }}" />
-            </mat-carousel-slide>
-          </mat-carousel>
-          <button (click)="onNextClick()">Next</button>
+        <div class="carousel-container">
+            <igx-carousel #carousel [pause]="false" animationType="fade" [interval]="6000">
+                <igx-slide *ngFor="let slide of posts; let i = index">
+                    <a matTooltip="{{slide.viewNumber}} lượt xem" matTooltipPosition="above" class="image-container" routerLink="/discover/{{slide.subId}}">
+                        <div class="banner-title">📖 {{slide.title}}</div>
+                        <img [src]="slide.image">
+                    </a>
+                </igx-slide>
+            </igx-carousel>
+        </div>
+    </div>
+    <div>
+        <div class="flex-center-sb">
+            <h5>Khóa học</h5>
+            <p style="font-size: 12px;"><i>xem thêm</i></p>
+        </div>
+        <div class="flex-center-sb">
+            <h5>Luyện tập</h5>
+            <p style="font-size: 12px;"><i>xem thêm</i></p>
+        </div>
+        <div class="flex-center-sb">
+            <h5>Cuộc thi</h5>
+            <p style="font-size: 12px;"><i>xem thêm</i></p>
+        </div>
+        <div>
+            <div class="flex-center-sb">
+                <h5>Tham gia diễn đàn</h5>
+                <p style="font-size: 12px;"><i>Truy cập</i></p>
+            </div>
+            <img src="assets/Icon/Forum.jpg" alt="">
+        </div>
     </div>
 </div>

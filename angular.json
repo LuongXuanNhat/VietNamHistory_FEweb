@@ -27,11 +27,20 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/minireset.css/minireset.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/hammerjs/hammer.min.js"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -93,9 +102,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/hammerjs/hammer.min.js"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           }
         }
       }

@@ -18,6 +18,9 @@ export class PublicserviceService {
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);
   }
+  CreateQuestion(data: FormData){
+    return this.http.post(this.apiurl + '/Question', data);
+  }
   CreatePostComment(data: CommentPostDto){
     return this.http.post(this.apiurl + '/Post/Chat', data);
   }
@@ -47,6 +50,9 @@ export class PublicserviceService {
   GetPostDetail(postId: string){
     return this.http.get(this.apiurl + '/Post/' + postId);
   }
+  GetQuestionDetail(subId: string){
+    return this.http.get(this.apiurl + '/Question/Detail?subId=' + subId);
+  }
   GetTopTags(number: number){
     return this.http.get(this.apiurl + '/HashTag/TopTag?numberTag=' + number);
   }
@@ -55,6 +61,9 @@ export class PublicserviceService {
   }
   GetAllTag(){
     return this.http.get(this.apiurl + '/HashTag');
+  }
+  GetQuestionForYou(){
+    return this.http.get(this.apiurl + '/Question');
   }
   getSave(postId: string, userId: string) {
     const params = {

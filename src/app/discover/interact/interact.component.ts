@@ -81,7 +81,6 @@ export class InteractComponent implements OnInit{
     formData.append('UserId', this.session.getUserId() ?? '');
     this.service.LikeOrUnlike(formData).subscribe(
       (data: any) => {
-        console.log(data.resultObj);
         const obj = data.resultObj;
         this.isThumbUp = obj.check;
         this.likeNumber = obj.quantity;

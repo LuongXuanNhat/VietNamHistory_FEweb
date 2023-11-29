@@ -5,12 +5,12 @@
             <form [formGroup]="createpostform">
                 <ng-template matStepLabel>Nội dung câu chuyện</ng-template>
                 <mat-form-field  class="w-100">
-                    <input style="font-size: 1.4em;" class="fw-5" matInput formControlName="Title" placeholder="Nhập tiêu đề ở đây..." required>
+                    <input style="font-size: 1.4em;line-height: 0;" class="fw-5" matInput formControlName="Title" placeholder="Nhập tiêu đề ở đây..." required>
                     <mat-error *ngIf="createpostform.get('Title')?.hasError('required')">
                         Tiêu đề là bắt buộc
                     </mat-error>
                     <mat-error *ngIf="createpostform.get('Title')?.hasError('maxlength')">
-                        Tiêu đề không được vượt quá 255 ký tự
+                        Tiêu đề không được quá dài
                     </mat-error>
                 </mat-form-field>
                 <div>
@@ -108,7 +108,7 @@
                     </span>
                 </div>
                 <div>
-                    <h2>{{createpostform.get('Title')?.value}}</h2>
+                    <h5>{{createpostform.get('Title')?.value}}</h5>
                     <div>
                         <div [innerHTML]="createpostform.get('Content')?.value"></div>
                     </div>

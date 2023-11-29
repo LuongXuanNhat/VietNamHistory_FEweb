@@ -2,7 +2,7 @@
     <app-interact></app-interact>
 </div>
 <div class="mt-50 plr-200 dis-flex">
-    <div style="flex-grow: 1;">
+    <div style="flex-grow: 1;" class="font">
         <div class="flex-center-sb">
             <mat-chip-set cdkDropListOrientation="horizontal">
                 <mat-chip cdkDrag>{{postData?.topicName}}</mat-chip>
@@ -16,9 +16,9 @@
             </div>
         </div>
         <div>
-            <h2>{{postData?.title}}</h2>
+            <h5 class="font">{{postData?.title}}</h5>
             <div>
-                <div [innerHTML]="postData?.content" style="overflow: auto;"></div>
+                <div class="font" [innerHTML]="postData?.content" style="overflow: auto;"></div>
                 <div class="flex-center-sb">
                     <div ><strong>Lượt xem: {{postData?.viewNumber}}</strong> </div>
                     <div class="flex-center-h">

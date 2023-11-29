@@ -15,9 +15,8 @@ export class DataService {
     return this.postDataSubject.asObservable();
   }
 
-  private reloadDetailPageSource = new BehaviorSubject<string | null>(null);
+  private reloadDetailPageSource = new BehaviorSubject<string>('');
   reloadDetailPage$ = this.reloadDetailPageSource.asObservable();
-
   triggerReloadDetailPage(postId: string) {
     this.reloadDetailPageSource.next(postId);
   }
@@ -38,5 +37,11 @@ export class DataService {
   currentSubId = this.subId.asObservable();
   changeSubId(subId: string) {
     this.subId.next(subId);
+  }
+
+  private idQuestion = new BehaviorSubject<string>('');
+  currentIdQuestion = this.idQuestion.asObservable();
+  changeIdQuestion(id: string) {
+    this.idQuestion.next(id);
   }
 }

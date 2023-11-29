@@ -1,1 +1,27 @@
-<p>forum works!</p>
+<div class="mt-60">
+    <div>
+        <div style="width: 374px;" class="fixed-menu dis-flex" appScroll>
+            <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+              <a *ngFor="let cate of category" mat-tab-link class="pl-1"
+              [routerLink]="cate.url" routerLinkActive #rla="routerLinkActive"
+              [routerLinkActiveOptions]="{exact:true}"
+              [active]="rla.isActive">
+                {{cate.categoryname}}
+              </a>
+            </nav>
+            <div class="flex-center font pl-1">
+              <div class="search-container">
+                  <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
+                  <button class="btn-search" (click)="search()">
+                      <mat-icon matSuffix matRipple style="padding-right: 12px;">search</mat-icon>
+                  </button>
+              </div>
+          </div>
+          </div> 
+    </div>
+    <div class="plr-200" >
+      <mat-tab-nav-panel #tabPanel>
+        <router-outlet></router-outlet>
+      </mat-tab-nav-panel> 
+    </div>
+</div>

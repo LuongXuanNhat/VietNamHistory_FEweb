@@ -1,0 +1,53 @@
+.carousel-container {
+    width: 73vw;
+    height: 50vh;
+    margin: 16px auto;
+}
+.banner-title{
+    border-radius: 8px;
+    padding: 8px 16px;
+    background-color: #00000091;
+    color: white;
+    font-weight: 500;
+    width: 80vh;
+    position: absolute;
+    text-align: justify;
+    font-size: larger;
+
+}
+:host ::ng-deep{
+    .image-container {
+        max-width: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .igx-carousel {
+        max-width: 100%;
+        width: unset;
+    }
+
+    .igx-nav-dot {
+        background: black;
+        box-shadow: none;
+        width: 15px;
+        height: 15px;
+    }
+
+    .igx-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+        width: unset;
+    }
+
+    .igx-slide img {
+        object-fit: fill;
+        max-width: 90%;
+    }
+    .igx-carousel__label {
+        display: none !important;
+    }
+}

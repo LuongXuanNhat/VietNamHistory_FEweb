@@ -21,6 +21,10 @@ import { MydocumentComponent } from './mycategory/mydocument/mydocument.componen
 import { MypostComponent } from './mycategory/mypost/mypost.component';
 import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.component';
 import { ForumComponent } from './forum/forum.component';
+import { ForumForyouComponent } from './forum/forum-foryou/forum-foryou.component';
+import { ForumTopComponent } from './forum/forum-top/forum-top.component';
+import { ForumNewComponent } from './forum/forum-new/forum-new.component';
+import { QuestionComponent } from './forum/question/question.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -52,8 +56,17 @@ const routes: Routes = [
       // { path: 'exercise', component: UpdateuserinforComponent },
     ]
   },
-  {path: 'forum', component:ForumComponent},
+  {path: 'forum', 
+    component:ForumComponent, canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'forum_foryou', pathMatch: 'full',},
+      { path: 'forum_foryou', component: ForumForyouComponent },
+      { path: 'forum_top', component: ForumTopComponent },
+      { path: 'forum_new', component: ForumNewComponent },
 
+    ]
+  },
+  {path: 'forum/:id', component: QuestionComponent},
 ];
 
 @NgModule({

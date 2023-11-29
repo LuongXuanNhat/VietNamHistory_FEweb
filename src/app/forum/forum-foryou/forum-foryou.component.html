@@ -1,0 +1,36 @@
+<div class="mt-1">
+    <a *ngFor="let q of questions" (click)="redirectToQuestion(q)" >
+        <div class="question-card">
+            <h6>🔖<strong>{{q.title}}</strong></h6>
+            <div class="flex-center-h">
+                <div class="flex-center-h plr-12">
+                    <span class="material-symbols-outlined pr">
+                        fullscreen
+                    </span>
+                    {{q.viewNumber}}
+                    lượt xem
+                </div>
+                <div class="flex-center-h plr-12">
+                    <span class="material-symbols-outlined pr">
+                        notes
+                    </span>
+                    {{q.commentNumber}}
+                    bình luận
+                </div>
+                <div class="flex-center-h plr-12">
+                    <span class="material-symbols-outlined pr">
+                        bookmark
+                    </span>
+                    {{q.saveNumber}}
+                    lượt lưu
+                </div>
+                <div class="flex-center-h plr-12">
+                    <span class="material-symbols-outlined pr">
+                        send
+                    </span>
+                    chia sẻ
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

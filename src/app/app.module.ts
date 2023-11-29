@@ -43,6 +43,15 @@ import { MydocumentComponent } from './mycategory/mydocument/mydocument.componen
 import { MyquestionComponent } from './mycategory/myquestion/myquestion.component';
 import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.component';
 import { ForumComponent } from './forum/forum.component';
+import { CarouselComponent } from './home/carousel/carousel.component';
+import { 	IgxCarouselModule,	IgxSliderModule } from "igniteui-angular";
+import { FooterComponent } from './footer/footer.component';
+import { ScrollDirective } from './service/scroll.directive';
+import { ForumForyouComponent } from './forum/forum-foryou/forum-foryou.component';
+import { ForumTopComponent } from './forum/forum-top/forum-top.component';
+import { ForumNewComponent } from './forum/forum-new/forum-new.component';
+import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
+import { QuestionComponent } from './forum/question/question.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +83,14 @@ import { ForumComponent } from './forum/forum.component';
     MyquestionComponent,
     MypostsavedComponent,
     ForumComponent,
-
+    CarouselComponent,
+    FooterComponent,
+    ScrollDirective,
+    ForumForyouComponent,
+    ForumTopComponent,
+    ForumNewComponent,
+    ForumCreateComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +118,9 @@ import { ForumComponent } from './forum/forum.component';
     OverlayModule,
     ClipboardModule,
     ReactiveFormsModule,
+    IgxCarouselModule,
+	  IgxSliderModule,
+
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},

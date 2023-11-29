@@ -9,6 +9,7 @@ import { SessionService } from './service/session/session.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
 import { MatMenu } from '@angular/material/menu';
+import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit, DoCheck{
   isadminuser = false;
   token: any;
   objectList: Category[] = [
-    { categoryname: 'Trang chủ', url: '' },
+    { categoryname: 'Trang chủ', url: '/home' },
     { categoryname: 'Khám phá', url: '/discover' },
     { categoryname: 'Học sử', url: '/learn' },
     { categoryname: 'Luyện tập', url: '/practice' },
@@ -85,7 +86,21 @@ export class AppComponent implements OnInit, DoCheck{
     //   this.LoadUser();
     // });
   }
-
+  createQuestion(){
+    if(this.sessionService.getToken()){
+      this.openQuestionDialog('100ms', '600ms');
+    } else {
+      this.toastr.info("Bạn cần đăng nhập trước");
+      this.router.navigate(['/login']);
+    }
+  }
+  openQuestionDialog(enteranimation: string, exitanimation: string) {
+    const popup = this.dialog.open(ForumCreateComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '50%'
+    });
+  }
   isLoggedIn(){
     this.token = this.sessionService.getToken();
     if(this.token){

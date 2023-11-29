@@ -86,6 +86,7 @@ export class DiscoverComponent  {
   }
   postDetail(post: PostResponse) {
     const postId = post.subId;
+    this.dataService.triggerReloadDetailPage(postId);
     this.router.navigate(['/discover', postId]);
   }
   getPosts(){

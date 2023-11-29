@@ -224,8 +224,8 @@ export class UpdatepostComponent implements OnInit{
     }
     
     formData.append('Id', this.postData.id || '');
-    formData.append('Title', updatepost.get('Title')?.value || '');
-    formData.append('Content', updatepost.get('Content')?.value || '');
+    formData.append('Title', updatepost.get('Title')?.value?.trim() || '');
+    formData.append('Content', updatepost.get('Content')?.value?.trim() || '');
     formData.append('Image', updatepost.get('Image')?.value || '');
     formData.append('TopicId', updatepost.get('TopicId')?.value || '');
     const tagValues = updatepost.get('Tag')?.value;

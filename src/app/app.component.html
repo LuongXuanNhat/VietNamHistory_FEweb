@@ -336,7 +336,7 @@
         <mat-icon>school</mat-icon>
         <span>Tạo khóa học</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="createQuestion()">
         <mat-icon>forum</mat-icon>
         <span>Đặt câu hỏi</span>
       </button>
@@ -414,8 +414,8 @@
 
 <div class="container" #tabPanel>
   <router-outlet> </router-outlet>
-  
-
-  <!-- Footer -->
+</div>
+<div>
+  <app-footer></app-footer>
 </div>
 

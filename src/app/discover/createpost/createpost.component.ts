@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from 'src/app/service/datashare/data.service';
-import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 
 
 
@@ -198,8 +197,8 @@ export class CreatepostComponent {
     const formData = new FormData();
     const createpost = this.createpostform;
   
-    formData.append('Title', createpost.get('Title')?.value || '');
-    formData.append('Content', createpost.get('Content')?.value || '');
+    formData.append('Title', createpost.get('Title')?.value?.trim() || '');
+    formData.append('Content', createpost.get('Content')?.value?.trim() || '');
     formData.append('Image', createpost.get('Image')?.value || '');
     formData.append('TopicId', createpost.get('TopicId')?.value || '');
     const tagValues = createpost.get('Tag')?.value;
