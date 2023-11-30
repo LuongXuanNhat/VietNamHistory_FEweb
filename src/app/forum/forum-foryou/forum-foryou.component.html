@@ -1,4 +1,4 @@
-<div class="mt-1">
+<div class="mt-1 mh-page">
     <a *ngFor="let q of questions" (click)="redirectToQuestion(q)" >
         <div class="question-card">
             <h6>🔖<strong>{{q.title}}</strong></h6>
@@ -29,6 +29,9 @@
                         send
                     </span>
                     chia sẻ
+                </div>
+                <div *ngIf="q.likeNumber != 0" class="flex-center-h plr-12">
+                    💡{{q.likeNumber}} cùng thắc mắc
                 </div>
             </div>
         </div>

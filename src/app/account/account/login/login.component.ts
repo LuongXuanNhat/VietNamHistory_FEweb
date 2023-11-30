@@ -64,7 +64,7 @@ export class LoginComponent {
           this.service.login();
         }
         const previousState = this.location.getState() as { redirect: string, navigationId: number };
-        const redirectTo = previousState.redirect !== '/' ? previousState.redirect : '/home';
+        const redirectTo = previousState.redirect !== '' ? previousState.redirect : '/home';
         this.router.navigateByUrl(redirectTo);
 
       },

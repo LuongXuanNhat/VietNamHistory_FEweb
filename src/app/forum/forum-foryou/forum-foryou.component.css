@@ -1,4 +1,9 @@
 .question-card {
+    cursor: pointer;
     padding: 16px 12px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    margin: 8px 0px;
+}
+.question-card:hover {
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }

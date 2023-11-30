@@ -25,7 +25,7 @@ export class ForumCreateComponent {
   
   createquestionform = this._formBuilder.group({
     Title: ['', [Validators.required, Validators.maxLength(255)]],
-    Content: ['<br><br><br><br>', Validators.required],
+    Content: ['', Validators.required],
     Tag: [[] as string[]]
   });
   currentDate = this.service.getCurrentDate();
@@ -112,13 +112,12 @@ export class ForumCreateComponent {
       return true;
     return false;
   }
-
-  CreatePost(){
+  CreateQuestion(){
     const formData = new FormData();
     const createpost = this.createquestionform;
-  
+
     formData.append('Title', createpost.get('Title')?.value?.trim() || '');
-    formData.append('Content', createpost.get('Content')?.value?.trim() || '');
+    formData.append('Content', createpost.get('Content')?.value || '');
     const tagValues = createpost.get('Tag')?.value;
     if (Array.isArray(tagValues)) {
       tagValues.forEach((tag, index) => {
@@ -132,7 +131,7 @@ export class ForumCreateComponent {
         this.dataService.changeIdQuestion(data.resultObj.id);
         this.router.navigate(['/forum', id]);
         setTimeout(() => {
-          this.triggerReloadDetailPage();
+          this.dataService.triggerReloadDetailPage(this.postId);
         }, 10);
         this.dialogRef.close();
       },
@@ -146,8 +145,5 @@ export class ForumCreateComponent {
         }
       }
     )
-  }
-  triggerReloadDetailPage() {
-    this.dataService.triggerReloadDetailPage(this.postId);
   }
 }

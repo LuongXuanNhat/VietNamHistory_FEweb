@@ -27,8 +27,6 @@ import { SessionService } from './service/session/session.service';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
 import { DatePipe } from '@angular/common';
 import { PostdetailComponent } from './discover/postdetail/postdetail.component';
-import { CardpostmoreComponent } from './discover/cardpostmore/cardpostmore.component';
-import { InteractComponent } from './discover/interact/interact.component';
 import { ReportpostComponent } from './discover/reportpost/reportpost.component';
 import { ChatComponent } from './discover/chat/chat.component';
 import { UpdatepostComponent } from './discover/updatepost/updatepost.component';
@@ -71,8 +69,6 @@ import { QuestionComponent } from './forum/question/question.component';
     ChangepasswordComponent,
     CreatepostComponent,
     PostdetailComponent,
-    CardpostmoreComponent,
-    InteractComponent,
     ReportpostComponent,
     ChatComponent,
     UpdatepostComponent,

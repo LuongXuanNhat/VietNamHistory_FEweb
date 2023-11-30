@@ -1,8 +1,8 @@
-<div style="height: 480px;" class="plr-1">
+<div class="plr-1 create-question">
     <form [formGroup]="createquestionform">
         <mat-label class="flex-center-sb pt-1 pb">
             <strong>Đặt câu hỏi</strong>
-            <button mat-raised-button color="primary" [disabled]="!Check()" (click)="CreatePost()">Đăng</button>
+            <button mat-raised-button color="primary" [disabled]="!Check()" (click)="CreateQuestion()">Đăng</button>
         </mat-label>
         <mat-form-field  class="w-100 specific-border" appearance="outline">
             <textarea   class="fw-5 title-question" matInput formControlName="Title" placeholder="Nhập câu hỏi ở đây..." required></textarea>

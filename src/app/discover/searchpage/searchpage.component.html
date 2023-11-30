@@ -46,7 +46,7 @@
                             <ng-template #avaterdefault >
                                 <img class="icon-24" src="assets/Icon/user.png" alt="">
                             </ng-template>
-                            <span class="pl-1" *ngIf="post.userShort.fullName !== ''; else fullname">{{post.userShort.fullName}}</span>
+                            <span class="pl-1 w-90 of-h" *ngIf="post.userShort.fullName !== ''; else fullname">{{post.userShort.fullName}}</span>
                             <ng-template class="pl-1" #fullname>{{post.userShort.fullName}}</ng-template>
                         </div>
                         <div class="flex-center-sb">

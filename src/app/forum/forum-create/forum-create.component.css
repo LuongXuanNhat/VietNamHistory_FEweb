@@ -10,3 +10,10 @@
     height: 106px;
     max-height: 106px;
 }
+:host ::ng-deep .ck.ck-editor__main > .ck-editor__editable {
+    background: var(--ck-color-base-background);
+    border-radius: 0;
+    min-height: 6.5em !important;
+    max-height: 11.5em !important;
+    overflow: auto;
+  }

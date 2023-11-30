@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
 import { MatMenu } from '@angular/material/menu';
 import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
+import { AnimationService } from './service/animations/animation.service';
 
 @Component({
   selector: 'app-root',
@@ -38,12 +39,13 @@ export class AppComponent implements OnInit, DoCheck{
   
   constructor(private router : Router, private service: AuthService, private overlayContainer: OverlayContainer,
     private toastr: ToastrService, private userService: UserService, private sessionService: SessionService,
-    private dialog: MatDialog){
+    private dialog: MatDialog,private animationService: AnimationService){
 
   }
 
   ngOnInit() {
-    
+    this.animationService.attachAnimationListener();
+    this.animationService.attachAnimationListener_btn2();
   }
   
   isMenuOpen = false;

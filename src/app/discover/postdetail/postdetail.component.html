@@ -1,7 +1,79 @@
 <div class="po-re">
-    <app-interact></app-interact>
+    <div style="position: fixed; ">
+        <div class="interact">
+            <button matTooltip="Thích" mat-icon-button matTooltipPosition="left" *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-interact">
+                <span class="material-symbols-outlined"> 
+                    thumb_up
+                </span>
+                <div class="likeNumber">
+                    {{likeNumber}}
+                </div>
+            </button>
+            <ng-template #liked>
+                <button mat-icon-button (click)="toggleThumb()" class="selected btn-interact">
+                    <span class="material-symbols-outlined selected-icon">
+                        thumb_up
+                    </span>
+                    <div class="likeNumber">
+                        {{likeNumber}}
+                    </div>
+                </button>
+            </ng-template>
+    
+            <button matTooltip="Bình luận" matTooltipPosition="left" mat-icon-button (click)="comment()" class="btn-interact">
+                <span class="material-symbols-outlined">
+                    forum
+                </span>
+                <div class="likeNumber">
+                    {{commentNum}}
+                </div>
+            </button>
+    
+            <button matTooltip="Lưu xem sau" matTooltipPosition="left" mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()" class="btn-interact">
+                <span class="material-symbols-outlined">
+                    bookmark_add
+                </span>
+                <div class="likeNumber">
+                    {{saveNumber}}
+                </div>
+            </button>
+            <ng-template #saved >
+                <button mat-icon-button (click)="IsSave()" class="selected btn-interact">
+                    <span class="material-symbols-outlined selected-icon">
+                        bookmark_added
+                    </span>
+                    <div class="likeNumber">
+                        {{saveNumber}}
+                    </div>
+                </button>
+            </ng-template>
+    
+            <button matTooltip="Báo cáo" matTooltipPosition="left" mat-icon-button (click)="Report()">
+                <span class="material-symbols-outlined">
+                    error
+                </span>
+            </button>
+            <button matTooltip="Copy" matTooltipPosition="left" mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
+                <span class="material-symbols-outlined">
+                    content_copy
+                </span>
+            </button>
+            <div *ngIf="canEditDelete()">
+                <button matTooltip="Sửa bài" matTooltipPosition="left" mat-icon-button (click)="updatePost()">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </button>
+                <button matTooltip="Xóa bài" matTooltipPosition="left" mat-icon-button  style="display: block;">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>  
 </div>
-<div class="mt-50 plr-200 dis-flex">
+<div class="mt-50 plr-200 dis-flex mh-page">
     <div style="flex-grow: 1;" class="font">
         <div class="flex-center-sb">
             <mat-chip-set cdkDropListOrientation="horizontal">
@@ -41,6 +113,19 @@
         </div>
     </div>
     <div class="card_more">
-        <app-cardpostmore></app-cardpostmore>
+        <div style="text-align: center;">
+            <p style="margin-top: 4px;"><strong>Các bài viết liên quan</strong></p>
+        </div>
+        <div>
+            <div *ngFor="let post of posts"  style="display:flex;">
+                <a class="small-post-card plr-12 font pt pb" (click)="postDetail(post)" >
+                    <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
+                    <div style="display: inline-block;" class="pl">
+                        <span class="text-3-line">{{post.title}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
     </div>
 </div>

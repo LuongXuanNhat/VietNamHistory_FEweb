@@ -34,6 +34,7 @@
               "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
             "scripts": [
+              "src/style.js",
               "./node_modules/hammerjs/hammer.min.js"
             ],
             "stylePreprocessorOptions": {
@@ -47,8 +48,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2.5mb",
-                  "maximumError": "2.5mb"
+                  "maximumWarning": "4.5mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -106,6 +107,7 @@
               "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
             "scripts": [
+              "src/style.js",
               "./node_modules/hammerjs/hammer.min.js"
             ],
             "stylePreprocessorOptions": {

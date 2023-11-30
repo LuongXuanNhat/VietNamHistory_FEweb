@@ -1,7 +1,82 @@
-<div class="mt-50 plr-200 dis-flex">
+<div class="po-re">
+    <div style="position: fixed; ">
+        <div class="interact">
+            <button matTooltip="Thích" mat-icon-button matTooltipPosition="left" *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-interact">
+                <span class="material-symbols-outlined"> 
+                    thumb_up
+                </span>
+                <div class="likeNumber">
+                    {{likeNumber}}
+                </div>
+            </button>
+            <ng-template #liked>
+                <button mat-icon-button (click)="toggleThumb()" class="selected btn-interact">
+                    <span class="material-symbols-outlined selected-icon">
+                        thumb_up
+                    </span>
+                    <div class="likeNumber">
+                        {{likeNumber}}
+                    </div>
+                </button>
+            </ng-template>
+    
+            <button matTooltip="Bình luận" matTooltipPosition="left" mat-icon-button class="btn-interact">
+                <span class="material-symbols-outlined">
+                    forum
+                </span>
+                <div class="likeNumber">
+                    {{commentNum}}
+                </div>
+            </button>
+    
+            <button matTooltip="Lưu xem sau" matTooltipPosition="left" mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()" class="btn-interact">
+                <span class="material-symbols-outlined">
+                    bookmark_add
+                </span>
+                <div class="likeNumber">
+                    {{saveNumber}}
+                </div>
+            </button>
+            <ng-template #saved >
+                <button mat-icon-button (click)="IsSave()" class="selected btn-interact">
+                    <span class="material-symbols-outlined selected-icon">
+                        bookmark_added
+                    </span>
+                    <div class="likeNumber">
+                        {{saveNumber}}
+                    </div>
+                </button>
+            </ng-template>
+    
+            <button matTooltip="Báo cáo" matTooltipPosition="left" mat-icon-button (click)="Report()">
+                <span class="material-symbols-outlined">
+                    error
+                </span>
+            </button>
+            <button matTooltip="Copy" matTooltipPosition="left" mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
+                <span class="material-symbols-outlined">
+                    content_copy
+                </span>
+            </button>
+            <div *ngIf="canEditDelete()">
+                <button matTooltip="Sửa bài" matTooltipPosition="left" mat-icon-button (click)="updatePost()">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </button>
+                <button matTooltip="Xóa bài" matTooltipPosition="left" mat-icon-button  style="display: block;">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>  
+</div>
+<div class="mt-50 plr-200 dis-flex mh-page">
     <div style="flex-grow: 1;" class="font">
         <div class="flex-center-sb">
-            <div class="dis-flex" >
+            <div class="dis-flex mt-1" >
                 <ng-template #avaterdefault >
                     <img class="icon-24" src="assets/Icon/user.png" alt="">
                 </ng-template>
@@ -13,14 +88,14 @@
         <div>
             <p class="font fs-20"> <strong>{{question?.title}}</strong></p>
             <div>
-                <div class="font" [innerHTML]="question?.content" style="overflow: auto;"></div>
-                <div class="flex-center-sb">
+                <div class="font content-question" [innerHTML]="question?.content" style="overflow: auto;"></div>
+                <span class="flex-center-sb">
                     <div ><strong>Lượt xem: {{question?.viewNumber}}</strong></div>
                     <div class="flex-center-h">
                         <mat-icon matSuffix>today</mat-icon>
                         {{question?.updatedAt ?? question?.createdAt}} 
                     </div>
-                </div>
+                </span>
             </div>
         </div>
         <div>

@@ -27,12 +27,6 @@ export class DataService {
     this.keywordSource.next(keyword);
   }
 
-  private PostOfUserId = new BehaviorSubject<string>('');
-  currentPostOfUserId = this.PostOfUserId.asObservable();
-  changePostOfUserId(userId: string) {
-    this.PostOfUserId.next(userId);
-  }
-
   private subId = new BehaviorSubject<string>('');
   currentSubId = this.subId.asObservable();
   changeSubId(subId: string) {

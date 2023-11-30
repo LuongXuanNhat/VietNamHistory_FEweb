@@ -324,7 +324,7 @@
     </nav>
   </div>
   <div class="flex-center-h">
-    <button mat-icon-button [matMenuTriggerFor]="menuCreate" matTooltip="Lên ý tưởng" matTooltipPosition="left" >
+    <button class="dis-flex" mat-icon-button [matMenuTriggerFor]="menuCreate" matTooltip="Lên ý tưởng" matTooltipPosition="left" >
       <mat-icon matBadge="1" matBadgeColor="warn" style="color: #3e50ca;">add_circle</mat-icon>
     </button>
     <mat-menu #menuCreate="matMenu" style="z-index: 10;">
@@ -346,7 +346,9 @@
       </button>
     </mat-menu>
 
-    <button mat-icon-button matTooltip="Thông báo" matTooltipPosition="below">
+<!-- <button class="bubbly-button">Hello</button>
+<button class="bubbly-button-1">Hello</button> -->
+    <button class="dis-flex" mat-icon-button matTooltip="Thông báo" matTooltipPosition="below">
       <mat-icon matBadge="1" matBadgeColor="warn" style="color: #7d7d7d;">notifications</mat-icon>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn(); else loginLink" class="btn-user" >
@@ -416,6 +418,8 @@
   <router-outlet> </router-outlet>
 </div>
 <div>
+
   <app-footer></app-footer>
+
 </div>
 
