@@ -1,16 +1,16 @@
 <div class="po-re">
     <div style="position: fixed; ">
         <div class="interact">
-            <button matTooltip="Thích" mat-icon-button matTooltipPosition="left" *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-interact">
+            <button matTooltip="Cùng thắc mắc" mat-icon-button matTooltipPosition="right" *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-interact">
                 <span class="material-symbols-outlined"> 
                     thumb_up
-                </span>
+                </span> 
                 <div class="likeNumber">
                     {{likeNumber}}
                 </div>
             </button>
             <ng-template #liked>
-                <button mat-icon-button (click)="toggleThumb()" class="selected btn-interact">
+                <button matTooltip="Cùng thắc mắc" mat-icon-button matTooltipPosition="right" mat-icon-button (click)="toggleThumb()" class="selected btn-interact">
                     <span class="material-symbols-outlined selected-icon">
                         thumb_up
                     </span>
@@ -19,8 +19,7 @@
                     </div>
                 </button>
             </ng-template>
-    
-            <button matTooltip="Bình luận" matTooltipPosition="left" mat-icon-button class="btn-interact">
+            <button id="answer" matTooltip="Câu trả lời" matTooltipPosition="right" mat-icon-button class="btn-interact">
                 <span class="material-symbols-outlined">
                     forum
                 </span>
@@ -29,7 +28,7 @@
                 </div>
             </button>
     
-            <button matTooltip="Lưu xem sau" matTooltipPosition="left" mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()" class="btn-interact">
+            <button matTooltip="Lưu xem sau" matTooltipPosition="right" mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()" class="btn-interact">
                 <span class="material-symbols-outlined">
                     bookmark_add
                 </span>
@@ -38,7 +37,7 @@
                 </div>
             </button>
             <ng-template #saved >
-                <button mat-icon-button (click)="IsSave()" class="selected btn-interact">
+                <button matTooltip="Bỏ lưu" matTooltipPosition="right" mat-icon-button (click)="IsSave()" class="selected btn-interact">
                     <span class="material-symbols-outlined selected-icon">
                         bookmark_added
                     </span>
@@ -48,23 +47,23 @@
                 </button>
             </ng-template>
     
-            <button matTooltip="Báo cáo" matTooltipPosition="left" mat-icon-button (click)="Report()">
+            <button class="dis-flex" matTooltip="Báo cáo" matTooltipPosition="right" mat-icon-button (click)="Report()">
                 <span class="material-symbols-outlined">
                     error
                 </span>
             </button>
-            <button matTooltip="Copy" matTooltipPosition="left" mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
+            <button class="dis-flex" matTooltip="Copy" matTooltipPosition="right" mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
                 <span class="material-symbols-outlined">
                     content_copy
                 </span>
             </button>
             <div *ngIf="canEditDelete()">
-                <button matTooltip="Sửa bài" matTooltipPosition="left" mat-icon-button (click)="updatePost()">
+                <button class="dis-flex" matTooltip="Sửa bài" matTooltipPosition="right" mat-icon-button (click)="updatePost()">
                     <span class="material-symbols-outlined">
                         edit
                     </span>
                 </button>
-                <button matTooltip="Xóa bài" matTooltipPosition="left" mat-icon-button  style="display: block;">
+                <button class="dis-flex" matTooltip="Xóa bài" matTooltipPosition="right" mat-icon-button  style="display: block;">
                     <span class="material-symbols-outlined">
                         delete
                     </span>
@@ -73,25 +72,25 @@
         </div>
     </div>  
 </div>
-<div class="mt-50 plr-200 dis-flex mh-page">
+<div class="mt-50 plr-300 dis-flex mh-page">
     <div style="flex-grow: 1;" class="font">
         <div class="flex-center-sb">
             <div class="dis-flex mt-1" >
                 <ng-template #avaterdefault >
-                    <img class="icon-24" src="assets/Icon/user.png" alt="">
+                    <img class="icon-24" src="assets/Icon/user.png" alt="avatar">
                 </ng-template>
-                <img *ngIf="question?.userShort?.image !== ''; else avaterdefault" src="{{question?.userShort?.image}}" alt="" class="icon-24" style="margin-right: 8px;">
-                <span  class="pr">{{question?.userShort?.fullName}}</span>
+                <img *ngIf="question?.userShort?.image !== ''; else avaterdefault" src="{{question?.userShort?.image}}" alt="avatar" class="icon-24" style="margin-right: 8px;">
+                <span  class="pl">{{question?.userShort?.fullName}}</span>
                 
             </div>
         </div>
         <div>
             <p class="font fs-20"> <strong>{{question?.title}}</strong></p>
             <div>
-                <div class="font content-question" [innerHTML]="question?.content" style="overflow: auto;"></div>
+                <div class="font content-question mt-1 mb-1" [innerHTML]="question?.content" style="overflow: auto;"></div>
                 <span class="flex-center-sb">
                     <div ><strong>Lượt xem: {{question?.viewNumber}}</strong></div>
-                    <div class="flex-center-h">
+                    <div class="flex-center-h cursor-d" matTooltip="{{question?.updatedAt == null ? 'Đã tạo' : 'Đã sửa'}}" matTooltipPosition="right">
                         <mat-icon matSuffix>today</mat-icon>
                         {{question?.updatedAt ?? question?.createdAt}} 
                     </div>
@@ -102,12 +101,93 @@
             <mat-chip-set cdkDropList cdkDropListOrientation="horizontal" >
                 <div *ngIf="question?.tags?.length" class="flex-center-h">
                     <mat-icon matSuffix>tag</mat-icon>
-                    <mat-chip matTooltip="Tìm kiếm tag này" matTooltipPosition="right" *ngFor="let tag of question?.tags" cdkDrag (click)="findByTag(tag.name)">
+                    <mat-chip matTooltip="Tìm kiếm tag này" matTooltipPosition="below" *ngFor="let tag of question?.tags" cdkDrag (click)="findByTag(tag.name)">
                         <span style="cursor: pointer;">
                             {{tag.name}}
                         </span></mat-chip>
                 </div>
             </mat-chip-set>
+        </div>
+        <div #answercard >
+            <div class="flex-center-sb">
+                <h6 class="card-answer pb-1"><strong>Trả lời</strong></h6>
+                <button class="flex-center-h"  [matMenuTriggerFor]="menu" aria-label="Sắp xếp" matTooltip="Sắp xếp" style="border: none; background-color: transparent;">
+                    <span class="pr">Sắp xếp</span>
+                    <span class="material-symbols-outlined">
+                        keyboard_arrow_down
+                    </span>  
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>dialpad</mat-icon>
+                        <span>Mặc định</span>
+                      </button>
+                    <button mat-menu-item>
+                      <mat-icon>dialpad</mat-icon>
+                      <span>Theo thời gian</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                      <mat-icon>voicemail</mat-icon>
+                      <span>Lượt bình chọn nhiều nhất</span>
+                    </button>
+                  </mat-menu>
+            </div>
+            <div *ngIf="userId; else login" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
+                <div style="display: flex; align-items: center;" class="pb">
+                    <img class="icon-24" [src]="imgUser || 'assets/Icon/user.png'" alt="">
+                    <strong class="pl">{{userName}}</strong>
+                </div>
+                
+                <div style="font-size: 14px;">
+                    <ckeditor
+                        style="max-height: 650px; overflow: auto;"
+                        [editor]="Editor"
+                        [config]="editorConfig"
+                        [(ngModel)]="createCommentContent"
+                        (change)="onEditorChange($event)"
+                    ></ckeditor>
+                </div>
+                <div class="mt">
+                    <button mat-raised-button color="primary" *ngIf="isCheckCommented()" (click)="sendAnswer()">Trả lời</button>
+                    <button mat-button *ngIf="isCheckCommented()" (click)="cancelComment()">Hủy</button>
+                </div>
+            </div>
+            <ng-template #login class="pt">
+                <span class="pr">Đăng nhập để bình luận </span>
+                <button mat-raised-button color="primary" (click)="loginUser()">Đăng nhập</button>
+            </ng-template>
+
+            <div *ngIf="answers && answers.length > 0">
+                <div *ngFor="let answer of answers">
+                    <div style="display: flex; align-items: center;" class="mt-1">
+                        <img class="icon-24" [src]="answer.userShort?.image == '' ? 'assets/Icon/user.png' : answer.userShort?.image" alt="avatar">
+                        <strong class="pl">{{answer.userShort?.fullName}} </strong>
+                        <div class="pl">{{answer.updatedAt ?? answer?.createdAt}}</div>
+                        <button  [matMenuTriggerFor]="menu" *ngIf="answer.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px; margin-left: auto;">
+                            <span class="material-symbols-outlined">
+                                more_horiz
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div btn-comment>
+                        <mat-menu #menu="matMenu" >
+                            <button mat-menu-item (click)="editComment(answer.id ?? '')">
+                              <mat-icon>edit</mat-icon>
+                              <span>Sửa</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteAnswer(answer.id ?? '')">
+                              <mat-icon>delete</mat-icon>
+                              <span>Xóa</span>
+                            </button>
+                            
+                        </mat-menu>
+                    </div>
+                    
+                <div [innerHTML]="answer.content" class="content"></div>
+                </div>
+                
+            </div>              
         </div>
     </div>
 </div>

@@ -4,7 +4,6 @@ import { PublicserviceService } from '../service/publicservice.service';
 import { PostFpk, PostResponse, TagDto } from '../ObjectClass/object';
 import { DataService } from  '../service/datashare/data.service'
 import { format, parseISO } from 'date-fns';
-import { HammerGestureConfigComponent } from '../hammer-gesture-config/hammer-gesture-config.component';
 import { SessionService } from '../service/session/session.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -12,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-discover',
   templateUrl: './discover.component.html',
   styleUrls: ['./discover.component.css'],
-  providers: [HammerGestureConfigComponent],
 })
 export class DiscoverComponent  {
   keyWord!: string | null;

@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { format, parseISO } from 'date-fns';
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
-import { PostResponse } from 'src/app/ObjectClass/object';
+import { AnswerQuestionDto, CommentPostDto, PostResponse } from 'src/app/ObjectClass/object';
 import { ReportpostComponent } from 'src/app/discover/reportpost/reportpost.component';
 import { UpdatepostComponent } from 'src/app/discover/updatepost/updatepost.component';
 import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
+import viLocale from 'date-fns/locale/vi';
+import { ForumUpdateComponent } from '../forum-update/forum-update.component';
 
 @Component({
   selector: 'app-question',
@@ -17,7 +21,7 @@ import { SessionService } from 'src/app/service/session/session.service';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit{
-  idQuestion!: string;
+  subQuestionId!: string;
   isThumbUp: boolean | null = null;
   isSave: boolean | null = null;
   currentUrl: string = '';
@@ -25,51 +29,131 @@ export class QuestionComponent implements OnInit{
   saveNumber: number = 0;
   commentNum: number = 0;
   userIdOfPost: string = '';
-
   question: PostResponse | null = null;
+  answers!: AnswerQuestionDto[];
+
+  userId: string | null;
+  userName: string | null;
+  imgUser: string | null;
+  isCommented = false;
+  isUpdateCommented = false;
+  isEdit: string = '';
+  private hubConnection!: HubConnection;
+  public Editor = ClassicEditor;
+  createCommentContent: string = '';
+  contentUpdate: string = '';
+  createAnswer: AnswerQuestionDto = {
+    authorId: '',
+    questionId: '',
+    content: '',
+    confirm: false,
+    mostConfirm: false
+  };
+  updateAnswer: AnswerQuestionDto = {
+    authorId: '',
+    questionId: '',
+    content: '',
+    confirm: false,
+    mostConfirm: false
+  }
+  questionId: string = '';
+
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private route: ActivatedRoute,private dialog: MatDialog,
     private clipboardService: ClipboardService, ){
       this.route.params.subscribe(params => {
-        this.idQuestion = params['id'] ?? '';
+        this.subQuestionId = params['id'] ?? '';
       });
       this.GetQuestion();
+      this.userId = session.getUserId();
+      this.userName= session.getName();
+      this.imgUser = session.getAvatar();
+
+      this.connectChatSignal();
   }
+  
   ngOnInit() {
     this.dataService.reloadDetailPage$.subscribe((idQuestion: string | null) => {
       if(idQuestion != '' && idQuestion)  {
-        this.idQuestion = idQuestion;
+        this.subQuestionId = idQuestion;
         this.router.navigate([], {relativeTo: this.route});
         this.GetQuestion();
       }
     });
   }
    GetQuestion() {
-    this.service.GetQuestionDetail(this.idQuestion).subscribe(
+    this.service.GetQuestionDetail(this.subQuestionId).subscribe(
       (data: any) => {
         this.question = this.ConvertDate(data.resultObj);
-        
+        this.questionId = this.question.id;
+        this.userIdOfPost = data.resultObj.userShort.id;
+        this.GetAnswers();
       }, (error: any) => {
         this.toastr.error("Lỗi: " + error);
       }
     )
   }
-  ConvertDate(comments: PostResponse): PostResponse{
-      const parsedDate = parseISO(comments.createdAt.toString());
-      const parsedDate2 = parseISO(comments.updatedAt?.toString() ?? "");
+  GetAnswers() {
+    this.service.GetAnswers(this.questionId).subscribe(
+      (data: any) => {
+        this.answers = this.ConvertListDate(data.resultObj);
+        this.commentNum = this.answers.length;
+      }, (error: any) => {
+        this.toastr.error("Lỗi: "+ error);
+      }
+    )
+  }
+  connectChatSignal() {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl(this.service.getChatSignRl())
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => {
+        console.log('Connection started!');
+      })
+      .catch(err => console.error('Error while establishing connection:', err));
+
+    // Listen to SignalR events
+      this.hubConnection.on('ReceiveAnswer', (data: any) => {
+        if(data){
+          this.answers = this.ConvertListDate(data.resultObj as AnswerQuestionDto[]);
+          this.commentNum = this.answers.length;
+        }
+    });
+  }
+  ConvertDate(comment: PostResponse): PostResponse{
+      const parsedDate = parseISO(comment.createdAt?.toString() ?? "");
+      const parsedDate2 = parseISO(comment.updatedAt?.toString() ?? "");
 
       if (!isNaN(parsedDate.getTime())) {
-        comments.createdAt = format(parsedDate, 'dd-MM-yyyy');
+        comment.createdAt = format(parsedDate, 'dd-MM-yyyy hh:mm', { locale: viLocale });
       }
       if (!isNaN(parsedDate2.getTime())) {
-        comments.updatedAt = format(parsedDate2, 'dd-MM-yyyy');
+        comment.updatedAt = format(parsedDate2, 'dd-MM-yyyy hh:mm', { locale: viLocale });
       }
-    return comments;
+    return comment;
   }
+  ConvertListDate(answers: AnswerQuestionDto[]): AnswerQuestionDto[]{
+    answers.forEach(element => {
+      const parsedDate = parseISO(element.createdAt?.toString() ?? '');
+    const parsedDate2 = parseISO(element.updatedAt?.toString() ?? "");
+
+    if (!isNaN(parsedDate.getTime())) {
+      element.createdAt = format(parsedDate, 'dd-MM-yyyy hh:mm', { locale: viLocale });
+    }
+    if (!isNaN(parsedDate2.getTime())) {
+      element.updatedAt = format(parsedDate2, 'dd-MM-yyyy hh:mm', { locale: viLocale });
+    }
+    });
+    
+  return answers;
+}
   getLike(){
     if(this.session.getUserId()){
-      this.service.getLike(this.idQuestion, this.session.getUserId() || '').subscribe(
+      this.service.getLike(this.subQuestionId, this.session.getUserId() || '').subscribe(
         (result: any) => {
             this.isThumbUp = result.resultObj.check;
         },
@@ -77,7 +161,7 @@ export class QuestionComponent implements OnInit{
             console.error(error);
         }
       );
-      this.service.getSave(this.idQuestion, this.session.getUserId() || '').subscribe(
+      this.service.getSave(this.subQuestionId, this.session.getUserId() || '').subscribe(
         (result: any) => {
             this.isSave = result.resultObj.check;
         },
@@ -97,7 +181,7 @@ export class QuestionComponent implements OnInit{
       return;
     }
     const formData = new FormData();
-    formData.append('idQuestion', this.idQuestion);
+    formData.append('idQuestion', this.subQuestionId);
     formData.append('UserId', this.session.getUserId() ?? '');
     this.service.LikeOrUnlike(formData).subscribe(
       (data: any) => {
@@ -113,7 +197,7 @@ export class QuestionComponent implements OnInit{
       return;
     }
     const formData = new FormData();
-    formData.append('idQuestion', this.idQuestion);
+    formData.append('idQuestion', this.subQuestionId);
     formData.append('UserId', this.session.getUserId() ?? '');
     this.service.SaveOrUnSave(formData).subscribe(
       (data: any) => {
@@ -138,20 +222,20 @@ export class QuestionComponent implements OnInit{
       width: '900px',
       height: '500px',
       data: {
-        SubId: this.idQuestion
+        SubId: this.subQuestionId
       }
     });
   }
 
   updatePost(){
-    this.dataService.changeSubId(this.idQuestion);
+    this.dataService.changeSubId(this.subQuestionId);
     this.openDialogUpdatePost('100ms', '600ms');
   }
   openDialogUpdatePost(enteranimation: any, exitanimation: any){
-    const popup = this.dialog.open(UpdatepostComponent, {
+    const popup = this.dialog.open(ForumUpdateComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
-      width: '60%'
+      width: '50%'
     });
   }
   copyToClipboard() {
@@ -159,8 +243,118 @@ export class QuestionComponent implements OnInit{
     this.toastr.info("Đã sao chép đường link");
   }
   canEditDelete(){
-    if(this.session.getUserId() == this.userIdOfPost)
+    if(this.userId == this.userIdOfPost)
       return true;
     return false;
+  }
+
+  public editorConfig = {
+    toolbar: {
+      items: ['heading', 'bold', 'italic','blockQuote', 'bulletedList', 'numberedList', 'link'],
+    },
+    placeholder: 'Viết bình luận...',
+    language: 'vi',
+  };
+  onEditorChange(event: any) {
+    this.isCommented = true;
+    this.createCommentContent = event.editor.getData();
+    if(this.hasImage(this.contentUpdate)){
+      this.toastr.warning("Không được bình luận có nội dung là ảnh!");
+    }
+  }
+  onEditChange(event: any) {
+    this.isUpdateCommented = true;
+    this.contentUpdate = event.editor.getData();
+
+    if(this.hasImage(this.contentUpdate)){
+      this.toastr.warning("Không được bình luận có nội dung là ảnh!");
+    }
+  }
+  hasImage(content: string): boolean{
+    const imageRegex = /<img[^>]+src\s*=\s*['"]([^'"]+)['"][^>]*>/g;
+    const containsImage = imageRegex.test(content);
+    if (containsImage) {
+      return true;
+    }
+    return false;
+  }
+  sendAnswer(){
+    // if(this.hasImage(this.createCommentContent)){
+    //   this.toastr.warning("Không được bình luận có nội dung là ảnh!");
+    //   return;
+    // }
+
+    this.createAnswer.questionId = this.questionId;
+    this.createAnswer.authorId = this.userId ?? '';
+    this.createAnswer.content = this.createCommentContent.trim();
+    
+    this.service.CreateForumAnswer(this.createAnswer).subscribe(
+      (data: any)=>{
+        this.cancelComment();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+  submitEdited(){
+    if(this.hasImage(this.contentUpdate)){
+      this.toastr.warning("Không được bình luận có nội dung là ảnh!");
+      return;
+    }
+
+    this.updateAnswer.content = this.contentUpdate?.trim();
+    if(this.contentUpdate.trim() == ''){
+      this.toastr.info("Vui lòng không để trống bình luận");
+      return;
+    }
+    this.service.UpdateForumAnswer(this.updateAnswer).subscribe(
+      (data: any)=>{
+        this.contentUpdate = '';
+        this.cancelEditComment();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+  isCheckCommented(){
+    if(this.isCommented)  
+      return true;
+    return false;
+  }
+  cancelComment(){
+    this.isCommented = false;
+    this.createCommentContent = '';
+  }
+  cancelEditComment(){
+    this.isUpdateCommented = false;
+    this.contentUpdate = '';
+    this.isEdit = '-1';
+  }
+  editComment(id: string){
+    var foundComment = this.answers?.find(x => x.id === id);
+    if(foundComment){
+      this.updateAnswer = foundComment;
+      this.contentUpdate = foundComment.content;
+      this.isEdit = id;
+    }
+  }
+  deleteAnswer(id: string){
+    this.service.deleteAnswer(id).subscribe(
+      (data: any) => {
+
+      },
+      (error: any) => {
+        this.toastr.error("Lỗi: "+error);
+      }
+    )
+  }
+  isCheckEdit(id: string): boolean{
+    return this.isEdit == id;
+  }
+  loginUser(){
+    const currentUrl = this.router.url;
+    this.router.navigate(['/login'], { state: { redirect: currentUrl } });
   }
 }

@@ -11,7 +11,7 @@ import { UpdateaccountComponent } from './account/updateaccount/updateaccount.co
 import { IntroduceComponent } from './account/introduce/introduce.component';
 import { ChangeemailComponent } from './account/updateaccount/changeemail/changeemail.component';
 import { ChangepasswordComponent } from './account/updateaccount/changepassword/changepassword.component';
-import { AuthGuard } from './guard/auth.guard';
+import { AuthGuard } from './service/guard/auth.guard';
 import { PostdetailComponent } from './discover/postdetail/postdetail.component';
 import { DiscoverComponent } from './discover/discover.component';
 import { SearchpageComponent } from './discover/searchpage/searchpage.component';
@@ -57,7 +57,7 @@ const routes: Routes = [
     ]
   },
   {path: 'forum', 
-    component:ForumComponent, canActivate: [AuthGuard],
+    component:ForumComponent,
     children: [
       { path: '', redirectTo: 'forum_foryou', pathMatch: 'full',},
       { path: 'forum_foryou', component: ForumForyouComponent },

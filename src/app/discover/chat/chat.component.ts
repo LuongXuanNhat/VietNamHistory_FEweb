@@ -10,6 +10,7 @@ import { format, parseISO } from 'date-fns';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import viLocale from 'date-fns/locale/vi';
 
 @Component({
   selector: 'app-chat',
@@ -69,8 +70,8 @@ export class ChatComponent {
       .catch(err => console.error('Error while establishing connection:', err));
 
     // Listen to SignalR events
-      this.hubConnection.on('ReceiveComment', (comment: CommentPostDto[]) => {
-      this.GetChatPost(); // Update comments when a new comment is received
+      this.hubConnection.on('ReceiveComment', (data: any) => {
+        this.comments = this.ConvertChatDate(data.resultObj);
     });
   }
   GetChatPost(){
@@ -86,10 +87,10 @@ export class ChatComponent {
       const parsedDate2 = parseISO(element.updatedAt?.toString() ?? "");
 
       if (!isNaN(parsedDate.getTime())) {
-        element.createdAt = format(parsedDate, 'dd-MM-yyyy');
+        element.createdAt = format(parsedDate, 'dd-MM-yyyy hh:mm', { locale: viLocale });
       }
       if (!isNaN(parsedDate2.getTime())) {
-        element.updatedAt = format(parsedDate2, 'dd-MM-yyyy');
+        element.updatedAt = format(parsedDate2, 'dd-MM-yyyy  hh:mm',{ locale: viLocale });
       }
     });
     return comments;
@@ -131,15 +132,12 @@ export class ChatComponent {
     }
 
     this.createComment.postId = this.postId;
-    this.createComment.createdAt = new Date();
     this.createComment.userId = this.userId ?? '';
     this.createComment.content = this.createCommentContent.trim();
     
     this.service.CreatePostComment(this.createComment).subscribe(
       (data: any)=>{
         this.cancelComment();
-        this.comments = this.ConvertChatDate(data.resultObj);
-        this.hubConnection.invoke('SendComment', this.createComment);
       },
       error => {
         console.log(error);
@@ -155,16 +153,16 @@ export class ChatComponent {
     this.updateComment.content = this.contentUpdate?.trim();
     this.updateComment.createdAt = new Date();
     this.updateComment.updatedAt = new Date();
+
+    console.log(this.updateComment);
     if(this.contentUpdate.trim() == ''){
       this.toastr.info("Vui lòng không để trống bình luận");
       return;
     }
     this.service.UpdatePostComment(this.updateComment).subscribe(
       (data: any)=>{
-        this.comments = this.ConvertChatDate(data.resultObj);
         this.contentUpdate = '';
         this.cancelEditComment();
-        this.hubConnection.invoke('SendComment', this.updateComment);
       },
       error => {
         console.log(error);
@@ -174,6 +172,9 @@ export class ChatComponent {
   cancelComment(){
     this.isCommented = false;
     this.createCommentContent = '';
+  }
+  isCheckCommented(){
+    return this.isCommented;
   }
   cancelEditComment(){
     this.isUpdateCommented = false;
@@ -191,8 +192,7 @@ export class ChatComponent {
   deleteComment(id: string){
     this.service.deleteComment(id).subscribe(
       (data: any) => {
-        this.comments = this.ConvertChatDate(data.resultObj);
-        this.hubConnection.invoke('SendComment', this.updateComment);
+        
       },
       (error: any) => {
         this.toastr.error("Lỗi: "+error);

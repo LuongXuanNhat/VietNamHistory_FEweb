@@ -29,9 +29,9 @@ export class AppComponent implements OnInit, DoCheck{
   objectList: Category[] = [
     { categoryname: 'Trang chủ', url: '/home' },
     { categoryname: 'Khám phá', url: '/discover' },
-    { categoryname: 'Học sử', url: '/learn' },
+    { categoryname: 'Học sử', url: '/course' },
     { categoryname: 'Luyện tập', url: '/practice' },
-    { categoryname: 'Thi đấu', url: '/contest' },
+    { categoryname: 'Tài liệu', url: '/document' },
     { categoryname: 'Diễn đàn', url: '/forum' },
     { categoryname: 'Về chúng tôi', url: '/about' }
   ];
@@ -75,7 +75,8 @@ export class AppComponent implements OnInit, DoCheck{
       this.openDialog('100ms', '600ms');
     } else {
       this.toastr.info("Bạn cần đăng nhập trước");
-      this.router.navigate(['/login']);
+      const currentUrl = this.router.url;
+      this.router.navigate(['/login'], { state: { redirect: currentUrl } });
     }
   }
   openDialog(enteranimation: any, exitanimation: any){
@@ -84,16 +85,14 @@ export class AppComponent implements OnInit, DoCheck{
       exitAnimationDuration: exitanimation,
       width: '60%'
     });
-    // popup.afterClosed().subscribe(res => {
-    //   this.LoadUser();
-    // });
   }
   createQuestion(){
     if(this.sessionService.getToken()){
       this.openQuestionDialog('100ms', '600ms');
     } else {
       this.toastr.info("Bạn cần đăng nhập trước");
-      this.router.navigate(['/login']);
+      const currentUrl = this.router.url;
+      this.router.navigate(['/login'], { state: { redirect: currentUrl } });
     }
   }
   openQuestionDialog(enteranimation: string, exitanimation: string) {

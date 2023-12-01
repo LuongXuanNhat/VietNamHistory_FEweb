@@ -63,6 +63,7 @@ export class PostdetailComponent implements OnInit{
         this.likeNumber = data.resultObj.likeNumber;
         this.saveNumber = data.resultObj.saveNumber;
         this.commentNum = data.resultObj.commentNumber;
+        this.userIdOfPost = data.resultObj.userShort.id;
         if(this.postData){
           const parsedDate = parseISO(this.postData.createdAt);
           const parsedDate2 = parseISO(this.postData.updatedAt ?? "");

@@ -19,8 +19,8 @@
             ></ckeditor>
         </div>
         <div class="mt">
-            <button mat-raised-button color="primary" *ngIf="isCommented" (click)="sendComment()">Đăng</button>
-            <button mat-button *ngIf="isCommented" (click)="cancelComment()">Hủy</button>
+            <button mat-raised-button color="primary" *ngIf="isCheckCommented()" (click)="sendComment()">Đăng</button>
+            <button mat-button *ngIf="isCheckCommented()" (click)="cancelComment()">Hủy</button>
         </div>
     </div>
    
@@ -37,7 +37,7 @@
                             <img class="icon-24" [src]="comment.userShort?.image || 'assets/Icon/user.png' " alt="">
                             <strong class="pl">{{comment.userShort?.fullName}}</strong>
                         </div>
-                        <button [matMenuTriggerFor]="menu" *ngIf="comment.userShort?.id === userId" mat-icon-button class="btn-icon-small" style="right: 16px;">
+                        <button  [matMenuTriggerFor]="menu" *ngIf="comment.userShort?.id === userId" mat-icon-button class="btn-icon-small dis-flex" style="right: 16px;">
                             <span class="material-symbols-outlined">
                                 more_horiz
                             </span>
@@ -80,7 +80,6 @@
                 <div class="mt">
                     <button mat-raised-button color="primary" *ngIf="isUpdateCommented" (click)="submitEdited()">Cập nhập</button>
                     <button mat-button *ngIf="isCheckEdit(comment.id ?? '')" (click)="cancelEditComment()">Hủy</button>
-
                 </div>
             </div>
         </div>

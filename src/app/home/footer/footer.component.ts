@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../service/datashare/data.service';
-import { PublicserviceService } from '../service/publicservice.service';
-import { SessionService } from '../service/session/session.service';
+import { DataService } from '../../service/datashare/data.service';
+import { PublicserviceService } from '../../service/publicservice.service';
+import { SessionService } from '../../service/session/session.service';
 
 @Component({
   selector: 'app-footer',

@@ -78,16 +78,25 @@ export interface PostResponse {
     userId: string;
   }
  
-  // export class QuestionResponseDto {
-  //   id: string = '';
-  //   title: string = '';
-  //   content: string = '';
-  //   createAt?: Date | null;
-  //   updateAt?: Date | null;
-  //   tags?: TagDto[] = [];
-  //   userShort?: UserShortDto | null;
-  //   viewNumber: number = 0;
-  //   commentNumber: number = 0;
-  //   saveNumber: number = 0;
-  // }
-  
+  export interface AnswerQuestionDto {
+    id?: string | null;
+    authorId?: string;
+    questionId: string;
+    userShort?: UserShortDto | null;
+    content: string;
+    createdAt?: Date | string | null;
+    updatedAt?: Date | string | null;
+    confirm: boolean;
+    mostConfirm: boolean;
+    subAnswer?: SubAnswerQuestionDto[] | null;
+}
+
+export interface SubAnswerQuestionDto {
+    id: string;
+    preAnswerId: string;
+    authorId: string;
+    content: string;
+    createdAt?: Date | string | null;
+    updatedAt?: Date | string | null;
+    userShort?: UserShortDto | null;
+}

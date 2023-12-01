@@ -1,0 +1,50 @@
+<div class="plr-1 create-question">
+    <form [formGroup]="updateQuestionForm">
+        <mat-label class="flex-center-sb pt-1 pb">
+            <strong>Chỉnh sửa câu hỏi</strong>
+            <button mat-raised-button color="primary" [disabled]="!Check()" (click)="UpdateQuestion()">Cập nhập</button>
+        </mat-label>
+        <mat-form-field  class="w-100 specific-border" appearance="outline">
+            <textarea   class="fw-5 title-question" matInput formControlName="Title" placeholder="Nhập câu hỏi ở đây..." required></textarea>
+            <mat-error *ngIf="updateQuestionForm.get('Title')?.hasError('required')">
+                Đặt câu hỏi tại đây...
+            </mat-error>
+            <mat-error *ngIf="updateQuestionForm.get('Title')?.hasError('maxlength')">
+                Câu hỏi không được quá dài
+            </mat-error>
+        </mat-form-field>
+        <div>
+            <ckeditor
+                style="max-height: 650px; overflow: auto;"
+                [editor]="Editor"
+                [config]="editorConfig"
+                formControlName="Content"
+                (change)="onEditorChange($event)"
+            ></ckeditor>
+        </div>
+        <mat-form-field class=" w-100 specific-border mt-1" appearance="outline">
+            <mat-chip-grid #chipGridTag aria-label="Hashtag làm cho các bài viết của bạn được dễ tìm thấy hơn">
+                <mat-chip-row *ngFor="let title of chooseTag" (removed)="removeTag(title)">
+                    {{title}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + title">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip-row>
+            </mat-chip-grid>
+
+            <mat-label>
+                <mat-icon matSuffix>tag</mat-icon> Gắn thẻ (không bắt buộc)
+            </mat-label>
+            <input  #TagInput [formControl]="tagCtrl"
+                [matChipInputFor]="chipGridTag" [matAutocomplete]="autoTag"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodesTag"
+                (matChipInputTokenEnd)="addTag($event)"
+                />
+            <mat-autocomplete #autoTag="matAutocomplete" (optionSelected)="selectedTag($event)">
+                <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                    {{tag}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</div>

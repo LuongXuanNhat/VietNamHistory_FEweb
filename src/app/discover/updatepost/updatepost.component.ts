@@ -120,13 +120,13 @@ export class UpdatepostComponent implements OnInit{
   addTag(event: MatChipInputEvent): void {
     const value = event.value;
     if (value && this.isDupplication(value) && this.chooseTag.length <= 5) {
-        this.chooseTag.push(value);
+        this.chooseTag.push(value.trim());
     }
     event.chipInput!.clear();
     this.tagCtrl.setValue(null);
   }
   isDupplication(value: string): boolean {
-    if(value == '') return false;
+    if(value == '' || value.trim().length > 31) return false;
     return !this.chooseTag.includes(value);
   }
   removeTag(tag: string): void {

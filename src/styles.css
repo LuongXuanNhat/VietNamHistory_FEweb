@@ -17,7 +17,9 @@
 h1, h2, h3, h4, h5, h6, p, div, strong, a, button {
     font-family: Be Vietnam !important;
 }
-
+p {
+    margin: 0px !important;
+}
 .custom-toast {
     top: 60px;
     right: 12px;
@@ -46,7 +48,6 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     font-weight: 600;
     background-color: white;
     padding: 4px;
-    border-radius: 50%;
     color: #3E50CA;
 }
 .btn-search {
@@ -98,6 +99,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .create-question {
     height: 480px;
+}
+.cursor-d {
+    cursor: default;
 }
 .fixed-menu {
     transition: top 0.3s; /* Add smooth transition effect */
@@ -194,6 +198,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .mb{
     margin-bottom: 8px;
 }
+.mb-1{
+    margin-bottom: 16px;
+}
 .mt{
     margin-top: 8px;
 }
@@ -213,7 +220,11 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     margin-right: 8px;
 }
 .of-h {
-    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical;
+    height: 26px;
 }
 .pb {
     padding-bottom: 8px !important;
@@ -232,6 +243,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .plr-200{
     padding: 0 200px;
+}
+.plr-300{
+    padding: 0 300px;
 }
 .plr-1{
     padding: 0 16px;
@@ -379,7 +393,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 /* Hiển thị thanh cuộn tùy chỉnh cho các trình duyệt hỗ trợ -webkit- */
 .inner-container::-webkit-scrollbar {
     margin-top: 4px !important;
-    height: 4px;
+    height: 4px !important;
 }
 
 .inner-container::-webkit-scrollbar-thumb {

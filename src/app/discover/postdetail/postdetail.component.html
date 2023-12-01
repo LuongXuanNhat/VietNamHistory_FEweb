@@ -1,7 +1,7 @@
 <div class="po-re">
     <div style="position: fixed; ">
         <div class="interact">
-            <button matTooltip="Thích" mat-icon-button matTooltipPosition="left" *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-interact">
+            <button mat-icon-button matTooltip="Thích" matTooltipPosition="left" *ngIf="!isThumbUp; else liked" (click)="toggleThumb()" class="btn-interact">
                 <span class="material-symbols-outlined"> 
                     thumb_up
                 </span>
@@ -10,7 +10,7 @@
                 </div>
             </button>
             <ng-template #liked>
-                <button mat-icon-button (click)="toggleThumb()" class="selected btn-interact">
+                <button mat-icon-button matTooltip="Bỏ thích" matTooltipPosition="left" (click)="toggleThumb()" class="selected btn-interact">
                     <span class="material-symbols-outlined selected-icon">
                         thumb_up
                     </span>
@@ -38,7 +38,7 @@
                 </div>
             </button>
             <ng-template #saved >
-                <button mat-icon-button (click)="IsSave()" class="selected btn-interact">
+                <button matTooltip="Bỏ lưu" matTooltipPosition="left" mat-icon-button (click)="IsSave()" class="selected btn-interact">
                     <span class="material-symbols-outlined selected-icon">
                         bookmark_added
                     </span>
@@ -48,23 +48,23 @@
                 </button>
             </ng-template>
     
-            <button matTooltip="Báo cáo" matTooltipPosition="left" mat-icon-button (click)="Report()">
+            <button class="dis-flex" matTooltip="Báo cáo" matTooltipPosition="left" mat-icon-button (click)="Report()">
                 <span class="material-symbols-outlined">
                     error
                 </span>
             </button>
-            <button matTooltip="Copy" matTooltipPosition="left" mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
+            <button class="dis-flex" matTooltip="Copy" matTooltipPosition="left" mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
                 <span class="material-symbols-outlined">
                     content_copy
                 </span>
             </button>
-            <div *ngIf="canEditDelete()">
-                <button matTooltip="Sửa bài" matTooltipPosition="left" mat-icon-button (click)="updatePost()">
+            <div *ngIf="canEditDelete()" >
+                <button class="dis-flex" matTooltip="Sửa bài" matTooltipPosition="left" mat-icon-button (click)="updatePost()">
                     <span class="material-symbols-outlined">
                         edit
                     </span>
                 </button>
-                <button matTooltip="Xóa bài" matTooltipPosition="left" mat-icon-button  style="display: block;">
+                <button class="dis-flex" matTooltip="Xóa bài" matTooltipPosition="left" mat-icon-button  style="display: block;">
                     <span class="material-symbols-outlined">
                         delete
                     </span>
@@ -90,7 +90,7 @@
         <div>
             <h5 class="font">{{postData?.title}}</h5>
             <div>
-                <div class="font" [innerHTML]="postData?.content" style="overflow: auto;"></div>
+                <div class="font" [innerHTML]="postData?.content" style="margin: 16px 0px;"></div>
                 <div class="flex-center-sb">
                     <div ><strong>Lượt xem: {{postData?.viewNumber}}</strong> </div>
                     <div class="flex-center-h">
@@ -104,7 +104,7 @@
             <mat-chip-set cdkDropList cdkDropListOrientation="horizontal" >
                 <div *ngIf="postData?.tags?.length" class="flex-center-h">
                     <mat-icon matSuffix>tag</mat-icon>
-                    <mat-chip matTooltip="Tìm kiếm tag này" matTooltipPosition="right" *ngFor="let tag of postData?.tags" cdkDrag (click)="findByTag(tag.name)">
+                    <mat-chip matTooltip="Tìm kiếm tag này" matTooltipPosition="below" *ngFor="let tag of postData?.tags" cdkDrag (click)="findByTag(tag.name)">
                         <span style="cursor: pointer;">
                             {{tag.name}}
                         </span></mat-chip>

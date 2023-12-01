@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CommentPostDto } from '../ObjectClass/object';
+import { AnswerQuestionDto, CommentPostDto } from '../ObjectClass/object';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -23,6 +23,9 @@ export class PublicserviceService {
   }
   CreatePostComment(data: CommentPostDto){
     return this.http.post(this.apiurl + '/Post/Chat', data);
+  }
+  CreateForumAnswer(data: AnswerQuestionDto){
+    return this.http.post(this.apiurl + '/Answer', data);
   }
   getChatSignRl(): string{
     return this.apiurl + '/commentHub';
@@ -52,6 +55,9 @@ export class PublicserviceService {
   }
   GetQuestionDetail(subId: string){
     return this.http.get(this.apiurl + '/Question/Detail?subId=' + subId);
+  }
+  GetAnswers(questionId: string){
+    return this.http.get(this.apiurl + '/Answer?questionId=' + questionId);
   }
   GetTopTags(number: number){
     return this.http.get(this.apiurl + '/HashTag/TopTag?numberTag=' + number);
@@ -103,8 +109,17 @@ export class PublicserviceService {
   UpdatePostComment(data: CommentPostDto){
     return this.http.put(this.apiurl + '/Post/Chat', data);
   }
+  UpdateQuestion(data: FormData){
+    return this.http.put(this.apiurl + '/Question', data);
+  }
+  UpdateForumAnswer(data: AnswerQuestionDto){
+    return this.http.put(this.apiurl + '/Answer', data);
+  }
   deleteComment(id: string){
     return this.http.delete(this.apiurl + '/Post/Chat?idComment=' + id);
+  }
+  deleteAnswer(idAnswer: string){
+    return this.http.delete(this.apiurl + '/Answer/delete?idAnswer=' + idAnswer);
   }
   getRandomPost(quantity: number){
     return this.http.get(this.apiurl + '/Post/RandomArticle?quantity=' + quantity);

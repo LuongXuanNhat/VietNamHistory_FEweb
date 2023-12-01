@@ -30,7 +30,6 @@ import { PostdetailComponent } from './discover/postdetail/postdetail.component'
 import { ReportpostComponent } from './discover/reportpost/reportpost.component';
 import { ChatComponent } from './discover/chat/chat.component';
 import { UpdatepostComponent } from './discover/updatepost/updatepost.component';
-import { HammerGestureConfigComponent } from './hammer-gesture-config/hammer-gesture-config.component';
 import { HammerModule, HammerGestureConfig  } from '@angular/platform-browser';
 import { OverlayModule, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { SearchpageComponent } from './discover/searchpage/searchpage.component';
@@ -43,13 +42,15 @@ import { MypostsavedComponent } from './mycategory/mypostsaved/mypostsaved.compo
 import { ForumComponent } from './forum/forum.component';
 import { CarouselComponent } from './home/carousel/carousel.component';
 import { 	IgxCarouselModule,	IgxSliderModule } from "igniteui-angular";
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './home/footer/footer.component';
 import { ScrollDirective } from './service/scroll.directive';
 import { ForumForyouComponent } from './forum/forum-foryou/forum-foryou.component';
 import { ForumTopComponent } from './forum/forum-top/forum-top.component';
 import { ForumNewComponent } from './forum/forum-new/forum-new.component';
 import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
 import { QuestionComponent } from './forum/question/question.component';
+import { DocumentComponent } from './document/document.component';
+import { ForumUpdateComponent } from './forum/forum-update/forum-update.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,9 @@ import { QuestionComponent } from './forum/question/question.component';
     ForumTopComponent,
     ForumNewComponent,
     ForumCreateComponent,
-    QuestionComponent
+    QuestionComponent,
+    DocumentComponent,
+    ForumUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +125,6 @@ import { QuestionComponent } from './forum/question/question.component';
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     SessionService,
     [DatePipe],
-    HammerGestureConfig,
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
     { provide: ScrollStrategyOptions, useClass: ScrollStrategyOptions },
     
