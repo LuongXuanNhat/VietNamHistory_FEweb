@@ -5,7 +5,7 @@
                 <igx-slide *ngFor="let slide of posts; let i = index">
                     <a matTooltip="{{slide.viewNumber}} lượt xem" matTooltipPosition="above" class="image-container" routerLink="/discover/{{slide.subId}}">
                         <div class="banner-title">📖 {{slide.title}}</div>
-                        <img [src]="slide.image">
+                        <img [src]="slide.image" loading="lazy">
                     </a>
                 </igx-slide>
             </igx-carousel>

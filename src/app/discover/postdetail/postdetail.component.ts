@@ -44,7 +44,7 @@ export class PostdetailComponent implements OnInit{
       });
       this.getDetail();
       this.getPosts();
-      this.getLike();
+      this.getInteract();
       this.currentUrl = this.location.path();
   }
   ngOnInit(){
@@ -84,7 +84,7 @@ export class PostdetailComponent implements OnInit{
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/discover', postId]);
   }
-  getLike(){
+  getInteract(){
     if(this.session.getUserId()){
       this.service.getLike(this.postId, this.session.getUserId() || '').subscribe(
         (result: any) => {

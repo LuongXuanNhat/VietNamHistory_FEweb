@@ -27,10 +27,22 @@ export class DataService {
     this.keywordSource.next(keyword);
   }
 
+  // private subId = new BehaviorSubject<string>('');
+  // currentSubId = this.subId.asObservable();
+  // changeSubId(subId: string) {
+  //   this.subId.next(subId);
+  // }
   private subId = new BehaviorSubject<string>('');
   currentSubId = this.subId.asObservable();
+  public isRequestInProgress = false;
+
   changeSubId(subId: string) {
-    this.subId.next(subId);
+    if (!this.isRequestInProgress) {
+      this.isRequestInProgress = true;
+
+      this.subId.next(subId);
+      this.isRequestInProgress = false;
+    }
   }
 
   private idQuestion = new BehaviorSubject<string>('');

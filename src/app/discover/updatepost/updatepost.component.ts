@@ -80,15 +80,26 @@ export class UpdatepostComponent implements OnInit{
     );
   }
   ngOnInit(): void {
+    // this.dataService.currentSubId.subscribe(subId => {
+    //   this.subId = subId ?? this.subId;
+    //   this.getDetail(this.subId);
+    // });
     this.dataService.currentSubId.subscribe(subId => {
       this.subId = subId ?? this.subId;
-      this.getDetail(this.subId);
-      console.log(this.updatepostform.value.Title);
+  
+      // Check xem có yêu cầu nào đang được thực hiện không
+      if (!this.dataService.isRequestInProgress) {
+        this.dataService.isRequestInProgress = true;
+  
+        this.getDetail(this.subId);
+        this.dataService.isRequestInProgress = false;
+      }
     });
   }
   getDetail(postId: string){
     this.service.GetPostDetail(this.subId).subscribe(
       (data: any) => {
+        console.log(data.resultObj);
         this.postData = data.resultObj;
         this.updatepostform.patchValue({
           Tag: this.postData.tags.map(tag => tag.name),

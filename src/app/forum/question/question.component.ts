@@ -14,6 +14,8 @@ import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
 import viLocale from 'date-fns/locale/vi';
 import { ForumUpdateComponent } from '../forum-update/forum-update.component';
+import { QuestionReportComponent } from '../questionreport/questionreport.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-question',
@@ -61,7 +63,7 @@ export class QuestionComponent implements OnInit{
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private route: ActivatedRoute,private dialog: MatDialog,
-    private clipboardService: ClipboardService, ){
+    private clipboardService: ClipboardService, private location: Location,  ){
       this.route.params.subscribe(params => {
         this.subQuestionId = params['id'] ?? '';
       });
@@ -69,7 +71,7 @@ export class QuestionComponent implements OnInit{
       this.userId = session.getUserId();
       this.userName= session.getName();
       this.imgUser = session.getAvatar();
-
+      this.currentUrl = this.location.path();
       this.connectChatSignal();
   }
   
@@ -88,7 +90,9 @@ export class QuestionComponent implements OnInit{
         this.question = this.ConvertDate(data.resultObj);
         this.questionId = this.question.id;
         this.userIdOfPost = data.resultObj.userShort.id;
+
         this.GetAnswers();
+        this.getInteract();
       }, (error: any) => {
         this.toastr.error("Lỗi: " + error);
       }
@@ -112,7 +116,7 @@ export class QuestionComponent implements OnInit{
     this.hubConnection
       .start()
       .then(() => {
-        console.log('Connection started!');
+        //  console.log('Connection started!');
       })
       .catch(err => console.error('Error while establishing connection:', err));
 
@@ -151,19 +155,22 @@ export class QuestionComponent implements OnInit{
     
   return answers;
 }
-  getLike(){
+  getInteract(){
     if(this.session.getUserId()){
-      this.service.getLike(this.subQuestionId, this.session.getUserId() || '').subscribe(
+      this.service.getLikeQuestion(this.subQuestionId, this.session.getUserId() || '').subscribe(
         (result: any) => {
             this.isThumbUp = result.resultObj.check;
+            this.likeNumber = result.resultObj.quantity;
         },
         (error: any) => {
             console.error(error);
         }
       );
-      this.service.getSave(this.subQuestionId, this.session.getUserId() || '').subscribe(
+      this.service.getSaveQuestion(this.questionId, this.session.getUserId() || '').subscribe(
         (result: any) => {
             this.isSave = result.resultObj.check;
+            this.saveNumber = result.resultObj.quantity;
+
         },
         (error: any) => {
             console.error(error);
@@ -181,9 +188,9 @@ export class QuestionComponent implements OnInit{
       return;
     }
     const formData = new FormData();
-    formData.append('idQuestion', this.subQuestionId);
+    formData.append('QuestionId', this.subQuestionId);
     formData.append('UserId', this.session.getUserId() ?? '');
-    this.service.LikeOrUnlike(formData).subscribe(
+    this.service.LikeOrUnlikeQuestion(formData).subscribe(
       (data: any) => {
         const obj = data.resultObj;
         this.isThumbUp = obj.check;
@@ -197,9 +204,9 @@ export class QuestionComponent implements OnInit{
       return;
     }
     const formData = new FormData();
-    formData.append('idQuestion', this.subQuestionId);
+    formData.append('QuestionId', this.questionId);
     formData.append('UserId', this.session.getUserId() ?? '');
-    this.service.SaveOrUnSave(formData).subscribe(
+    this.service.SaveOrUnSaveQuestion(formData).subscribe(
       (data: any) => {
         const obj = data.resultObj;
         this.isSave = obj.check;
@@ -216,13 +223,13 @@ export class QuestionComponent implements OnInit{
     this.openDialog('10ms', '10ms');
   }
   openDialog(enteranimation: any, exitanimation: any){
-    const popup = this.dialog.open(ReportpostComponent, {
+    const popup = this.dialog.open(QuestionReportComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '900px',
       height: '500px',
       data: {
-        SubId: this.subQuestionId
+        QuestionId: this.questionId
       }
     });
   }

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from 'src/app/service/datashare/data.service';
+import { TagDto } from 'src/app/ObjectClass/object';
 
 @Component({
   selector: 'app-forum-update',
@@ -72,8 +73,8 @@ export class ForumUpdateComponent {
       (data: any) => {
         this.updateQuestionForm.get('Title')?.setValue(data.resultObj.title);
         this.updateQuestionForm.get('Content')?.setValue(data.resultObj.content);
-        this.chooseTag = data.resultObj.tag as string[] ?? this.chooseTag;
-        console.log(data.resultObj.tag);
+        const tags = data.resultObj.tags as TagDto[];
+        this.chooseTag.push(...tags.map(x=>x.name));
         this.updateQuestionForm.get('Id')?.setValue(data.resultObj.id);
         this.questionId = data.resultObj.id;
         
@@ -155,7 +156,7 @@ export class ForumUpdateComponent {
         this.dataService.changeIdQuestion(data.resultObj.id);
         this.router.navigate(['/forum', id]);
         setTimeout(() => {
-          this.dataService.triggerReloadDetailPage(this.questionId);
+          this.dataService.triggerReloadDetailPage(id);
         }, 10);
         this.dialogRef.close();
       },

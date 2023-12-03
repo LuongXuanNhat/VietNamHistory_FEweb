@@ -1,0 +1,9 @@
+.des-report {
+    max-width: 90%;width: 90%;
+    min-width: 90%;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    border-radius: 4px;
+    font-size: 1rem;
+    max-height: 100px;
+}

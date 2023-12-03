@@ -51,6 +51,8 @@ import { ForumCreateComponent } from './forum/forum-create/forum-create.componen
 import { QuestionComponent } from './forum/question/question.component';
 import { DocumentComponent } from './document/document.component';
 import { ForumUpdateComponent } from './forum/forum-update/forum-update.component';
+import { QuestionReportComponent } from './forum/questionreport/questionreport.component';
+
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { ForumUpdateComponent } from './forum/forum-update/forum-update.componen
     ForumCreateComponent,
     QuestionComponent,
     DocumentComponent,
-    ForumUpdateComponent
+    ForumUpdateComponent,
+    QuestionComponent,
+    QuestionReportComponent ,
   ],
   imports: [
     BrowserModule,

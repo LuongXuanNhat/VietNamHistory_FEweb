@@ -26,7 +26,6 @@ export class ForumForyouComponent implements OnInit {
     this.service.GetQuestionForYou().subscribe(
       (data: any) => {
         this.questions = data.resultObj;
-        console.log(this.questions);
       }, (error: any) => {
         this.toastr.error("Lỗi: "+ error);
       }

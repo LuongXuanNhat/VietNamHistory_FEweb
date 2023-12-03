@@ -7,13 +7,13 @@ import { ReportPost } from 'src/app/ObjectClass/object';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-reportpost',
-  templateUrl: './reportpost.component.html',
-  styleUrls: ['./reportpost.component.css']
+  selector: 'app-report',
+  templateUrl: './questionreport.component.html',
+  styleUrls: ['./questionreport.component.css']
 })
-export class ReportpostComponent {
+export class QuestionReportComponent {
   reportform =  this.builder.group({
-    PostId: [''],
+    QuestionId: [''],
     UserId: [this.session.getUserId()],
     ReportId: ['', Validators.required],
     Description: ['', Validators.maxLength(500)],
@@ -23,13 +23,13 @@ export class ReportpostComponent {
   reports: ReportPost[] | null = null;
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { SubId: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { QuestionId: string }
     ,private builder: FormBuilder, private session: SessionService,private service: PublicserviceService,
-    private  toastr: ToastrService, private dialogRef: MatDialogRef<ReportpostComponent>){
-      this.reportform.get('PostId')?.setValue(data.SubId) ;
-      this.GetReportPost();
+    private  toastr: ToastrService,private dialogRef: MatDialogRef<QuestionReportComponent>){
+      this.reportform.get('QuestionId')?.setValue(data.QuestionId) ;
+      this.GetReport();
   }
-  GetReportPost(){
+  GetReport(){
     this.service.getReport().subscribe(
       (data: any) => {
         this.reports = data.resultObj
@@ -39,7 +39,7 @@ export class ReportpostComponent {
   onSubmit(){
     console.log(this.reportform.value)
     if(this.reportform.valid){
-      this.service.ReportPost(this.reportform.value).subscribe(
+      this.service.ReportQuestion(this.reportform.value).subscribe(
         (data: any) =>{
           this.toastr.success("Đã gửi báo cáo! Bạn sẽ sớm nhận được phản hồi!");
           this.dialogRef.close();

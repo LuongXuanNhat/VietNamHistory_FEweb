@@ -41,6 +41,13 @@ export class PublicserviceService {
     };
     return this.http.get(`${this.apiurl}/Post/Like`, { params });
   }
+  getLikeQuestion(questionId: string, userId: string) {
+    const params = {
+      QuestionId: questionId,
+      UserId: userId
+    };
+    return this.http.get(`${this.apiurl}/Question/Like`, { params });
+  }
   GetMyPost(){
     return this.http.get(this.apiurl + '/Post/MyPost');
   }
@@ -78,6 +85,13 @@ export class PublicserviceService {
     };
     return this.http.get(`${this.apiurl}/Post/Save`, { params });
   }
+  getSaveQuestion(questionId: string, userId: string) {
+    const params = {
+      QuestionId: questionId,
+      UserId: userId
+    };
+    return this.http.get(`${this.apiurl}/Question/Save`, { params });
+  }
   GetTopic(){
     return this.http.get(this.apiurl + "/Topic");
   }
@@ -93,15 +107,28 @@ export class PublicserviceService {
   LikeOrUnlike(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Post/Like`, data);
   }
+  LikeOrUnlikeQuestion(data: FormData): Observable<any>{
+    return this.http.post(`${this.apiurl}/Question/Like`, data);
+  }
   postSearch(keyWord: string){
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Post/Search?keyWord=' + keyWord);
   }
+  qusestionSearch(keyWord: string){
+    keyWord = encodeURIComponent(keyWord);
+    return this.http.get(this.apiurl + '/Question/Search?keyWord=' + keyWord);
+  }
   ReportPost(data: any){
     return this.http.post(`${this.apiurl}/Post/Report`, data);
   }
+  ReportQuestion(data: any){
+    return this.http.post(`${this.apiurl}/Question/Report`, data);
+  }
   SaveOrUnSave(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Post/Save`, data);
+  }
+  SaveOrUnSaveQuestion(data: FormData): Observable<any>{
+    return this.http.post(`${this.apiurl}/Question/Save`, data);
   }
   UpdatePost(data: FormData){
     return this.http.put(this.apiurl + '/Post', data);

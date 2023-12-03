@@ -33,7 +33,6 @@ export class ChangeemailComponent {
     this.email = '';
   }
   changeemail(){
-    console.log(this.email)
     if(this.email != null){
       this.service.ChangeEmail(this.email).subscribe(
         (res: any) => {
