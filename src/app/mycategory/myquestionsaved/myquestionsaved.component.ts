@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { format, parseISO } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
@@ -6,40 +7,26 @@ import { PostResponse } from 'src/app/ObjectClass/object';
 import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
-import { UpdatepostComponent } from 'src/app/discover/updatepost/updatepost.component';
-import { ForumUpdateComponent } from 'src/app/forum/forum-update/forum-update.component';
-
 
 @Component({
-  selector: 'app-myquestion',
-  templateUrl: './myquestion.component.html',
-  styleUrls: ['./myquestion.component.css']
+  selector: 'app-myquestionsaved',
+  templateUrl: './myquestionsaved.component.html',
+  styleUrls: ['./myquestionsaved.component.css']
 })
-export class MyquestionComponent implements OnInit{
+export class MyquestionsavedComponent {
   userId: string ;
-  dataSource = new MatTableDataSource<PostResponse>([]);
   questions: PostResponse[] = [];
-  @ViewChild(MatSort) sort!: MatSort;
-  displayedColumns: string[] = ['title', 'createdAt', 'updatedAt','viewNumber', 'likeNumber', 'commentNumber', 'saveNumber'];
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private dialog: MatDialog){
       this.userId = session.getUserId() ?? '';
       this.GetMyQuestion();
   }
-  ngOnInit() {
-    this.dataSource.sort = this.sort;
-  }
   GetMyQuestion(){
-    this.service.GetMyQuestion().subscribe(
+    this.service.GetMyQuestionSaved().subscribe(
       (data: any) => {
         this.questions = data.resultObj;
         this.ConvertDate();
-        this.dataSource = new MatTableDataSource(this.questions);
-        this.dataSource.sort = this.sort;
       }
     ),
     (error: any) => {
@@ -61,19 +48,18 @@ export class MyquestionComponent implements OnInit{
       }
     });
   }
-  QuestionDetail(question: PostResponse) {
+  postDetail(question: PostResponse) {
     const questionId = question.subId;
     this.router.navigate(['/forum', questionId]);
   }
-  updateQuestion(question: PostResponse){
-    this.dataService.changeSubId(question.subId);
-    this.openDialogUpdateQuestion('100ms', '600ms');
-  }
-  openDialogUpdateQuestion(enteranimation: any, exitanimation: any){
-    const popup = this.dialog.open(ForumUpdateComponent, {
-      enterAnimationDuration: enteranimation,
-      exitAnimationDuration: exitanimation,
-      width: '50%'
-    });
+  IsSave(question:PostResponse, event: Event){
+    const formData = new FormData();
+    formData.append('QuestionId', question.id);
+    formData.append('UserId', this.session.getUserId() ?? '');
+    this.service.SaveOrUnSaveQuestion(formData).subscribe(
+      (data: any) => {
+        this.GetMyQuestion();
+      }
+    )
   }
 }

@@ -148,8 +148,8 @@
                     ></ckeditor>
                 </div>
                 <div class="mt">
-                    <button mat-raised-button color="primary" *ngIf="isCheckCommented()" (click)="sendAnswer()">Trả lời</button>
-                    <button mat-button *ngIf="isCheckCommented()" (click)="cancelComment()">Hủy</button>
+                    <button mat-raised-button color="primary" *ngIf="isCommented" (click)="sendAnswer()">Trả lời</button>
+                    <button mat-button *ngIf="isCommented" (click)="cancelComment()">Hủy</button>
                 </div>
             </div>
             <ng-template #login class="pt">
@@ -162,7 +162,7 @@
                     <div style="display: flex; align-items: center;" class="mt-1">
                         <img class="icon-24" [src]="answer.userShort?.image == '' ? 'assets/Icon/user.png' : answer.userShort?.image" alt="avatar">
                         <strong class="pl">{{answer.userShort?.fullName}} </strong>
-                        <div class="pl">{{answer.updatedAt ?? answer?.createdAt}}</div>
+                        <div class="pl cursor-d" matTooltip="{{answer.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="right">{{answer.updatedAt ?? answer?.createdAt}}</div>
                         <button  [matMenuTriggerFor]="menu" *ngIf="answer.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px; margin-left: auto;">
                             <span class="material-symbols-outlined">
                                 more_horiz
@@ -172,7 +172,7 @@
                     
                     <div btn-comment>
                         <mat-menu #menu="matMenu" >
-                            <button mat-menu-item (click)="editComment(answer.id ?? '')">
+                            <button mat-menu-item (click)="editAnswer(answer.id ?? '')">
                               <mat-icon>edit</mat-icon>
                               <span>Sửa</span>
                             </button>
@@ -184,10 +184,149 @@
                         </mat-menu>
                     </div>
                     
-                <div [innerHTML]="answer.content" class="content"></div>
+                <div [innerHTML]="answer.content" class="content" style="position: relative !important;"></div>
+                <!-- Edit Answer -->
+                <div *ngIf="isCheckEdit(answer?.id ?? '')" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
+                    <div style="display: flex; align-items: center;" class="pb">
+                        <img class="icon-24" [src]="imgUser || 'assets/Icon/user.png'" alt="">
+                        <strong class="pl">{{userName}}</strong>
+                    </div>
+                    
+                    <div style="font-size: 14px;">
+                        <ckeditor
+                            style="max-height: 650px; overflow: auto;"
+                            [editor]="Editor"
+                            [config]="editorConfig"
+                            [(ngModel)]="contentUpdate"
+                            (change)="onEditChange($event)"
+                        ></ckeditor>
+                    </div>
+                    <div class="mt">
+                        <button mat-raised-button color="primary" *ngIf="isUpdateCommented" (click)="submitEdited()">Cập nhập</button>
+                        <button mat-button (click)="cancelEditComment()">Hủy</button>
+                    </div>
+                </div>
+                <!-- Comment -->
+                <div>
+                    <div class="flex-center-sb">
+                        <div></div>
+                        <div class="dis-flex cursor-p reply" (click)="Reply(answer?.id ?? '')">
+                            <span class="material-symbols-outlined">
+                                reply
+                            </span>
+                            <div style="font-weight: 500;">Bình luận</div>
+                        </div>
+                    </div>
+                    <div *ngIf="CheckReply(answer.id ?? '')" style="margin-left: 4%;" class="mt">
+                        <div *ngIf="userId; else login" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
+                            <div style="display: flex; align-items: center;" class="pb">
+                                <img class="icon-24" [src]="imgUser || 'assets/Icon/user.png'" alt="">
+                                <strong class="pl">{{userName}}</strong> 
+                                <div style="padding-left:4px;" class="cursor-p" > bình luận câu trả lời của <i>{{answer.userShort?.fullName}}</i></div> 
+                            </div>
+                            
+                            <div style="font-size: 14px;">
+                                <ckeditor
+                                    style="max-height: 650px; overflow: auto;"
+                                    [editor]="Editor"
+                                    [config]="editorConfig"
+                                    [(ngModel)]="subAnswerContent"
+                                    (change)="onEditorChange($event)"
+                                ></ckeditor>
+                            </div>
+                            <div class="mt">
+                                <button mat-raised-button color="primary" (click)="sendSubAnswer(answer.id ?? '')">Bình luận</button>
+                                <button mat-button  (click)="cancelReply()">Hủy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SubAnswer -->
+                <div *ngIf="answer.subAnswer?.length != 0" style="margin-left: 4%;">
+                    <div *ngFor="let subAnswer of answer.subAnswer">
+                        <div style="display: flex; align-items: center;" class="mt-1">
+                            <img class="icon-24" [src]="subAnswer.userShort?.image == '' ? 'assets/Icon/user.png' : subAnswer.userShort?.image" alt="avatar">
+                            <strong class="pl">{{subAnswer.userShort?.fullName}} </strong>
+                            <div class="pl cursor-d" matTooltip="{{answer.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="right">{{subAnswer.updatedAt ?? subAnswer?.createdAt}}</div>
+                            <button  [matMenuTriggerFor]="menu" *ngIf="subAnswer.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px; margin-left: auto;">
+                                <span class="material-symbols-outlined">
+                                    more_horiz
+                                </span>
+                            </button>
+                        </div>
+                        
+                        <div btn-comment>
+                            <mat-menu #menu="matMenu" >
+                                <button mat-menu-item (click)="editSubAnswer(subAnswer)">
+                                  <mat-icon>edit</mat-icon>
+                                  <span>Sửa</span>
+                                </button>
+                                <button mat-menu-item (click)="deleteSubAnswer(subAnswer.id ?? '')">
+                                  <mat-icon>delete</mat-icon>
+                                  <span>Xóa</span>
+                                </button>
+                                
+                            </mat-menu>
+                        </div>
+                        
+                    <div [innerHTML]="subAnswer.content" class="content" style="position: relative !important;"></div>
+                    <!--Create SubAnswer -->
+                    <div>
+                        <div class="flex-center-sb">
+                            <div></div>
+                            <div class="dis-flex cursor-p reply" (click)="Reply(subAnswer?.id ?? '')">
+                                <div style="font-size: 13;">Bình luận</div>
+                            </div>
+                        </div>
+                        <div *ngIf="CheckReply(subAnswer.id ?? '')" style="margin-left: 4%;" class="mt">
+                            <div *ngIf="userId; else login" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
+                                <div style="display: flex; align-items: center;" class="pb">
+                                    <img class="icon-24" [src]="imgUser || 'assets/Icon/user.png'" alt="">
+                                    <strong class="pl">{{userName}}</strong> 
+                                    <div style="padding-left:4px;" class="cursor-p" > trả lời bình luận câu của <i>{{subAnswer.userShort?.fullName}}</i></div> 
+                                </div>
+                                
+                                <div style="font-size: 14px;">
+                                    <ckeditor
+                                        style="max-height: 650px; overflow: auto;"
+                                        [editor]="Editor"
+                                        [config]="editorConfig"
+                                        [(ngModel)]="subAnswerContent"
+                                        (change)="onEditorChange($event)"
+                                    ></ckeditor>
+                                </div>
+                                <div class="mt">
+                                    <button mat-raised-button color="primary" (click)="sendSubAnswer(answer.id ?? '', subAnswer.userShort)">Bình luận</button>
+                                    <button mat-button  (click)="cancelReply()">Hủy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit SubAnswer -->
+                    <div *ngIf="isCheckSubEdit(subAnswer?.id ?? '')" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
+                        <div style="display: flex; align-items: center;" class="pb">
+                            <img class="icon-24" [src]="imgUser || 'assets/Icon/user.png'" alt="">
+                            <strong class="pl">{{userName}}</strong>
+                        </div>
+                        
+                        <div style="font-size: 14px;">
+                            <ckeditor
+                                style="max-height: 650px; overflow: auto;"
+                                [editor]="Editor"
+                                [config]="editorConfig"
+                                [(ngModel)]="contentSubUpdate"
+                                (change)="onSubEditorChange($event)"
+                            ></ckeditor>
+                        </div>
+                        <div class="mt">
+                            <button mat-raised-button color="primary" *ngIf="isEditSubCommented" (click)="submitEditedSubAnswer()">Cập nhập</button>
+                            <button mat-button (click)="cancelEditSubComment()">Hủy</button>
+                        </div>
+                    </div>
+                </div>
                 </div>
                 
-            </div>              
+            </div>            
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AnswerQuestionDto, CommentPostDto } from '../ObjectClass/object';
+import { AnswerQuestionDto, CommentPostDto, SubAnswerQuestionDto } from '../ObjectClass/object';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -26,6 +26,9 @@ export class PublicserviceService {
   }
   CreateForumAnswer(data: AnswerQuestionDto){
     return this.http.post(this.apiurl + '/Answer', data);
+  }
+  CreateForumSubAnswer(data: SubAnswerQuestionDto){
+    return this.http.post(this.apiurl + '/Answer/SubAnswer', data);
   }
   getChatSignRl(): string{
     return this.apiurl + '/commentHub';
@@ -51,8 +54,14 @@ export class PublicserviceService {
   GetMyPost(){
     return this.http.get(this.apiurl + '/Post/MyPost');
   }
+  GetMyQuestion(){
+    return this.http.get(this.apiurl + '/Question/MyQuestion');
+  }
   GetMyPostSaved(){
     return this.http.get(this.apiurl + '/Post/MyPostSaved');
+  }
+  GetMyQuestionSaved(){
+    return this.http.get(this.apiurl + '/Question/MyQuestionSaved');
   }
   getpostbytag(tag: string){
     return this.http.get(this.apiurl + '/Post/FindByTag?tag=' + tag);
@@ -142,11 +151,17 @@ export class PublicserviceService {
   UpdateForumAnswer(data: AnswerQuestionDto){
     return this.http.put(this.apiurl + '/Answer', data);
   }
+  UpdateForumSubAnswer(data: AnswerQuestionDto){
+    return this.http.put(this.apiurl + '/Answer/SubAnswer', data);
+  }
   deleteComment(id: string){
     return this.http.delete(this.apiurl + '/Post/Chat?idComment=' + id);
   }
   deleteAnswer(idAnswer: string){
     return this.http.delete(this.apiurl + '/Answer/delete?idAnswer=' + idAnswer);
+  }
+  deleteSubAnswer(idAnswer: string){
+    return this.http.delete(this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer);
   }
   getRandomPost(quantity: number){
     return this.http.get(this.apiurl + '/Post/RandomArticle?quantity=' + quantity);

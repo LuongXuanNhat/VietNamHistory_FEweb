@@ -92,7 +92,7 @@ export interface PostResponse {
 }
 
 export interface SubAnswerQuestionDto {
-    id: string;
+    id?: string;
     preAnswerId: string;
     authorId: string;
     content: string;

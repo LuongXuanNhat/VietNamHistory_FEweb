@@ -1,0 +1,24 @@
+.seleted{
+    background-color: #3E50CA;
+    color: white;
+}
+.btn-interact{
+    display: flex !important;
+    left: 22px; position: fixed;
+}
+.card-question{
+    position: relative;
+    display: inline-block;
+    width: 254px !important;
+    height: 160px;
+    cursor: pointer;
+}
+.card-question:hover{
+    border-radius: 4px;
+    box-shadow: 0 26px 58px 0 rgba(0, 0, 0, .22), 0 5px 14px 0 rgba(0, 0, 0, .18);
+}
+.son-question {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}

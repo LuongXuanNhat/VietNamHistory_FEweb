@@ -58,8 +58,7 @@
                     </div>
                     <div style="left: 32px;">{{comment.updatedAt ?? comment.createdAt}}</div>
                 </div>
-                <div [innerHTML]="comment.content" class="content">
-                </div>
+                <div [innerHTML]="comment.content" class="content"></div>
             </div>
             <div *ngIf="isCheckEdit(comment.id ?? '')" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;border-radius: 4px;">
                 <div style="display: flex; align-items: center;" class="pb">

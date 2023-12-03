@@ -25,6 +25,7 @@ import { ForumForyouComponent } from './forum/forum-foryou/forum-foryou.componen
 import { ForumTopComponent } from './forum/forum-top/forum-top.component';
 import { ForumNewComponent } from './forum/forum-new/forum-new.component';
 import { QuestionComponent } from './forum/question/question.component';
+import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestionsaved.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'post', pathMatch: 'full',},
       { path: 'post', component: MypostComponent },
       { path: 'question', component: MyquestionComponent },
+      { path: 'questionsaved', component: MyquestionsavedComponent },
       { path: 'document', component: MydocumentComponent },
       { path: 'postsaved', component: MypostsavedComponent },
       // { path: 'exercise', component: UpdateuserinforComponent },

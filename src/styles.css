@@ -103,6 +103,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .cursor-d {
     cursor: default;
 }
+.cursor-p {
+    cursor: pointer;
+}
 .fixed-menu {
     transition: top 0.3s; /* Add smooth transition effect */
     color: #fff;

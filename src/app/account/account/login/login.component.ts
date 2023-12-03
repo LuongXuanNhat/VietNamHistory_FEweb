@@ -36,7 +36,7 @@ export class LoginComponent {
       this.service.Login(this.loginform.value).subscribe( (res: any) => {
         const resultObj = res.resultObj;
         this.sessionService.setToken(resultObj);
-        if(res.resultObj){
+        if(res.isSuccessed){
           const decodedToken = this.jwtHelper.decodeToken(res.resultObj);
           const email = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
           const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
@@ -62,19 +62,17 @@ export class LoginComponent {
           );
 
           this.service.login();
+          const previousState = this.location.getState() as { redirect: string, navigationId: number };
+          const redirectTo = previousState.redirect !== '' ? previousState.redirect : '/home';
+          this.router.navigateByUrl(redirectTo);
+        } else {
+          this.toastr.error(res.message);
         }
-        const previousState = this.location.getState() as { redirect: string, navigationId: number };
-        const redirectTo = previousState.redirect !== '' ? previousState.redirect : '/home';
-        this.router.navigateByUrl(redirectTo);
-
+      
       },
       (error: any) => {
         const message = error.error.message; 
-        if(message == null){
-          this.toastr.error("Lỗi kết nối đến server! Xin lỗi vì sự cố này");
-        } else {
-          this.toastr.error(message);
-        }
+        this.toastr.error("Lỗi kết nối đến server! Xin lỗi vì sự cố này");
       })
     } else {
       this.toastr.warning('Vui lòng nhập đầy đủ thông tin!')

@@ -154,7 +154,6 @@ export class ChatComponent {
     this.updateComment.createdAt = new Date();
     this.updateComment.updatedAt = new Date();
 
-    console.log(this.updateComment);
     if(this.contentUpdate.trim() == ''){
       this.toastr.info("Vui lòng không để trống bình luận");
       return;

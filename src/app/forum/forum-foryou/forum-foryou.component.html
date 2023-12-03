@@ -1,7 +1,7 @@
 <div class="mt-1 mh-page">
     <a *ngFor="let q of questions" (click)="redirectToQuestion(q)" >
         <div class="question-card">
-            <h6>🔖<strong>{{q.title}}</strong></h6>
+            <h6 class="text-3-line">🔖<strong >{{q.title}}</strong></h6>
             <div class="flex-center-h">
                 <div class="flex-center-h plr-12">
                     <span class="material-symbols-outlined pr">
@@ -15,7 +15,7 @@
                         notes
                     </span>
                     {{q.commentNumber}}
-                    bình luận
+                    trả lời
                 </div>
                 <div class="flex-center-h plr-12">
                     <span class="material-symbols-outlined pr">
@@ -31,7 +31,7 @@
                     chia sẻ
                 </div>
                 <div *ngIf="q.likeNumber != 0" class="flex-center-h plr-12">
-                    💡{{q.likeNumber}} cùng thắc mắc
+                    💡{{q.likeNumber}} người cùng thắc mắc
                 </div>
             </div>
         </div>

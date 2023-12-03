@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { format, parseISO } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
@@ -17,10 +15,7 @@ import { SessionService } from 'src/app/service/session/session.service';
 })
 export class MypostsavedComponent implements OnInit{
   userId: string ;
-  dataSource = new MatTableDataSource<PostResponse>([]);
   posts: PostResponse[] = [];
-  @ViewChild(MatSort) sort!: MatSort;
-  displayedColumns: string[] = ['image', 'title', 'createdAt', 'updatedAt','viewNumber', 'likeNumber', 'commentNumber', 'saveNumber'];
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private dialog: MatDialog){
@@ -28,15 +23,12 @@ export class MypostsavedComponent implements OnInit{
       this.GetMyPost();
   }
   ngOnInit() {
-    this.dataSource.sort = this.sort;
   }
   GetMyPost(){
     this.service.GetMyPostSaved().subscribe(
       (data: any) => {
         this.posts = data.resultObj;
         this.ConvertDate();
-        this.dataSource = new MatTableDataSource(this.posts);
-        this.dataSource.sort = this.sort;
       }
     ),
     (error: any) => {

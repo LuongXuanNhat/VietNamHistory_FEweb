@@ -52,6 +52,7 @@ import { QuestionComponent } from './forum/question/question.component';
 import { DocumentComponent } from './document/document.component';
 import { ForumUpdateComponent } from './forum/forum-update/forum-update.component';
 import { QuestionReportComponent } from './forum/questionreport/questionreport.component';
+import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestionsaved.component';
 
 
 @NgModule({
@@ -93,7 +94,8 @@ import { QuestionReportComponent } from './forum/questionreport/questionreport.c
     DocumentComponent,
     ForumUpdateComponent,
     QuestionComponent,
-    QuestionReportComponent ,
+    QuestionReportComponent,
+    MyquestionsavedComponent ,
   ],
   imports: [
     BrowserModule,
