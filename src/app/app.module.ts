@@ -53,6 +53,7 @@ import { DocumentComponent } from './document/document.component';
 import { ForumUpdateComponent } from './forum/forum-update/forum-update.component';
 import { QuestionReportComponent } from './forum/questionreport/questionreport.component';
 import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestionsaved.component';
+import { AnimationService } from './service/animations/animation.service';
 
 
 @NgModule({
@@ -133,7 +134,8 @@ import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestio
     [DatePipe],
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
     { provide: ScrollStrategyOptions, useClass: ScrollStrategyOptions },
-    
+    [AnimationService],
+
   ],
   bootstrap: [AppComponent]
 })

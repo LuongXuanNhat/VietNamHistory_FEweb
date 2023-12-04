@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimationService {
-  animateButton = (e: Event): void => {
-    e.preventDefault();
-    const target = e.target as HTMLElement;
-    
-    //reset animation 
-    target.classList.remove('animate');
-    
-    target.classList.add('animate');
+  private renderer: Renderer2;
+
+  constructor(private rendererFactory: RendererFactory2) {
+    this.renderer = this.rendererFactory.createRenderer(null, null);
+  }
+
+  animateButton = (target: HTMLElement): void => {
+    this.renderer.addClass(target, 'animate');
     setTimeout(() => {
-      target.classList.remove('animate');
+      this.renderer.removeClass(target, 'animate');
     }, 700);
   };
 
@@ -21,20 +21,14 @@ export class AnimationService {
     const bubblyButtons = document.getElementsByClassName("bubbly-button");
 
     for (let i = 0; i < bubblyButtons.length; i++) {
-      bubblyButtons[i].addEventListener('click', this.animateButton, false);
+      bubblyButtons[i].addEventListener('click', (event) => this.animateButton(event.target as HTMLElement), { capture: false });
     }
   }
 
-  // Button custom 2
-  animateButton1 = (e: Event): void => {
-    e.preventDefault();
-    const target = e.target as HTMLElement;
-    
-    target.classList.remove('animate1');
-    
-    target.classList.add('animate1');
+  animateButton1 = (target: HTMLElement): void => {
+    this.renderer.addClass(target, 'animate1');
     setTimeout(() => {
-      target.classList.remove('animate1');
+      this.renderer.removeClass(target, 'animate1');
     }, 700);
   };
 
@@ -42,7 +36,7 @@ export class AnimationService {
     const bubblyButtons = document.getElementsByClassName("bubbly-button-1");
 
     for (let i = 0; i < bubblyButtons.length; i++) {
-      bubblyButtons[i].addEventListener('click', this.animateButton1, false);
+      bubblyButtons[i].addEventListener('click', (event) => this.animateButton1(event.target as HTMLElement), { capture: false });
     }
   }
 }

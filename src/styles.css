@@ -222,6 +222,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .mr {
     margin-right: 8px;
 }
+.mr-1 {
+    margin-right: 16px;
+}
 .of-h {
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -480,11 +483,11 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     background-color: #3948a1;
   }
   .bubbly-button.animate:before {
-    display: block;
+    display: block !important;
     animation: topBubbles ease-in-out 0.75s forwards !important; 
   }
   .bubbly-button.animate:after {
-    display: block;
+    display: block !important;
     animation: bottomBubbles ease-in-out 0.75s forwards !important;
   }
   

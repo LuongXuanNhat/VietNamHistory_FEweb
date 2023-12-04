@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -7,8 +7,6 @@ import { format, parseISO } from 'date-fns';
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { AnswerQuestionDto, CommentPostDto, PostResponse, SubAnswerQuestionDto, UserShortDto } from 'src/app/ObjectClass/object';
-import { ReportpostComponent } from 'src/app/discover/reportpost/reportpost.component';
-import { UpdatepostComponent } from 'src/app/discover/updatepost/updatepost.component';
 import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
@@ -16,6 +14,7 @@ import viLocale from 'date-fns/locale/vi';
 import { ForumUpdateComponent } from '../forum-update/forum-update.component';
 import { QuestionReportComponent } from '../questionreport/questionreport.component';
 import { Location } from '@angular/common';
+import { AnimationService } from 'src/app/service/animations/animation.service';
 
 @Component({
   selector: 'app-question',
@@ -79,7 +78,7 @@ export class QuestionComponent implements OnInit{
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private route: ActivatedRoute,private dialog: MatDialog,
-    private clipboardService: ClipboardService, private location: Location,  ){
+    private clipboardService: ClipboardService, private location: Location, private animation: AnimationService ){
       this.route.params.subscribe(params => {
         this.subQuestionId = params['id'] ?? '';
       });
@@ -530,5 +529,14 @@ export class QuestionComponent implements OnInit{
         console.log(error);
       }
     )
+  }
+  onClickButton(event: Event): void {
+    const target = event.target as HTMLElement;
+    this.animation.animateButton(target);
+  }
+
+  onClickButton1(event: Event): void {
+    const target = event.target as HTMLElement;
+    this.animation.animateButton1(target);
   }
 }

@@ -108,6 +108,7 @@
                 </div>
             </mat-chip-set>
         </div>
+        
         <div #answercard >
             <div class="flex-center-sb">
                 <h6 class="card-answer pb-1"><strong>Trả lời</strong></h6>
@@ -156,18 +157,26 @@
                 <span class="pr">Đăng nhập để bình luận </span>
                 <button mat-raised-button color="primary" (click)="loginUser()">Đăng nhập</button>
             </ng-template>
-
+            
             <div *ngIf="answers && answers.length > 0">
                 <div *ngFor="let answer of answers">
                     <div style="display: flex; align-items: center;" class="mt-1">
-                        <img class="icon-24" [src]="answer.userShort?.image == '' ? 'assets/Icon/user.png' : answer.userShort?.image" alt="avatar">
-                        <strong class="pl">{{answer.userShort?.fullName}} </strong>
-                        <div class="pl cursor-d" matTooltip="{{answer.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="right">{{answer.updatedAt ?? answer?.createdAt}}</div>
-                        <button  [matMenuTriggerFor]="menu" *ngIf="answer.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px; margin-left: auto;">
-                            <span class="material-symbols-outlined">
-                                more_horiz
+                        <div>
+                            <button class="bubbly-button" (click)="onClickButton($event)">Click me!</button>
+                            <span class="material-symbols-outlined" style="color: rebeccapurple;">
+                                arrow_upward
                             </span>
-                        </button>
+                        </div>
+                        <img class="icon-24 ml" [src]="answer.userShort?.image == '' ? 'assets/Icon/user.png' : answer.userShort?.image" alt="avatar">
+                        <strong class="pl">{{answer.userShort?.fullName}} </strong>
+                        <div style="display: flex; margin-left: auto; align-items: center;">
+                            <div class="mr-1 cursor-d" matTooltip="{{answer.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="left">{{answer.updatedAt ?? answer?.createdAt}}</div>
+                            <button  [matMenuTriggerFor]="menu" *ngIf="answer.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px;">
+                                <span class="material-symbols-outlined">
+                                    more_horiz
+                                </span>
+                            </button>
+                        </div>
                     </div>
                     
                     <div btn-comment>
@@ -185,6 +194,7 @@
                     </div>
                     
                 <div [innerHTML]="answer.content" class="content" style="position: relative !important;"></div>
+                
                 <!-- Edit Answer -->
                 <div *ngIf="isCheckEdit(answer?.id ?? '')" style="padding: 8px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
                     <div style="display: flex; align-items: center;" class="pb">
