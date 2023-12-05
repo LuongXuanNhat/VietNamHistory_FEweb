@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MyquestionsavedComponent } from './myquestionsaved.component';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { InjectionToken } from '@angular/core';
 
 describe('MyquestionsavedComponent', () => {
@@ -10,8 +10,9 @@ describe('MyquestionsavedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrService, InjectionToken],
-      declarations: [MyquestionsavedComponent]
+      imports: [ToastrModule.forRoot, InjectionToken],
+      declarations: [MyquestionsavedComponent],
+      providers: [ToastrService]
     });
     fixture = TestBed.createComponent(MyquestionsavedComponent);
     component = fixture.componentInstance;

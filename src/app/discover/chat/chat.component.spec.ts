@@ -10,7 +10,8 @@ describe('ChatComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ InjectionToken],
-      declarations: [ChatComponent]
+      declarations: [ChatComponent],
+      providers: [InjectionToken]
     });
     fixture = TestBed.createComponent(ChatComponent);
     component = fixture.componentInstance;

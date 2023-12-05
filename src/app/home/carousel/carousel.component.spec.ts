@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CarouselComponent } from './carousel.component';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 
 describe('CarouselComponent', () => {
@@ -12,7 +12,7 @@ describe('CarouselComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       
-      imports: [ToastrService, PublicserviceService, HttpClient],
+      imports: [ToastrModule.forRoot, PublicserviceService, HttpClient],
       declarations: [CarouselComponent]
     });
     fixture = TestBed.createComponent(CarouselComponent);

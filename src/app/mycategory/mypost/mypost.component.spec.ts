@@ -13,7 +13,8 @@ describe('MypostComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ToastrService, PublicserviceService, HttpClient],
-      declarations: [MypostComponent]
+      declarations: [MypostComponent],
+      providers: [ToastrService]
     });
     fixture = TestBed.createComponent(MypostComponent);
     component = fixture.componentInstance;

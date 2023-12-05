@@ -11,7 +11,8 @@ describe('ForumForyouComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [PublicserviceService, HttpClient],
-      declarations: [ForumForyouComponent]
+      declarations: [ForumForyouComponent],
+      providers: [PublicserviceService]
     });
     fixture = TestBed.createComponent(ForumForyouComponent);
     component = fixture.componentInstance;

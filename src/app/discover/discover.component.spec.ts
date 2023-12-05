@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DiscoverComponent } from './discover.component';
+import { PublicserviceService } from '../service/publicservice.service';
+import { HttpClient } from '@angular/common/http';
 
 describe('DiscoverComponent', () => {
   let component: DiscoverComponent;
@@ -8,6 +10,7 @@ describe('DiscoverComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [PublicserviceService, HttpClient],
       declarations: [DiscoverComponent]
     });
     fixture = TestBed.createComponent(DiscoverComponent);

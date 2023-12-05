@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpdateaccountComponent } from './updateaccount.component';
 import { ChangeemailComponent } from './changeemail/changeemail.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { InjectionToken } from '@angular/core';
 
 describe('UpdateaccountComponent', () => {
@@ -12,7 +12,7 @@ describe('UpdateaccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrService, InjectionToken],
+      imports: [ToastrModule.forRoot, InjectionToken],
       declarations: [UpdateaccountComponent, ChangeemailComponent, ChangepasswordComponent]
     });
     fixture = TestBed.createComponent(UpdateaccountComponent);

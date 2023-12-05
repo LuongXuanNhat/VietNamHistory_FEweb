@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { PublicserviceService } from '../service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,7 +12,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       
-      imports: [ToastrService, PublicserviceService, HttpClient],
+      imports: [ToastrModule.forRoot, PublicserviceService, HttpClient],
       declarations: [HomeComponent]
     });
     fixture = TestBed.createComponent(HomeComponent);

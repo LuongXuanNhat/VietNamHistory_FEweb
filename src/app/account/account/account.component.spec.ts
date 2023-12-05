@@ -10,7 +10,8 @@ describe('AccountComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [IntroduceComponent],
-      declarations: [AccountComponent]
+      declarations: [AccountComponent],
+      providers: [IntroduceComponent]
     });
     fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;

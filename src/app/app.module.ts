@@ -55,6 +55,7 @@ import { QuestionReportComponent } from './forum/questionreport/questionreport.c
 import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestionsaved.component';
 import { AnimationService } from './service/animations/animation.service';
 import { NewsComponent } from './news/news.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -101,6 +102,7 @@ import { NewsComponent } from './news/news.component';
     NewsComponent ,
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     MaterialModule,

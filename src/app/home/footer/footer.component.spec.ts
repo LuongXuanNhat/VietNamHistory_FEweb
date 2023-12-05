@@ -11,7 +11,8 @@ describe('FooterComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [PublicserviceService, HttpClient],
-      declarations: [FooterComponent]
+      declarations: [FooterComponent],
+      providers: [PublicserviceService]
     });
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;

@@ -10,8 +10,8 @@ describe('PublicserviceService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, PublicserviceService, DatePipe],
-      providers: [PublicserviceService],
+      imports: [HttpClientTestingModule],
+      providers: [PublicserviceService, DatePipe],
     });
     service = TestBed.inject(PublicserviceService);
   });

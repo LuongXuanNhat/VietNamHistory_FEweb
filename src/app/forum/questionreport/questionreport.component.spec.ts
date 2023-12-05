@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuestionReportComponent } from './questionreport.component';
+import { InjectionToken } from '@angular/core';
 
 describe('QuestionreportComponent', () => {
   let component: QuestionReportComponent;
@@ -7,7 +8,9 @@ describe('QuestionreportComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [QuestionReportComponent]
+      imports: [InjectionToken, ],
+      declarations: [QuestionReportComponent],
+      providers: [InjectionToken]
     });
     fixture = TestBed.createComponent(QuestionReportComponent);
     component = fixture.componentInstance;
