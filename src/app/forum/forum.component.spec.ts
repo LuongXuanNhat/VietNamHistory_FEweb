@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForumComponent } from './forum.component';
+import { InjectionToken } from '@angular/core';
 
 describe('ForumComponent', () => {
   let component: ForumComponent;
@@ -8,6 +9,8 @@ describe('ForumComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      
+      imports: [InjectionToken, ],
       declarations: [ForumComponent]
     });
     fixture = TestBed.createComponent(ForumComponent);

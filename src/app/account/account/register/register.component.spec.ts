@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import { ToastrService } from 'ngx-toastr';
+import { InjectionToken } from '@angular/core';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,6 +10,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ToastrService, InjectionToken],
       declarations: [RegisterComponent]
     });
     fixture = TestBed.createComponent(RegisterComponent);

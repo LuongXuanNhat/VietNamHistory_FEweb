@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PublicserviceService } from './publicservice.service';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -9,7 +10,7 @@ describe('PublicserviceService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, PublicserviceService, DatePipe],
       providers: [PublicserviceService],
     });
     service = TestBed.inject(PublicserviceService);

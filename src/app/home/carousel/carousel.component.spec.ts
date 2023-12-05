@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CarouselComponent } from './carousel.component';
+import { PublicserviceService } from 'src/app/service/publicservice.service';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 describe('CarouselComponent', () => {
   let component: CarouselComponent;
@@ -8,6 +11,8 @@ describe('CarouselComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      
+      imports: [ToastrService, PublicserviceService, HttpClient],
       declarations: [CarouselComponent]
     });
     fixture = TestBed.createComponent(CarouselComponent);

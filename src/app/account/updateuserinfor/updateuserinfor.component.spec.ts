@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateuserinforComponent } from './updateuserinfor.component';
+import { ToastrService } from 'ngx-toastr';
+import { InjectionToken } from '@angular/core';
 
 describe('UpdateuserinforComponent', () => {
   let component: UpdateuserinforComponent;
@@ -8,6 +10,7 @@ describe('UpdateuserinforComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ToastrService, InjectionToken],
       declarations: [UpdateuserinforComponent]
     });
     fixture = TestBed.createComponent(UpdateuserinforComponent);

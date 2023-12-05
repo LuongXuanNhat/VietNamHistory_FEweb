@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdatepostComponent } from './updatepost.component';
+import { ToastrService } from 'ngx-toastr';
+import { PublicserviceService } from 'src/app/service/publicservice.service';
+import { HttpClient } from '@angular/common/http';
 
 describe('UpdatepostComponent', () => {
   let component: UpdatepostComponent;
@@ -8,6 +11,8 @@ describe('UpdatepostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      
+      imports: [ToastrService, PublicserviceService, HttpClient],
       declarations: [UpdatepostComponent]
     });
     fixture = TestBed.createComponent(UpdatepostComponent);

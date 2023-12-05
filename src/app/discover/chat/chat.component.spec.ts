@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatComponent } from './chat.component';
+import { InjectionToken } from '@angular/core';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -8,6 +9,7 @@ describe('ChatComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ InjectionToken],
       declarations: [ChatComponent]
     });
     fixture = TestBed.createComponent(ChatComponent);

@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MypostComponent } from './mypost.component';
+import { ToastrService } from 'ngx-toastr';
+import { InjectionToken } from '@angular/core';
+import { PublicserviceService } from 'src/app/service/publicservice.service';
+import { HttpClient } from '@angular/common/http';
 
 describe('MypostComponent', () => {
   let component: MypostComponent;
@@ -8,6 +12,7 @@ describe('MypostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ToastrService, PublicserviceService, HttpClient],
       declarations: [MypostComponent]
     });
     fixture = TestBed.createComponent(MypostComponent);
