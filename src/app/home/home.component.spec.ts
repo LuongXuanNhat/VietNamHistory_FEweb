@@ -6,6 +6,9 @@ import { PublicserviceService } from '../service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
+import { DataService } from '../service/datashare/data.service';
+import { SessionService } from '../service/session/session.service';
+import { IgxCarouselModule } from 'igniteui-angular';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,9 +16,10 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule, IgxCarouselModule],
       declarations: [HomeComponent],
-      providers: [PublicserviceService, DatePipe]
+      providers: [PublicserviceService, DatePipe, DataService, SessionService,
+      ]
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;

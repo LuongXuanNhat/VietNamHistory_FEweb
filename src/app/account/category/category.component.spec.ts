@@ -9,7 +9,7 @@ describe('CategoryComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatTabsModule, RouterTestingModule], // Include RouterTestingModule
+      imports: [MatTabsModule, RouterTestingModule], 
       declarations: [CategoryComponent]
     });
     fixture = TestBed.createComponent(CategoryComponent);

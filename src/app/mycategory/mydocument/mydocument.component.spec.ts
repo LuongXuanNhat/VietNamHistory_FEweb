@@ -12,7 +12,6 @@ describe('MydocumentComponent', () => {
     TestBed.configureTestingModule({
       imports: [ToastrModule.forRoot(), ],
       declarations: [MydocumentComponent],
-      providers: [InjectionToken]
     });
     fixture = TestBed.createComponent(MydocumentComponent);
     component = fixture.componentInstance;

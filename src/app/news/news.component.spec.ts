@@ -5,6 +5,7 @@ import { PublicserviceService } from '../service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
@@ -12,7 +13,7 @@ describe('NewsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot()],
       declarations: [NewsComponent],
       providers: [PublicserviceService, DatePipe]
     });

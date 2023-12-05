@@ -6,6 +6,7 @@ import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@microsoft/signalr';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
+import { SessionService } from 'src/app/service/session/session.service';
 
 describe('MypostsavedComponent', () => {
   let component: MypostsavedComponent;
@@ -15,7 +16,7 @@ describe('MypostsavedComponent', () => {
     TestBed.configureTestingModule({
       imports: [ToastrModule.forRoot(), HttpClientTestingModule],
       declarations: [MypostsavedComponent],
-      providers: [PublicserviceService, DatePipe]
+      providers: [PublicserviceService, DatePipe, SessionService]
     });
     fixture = TestBed.createComponent(MypostsavedComponent);
     component = fixture.componentInstance;

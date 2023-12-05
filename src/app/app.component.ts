@@ -37,8 +37,8 @@ export class AppComponent implements OnInit, DoCheck{
   ];
   
   
-  constructor(private router : Router, private service: AuthService, private overlayContainer: OverlayContainer,
-    private toastr: ToastrService, private userService: UserService, private sessionService: SessionService,
+  constructor(private router : Router, private service: AuthService,
+    private toastr: ToastrService, private sessionService: SessionService,
     private dialog: MatDialog,private animationService: AnimationService){
 
   }

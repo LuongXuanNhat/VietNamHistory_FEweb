@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/service/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ForgetpassComponent', () => {
   let component: ForgetpassComponent;
@@ -12,9 +14,9 @@ describe('ForgetpassComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot(), RouterTestingModule],
       declarations: [ForgetpassComponent],
-      providers:[AuthService, MatDialogRef]
+      providers:[AuthService, MatDialogRef, ]
     });
     fixture = TestBed.createComponent(ForgetpassComponent);
     component = fixture.componentInstance;

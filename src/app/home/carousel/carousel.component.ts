@@ -15,7 +15,7 @@ import { SessionService } from 'src/app/service/session/session.service';
 export class CarouselComponent implements OnInit{
   posts!: PostResponse[];
   currentSlideIndex = 0;
-  constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
+  constructor(private router: Router, private service: PublicserviceService,
     private session: SessionService, private toastr: ToastrService) {
       this.getposts();
   }

@@ -50,8 +50,8 @@ export class ChatComponent {
   contentUpdate: string = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { SubId: string }
-  ,private builder: FormBuilder, private session: SessionService,private service: PublicserviceService,
-  private  toastr: ToastrService,  private location: Location,private route: ActivatedRoute, private router: Router){
+  ,private session: SessionService,private service: PublicserviceService,
+  private  toastr: ToastrService, private router: Router){
     this.postId = data.SubId;
     this.userId = session.getUserId();
     this.userName= session.getName();

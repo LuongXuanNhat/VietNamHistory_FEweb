@@ -6,6 +6,8 @@ import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
+import { DataService } from 'src/app/service/datashare/data.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('CreatepostComponent', () => {
   let component: CreatepostComponent;
@@ -15,7 +17,7 @@ describe('CreatepostComponent', () => {
     TestBed.configureTestingModule({
       imports: [ToastrModule.forRoot(), HttpClientTestingModule],
       declarations: [CreatepostComponent],
-      providers: [PublicserviceService, DatePipe]
+      providers: [PublicserviceService, DatePipe, DataService, MatDialogRef]
     });
     fixture = TestBed.createComponent(CreatepostComponent);
     component = fixture.componentInstance;

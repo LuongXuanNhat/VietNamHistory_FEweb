@@ -5,6 +5,10 @@ import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
+import { DataService } from 'src/app/service/datashare/data.service';
+import { SessionService } from 'src/app/service/session/session.service';
+import { AnimationService } from 'src/app/service/animations/animation.service';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('ForumForyouComponent', () => {
   let component: ForumForyouComponent;
@@ -12,9 +16,9 @@ describe('ForumForyouComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot()],
       declarations: [ForumForyouComponent],
-      providers: [PublicserviceService, DatePipe]
+      providers: [PublicserviceService, DatePipe, DataService, SessionService, AnimationService]
     });
     fixture = TestBed.createComponent(ForumForyouComponent);
     component = fixture.componentInstance;

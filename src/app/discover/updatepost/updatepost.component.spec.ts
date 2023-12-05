@@ -6,6 +6,9 @@ import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialogRef } from '@angular/material/dialog';
+import { DataService } from 'src/app/service/datashare/data.service';
 
 describe('UpdatepostComponent', () => {
   let component: UpdatepostComponent;
@@ -14,9 +17,9 @@ describe('UpdatepostComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       
-      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
       declarations: [UpdatepostComponent],
-      providers: [PublicserviceService, DatePipe]
+      providers: [PublicserviceService, DatePipe, MatDialogRef, DataService]
     });
     fixture = TestBed.createComponent(UpdatepostComponent);
     component = fixture.componentInstance;

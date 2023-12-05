@@ -4,6 +4,7 @@ import { ChangepasswordComponent } from './changepassword.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/service/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('ChangepasswordComponent', () => {
   let component: ChangepasswordComponent;
@@ -11,7 +12,7 @@ describe('ChangepasswordComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule, MatIconModule],
       declarations: [ChangepasswordComponent],
       providers: [AuthService]
     });

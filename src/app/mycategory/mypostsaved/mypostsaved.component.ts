@@ -17,8 +17,8 @@ export class MypostsavedComponent implements OnInit{
   userId: string ;
   posts: PostResponse[] = [];
 
-  constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
-    private session: SessionService, private toastr: ToastrService,private dialog: MatDialog){
+  constructor(private router: Router, private service: PublicserviceService,
+    private session: SessionService, private toastr: ToastrService){
       this.userId = session.getUserId() ?? '';
       this.GetMyPost();
   }

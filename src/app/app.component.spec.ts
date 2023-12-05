@@ -5,12 +5,15 @@ import { AuthService } from './service/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { InjectionToken } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { AnimationService } from './service/animations/animation.service';
+import { SessionService } from './service/session/session.service';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [ToastrModule.forRoot(),RouterTestingModule, HttpClientTestingModule],
+    imports: [ToastrModule.forRoot(),RouterTestingModule, HttpClientTestingModule, RouterTestingModule],
     declarations: [AppComponent],
-    providers: [AuthService]
+    providers: [AuthService, MatDialog, AnimationService, SessionService]
   }));
 
   it('should create the app', () => {

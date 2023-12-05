@@ -21,8 +21,7 @@ export class MycategoryComponent {
     
   ];
   defaultLink = this.objectList[0].url;
-  constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
-    private session: SessionService, private toastr: ToastrService){
+  constructor(private router: Router){
 
   }
 }
