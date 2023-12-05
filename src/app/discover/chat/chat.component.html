@@ -56,7 +56,7 @@
                             </mat-menu>
                         </div>
                     </div>
-                    <div style="left: 32px;">{{comment.updatedAt ?? comment.createdAt}}</div>
+                    <div style="left: 32px;" class="cursor-d" matTooltip="{{comment.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="right">{{comment.updatedAt ?? comment.createdAt}}</div>
                 </div>
                 <div [innerHTML]="comment.content" class="content"></div>
             </div>

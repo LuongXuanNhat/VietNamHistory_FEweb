@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AnswerQuestionDto, CommentPostDto, SubAnswerQuestionDto } from '../ObjectClass/object';
+import { AnswerFpkDto, AnswerQuestionDto, CommentPostDto, SubAnswerQuestionDto } from '../ObjectClass/object';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -29,6 +29,15 @@ export class PublicserviceService {
   }
   CreateForumSubAnswer(data: SubAnswerQuestionDto){
     return this.http.post(this.apiurl + '/Answer/SubAnswer', data);
+  }
+  deleteComment(id: string){
+    return this.http.delete(this.apiurl + '/Post/Chat?idComment=' + id);
+  }
+  deleteAnswer(idAnswer: string){
+    return this.http.delete(this.apiurl + '/Answer/delete?idAnswer=' + idAnswer);
+  }
+  deleteSubAnswer(idAnswer: string){
+    return this.http.delete(this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer);
   }
   getChatSignRl(): string{
     return this.apiurl + '/commentHub';
@@ -63,6 +72,9 @@ export class PublicserviceService {
   GetMyQuestionSaved(){
     return this.http.get(this.apiurl + '/Question/MyQuestionSaved');
   }
+  GetNews(){
+    return this.http.get(this.apiurl + '/News');
+  }
   getpostbytag(tag: string){
     return this.http.get(this.apiurl + '/Post/FindByTag?tag=' + tag);
   }
@@ -74,6 +86,9 @@ export class PublicserviceService {
   }
   GetAnswers(questionId: string){
     return this.http.get(this.apiurl + '/Answer?questionId=' + questionId);
+  }
+  getRandomPost(quantity: number){
+    return this.http.get(this.apiurl + '/Post/RandomArticle?quantity=' + quantity);
   }
   GetTopTags(number: number){
     return this.http.get(this.apiurl + '/HashTag/TopTag?numberTag=' + number);
@@ -151,20 +166,15 @@ export class PublicserviceService {
   UpdateForumAnswer(data: AnswerQuestionDto){
     return this.http.put(this.apiurl + '/Answer', data);
   }
-  UpdateForumSubAnswer(data: AnswerQuestionDto){
+  UpdateForumSubAnswer(data: SubAnswerQuestionDto){
     return this.http.put(this.apiurl + '/Answer/SubAnswer', data);
   }
-  deleteComment(id: string){
-    return this.http.delete(this.apiurl + '/Post/Chat?idComment=' + id);
+  VoteAnswer(data: AnswerFpkDto){
+    return this.http.post(this.apiurl + '/Answer/Vote', data);
   }
-  deleteAnswer(idAnswer: string){
-    return this.http.delete(this.apiurl + '/Answer/delete?idAnswer=' + idAnswer);
+  VoteAnswerByQuestioner(data: AnswerFpkDto){
+    return this.http.post(this.apiurl + '/Answer/Confirm', data);
   }
-  deleteSubAnswer(idAnswer: string){
-    return this.http.delete(this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer);
-  }
-  getRandomPost(quantity: number){
-    return this.http.get(this.apiurl + '/Post/RandomArticle?quantity=' + quantity);
-  }
+  
   
 }

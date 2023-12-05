@@ -93,7 +93,7 @@
                 <div class="font" [innerHTML]="postData?.content" style="margin: 16px 0px;"></div>
                 <div class="flex-center-sb">
                     <div ><strong>Lượt xem: {{postData?.viewNumber}}</strong> </div>
-                    <div class="flex-center-h">
+                    <div class="flex-center-h cursor-d" matTooltip="{{postData?.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="left">
                         <mat-icon matSuffix>today</mat-icon>
                         {{postData?.updatedAt ?? postData?.createdAt}} 
                     </div>

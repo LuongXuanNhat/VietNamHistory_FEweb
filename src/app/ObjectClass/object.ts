@@ -88,6 +88,7 @@ export interface PostResponse {
     updatedAt?: Date | string | null;
     confirm: boolean;
     mostConfirm: boolean;
+    voteNumber: number;
     subAnswer?: SubAnswerQuestionDto[] | null;
 }
 
@@ -99,4 +100,20 @@ export interface SubAnswerQuestionDto {
     createdAt?: Date | string | null;
     updatedAt?: Date | string | null;
     userShort?: UserShortDto | null;
+}
+
+export interface AnswerFpkDto {
+  questionId: string;
+  answerId: string;
+  userId: string;
+  questionUserId: string;
+}
+
+export interface News {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: Date;
+  image: string;
+  url: string;
 }

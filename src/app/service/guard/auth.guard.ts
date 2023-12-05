@@ -8,13 +8,13 @@ import { AuthService } from '../auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private service: AuthService, private router: Router,private tostr:ToastrService) { }
+  constructor(private service: AuthService, private router: Router,private toastr: ToastrService) { }
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.service.isAuthenticated()) {
       return true;
     } else {
-      this.tostr.warning('Bạn chưa đăng nhập')
+      this.toastr.warning('Bạn chưa đăng nhập')
       this.router.navigate(['/login']);
       return false;
     }

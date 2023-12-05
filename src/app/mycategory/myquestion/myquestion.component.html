@@ -1,5 +1,5 @@
-<div class="plr-200">
-    <div class="interact">
+<div class="plr-200 flex-center-h">
+    <div class="interact-save">
         <button matTooltip="Câu hỏi của tôi" matTooltipPosition="right"
             mat-icon-button class="btn-interact seleted" style="top: 100px;">
             <span class="material-symbols-outlined " > 
@@ -68,5 +68,8 @@
             <tr style="height: 48px;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+    </div>
+    <div  class="tag-category plr-1 pt pb text-white">
+        Câu hỏi
     </div>
 </div>

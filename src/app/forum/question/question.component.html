@@ -112,13 +112,13 @@
         <div #answercard >
             <div class="flex-center-sb">
                 <h6 class="card-answer pb-1"><strong>Trả lời</strong></h6>
-                <button class="flex-center-h"  [matMenuTriggerFor]="menu" aria-label="Sắp xếp" matTooltip="Sắp xếp" style="border: none; background-color: transparent;">
+                <button class="flex-center-h"  [matMenuTriggerFor]="menu1" aria-label="Sắp xếp" matTooltip="Sắp xếp" style="border: none; background-color: transparent;">
                     <span class="pr">Sắp xếp</span>
                     <span class="material-symbols-outlined">
                         keyboard_arrow_down
                     </span>  
                   </button>
-                  <mat-menu #menu="matMenu">
+                  <mat-menu #menu1="matMenu">
                     <button mat-menu-item>
                         <mat-icon>dialpad</mat-icon>
                         <span>Mặc định</span>
@@ -162,16 +162,20 @@
                 <div *ngFor="let answer of answers">
                     <div style="display: flex; align-items: center;" class="mt-1">
                         <div>
-                            <button class="bubbly-button" (click)="onClickButton($event)">Click me!</button>
-                            <span class="material-symbols-outlined" style="color: rebeccapurple;">
-                                arrow_upward
-                            </span>
+                            <button class="bubbly-button" (click)="onClickButton($event, answer)" matTooltip="Tán thành" matTooltipPosition="left">
+                            </button>
                         </div>
                         <img class="icon-24 ml" [src]="answer.userShort?.image == '' ? 'assets/Icon/user.png' : answer.userShort?.image" alt="avatar">
                         <strong class="pl">{{answer.userShort?.fullName}} </strong>
+                        <div *ngIf="answer.confirm">
+                            <img src="assets/Icon/tick.png" class="ml-1 img-24" matTooltip="{{question?.userShort?.fullName}} đã chọn đây là câu trả lời đúng nhất" alt="tick" >
+                        </div>
+                        <div *ngIf="answer.mostConfirm">
+                            <img src="assets/Icon/tick1.png" class="ml-1 img-24" matTooltip="câu trả lời nhiều người đông ý nhất" alt="tick" >
+                        </div>
                         <div style="display: flex; margin-left: auto; align-items: center;">
                             <div class="mr-1 cursor-d" matTooltip="{{answer.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="left">{{answer.updatedAt ?? answer?.createdAt}}</div>
-                            <button  [matMenuTriggerFor]="menu" *ngIf="answer.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px;">
+                            <button  [matMenuTriggerFor]="menu2" *ngIf="answer.userShort?.id === userId || question?.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px;">
                                 <span class="material-symbols-outlined">
                                     more_horiz
                                 </span>
@@ -180,15 +184,33 @@
                     </div>
                     
                     <div btn-comment>
-                        <mat-menu #menu="matMenu" >
-                            <button mat-menu-item (click)="editAnswer(answer.id ?? '')">
-                              <mat-icon>edit</mat-icon>
-                              <span>Sửa</span>
-                            </button>
-                            <button mat-menu-item (click)="deleteAnswer(answer.id ?? '')">
-                              <mat-icon>delete</mat-icon>
-                              <span>Xóa</span>
-                            </button>
+                        <mat-menu #menu2="matMenu" >
+                            <div *ngIf="question?.userShort?.id === userId">
+                                <button mat-menu-item (click)="confirmAnswerByQuestioner(answer)" >
+                                    <div class="flex-center-h" *ngIf="!answer.confirm; else unConfirmAnswer">
+                                        <span class="material-symbols-outlined" style="color: green;">
+                                            check_circle
+                                        </span>
+                                        <span class="cursor-p ml-1">Câu trả lời đúng nhất</span>
+                                    </div>
+                                    <ng-template #unConfirmAnswer class="flex-center-h">
+                                        <span class="material-symbols-outlined" style="color: green;">
+                                            check_circle
+                                        </span>
+                                        <span class="cursor-p ml-1">Bỏ chọn trả lời đúng nhất</span>
+                                    </ng-template>
+                                </button>
+                            </div>
+                            <div *ngIf="answer.userShort?.id === userId">
+                                <button mat-menu-item (click)="editAnswer(answer.id ?? '')">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Sửa</span>
+                                  </button>
+                                  <button mat-menu-item (click)="deleteAnswer(answer.id ?? '')">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Xóa</span>
+                                  </button>
+                            </div>
                             
                         </mat-menu>
                     </div>
@@ -219,8 +241,19 @@
                 <!-- Comment -->
                 <div>
                     <div class="flex-center-sb">
-                        <div></div>
-                        <div class="dis-flex cursor-p reply" (click)="Reply(answer?.id ?? '')">
+                        <div class="flex-center-h">
+                            <div class="cursor-d mr-1" matTooltip="Người chọn câu trả lời này đúng" matTooltipPosition="below" style="font-weight: 700; color: #263390;">
+                                {{answer.voteNumber != 0 ? '+'+answer.voteNumber : '0'}}
+                            </div>
+
+                            <div *ngIf="answer.subAnswer?.length" class="flex-center-h cursor-p" matTooltip="Xem bình luận" matTooltipPosition="left" (click)="viewComments(answer.id ?? '')">
+                                <span class="material-symbols-outlined mr">
+                                    notes
+                                </span>
+                                {{answer.subAnswer?.length}} 
+                            </div>
+                        </div>
+                        <div class="dis-flex cursor-p reply" (click)="Reply(answer?.id ?? '')" style="margin-left: auto;">
                             <span class="material-symbols-outlined">
                                 reply
                             </span>
@@ -251,14 +284,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- SubAnswer -->
-                <div *ngIf="answer.subAnswer?.length != 0" style="margin-left: 4%;">
+                <!-- Show Comment (SubAnser) -->
+                <div *ngIf="viewComment == answer.id" style="margin-left: 4%;">
                     <div *ngFor="let subAnswer of answer.subAnswer">
-                        <div style="display: flex; align-items: center;" class="mt-1">
+                        <div style="display: flex; align-items: center;" class="mt">
                             <img class="icon-24" [src]="subAnswer.userShort?.image == '' ? 'assets/Icon/user.png' : subAnswer.userShort?.image" alt="avatar">
                             <strong class="pl">{{subAnswer.userShort?.fullName}} </strong>
                             <div class="pl cursor-d" matTooltip="{{answer.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="right">{{subAnswer.updatedAt ?? subAnswer?.createdAt}}</div>
-                            <button  [matMenuTriggerFor]="menu" *ngIf="subAnswer.userShort?.id === userId" mat-icon-button class=" dis-flex" style="right: 16px; margin-left: auto;">
+                            <button  [matMenuTriggerFor]="menu3" *ngIf="subAnswer.userShort?.id === userId " mat-icon-button class=" dis-flex" style="right: 16px; margin-left: auto;">
                                 <span class="material-symbols-outlined">
                                     more_horiz
                                 </span>
@@ -266,7 +299,7 @@
                         </div>
                         
                         <div btn-comment>
-                            <mat-menu #menu="matMenu" >
+                            <mat-menu #menu3="matMenu" >
                                 <button mat-menu-item (click)="editSubAnswer(subAnswer)">
                                   <mat-icon>edit</mat-icon>
                                   <span>Sửa</span>
@@ -306,7 +339,7 @@
                                     ></ckeditor>
                                 </div>
                                 <div class="mt">
-                                    <button mat-raised-button color="primary" (click)="sendSubAnswer(answer.id ?? '', subAnswer.userShort)">Bình luận</button>
+                                    <button mat-raised-button color="primary" (click)="sendSubAnswer(answer.id, subAnswer.userShort)">Bình luận</button>
                                     <button mat-button  (click)="cancelReply()">Hủy</button>
                                 </div>
                             </div>

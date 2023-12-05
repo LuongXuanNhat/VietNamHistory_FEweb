@@ -54,6 +54,7 @@ import { ForumUpdateComponent } from './forum/forum-update/forum-update.componen
 import { QuestionReportComponent } from './forum/questionreport/questionreport.component';
 import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestionsaved.component';
 import { AnimationService } from './service/animations/animation.service';
+import { NewsComponent } from './news/news.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { AnimationService } from './service/animations/animation.service';
     ForumUpdateComponent,
     QuestionComponent,
     QuestionReportComponent,
-    MyquestionsavedComponent ,
+    MyquestionsavedComponent,
+    NewsComponent ,
   ],
   imports: [
     BrowserModule,
@@ -135,7 +137,6 @@ import { AnimationService } from './service/animations/animation.service';
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
     { provide: ScrollStrategyOptions, useClass: ScrollStrategyOptions },
     [AnimationService],
-
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
-<div class="plr-200">
-    <div class="interact">
+<div class="plr-200 flex-center-h ">
+    <div class="interact-save">
         <button matTooltip="Câu hỏi của tôi" matTooltipPosition="right"
             mat-icon-button class="btn-interact " style="top: 100px;" routerLink="/mycategory/question">
             <span class="material-symbols-outlined " > 
@@ -15,10 +15,10 @@
         
     </div>
     <div style="text-align: center; margin-top: 48px;">
-        <div *ngFor="let question of questions" class="" style="display: inline-flex;">
+        <div *ngFor="let question of questions" class="mb-1" style="display: inline-flex;">
             <div style="z-index: 10;">
-                <button matTooltip="Bỏ lưu" matTooltipPosition="right" mat-mini-fab (click)="IsSave(question, $event)" class=" po-ab" style="margin-top: 4px; margin-left: 12px;background-color: #00000073 ;height: 24px;
-                width: 24px;">
+                <button matTooltip="Bỏ lưu" matTooltipPosition="above" mat-mini-fab (click)="IsSave(question, $event)" class=" po-ab" style="margin-top: 4px; margin-left: 12px;background-color: #00000073 ;height: 24px;
+                width: 24px; box-shadow: none !important;">
                     <mat-icon class="material-symbols-outlined text-white">
                         close
                     </mat-icon>
@@ -35,20 +35,18 @@
                         <ng-template #avaterdefault >
                             <img class="icon-24" src="assets/Icon/user.png" alt="">
                         </ng-template>
-                        <span class="pl-1" *ngIf="question.userShort.fullName !== ''; else fullname">{{question.userShort.fullName}}</span>
-                        <ng-template class="pl-1" #fullname>{{question.userShort.fullName}}</ng-template>
+                        <span class="pl-1">{{question?.userShort?.fullName}}</span>
                     </div>
                     <div class="flex-center-sb">
                         <div>
                             {{question.viewNumber}} lượt xem
                         </div>
-                        <div>
-                            <div *ngIf="question.updatedAt == null; else updateAt">{{question.createdAt}}</div>
-                            <ng-template #updateAt>{{question.updatedAt}}</ng-template>
-                        </div>
                     </div>
                 </div>
             </a>
         </div>
+    </div>
+    <div  class="plr-1 pt pb text-white tag-category">
+        Câu hỏi
     </div>
 </div>

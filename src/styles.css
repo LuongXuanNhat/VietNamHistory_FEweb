@@ -142,7 +142,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     align-items: center;
 }
 .flex-center-h{
-    display: flex;
+    display: flex !important;
     align-items: center;
 }
 .flex-center-v{
@@ -173,6 +173,16 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     display: grid; 
     margin-left: 100px;
     margin-top: 40px;
+}
+.interact-save {
+    position: absolute;
+    display: grid;
+    margin-left: 100px;
+    margin-top: 40px;
+}
+.img-24 {
+    width: 24px;
+    height: 24px;
 }
 .likeNumber{
     display: none;
@@ -253,6 +263,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .plr-300{
     padding: 0 300px;
 }
+.plr {
+    padding: 0 8px;
+}
 .plr-1{
     padding: 0 16px;
 }
@@ -261,6 +274,24 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .plr-12{
     padding: 0 12px;
+}
+.pt{
+    padding-top: 8px;
+}
+.pt-1{
+    padding-top: 16px;
+}
+.pt-2{
+    padding-top: 32px;
+}
+.po-re{
+    position: relative;
+}
+.po-ab{
+    position: absolute !important;
+}
+.pb-1{
+    padding-bottom: 16px;
 }
 .pr{
     padding-right: 8px;
@@ -276,6 +307,13 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .custom-backdrop {
     background-color: rgba(0, 0, 0, 0.05);
+}
+.tag-category {
+    margin-left: auto;
+    background-color: #3C4DC2;
+    border-radius: 4px;
+    margin-bottom: auto;
+    margin-top: 4px;
 }
 .text-2-line{
     height: 41.6px;
@@ -322,25 +360,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .w-40 {
     width: 40%;
 }
-.pt{
-    padding-top: 8px;
-}
-.pt-1{
-    padding-top: 16px;
-}
-.pt-2{
-    padding-top: 32px;
-}
 
-.po-re{
-    position: relative;
-}
-.po-ab{
-    position: absolute !important;
-}
-.pb-1{
-    padding-bottom: 16px;
-}
 .selected{
     background-color: #7989f4 !important;
 }
@@ -419,23 +439,28 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 
 /*  Bubby button */
 .bubbly-button {
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    background-image: url("assets/Icon/Vote.png") !important;
+    background-size: contain;
+    z-index: 2;
     display: inline-block;
     font-size: 1em;
     font-weight: 600;
-    height: 36px;
-    padding: 0 16px 0 16px;
-    margin-top: 100px;
-    margin-bottom: 60px;
+    height: 30px;
+    width: 30px;
+    padding: 8px;
+    margin: 2px 0px;
+    border-radius: 50% !important;
     -webkit-appearance: none;
     appearance: none;
-    background-color: var(--primary);
-    color: #fff;
-    border-radius: 4px;
+    background-color: white;
+    color: transparent;
     border: none;
     cursor: pointer;
     position: relative;
     transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
+  }
+  .bubbly-button:hover {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   }
   .bubbly-button:focus {
@@ -444,7 +469,6 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
   .bubbly-button:before, .bubbly-button:after {
     position: absolute;
     content: '';
-    display: block;
     width: 140%;
     height: 100%;
     left: -20%;
@@ -464,7 +488,7 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     radial-gradient(circle, var(--primary) 20%, transparent 20%), 
     radial-gradient(circle, var(--primary) 20%, transparent 20%), 
     radial-gradient(circle, var(--primary) 20%, transparent 20%);
-    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+    background-size: 10% 10%, 20% 20%, 25% 25%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
   }
   .bubbly-button:after {
     display: none;
@@ -476,21 +500,23 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     radial-gradient(circle, var(--primary) 20%, transparent 20%), 
     radial-gradient(circle, var(--primary) 20%, transparent 20%), 
     radial-gradient(circle, var(--primary) 20%, transparent 20%);
-    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+    background-size: 15% 15%, 20% 20%, 25% 25%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
   }
   .bubbly-button:active {
     transform: scale(0.9);
-    background-color: #3948a1;
+    /* background-color: #3948a1; */
   }
   .bubbly-button.animate:before {
     display: block !important;
-    animation: topBubbles ease-in-out 0.75s forwards !important; 
+    animation: topBubbles ease-in-out 1s forwards !important; 
   }
   .bubbly-button.animate:after {
     display: block !important;
-    animation: bottomBubbles ease-in-out 0.75s forwards !important;
+    animation: bottomBubbles ease-in-out 1s forwards !important;
   }
   
+  
+
   @keyframes topBubbles {
     0% {
       background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
@@ -515,7 +541,6 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
       background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
     }
   }
-
 
 
 

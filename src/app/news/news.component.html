@@ -1,0 +1,23 @@
+<div class="mt-60 plr-300 mh-page">
+    <h5 class="mt mb" style="text-align: center;">
+        📻 Bản tin lịch sử tổng hợp
+    </h5>
+    <div class="mt-1">
+        <a *ngFor="let new of news" href="{{new.url}}" class="flex-center-h mt text-black underline-none">
+            <img class="img-news" src="{{new.image}}" loading="lazy" alt="ảnh tin tức">
+            <div class="ml-1 dis-block">
+                <div>
+                    <strong style="font-size: 20px;">
+                        {{new.title}}
+                    </strong>
+                </div>
+                <div>
+                    {{new.description}}
+                </div>
+                <div style="float: inline-end;">
+                    {{new.createdAt}}
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

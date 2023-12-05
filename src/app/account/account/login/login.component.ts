@@ -40,7 +40,7 @@ export class LoginComponent {
           const decodedToken = this.jwtHelper.decodeToken(res.resultObj);
           const email = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
           const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-          const name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+          const name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname'];
           const id = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
           // Lưu thông tin vào sessionStorage
           this.sessionService.setEmail(email);

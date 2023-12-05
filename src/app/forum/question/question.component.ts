@@ -6,7 +6,7 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { format, parseISO } from 'date-fns';
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
-import { AnswerQuestionDto, CommentPostDto, PostResponse, SubAnswerQuestionDto, UserShortDto } from 'src/app/ObjectClass/object';
+import { AnswerFpkDto, AnswerQuestionDto, CommentPostDto, PostResponse, SubAnswerQuestionDto, UserShortDto } from 'src/app/ObjectClass/object';
 import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
@@ -49,14 +49,16 @@ export class QuestionComponent implements OnInit{
     questionId: '',
     content: '',
     confirm: false,
-    mostConfirm: false
+    mostConfirm: false,
+    voteNumber: 0
   };
   updateAnswer: AnswerQuestionDto = {
     authorId: '',
     questionId: '',
     content: '',
     confirm: false,
-    mostConfirm: false
+    mostConfirm: false,
+    voteNumber: 0
   }
   subAnswerContent: string = '';
   subAnswerDto: SubAnswerQuestionDto = {
@@ -74,7 +76,7 @@ export class QuestionComponent implements OnInit{
   contentSubUpdate: string = '';
   isSubCommented: boolean = false;
   isEditSubCommented: boolean = false;
-
+  viewComment: string = '';
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private route: ActivatedRoute,private dialog: MatDialog,
@@ -384,6 +386,7 @@ export class QuestionComponent implements OnInit{
     //   this.toastr.warning("Không được bình luận có nội dung là ảnh!");
     //   return;
     // }
+    this.updateAnswer.subAnswer = [];
     this.updateAnswer.createdAt = new Date();
     this.updateAnswer.updatedAt = new Date();
     this.updateAnswer.content = this.contentUpdate?.trim();
@@ -414,7 +417,7 @@ export class QuestionComponent implements OnInit{
       this.toastr.info("Vui lòng không để trống bình luận");
       return;
     }
-    this.service.UpdateForumSubAnswer(this.updateAnswer).subscribe(
+    this.service.UpdateForumSubAnswer(this.updateSubAnswer).subscribe(
       (data: any)=>{
         this.contentSubUpdate = '';
         this.cancelEditSubComment();
@@ -487,6 +490,10 @@ export class QuestionComponent implements OnInit{
   }
 
   Reply(id: string){
+    if(!this.session.getUserId()){
+      this.toastr.info("Bạn cần đăng nhập!");
+      return;
+    }
     this.reply = id ?? '';
   }
   CheckReply(answer: string): boolean{
@@ -523,6 +530,7 @@ export class QuestionComponent implements OnInit{
 
     this.service.CreateForumSubAnswer(this.subAnswerDto).subscribe(
       (data: any)=>{
+        this.viewComments(preAnswerId);
         this.cancelSubComment();
       },
       error => {
@@ -530,13 +538,72 @@ export class QuestionComponent implements OnInit{
       }
     )
   }
-  onClickButton(event: Event): void {
-    const target = event.target as HTMLElement;
-    this.animation.animateButton(target);
+  confirmAnswerByQuestioner(answer: AnswerQuestionDto){
+    var obj: AnswerFpkDto = {
+      answerId: '',
+      questionId: '',
+      questionUserId: '',
+      userId: ''
+    };
+    obj.answerId = answer.id ?? '';
+    obj.userId = this.session.getUserId() ?? '';
+    obj.questionId = answer.questionId;
+    obj.questionUserId = this.userId ?? '';
+
+    this.service.VoteAnswerByQuestioner(obj).subscribe(
+      (data: any) => {
+        if(data.isSuccessed){
+          this.GetAnswers();
+        } else {
+          this.toastr.error("Lỗi: " + data.message);
+        }
+      }, (error: any) => {
+        this.toastr.error("Lỗi: "+ error);
+      }
+    )
+  }
+  onClickButton(event: Event, answer: AnswerQuestionDto): void {
+    if(!this.session.getUserId()){
+      this.toastr.info("Bạn cần đăng nhập!");
+      return;
+    }
+    var obj: AnswerFpkDto = {
+      answerId: '',
+      questionId: '',
+      questionUserId: '',
+      userId: ''
+    };
+    obj.answerId = answer.id ?? '';
+    obj.userId = this.userId ?? '';
+    obj.questionId = answer.questionId;
+    obj.questionUserId = this.question?.userShort.id ?? '';
+
+    this.service.VoteAnswer(obj).subscribe(
+      (data: any) => {
+        if(data.isSuccessed){
+          const target = event.target as HTMLElement;
+          this.animation.animateButton(target);
+          setTimeout(() => {
+            this.GetAnswers();
+          }, 5);
+
+        } else {
+          this.toastr.error("Lỗi: " + data.message);
+        }
+      }, (error: any) => {
+        this.toastr.error("Lỗi: "+ error);
+      }
+    )
   }
 
   onClickButton1(event: Event): void {
     const target = event.target as HTMLElement;
     this.animation.animateButton1(target);
+  }
+  viewComments(id: string){
+    if(this.viewComment == id)
+      this.viewComment = '';
+    else
+    this.viewComment = id;
   }
 }

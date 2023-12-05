@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, DoCheck{
     { categoryname: 'Luyện tập', url: '/practice' },
     { categoryname: 'Tài liệu', url: '/document' },
     { categoryname: 'Diễn đàn', url: '/forum' },
-    { categoryname: 'Về chúng tôi', url: '/about' }
+    { categoryname: 'Tin tức', url: '/news' }
   ];
   
   

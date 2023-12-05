@@ -26,6 +26,7 @@ import { ForumTopComponent } from './forum/forum-top/forum-top.component';
 import { ForumNewComponent } from './forum/forum-new/forum-new.component';
 import { QuestionComponent } from './forum/question/question.component';
 import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestionsaved.component';
+import { NewsComponent } from './news/news.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -69,6 +70,8 @@ const routes: Routes = [
     ]
   },
   {path: 'forum/:id', component: QuestionComponent},
+  {path: 'news', component:NewsComponent},
+
 ];
 
 @NgModule({
