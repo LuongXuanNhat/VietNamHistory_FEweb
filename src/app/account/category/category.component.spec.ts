@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatTabsModule } from '@angular/material/tabs';
 import { CategoryComponent } from './category.component';
 
 describe('CategoryComponent', () => {
@@ -8,6 +8,7 @@ describe('CategoryComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [MatTabsModule],
       declarations: [CategoryComponent]
     });
     fixture = TestBed.createComponent(CategoryComponent);

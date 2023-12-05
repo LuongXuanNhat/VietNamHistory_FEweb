@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateaccountComponent } from './updateaccount.component';
+import { ChangeemailComponent } from './changeemail/changeemail.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 describe('UpdateaccountComponent', () => {
   let component: UpdateaccountComponent;
@@ -8,7 +10,7 @@ describe('UpdateaccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UpdateaccountComponent]
+      declarations: [UpdateaccountComponent, ChangeemailComponent, ChangepasswordComponent]
     });
     fixture = TestBed.createComponent(UpdateaccountComponent);
     component = fixture.componentInstance;
