@@ -10,7 +10,6 @@ describe('ReportpostComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ReportpostComponent],
-      providers: [InjectionToken]
     });
     fixture = TestBed.createComponent(ReportpostComponent);
     component = fixture.componentInstance;

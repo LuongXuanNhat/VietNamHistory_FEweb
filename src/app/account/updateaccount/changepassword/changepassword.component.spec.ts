@@ -3,6 +3,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ChangepasswordComponent } from './changepassword.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/service/auth.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ChangepasswordComponent', () => {
   let component: ChangepasswordComponent;
@@ -10,9 +11,9 @@ describe('ChangepasswordComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), AuthService, HttpClient],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
       declarations: [ChangepasswordComponent],
-      providers: [HttpClient, AuthService]
+      providers: [AuthService]
     });
     fixture = TestBed.createComponent(ChangepasswordComponent);
     component = fixture.componentInstance;

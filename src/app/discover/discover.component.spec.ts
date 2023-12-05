@@ -4,6 +4,7 @@ import { DiscoverComponent } from './discover.component';
 import { PublicserviceService } from '../service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('DiscoverComponent', () => {
   let component: DiscoverComponent;
@@ -13,7 +14,7 @@ describe('DiscoverComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [DiscoverComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(DiscoverComponent);
     component = fixture.componentInstance;

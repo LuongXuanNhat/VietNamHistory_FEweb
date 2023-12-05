@@ -5,6 +5,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { InjectionToken } from '@angular/core';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MypostComponent', () => {
   let component: MypostComponent;
@@ -12,7 +13,7 @@ describe('MypostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), HttpClient],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
       declarations: [MypostComponent],
       providers: [PublicserviceService]
     });

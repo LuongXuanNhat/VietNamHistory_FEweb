@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('PostdetailComponent', () => {
   let component: PostdetailComponent;
@@ -12,7 +13,7 @@ describe('PostdetailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClient],
+      imports: [HttpClientTestingModule],
       declarations: [PostdetailComponent],
       providers: [
         {

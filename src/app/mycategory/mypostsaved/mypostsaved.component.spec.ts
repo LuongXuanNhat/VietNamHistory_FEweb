@@ -5,6 +5,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@microsoft/signalr';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('MypostsavedComponent', () => {
   let component: MypostsavedComponent;
@@ -14,7 +15,7 @@ describe('MypostsavedComponent', () => {
     TestBed.configureTestingModule({
       imports: [ToastrModule.forRoot(), HttpClientTestingModule],
       declarations: [MypostsavedComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(MypostsavedComponent);
     component = fixture.componentInstance;

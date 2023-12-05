@@ -4,6 +4,7 @@ import { SearchpageComponent } from './searchpage.component';
 import { HttpClient } from '@angular/common/http';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('SearchpageComponent', () => {
   let component: SearchpageComponent;
@@ -13,7 +14,7 @@ describe('SearchpageComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [SearchpageComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(SearchpageComponent);
     component = fixture.componentInstance;

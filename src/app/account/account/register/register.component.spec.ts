@@ -10,8 +10,9 @@ describe('RegisterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), InjectionToken],
-      declarations: [RegisterComponent]
+      imports: [ToastrModule.forRoot()],
+      declarations: [RegisterComponent],
+      providers: [InjectionToken]
     });
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;

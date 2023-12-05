@@ -10,7 +10,7 @@ describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [ToastrModule.forRoot(),RouterTestingModule, HttpClientTestingModule],
     declarations: [AppComponent],
-    providers: [AuthService, InjectionToken]
+    providers: [AuthService]
   }));
 
   it('should create the app', () => {

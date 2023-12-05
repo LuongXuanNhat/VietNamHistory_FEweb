@@ -4,6 +4,7 @@ import { ForumForyouComponent } from './forum-foryou.component';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('ForumForyouComponent', () => {
   let component: ForumForyouComponent;
@@ -13,7 +14,7 @@ describe('ForumForyouComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [ForumForyouComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(ForumForyouComponent);
     component = fixture.componentInstance;

@@ -4,6 +4,7 @@ import { ForumCreateComponent } from './forum-create.component';
 import { HttpClient } from '@angular/common/http';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('ForumCreateComponent', () => {
   let component: ForumCreateComponent;
@@ -13,7 +14,7 @@ describe('ForumCreateComponent', () => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule],
       declarations: [ForumCreateComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(ForumCreateComponent);
     component = fixture.componentInstance;

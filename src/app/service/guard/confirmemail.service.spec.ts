@@ -11,8 +11,7 @@ describe('ConfirmemailService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule, ],
-      declarations: [ConfirmemailService],
-      providers: [ AuthService]
+      providers: [ AuthService, ConfirmemailService]
     });
     service = TestBed.inject(ConfirmemailService);
   });

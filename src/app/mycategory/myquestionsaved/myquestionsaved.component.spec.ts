@@ -10,9 +10,9 @@ describe('MyquestionsavedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), InjectionToken],
+      imports: [ToastrModule.forRoot()],
       declarations: [MyquestionsavedComponent],
-      providers: [ToastrService]
+      providers: [ToastrService, InjectionToken]
     });
     fixture = TestBed.createComponent(MyquestionsavedComponent);
     component = fixture.componentInstance;

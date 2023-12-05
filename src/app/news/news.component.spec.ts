@@ -4,6 +4,7 @@ import { NewsComponent } from './news.component';
 import { PublicserviceService } from '../service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('NewsComponent', () => {
   let component: NewsComponent;
@@ -13,7 +14,7 @@ describe('NewsComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [NewsComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(NewsComponent);
     component = fixture.componentInstance;

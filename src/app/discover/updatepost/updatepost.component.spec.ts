@@ -5,6 +5,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('UpdatepostComponent', () => {
   let component: UpdatepostComponent;
@@ -15,7 +16,7 @@ describe('UpdatepostComponent', () => {
       
       imports: [ToastrModule.forRoot(), HttpClientTestingModule],
       declarations: [UpdatepostComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(UpdatepostComponent);
     component = fixture.componentInstance;

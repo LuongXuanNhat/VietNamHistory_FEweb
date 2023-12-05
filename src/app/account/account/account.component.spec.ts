@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountComponent } from './account.component';
 import { IntroduceComponent } from '../introduce/introduce.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -9,6 +10,7 @@ describe('AccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [AccountComponent,IntroduceComponent],
     });
     fixture = TestBed.createComponent(AccountComponent);

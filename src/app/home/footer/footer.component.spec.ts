@@ -4,6 +4,7 @@ import { FooterComponent } from './footer.component';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -13,7 +14,7 @@ describe('FooterComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [FooterComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;

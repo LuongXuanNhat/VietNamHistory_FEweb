@@ -4,6 +4,7 @@ import { MycategoryComponent } from './mycategory.component';
 import { PublicserviceService } from '../service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DatePipe } from '@angular/common';
 
 describe('MycategoryComponent', () => {
   let component: MycategoryComponent;
@@ -13,7 +14,7 @@ describe('MycategoryComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [MycategoryComponent],
-      providers: [PublicserviceService]
+      providers: [PublicserviceService, DatePipe]
     });
     fixture = TestBed.createComponent(MycategoryComponent);
     component = fixture.componentInstance;

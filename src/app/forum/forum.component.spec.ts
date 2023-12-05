@@ -10,10 +10,8 @@ describe('ForumComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      
-      imports: [ ],
       declarations: [ForumComponent],
-      providers: [InjectionToken, PublicserviceService]
+      providers: [PublicserviceService]
     });
     fixture = TestBed.createComponent(ForumComponent);
     component = fixture.componentInstance;

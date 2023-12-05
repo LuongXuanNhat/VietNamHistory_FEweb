@@ -4,6 +4,7 @@ import { ForgetpassComponent } from './forgetpass.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/service/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('ForgetpassComponent', () => {
   let component: ForgetpassComponent;
@@ -13,7 +14,7 @@ describe('ForgetpassComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [ForgetpassComponent],
-      providers:[AuthService]
+      providers:[AuthService, MatDialogRef]
     });
     fixture = TestBed.createComponent(ForgetpassComponent);
     component = fixture.componentInstance;

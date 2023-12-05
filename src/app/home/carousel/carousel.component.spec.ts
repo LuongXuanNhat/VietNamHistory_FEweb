@@ -4,6 +4,7 @@ import { CarouselComponent } from './carousel.component';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CarouselComponent', () => {
   let component: CarouselComponent;
@@ -12,7 +13,7 @@ describe('CarouselComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       
-      imports: [ToastrModule.forRoot(), HttpClient],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
       declarations: [CarouselComponent],
       providers: [PublicserviceService]
     });

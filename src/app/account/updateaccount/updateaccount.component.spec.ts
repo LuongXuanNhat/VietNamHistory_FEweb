@@ -12,8 +12,9 @@ describe('UpdateaccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), InjectionToken],
-      declarations: [UpdateaccountComponent, ChangeemailComponent, ChangepasswordComponent]
+      imports: [ToastrModule.forRoot()],
+      declarations: [UpdateaccountComponent, ChangeemailComponent, ChangepasswordComponent],
+      providers: [InjectionToken]
     });
     fixture = TestBed.createComponent(UpdateaccountComponent);
     component = fixture.componentInstance;
