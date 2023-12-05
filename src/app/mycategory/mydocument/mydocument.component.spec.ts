@@ -10,7 +10,7 @@ describe('MydocumentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot, InjectionToken],
+      imports: [ToastrModule.forRoot(), InjectionToken],
       declarations: [MydocumentComponent]
     });
     fixture = TestBed.createComponent(MydocumentComponent);

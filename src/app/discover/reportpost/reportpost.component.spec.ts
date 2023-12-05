@@ -9,7 +9,6 @@ describe('ReportpostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [InjectionToken],
       declarations: [ReportpostComponent],
       providers: [InjectionToken]
     });

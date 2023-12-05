@@ -12,7 +12,7 @@ describe('ChangepasswordComponent', () => {
     TestBed.configureTestingModule({
       imports: [ToastrModule.forRoot(), AuthService, HttpClient],
       declarations: [ChangepasswordComponent],
-      providers: [HttpClient]
+      providers: [HttpClient, AuthService]
     });
     fixture = TestBed.createComponent(ChangepasswordComponent);
     component = fixture.componentInstance;

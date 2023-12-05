@@ -9,7 +9,6 @@ describe('ChatComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ InjectionToken],
       declarations: [ChatComponent],
       providers: [InjectionToken]
     });

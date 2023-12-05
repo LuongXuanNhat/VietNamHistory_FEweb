@@ -10,7 +10,7 @@ describe('MyquestionsavedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot, InjectionToken],
+      imports: [ToastrModule.forRoot(), InjectionToken],
       declarations: [MyquestionsavedComponent],
       providers: [ToastrService]
     });

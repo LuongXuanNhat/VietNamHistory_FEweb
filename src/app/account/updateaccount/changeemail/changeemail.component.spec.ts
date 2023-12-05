@@ -10,7 +10,7 @@ describe('ChangeemailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot, InjectionToken],
+      imports: [ToastrModule.forRoot(), InjectionToken],
       declarations: [ChangeemailComponent],
       providers: [InjectionToken]
     });

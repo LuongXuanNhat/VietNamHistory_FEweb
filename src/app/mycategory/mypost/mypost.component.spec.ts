@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MypostComponent } from './mypost.component';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { InjectionToken } from '@angular/core';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,9 +12,9 @@ describe('MypostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrService, PublicserviceService, HttpClient],
+      imports: [ToastrModule.forRoot(), HttpClient],
       declarations: [MypostComponent],
-      providers: [ToastrService]
+      providers: [PublicserviceService]
     });
     fixture = TestBed.createComponent(MypostComponent);
     component = fixture.componentInstance;

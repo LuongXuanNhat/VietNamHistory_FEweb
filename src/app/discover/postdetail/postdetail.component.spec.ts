@@ -12,14 +12,15 @@ describe('PostdetailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PublicserviceService, HttpClient],
+      imports: [HttpClient],
       declarations: [PostdetailComponent],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: { params: of({ postId: '' }) }, 
         },
-        HttpClient
+        HttpClient,
+        PublicserviceService
       ],
     });
     fixture = TestBed.createComponent(PostdetailComponent);

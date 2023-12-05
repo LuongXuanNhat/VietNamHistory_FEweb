@@ -4,6 +4,7 @@ import { CreatepostComponent } from './createpost.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CreatepostComponent', () => {
   let component: CreatepostComponent;
@@ -11,8 +12,9 @@ describe('CreatepostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot, PublicserviceService, HttpClient],
-      declarations: [CreatepostComponent]
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
+      declarations: [CreatepostComponent],
+      providers: [PublicserviceService]
     });
     fixture = TestBed.createComponent(CreatepostComponent);
     component = fixture.componentInstance;

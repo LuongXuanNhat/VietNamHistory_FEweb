@@ -12,8 +12,9 @@ describe('CarouselComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       
-      imports: [ToastrModule.forRoot, PublicserviceService, HttpClient],
-      declarations: [CarouselComponent]
+      imports: [ToastrModule.forRoot(), HttpClient],
+      declarations: [CarouselComponent],
+      providers: [PublicserviceService]
     });
     fixture = TestBed.createComponent(CarouselComponent);
     component = fixture.componentInstance;

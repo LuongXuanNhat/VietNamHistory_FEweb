@@ -10,7 +10,7 @@ describe('UpdateuserinforComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot, InjectionToken],
+      imports: [ToastrModule.forRoot(), InjectionToken],
       declarations: [UpdateuserinforComponent]
     });
     fixture = TestBed.createComponent(UpdateuserinforComponent);

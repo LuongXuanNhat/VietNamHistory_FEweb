@@ -8,7 +8,6 @@ describe('QuestionreportComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [InjectionToken, ],
       declarations: [QuestionReportComponent],
       providers: [InjectionToken]
     });

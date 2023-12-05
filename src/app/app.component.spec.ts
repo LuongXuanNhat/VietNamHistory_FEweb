@@ -3,12 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { AuthService } from './service/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { InjectionToken } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule, HttpClientTestingModule],
+    imports: [ToastrModule.forRoot(),RouterTestingModule, HttpClientTestingModule],
     declarations: [AppComponent],
-    providers: [AuthService]
+    providers: [AuthService, InjectionToken]
   }));
 
   it('should create the app', () => {

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForumForyouComponent } from './forum-foryou.component';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ForumForyouComponent', () => {
   let component: ForumForyouComponent;
@@ -10,7 +11,7 @@ describe('ForumForyouComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PublicserviceService, HttpClient],
+      imports: [HttpClientTestingModule],
       declarations: [ForumForyouComponent],
       providers: [PublicserviceService]
     });

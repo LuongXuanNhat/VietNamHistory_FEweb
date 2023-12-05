@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ForgetpassComponent } from './forgetpass.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/service/auth.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ForgetpassComponent', () => {
   let component: ForgetpassComponent;
@@ -10,9 +11,9 @@ describe('ForgetpassComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AuthService, HttpClient],
+      imports: [HttpClientTestingModule],
       declarations: [ForgetpassComponent],
-      providers:[HttpClient]
+      providers:[AuthService]
     });
     fixture = TestBed.createComponent(ForgetpassComponent);
     component = fixture.componentInstance;
