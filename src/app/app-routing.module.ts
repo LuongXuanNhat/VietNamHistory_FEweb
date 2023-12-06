@@ -75,7 +75,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), HttpClientModule],
+  imports: [RouterModule.forRoot(routes,{ useHash: true}), HttpClientModule],
   exports: [RouterModule],
   providers: [
     {
