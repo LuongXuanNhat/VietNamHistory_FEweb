@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 export class PublicserviceService {
 
   constructor(private http: HttpClient, private datePipe: DatePipe ,private authservice: AuthService) { }
-  url = "http://localhost:4200/VietNamHistory_FEweb";
+  url = "https://toiyeulichsu.com";
   apiurl = this.authservice.getApiUrl();
   
   CreatePost(data: FormData){
