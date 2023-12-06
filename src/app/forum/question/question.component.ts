@@ -147,14 +147,15 @@ export class QuestionComponent implements OnInit{
     this.hubConnection.on('ReceiveSubAnswer', (data: any) => {
       if(data.isSuccessed){
         var subAnswers = this.ConvertSubDate(data.resultObj as SubAnswerQuestionDto[]);
-        if(subAnswers?.length && subAnswers)  
+        if(subAnswers?.length)  
         {
           var preId = subAnswers[0].preAnswerId;
-          this.answers.forEach(element => {
-            if(preId){
+          for (const element of this.answers) {
+            if (preId == element.id) {
               element.subAnswer = subAnswers;
+              break;
             }
-          });
+          }
         } else {
           this.GetAnswers();
         }
@@ -510,19 +511,7 @@ export class QuestionComponent implements OnInit{
     this.subAnswerDto.authorId = this.userId ?? '';
     this.subAnswerDto.preAnswerId = preAnswerId;
     if(this.subAnswerContent.trim()){
-      if (answered?.fullName) {
-        const fourthCharIndex = 3;
-        const modifiedContent =
-          this.subAnswerContent.slice(0, fourthCharIndex) +
-          "<strong>" +
-          answered.fullName +
-          " </strong>" +
-          this.subAnswerContent.slice(fourthCharIndex);
-    
-        this.subAnswerDto.content = modifiedContent.trim();
-      } else {
         this.subAnswerDto.content = this.subAnswerContent.trim();
-      }
     } else {
       this.toastr.info("Không được bình luận trống!");
       return;
