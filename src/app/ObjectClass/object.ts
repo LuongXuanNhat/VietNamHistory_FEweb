@@ -113,7 +113,7 @@ export interface News {
   id: string;
   title: string;
   description: string;
-  createdAt: Date;
+  createdAt: Date | string;
   image: string;
   url: string;
 }

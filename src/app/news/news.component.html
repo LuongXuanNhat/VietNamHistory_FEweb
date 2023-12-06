@@ -3,7 +3,7 @@
         📻 Bản tin lịch sử tổng hợp
     </h5>
     <div class="mt-1">
-        <a *ngFor="let new of news" href="{{new.url}}" class="flex-center-h mt text-black underline-none">
+        <a *ngFor="let new of news" [href]="new.url" class="flex-center-h mt text-black underline-none" target="_blank">
             <img class="img-news" src="{{new.image}}" loading="lazy" alt="ảnh tin tức">
             <div class="ml-1 dis-block">
                 <div>

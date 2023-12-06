@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PublicserviceService } from '../service/publicservice.service';
 import { News } from '../ObjectClass/object';
 import { ToastrService } from 'ngx-toastr';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-news',
@@ -18,7 +19,8 @@ export class NewsComponent {
     this.service.GetNews().subscribe(
       (data: any) => {
         if(data.isSuccessed){
-          this.news = data.resultObj;
+          this.news = data.resultObj; 
+          this.ConvertDate();
         } else {
           this.toastr.error("Lỗi: " + data.message);
         }
@@ -26,5 +28,14 @@ export class NewsComponent {
         this.toastr.error("Lỗi: "+ error);
       }
     )
+  }
+  ConvertDate(){
+    this.news.forEach(element => {
+      const parsedDate = parseISO(element.createdAt?.toString() ?? "");
+
+    if (!isNaN(parsedDate.getTime())) {
+      element.createdAt = format(parsedDate, 'dd-MM-yyyy hh:mm');
+    }
+    }); 
   }
 }
