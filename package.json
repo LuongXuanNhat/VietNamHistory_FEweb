@@ -52,6 +52,7 @@
     "@types/date-fns": "^2.6.0",
     "@types/hammerjs": "^2.0.40",
     "@types/jasmine": "~4.3.0",
+    "angular-cli-ghpages": "^0.6.2",
     "css-loader": "^6.8.1",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
