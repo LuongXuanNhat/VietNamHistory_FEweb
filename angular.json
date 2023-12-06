@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/VietNamHistory_FEweb/",
+            "baseHref": "/toiyeulichsu.com/",
             "allowedCommonJsDependencies": ["@ckeditor/ckeditor5-build-classic"],
             "outputPath": "docs",
             "index": "src/index.html",
