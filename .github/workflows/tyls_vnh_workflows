@@ -38,6 +38,7 @@ jobs:
           folder: docs
           clean: true
           token: ${{ secrets.GITHUB_TOKEN }}
+          base_dir: "docs"
 
       - name: Copy built files to root
         run: cp -r docs/* .
