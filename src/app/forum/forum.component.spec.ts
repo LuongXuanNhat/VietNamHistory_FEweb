@@ -8,6 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DataService } from '../service/datashare/data.service';
 import { SessionService } from '../service/session/session.service';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
+import { DatePipe } from '@angular/common';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 describe('ForumComponent', () => {
   let component: ForumComponent;
@@ -15,9 +20,11 @@ describe('ForumComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
-      declarations: [ForumComponent],
-      providers: [PublicserviceService, DataService, SessionService],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule, MatTabsModule, MatIconModule,
+      RouterModule, ],
+      declarations: [ForumComponent], 
+      providers: [PublicserviceService,{ provide: MatDialogRef, useValue: {} }, DataService, 
+        SessionService, DatePipe, { provide: ActivatedRoute, useValue: {} }],
 
     });
     fixture = TestBed.createComponent(ForumComponent);

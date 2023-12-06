@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { DataService } from '../service/datashare/data.service';
 import { SessionService } from '../service/session/session.service';
 import { IgxCarouselModule } from 'igniteui-angular';
+import { AnimationBuilder } from '@angular/animations';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -16,10 +17,10 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), HttpClientTestingModule, IgxCarouselModule],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule, IgxCarouselModule, AnimationBuilder],
       declarations: [HomeComponent],
-      providers: [PublicserviceService, DatePipe, DataService, SessionService,
-      ]
+      providers: [PublicserviceService, DatePipe, DataService, SessionService
+      , ]
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;

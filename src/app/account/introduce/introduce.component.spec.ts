@@ -8,6 +8,9 @@ import { InjectionToken } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { SessionService } from 'src/app/service/session/session.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('IntroduceComponent', () => {
   let component: IntroduceComponent;
@@ -15,7 +18,8 @@ describe('IntroduceComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ToastrModule.forRoot()],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot(), MatCardModule, MatIconModule, FormsModule,
+      ReactiveFormsModule, ],
       declarations: [IntroduceComponent],
       providers:[UserService, DatePipe, SessionService]
     });

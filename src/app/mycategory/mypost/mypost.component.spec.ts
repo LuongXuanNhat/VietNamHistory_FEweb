@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
 import { DataService } from 'src/app/service/datashare/data.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { SessionService } from 'src/app/service/session/session.service';
 
 describe('MypostComponent', () => {
@@ -16,10 +16,11 @@ describe('MypostComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), HttpClientTestingModule],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule,MatDialogModule, ],
       declarations: [MypostComponent],
-      providers: [PublicserviceService, DatePipe, DataService, MatDialog,
-      SessionService, ]
+      providers: [PublicserviceService, DatePipe, DataService,
+      SessionService,  { provide: MatDialogRef, useValue: {} }, 
+      { provide: MAT_DIALOG_DATA, useValue: {} }]
     });
     fixture = TestBed.createComponent(MypostComponent);
     component = fixture.componentInstance;

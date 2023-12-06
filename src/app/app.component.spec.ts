@@ -5,15 +5,21 @@ import { AuthService } from './service/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { InjectionToken } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AnimationService } from './service/animations/animation.service';
 import { SessionService } from './service/session/session.service';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { FooterComponent } from './home/footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [ToastrModule.forRoot(),RouterTestingModule, HttpClientTestingModule, RouterTestingModule],
-    declarations: [AppComponent],
-    providers: [AuthService, MatDialog, AnimationService, SessionService]
+    imports: [ToastrModule.forRoot(),RouterTestingModule, HttpClientTestingModule, MatDialogModule,
+    MatIconModule, MatMenuModule, MatTooltipModule, RouterModule],
+    declarations: [AppComponent, FooterComponent],
+    providers: [AuthService,{ provide: MatDialogRef, useValue: {} }, AnimationService, SessionService]
   }));
 
   it('should create the app', () => {

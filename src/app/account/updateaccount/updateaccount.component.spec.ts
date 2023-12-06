@@ -5,6 +5,11 @@ import { ChangeemailComponent } from './changeemail/changeemail.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { InjectionToken } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule } from '@angular/forms';
 
 describe('UpdateaccountComponent', () => {
   let component: UpdateaccountComponent;
@@ -12,7 +17,8 @@ describe('UpdateaccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot()],
+      imports: [ToastrModule.forRoot(), HttpClientTestingModule, MatIconModule, MatFormFieldModule, MatTooltipModule, 
+      FormsModule,  ],
       declarations: [UpdateaccountComponent, ChangeemailComponent, ChangepasswordComponent],
     });
     fixture = TestBed.createComponent(UpdateaccountComponent);

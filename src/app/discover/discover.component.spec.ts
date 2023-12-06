@@ -8,6 +8,9 @@ import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { SessionService } from '../service/session/session.service';
 import { DataService } from '../service/datashare/data.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { FormsModule } from '@angular/forms';
 
 describe('DiscoverComponent', () => {
   let component: DiscoverComponent;
@@ -15,7 +18,8 @@ describe('DiscoverComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ToastrModule.forRoot()],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot(), MatIconModule, MatChipsModule,
+      FormsModule, ],
       declarations: [DiscoverComponent],
       providers: [PublicserviceService, DatePipe, SessionService, DataService]
     });

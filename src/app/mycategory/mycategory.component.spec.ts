@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 
 describe('MycategoryComponent', () => {
   let component: MycategoryComponent;
@@ -13,7 +16,7 @@ describe('MycategoryComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, ],
+      imports: [HttpClientTestingModule, RouterTestingModule, MatIconModule, MatMenuModule, MatTabsModule],
       declarations: [MycategoryComponent],
       providers: [PublicserviceService, DatePipe]
     });

@@ -10,11 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 
 describe('ConfirmemailService', () => {
   let service: ConfirmemailService;
+  let activatedRoute: ActivatedRoute;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule, RouterTestingModule, ToastrModule.forRoot(), ActivatedRoute],
-      providers: [ AuthService, ]
+      imports: [ HttpClientTestingModule, RouterTestingModule, ToastrModule.forRoot(), ],
+      providers: [ AuthService, { provide: ActivatedRoute, useValue: activatedRoute }]
     });
     service = TestBed.inject(ConfirmemailService);
   });

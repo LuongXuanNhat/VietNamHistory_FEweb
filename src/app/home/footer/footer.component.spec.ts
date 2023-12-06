@@ -5,6 +5,9 @@ import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatePipe } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { SessionService } from 'src/app/service/session/session.service';
+import { DataService } from 'src/app/service/datashare/data.service';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -12,9 +15,9 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot()],
       declarations: [FooterComponent],
-      providers: [PublicserviceService, DatePipe]
+      providers: [PublicserviceService, DatePipe, SessionService, DataService]
     });
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;

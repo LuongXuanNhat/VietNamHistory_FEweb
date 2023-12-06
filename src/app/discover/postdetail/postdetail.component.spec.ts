@@ -10,7 +10,11 @@ import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { SessionService } from 'src/app/service/session/session.service';
 import { ClipboardService } from 'ngx-clipboard';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatChipsModule } from '@angular/material/chips';
 
 describe('PostdetailComponent', () => {
   let component: PostdetailComponent;
@@ -18,7 +22,8 @@ describe('PostdetailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ToastrModule.forRoot(), ],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot(),MatIconModule, MatTooltipModule, 
+      MatMenuModule, MatChipsModule, MatDialogModule, ],
       declarations: [PostdetailComponent],
       providers: [
         {

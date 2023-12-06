@@ -4,7 +4,7 @@ import { InjectionToken } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule } from 'ngx-toastr';
 import { SessionService } from 'src/app/service/session/session.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 
@@ -16,7 +16,8 @@ describe('QuestionreportComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, ToastrModule.forRoot()],
       declarations: [QuestionReportComponent],
-      providers: [SessionService, MatDialogRef, DatePipe, PublicserviceService]
+      providers: [SessionService ,{ provide: MatDialogRef, useValue: {} }, DatePipe, PublicserviceService,
+        { provide: MAT_DIALOG_DATA, useValue: {} }, ]
     });
     fixture = TestBed.createComponent(QuestionReportComponent);
     component = fixture.componentInstance;
