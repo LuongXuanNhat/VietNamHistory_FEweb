@@ -60,7 +60,7 @@
                 
               ],
               "outputHashing": "all",
-              "baseHref": "/VietNamHistory_FEweb/"
+              "baseHref": ""
             },
             "development": {
               "buildOptimizer": false,
