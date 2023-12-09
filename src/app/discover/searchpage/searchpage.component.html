@@ -5,7 +5,7 @@
             <div class="search-container">
                 <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
                 <button class="btn-search" (click)="search()">
-                    <mat-icon matSuffix matRipple style="padding-right: 12px;" >search</mat-icon>
+                    <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
                 </button>
             </div>
             <div class="po-ab" *ngIf="countResult != 0; else notfoundpost" style="right: 0px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> bài viết được tìm thấy</i></div>

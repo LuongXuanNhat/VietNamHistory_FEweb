@@ -11,6 +11,7 @@ import { CreatepostComponent } from './discover/createpost/createpost.component'
 import { MatMenu } from '@angular/material/menu';
 import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
 import { AnimationService } from './service/animations/animation.service';
+import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
 
 @Component({
   selector: 'app-root',
@@ -100,6 +101,22 @@ export class AppComponent implements OnInit, DoCheck{
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '50%'
+    });
+  }
+  createDocument(){
+    if(this.sessionService.getToken()){
+      this.openDocumentDialog('100ms', '600ms');
+    } else {
+      this.toastr.info("Bạn cần đăng nhập trước");
+      const currentUrl = this.router.url;
+      this.router.navigate(['/login'], { state: { redirect: currentUrl } });
+    }
+  }
+  openDocumentDialog(enteranimation: string, exitanimation: string) {
+    const popup = this.dialog.open(CreatedocumentComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '60%'
     });
   }
   isLoggedIn(){

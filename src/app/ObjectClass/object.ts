@@ -117,3 +117,31 @@ export interface News {
   image: string;
   url: string;
 }
+
+export interface CreateDocumentDto {
+  id?: string;
+  subId?: string | null; 
+  title: string;
+  description: string;
+  fileName?: File; 
+}
+
+export interface DocumentResponseDto {
+  id?: string;
+  subId?: string | null;
+  title: string;
+  description: string;
+  fileName: string;
+  createdAt?: string ; 
+  updatedAt?: string | null; 
+  userShort: UserShortDto;
+  viewNumber: number;
+  downloadNumber: number;
+  pageNumber: number;
+  isSaved: boolean;
+}
+
+export interface DocumentFpkDto {
+  documentId: string;
+  userId: string;
+}

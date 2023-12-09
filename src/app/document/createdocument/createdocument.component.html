@@ -1,0 +1,39 @@
+<div class="plr-1 create-document">
+    <div class="flex-center-sb">
+        <h5>
+            Chia sẻ tài liệu
+        </h5>
+        <div matTooltip="{{createdocumentform.invalid  ? 'Vui lòng nhập đầy đủ thông tin' : ''}}">
+            <button mat-raised-button color="primary" [disabled]="createdocumentform.invalid" 
+            (click)="CreateDocument()" matTooltip="Chia sẻ">Đăng</button>
+        </div>
+    </div>
+    <form [formGroup]="createdocumentform">
+        <div class="mt"></div>
+        <div  class="w-100 specific-border flex-center-h" appearance="outline">
+            <label class="image-upload-container btn btn-bwm font">
+                <span class="mb inputfile">Tải file tài liệu</span>
+                <input #imageInput class="font" type="file" accept=".pdf, .docx" (change)="onFileSelected(imageInput)">
+            </label>
+            <div class="ml-1 pl" style="border-left: 2px solid rgb(31, 31, 31) ;">{{fileName}}</div>
+        </div>
+        <div style="font-size: 12px;" class="mb">
+            <i>* File tải lên yêu cầu là file pdf hoặc file word</i>
+        </div>
+        <mat-form-field class="w-100">
+            <input style="font-size: 1.2em;line-height: 0;" class="fw-5" matInput formControlName="Title" placeholder="Nhập tiêu đề ở đây..." required>
+            <mat-error *ngIf="createdocumentform.get('Title')?.hasError('required')">
+                Tiêu đề là bắt buộc
+            </mat-error>
+            <mat-error *ngIf="createdocumentform.get('Title')?.hasError('maxlength')">
+                Tiêu đề không được quá dài hay quá ngắn
+            </mat-error>
+            <mat-error *ngIf="createdocumentform.get('Title')?.hasError('minlength')">
+                Tiêu đề không được quá ngắn
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100" style="max-height: 170px;">
+            <textarea class="fw-5" style="max-height: 126px;" matInput formControlName="Description" placeholder="Nhập mô tả tài liệu..." required></textarea>
+        </mat-form-field>
+    </form>
+</div>

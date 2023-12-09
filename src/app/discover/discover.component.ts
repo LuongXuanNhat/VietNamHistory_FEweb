@@ -42,7 +42,6 @@ export class DiscoverComponent  {
       this.selectedTag = tag;
       this.service.getpostbytag(tag).subscribe(
         (result: any) => {
-          console.log(result.resultObj);
           this.posts = result.resultObj;
           this.posts.forEach(element => {
             if(element){
@@ -146,7 +145,7 @@ export class DiscoverComponent  {
   }
 
   search(){
-    if(this.keyWord){
+    if(this.keyWord?.trim()){
       this.dataService.changeKeyword(this.keyWord);
       this.router.navigate(['/search-posts']);
     }

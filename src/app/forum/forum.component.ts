@@ -25,6 +25,9 @@ export class ForumComponent{
   }
 
   search(){
-    
+    if(this.keyWord.trim()){
+      this.dataService.changeKeyword(this.keyWord);
+      this.router.navigate(['/searchquestion']);
+    }
   }
 }

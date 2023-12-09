@@ -1,1 +1,35 @@
-<p>document works!</p>
+<div class="plr-200 mt-60">
+    <div>
+        <div class="flex-center">
+            
+            <div class="search-container">
+                <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
+                <button class="btn-search" (click)="search()">
+                    <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li *ngFor="let document of documents">
+                    <a (click)="DocumentDetail(document)">
+                        <div>
+                            <strong>{{document.title}}</strong>
+                            <span>{{document.description}}</span>
+                            <div class="flex-center-h">
+                                <img src="{{document.userShort.image != '' ? document.userShort.image : 'assets/Icon/user.png'}}" class="img-24" alt="">
+                                <div class="pl"><span>{{document.userShort.fullName}}</span></div>
+                            </div>
+                            <div class="flex-center-sb">
+                                <div>{{document.viewNumber}} luợt xem</div>
+                                <div>{{document.downloadNumber}} lượt tải xuống</div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    
+</div>

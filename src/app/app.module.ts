@@ -56,6 +56,9 @@ import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestio
 import { AnimationService } from './service/animations/animation.service';
 import { NewsComponent } from './news/news.component';
 import { RouterModule } from '@angular/router';
+import { SearchquestionComponent } from './forum/searchquestion/searchquestion.component';
+import { DocumentdetailComponent } from './document/documentdetail/documentdetail.component';
+import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
 
 
 @NgModule({
@@ -99,7 +102,10 @@ import { RouterModule } from '@angular/router';
     QuestionComponent,
     QuestionReportComponent,
     MyquestionsavedComponent,
-    NewsComponent ,
+    NewsComponent,
+    SearchquestionComponent,
+    DocumentdetailComponent,
+    CreatedocumentComponent ,
   ],
   imports: [
     RouterModule,

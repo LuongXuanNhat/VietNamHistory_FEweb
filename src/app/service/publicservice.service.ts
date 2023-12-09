@@ -15,6 +15,9 @@ export class PublicserviceService {
   url = "https://toiyeulichsu.com";
   apiurl = this.authservice.getApiUrl();
   
+  CreateDocument(data: FormData){
+    return this.http.post(this.apiurl + '/Document', data);
+  }
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);
   }
@@ -39,12 +42,18 @@ export class PublicserviceService {
   deleteSubAnswer(idAnswer: string){
     return this.http.delete(this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer);
   }
+  DocumentDetail(id: string){
+    return this.http.get(this.apiurl + '/Document/' + id);
+  }
   getChatSignRl(): string{
     return this.apiurl + '/commentHub';
   }
   getCurrentDate(): string {
     const currentDate = new Date();
     return this.datePipe.transform(currentDate, 'dd/MM/yyyy') || '';
+  }
+  GetDocument(){
+    return this.http.get(this.apiurl + '/Document');
   }
   getLike(postId: string, userId: string) {
     const params = {
@@ -83,6 +92,9 @@ export class PublicserviceService {
   }
   GetQuestionDetail(subId: string){
     return this.http.get(this.apiurl + '/Question/Detail?subId=' + subId);
+  }
+  getQuestionByTag(tag: string){
+    return this.http.get(this.apiurl + '/Question/FindByTag?tag=' + tag);
   }
   GetAnswers(questionId: string){
     return this.http.get(this.apiurl + '/Answer?questionId=' + questionId);
@@ -137,6 +149,10 @@ export class PublicserviceService {
   postSearch(keyWord: string){
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Post/Search?keyWord=' + keyWord);
+  }
+  questionSearch(keyWord: string){
+    keyWord = encodeURIComponent(keyWord);
+    return this.http.get(this.apiurl + '/Question/Search?keyWord=' + keyWord);
   }
   qusestionSearch(keyWord: string){
     keyWord = encodeURIComponent(keyWord);

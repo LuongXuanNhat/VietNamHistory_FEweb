@@ -26,7 +26,7 @@ export class CreatepostComponent {
   postId: string = '';
   
   createpostform = this._formBuilder.group({
-    Title: ['', [Validators.required, Validators.maxLength(255)]],
+    Title: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(10)]],
     Content: [' ', Validators.required],
     Image: [null, Validators.required],
     TopicId: ['', Validators.required],

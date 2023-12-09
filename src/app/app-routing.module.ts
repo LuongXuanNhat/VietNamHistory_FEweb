@@ -27,12 +27,16 @@ import { ForumNewComponent } from './forum/forum-new/forum-new.component';
 import { QuestionComponent } from './forum/question/question.component';
 import { MyquestionsavedComponent } from './mycategory/myquestionsaved/myquestionsaved.component';
 import { NewsComponent } from './news/news.component';
+import { DocumentComponent } from './document/document.component';
+import { DocumentdetailComponent } from './document/documentdetail/documentdetail.component';
+import { SearchquestionComponent } from './forum/searchquestion/searchquestion.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'discover', component:DiscoverComponent},
+  {path: 'search-posts', component: SearchpageComponent},
   {path: 'discover/:postId', component: PostdetailComponent},
   {
     path: 'account',
@@ -46,7 +50,6 @@ const routes: Routes = [
       { path: 'changepassword', component: ChangepasswordComponent },
     ]
   },
-  {path: 'search-posts', component: SearchpageComponent},
   {path: 'mycategory', 
     component: MycategoryComponent, canActivate: [AuthGuard] ,
     children: [
@@ -56,21 +59,24 @@ const routes: Routes = [
       { path: 'questionsaved', component: MyquestionsavedComponent },
       { path: 'document', component: MydocumentComponent },
       { path: 'postsaved', component: MypostsavedComponent },
-      // { path: 'exercise', component: UpdateuserinforComponent },
     ]
   },
   {path: 'forum', 
     component:ForumComponent,
     children: [
-      { path: '', redirectTo: 'forum_foryou', pathMatch: 'full',},
-      { path: 'forum_foryou', component: ForumForyouComponent },
-      { path: 'forum_top', component: ForumTopComponent },
-      { path: 'forum_new', component: ForumNewComponent },
+      { path: '', redirectTo: 'foryou', pathMatch: 'full',},
+      { path: 'foryou', component: ForumForyouComponent },
+      { path: 'top', component: ForumTopComponent },
+      { path: 'new', component: ForumNewComponent },
 
     ]
   },
+  {path: 'searchquestion', component: SearchquestionComponent},
+
   {path: 'forum/:id', component: QuestionComponent},
   {path: 'news', component:NewsComponent},
+  {path: 'document', component:DocumentComponent},
+  {path: 'document/:documentId', component: DocumentdetailComponent},
 
 ];
 

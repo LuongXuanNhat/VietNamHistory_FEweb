@@ -20,7 +20,7 @@ import { DataService } from 'src/app/service/datashare/data.service';
   styleUrls: ['./forum-create.component.css'] 
 })
 export class ForumCreateComponent {
-  postId: string = '';
+  questionId: string = '';
   
   createquestionform = this._formBuilder.group({
     Title: ['', [Validators.required, Validators.maxLength(255)]],
@@ -130,7 +130,7 @@ export class ForumCreateComponent {
         this.dataService.changeIdQuestion(data.resultObj.id);
         this.router.navigate(['/forum', id]);
         setTimeout(() => {
-          this.dataService.triggerReloadDetailPage(this.postId);
+          this.dataService.triggerReloadDetailPage(this.questionId);
         }, 10);
         this.dialogRef.close();
       },

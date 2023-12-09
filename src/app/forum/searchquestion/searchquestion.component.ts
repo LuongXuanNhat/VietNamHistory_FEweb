@@ -1,62 +1,60 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { format, parseISO } from 'date-fns';
+import { ToastrService } from 'ngx-toastr';
 import { PostResponse } from 'src/app/ObjectClass/object';
 import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
-import { format, parseISO } from 'date-fns';
 import { SessionService } from 'src/app/service/session/session.service';
-import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
-  selector: 'app-searchpage',
-  templateUrl: './searchpage.component.html',
-  styleUrls: ['./searchpage.component.css']
+  selector: 'app-searchquestion',
+  templateUrl: './searchquestion.component.html',
+  styleUrls: ['./searchquestion.component.css']
 })
-export class SearchpageComponent implements OnInit{
+export class SearchquestionComponent implements OnInit{
   @ViewChild('innerContainer') innerContainer!: ElementRef;
   keyWord: string = '';
-  posts: PostResponse[] = [];
+  questions: PostResponse[] = [];
   tags: string[] = [];
   countResult: number = 0;
-  postSaved: PostResponse[] = [];
+  questionSaved: PostResponse[] = [];
   isSave: boolean | null = null;
   selectedTag: string | null = null;
-
-  constructor(private router: Router,private service: PublicserviceService,private route: ActivatedRoute
-    , private dataService: DataService,private session: SessionService,private toastr: ToastrService){
-    this.getTags(20);
+  constructor(private router: Router,private service: PublicserviceService, private dataService: DataService,private session: SessionService,
+    private toastr: ToastrService ){
+      
   }
   ngOnInit(): void {
     this.dataService.currentKeyword.subscribe(keyword => {
       this.keyWord = keyword ?? this.keyWord;
-      this.findPost();
+      this.findQuestion();
     });
+    this.getTags(20);
   }
-
-  findPost(){
+  findQuestion(){
     if(!this.containsOnlySpaces(this.keyWord)){
-      this.service.postSearch(this.keyWord).subscribe(
+      this.service.questionSearch(this.keyWord).subscribe(
         (data: any)=>{
-          this.posts = data.resultObj;
+          this.questions = data.resultObj;
           if(this.session.getUserId()){
             this.GetSaved();
           }
           this.ConvertDate();
-          this.countResult = this.posts.length;
+          this.countResult = this.questions.length;
         }
       )
     }
   }
   search(){
     if(!this.containsOnlySpaces(this.keyWord)){
-      this.service.postSearch(this.keyWord).subscribe(
+      this.service.questionSearch(this.keyWord).subscribe(
         (data: any)=>{
-          this.posts = data.resultObj;
+          this.questions = data.resultObj;
           if(this.session.getUserId()){
             this.GetSaved();
           }
-          this.countResult = this.posts.length;
+          this.countResult = this.questions.length;
           this.ConvertDate();
         }
       )
@@ -86,13 +84,13 @@ export class SearchpageComponent implements OnInit{
   selectTag(tag: string): void {
     if (this.selectedTag === tag) {
       this.selectedTag = null;
-      this.getPosts();
+      this.getQuestions();
     } else {
       this.selectedTag = tag;
-      this.service.getpostbytag(tag).subscribe(
+      this.service.getQuestionByTag(tag).subscribe(
         (result: any) => {
-          this.posts = result.resultObj;
-          this.posts.forEach(element => {
+          this.questions = result.resultObj;
+          this.questions.forEach(element => {
             if(element){
               const parsedDate = parseISO(element.createdAt);
               const parsedDate2 = parseISO(element.updatedAt ?? "");
@@ -112,21 +110,21 @@ export class SearchpageComponent implements OnInit{
       )
     }
   }
-  getPosts(){
-    this.service.GetPost().subscribe(
+  getQuestions(){
+    this.service.GetQuestionForYou().subscribe(
       (result: any) => {
-        this.posts = result.resultObj;
-        if(this.posts.length > 0){
+        this.questions = result.resultObj;
+        if(this.questions.length > 0){
           this.ConvertDate();
         }
       },
       (error) => {
-        console.error('Error fetching posts:', error);
+        console.error('Error fetching questions:', error);
       }
     )
   }
   ConvertDate() {
-    this.posts.forEach(element => {
+    this.questions.forEach(element => {
       if(element){
         const parsedDate = parseISO(element.createdAt);
         const parsedDate2 = parseISO(element.updatedAt ?? "");
@@ -140,42 +138,41 @@ export class SearchpageComponent implements OnInit{
       }
     });
   }
-  postDetail(post: PostResponse) {
-    const postId = post.subId;
+  questionDetail(question: PostResponse) {
+    const questionId = question.subId;
     this.dataService.changeKeyword(this.keyWord);
-    this.router.navigate(['/discover', postId]);
+    this.router.navigate(['/forum', questionId]);
   }
-  IsSave(post:PostResponse, event: Event){
+  IsSave(question:PostResponse, event: Event){
     if(!this.session.getUserId()){
       this.toastr.info("Bạn cần đăng nhập!");
       return;
     }
     const formData = new FormData();
-    formData.append('PostId', post.subId);
+    formData.append('QuestionId', question.id);
     formData.append('UserId', this.session.getUserId() ?? '');
-    this.service.SaveOrUnSave(formData).subscribe(
+    this.service.SaveOrUnSaveQuestion(formData).subscribe(
       (data: any) => {
-        post.isSaved = !post.isSaved;
+        question.isSaved = !question.isSaved;
       }
     )
     event.stopPropagation();
   }
   GetSaved(){
-    this.service.GetMyPostSaved().subscribe(
+    this.service.GetMyQuestionSaved().subscribe(
       (data: any)=>{
-        this.postSaved = data.resultObj;
-        this.posts.forEach(element => {
+        this.questionSaved = data.resultObj;
+        this.questions.forEach(element => {
           element.isSaved = this.checkSave(element);
         });
       }
     )
   }
-  checkSave(post:PostResponse): boolean{
-    if(this.postSaved.some(savedPost => savedPost.id === post.id)){
-      post.isSaved = true;
+  checkSave(question:PostResponse): boolean{
+    if(this.questionSaved.some(savedQuestion => savedQuestion.id === question.id)){
+      question.isSaved = true;
       return true;
     }
     return false;
   }
-
 }

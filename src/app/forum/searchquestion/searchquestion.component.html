@@ -1,0 +1,79 @@
+<div class="mt-60 mh-page">
+    <div class="plr-200">
+        <div class="flex-center font po-re">
+            <div class="search-container">
+                <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
+                <button class="btn-search" (click)="search()" >
+                    <mat-icon  matSuffix matRipple class="mr btn-search-icon" >search</mat-icon>
+                </button>
+            </div>
+            <div class="po-ab" *ngIf="countResult != 0; else notfoundpost" style="right: 0px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> câu hỏi được tìm thấy</i></div>
+            <ng-template #notfoundpost>
+                <div class="po-ab" style="right: 0px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> câu hỏi được tìm thấy</i></div>
+            </ng-template>
+        </div>
+        
+        <div class="flex-container">
+            <button mat-icon-button class="scroll-button" (click)="scrollLeft()"><span class="material-symbols-outlined">keyboard_arrow_left</span></button>
+            <div mat-chip-listbox class="inner-container" #innerContainer >
+              <mat-chip-option style="margin-bottom: 4px;"  class="ml-1 mat-chip-tag" *ngFor="let tag of tags" [selected]="selectedTag === tag" (click)="selectTag(tag)">{{tag}}</mat-chip-option>
+            </div>
+            <button style="margin-left: 8px;" mat-icon-button class="scroll-button" (click)="scrollRight()"><span class="material-symbols-outlined">keyboard_arrow_right</span></button>
+        </div>
+        <div >
+            <div *ngFor="let question of questions" class="">
+                <div style="z-index: 1; margin-left: -3em;" class="po-re">
+                    <button matTooltip="Lưu vào xem sau" mat-mini-fab *ngIf="!question.isSaved; else saved" (click)="IsSave(question, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;background-color: #00000073 !important;">
+                        <mat-icon class="material-symbols-outlined text-white">
+                            bookmark_add
+                        </mat-icon>
+                    </button>
+                    <ng-template #saved >
+                        <button mat-mini-fab (click)="IsSave(question, $event)" class="selected btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;">
+                            <mat-icon color="primary" class="material-symbols-outlined selected-icon text-white">
+                                bookmark_added
+                            </mat-icon>
+                        </button>
+                    </ng-template>
+                </div>
+                <a (click)="questionDetail(question)" >
+                    <div class="question-card">
+                        <h6 class="text-3-line">🔖<strong >{{question.title}}</strong></h6>
+                        <div class="flex-center-h">
+                            <div class="flex-center-h plr-12">
+                                <span class="material-symbols-outlined pr">
+                                    fullscreen
+                                </span>
+                                {{question.viewNumber}}
+                                lượt xem
+                            </div>
+                            <div class="flex-center-h plr-12">
+                                <span class="material-symbols-outlined pr">
+                                    notes
+                                </span>
+                                {{question.commentNumber}}
+                                trả lời
+                            </div>
+                            <div class="flex-center-h plr-12">
+                                <span class="material-symbols-outlined pr">
+                                    bookmark
+                                </span>
+                                {{question.saveNumber}}
+                                lượt lưu
+                            </div>
+                            <div class="flex-center-h plr-12">
+                                <span class="material-symbols-outlined pr">
+                                    send
+                                </span>
+                                chia sẻ
+                            </div>
+                            <div *ngIf="question.likeNumber != 0" class="flex-center-h plr-12">
+                                💡{{question.likeNumber}} người cùng thắc mắc
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

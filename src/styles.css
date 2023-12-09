@@ -56,6 +56,15 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     border: none;
     background-color: transparent;
 }
+.btn-search-icon {
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+}
+.btn-search-icon:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+}
 .card_more{
     max-width: 280px;
     max-height: 615px;
@@ -99,6 +108,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .create-question {
     height: 480px;
+}
+.create-document {
+    height: 380px;
 }
 .cursor-d {
     cursor: default;
@@ -390,7 +402,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .w-90 {
     width: 90%;
 }
-
+.w-80 {
+    width: 80%;
+}
 
 
 /* COLOR  */
