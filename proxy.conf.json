@@ -1,8 +1,12 @@
 {
-    "/api": {
-      "target": "http://vuanhpham25-001-site1.gtempurl.com",
-      "secure": true,
-      "changeOrigin": true
-    }
+  "/api": {
+    "target": "https://localhost:7138",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/other-api": {
+    "target": "http://vuanhpham25-001-site1.gtempurl.com",
+    "secure": false,
+    "changeOrigin": true
   }
-  
+}

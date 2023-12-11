@@ -59,7 +59,7 @@ import { RouterModule } from '@angular/router';
 import { SearchquestionComponent } from './forum/searchquestion/searchquestion.component';
 import { DocumentdetailComponent } from './document/documentdetail/documentdetail.component';
 import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -108,6 +108,7 @@ import { CreatedocumentComponent } from './document/createdocument/createdocumen
     CreatedocumentComponent ,
   ],
   imports: [
+    PdfViewerModule,
     RouterModule,
     BrowserModule,
     AppRoutingModule,
@@ -149,3 +150,4 @@ import { CreatedocumentComponent } from './document/createdocument/createdocumen
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

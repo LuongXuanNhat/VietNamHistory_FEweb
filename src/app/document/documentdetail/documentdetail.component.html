@@ -1,1 +1,25 @@
-<p>documentdetail works!</p>
+<div class="mt-60 plr-300 h-page">
+    <div>
+        <span style="font-size: 20px;" class="pt-1 pb-1 dis-block">{{document.title}}</span>
+        <span class="mt-1">{{document.description}}</span>
+        <div class="flex-center-sb">
+            <div class="flex-center-h">
+                <span class="material-symbols-outlined pr">
+                    visibility
+                </span>
+                {{document.view}}
+            </div>
+            <div class="pl flex-center-h">
+                <span class="material-symbols-outlined pr">
+                    calendar_month
+                </span>
+                {{document.createdAt}}
+            </div>
+        </div>
+    </div>
+    <div #viewer style="height: 900px;">
+        <pdf-viewer [src]="pdfSrc">
+        </pdf-viewer>
+    </div>
+</div>
+

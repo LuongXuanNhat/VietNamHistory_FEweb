@@ -14,9 +14,9 @@ import { Category } from '../ObjectClass/object';
 export class ForumComponent{
   keyWord: string = '';
   category: Category[] = [
-    {categoryname: "Dành cho bạn", url : 'forum_foryou'},
-    {categoryname: "Nổi bật", url : "forum_top"},
-    {categoryname: "Mới nhất", url : 'forum_new'}
+    {categoryname: "Dành cho bạn", url : 'foryou'},
+    {categoryname: "Nổi bật", url : "top"},
+    {categoryname: "Mới nhất", url : 'new'}
   ]
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService) {

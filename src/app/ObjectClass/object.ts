@@ -129,13 +129,14 @@ export interface CreateDocumentDto {
 export interface DocumentResponseDto {
   id?: string;
   subId?: string | null;
-  title: string;
+  title?: string;
   description: string;
   fileName: string;
+  filePath: string;
   createdAt?: string ; 
   updatedAt?: string | null; 
   userShort: UserShortDto;
-  viewNumber: number;
+  view: number;
   downloadNumber: number;
   pageNumber: number;
   isSaved: boolean;

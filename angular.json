@@ -14,7 +14,9 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "baseHref": "/VietNamHistory_FEweb/",
-            "allowedCommonJsDependencies": ["@ckeditor/ckeditor5-build-classic"],
+            "allowedCommonJsDependencies": 
+              ["@ckeditor/ckeditor5-build-classic", 
+              "@grapecity/gcpdfviewer"],
             "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -49,8 +51,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4.5mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",

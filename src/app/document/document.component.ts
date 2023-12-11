@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DocumentFpkDto, DocumentResponseDto } from '../ObjectClass/object';
+import { DocumentFpkDto, DocumentResponseDto, Result } from '../ObjectClass/object';
 import { Router } from '@angular/router';
 import { PublicserviceService } from '../service/publicservice.service';
 import { DataService } from '../service/datashare/data.service';
@@ -21,6 +21,7 @@ export class DocumentComponent {
     documentId : ''
   }
   documentSaved: DocumentResponseDto[] = [];
+  countResult!: number;
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService){
@@ -57,8 +58,21 @@ export class DocumentComponent {
   }
   search(){
     if(this.keyWord?.trim()){
-      this.dataService.changeKeyword(this.keyWord);
-      this.router.navigate(['/searchdocument']);
+      this.service.documentSearch(this.keyWord).subscribe(
+        (data: any)=>{
+          console.log(data);
+          if(data.isSuccessed){
+            this.documents = data.resultObj;
+            if(this.session.getUserId()){
+              this.GetSaved();
+            }
+            this.ConvertDate();
+            this.countResult = this.documents.length;
+          }
+        }
+      )
+    } else {
+      this.getDocuments();
     }
   }
   GetSaved(){

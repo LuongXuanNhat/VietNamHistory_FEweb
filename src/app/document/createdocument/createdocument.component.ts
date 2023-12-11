@@ -33,8 +33,12 @@ export class CreatedocumentComponent {
   onFileSelected(input: any): void {
     const file = input?.files[0];
     if (file && this.isValidFileType(file)) {
-        this.createdocumentform.get('Document')?.setValue(file);
-        this.fileName = file.name;
+      if(this.checkSize(file)){
+        return;
+      }
+
+      this.createdocumentform.get('Document')?.setValue(file);
+      this.fileName = file.name;
     } else {
       this.selectedFile = null;
       this.toastr.warning('Vui lòng chọn đúng file: PDF hoặc DOCX');
@@ -56,7 +60,8 @@ export class CreatedocumentComponent {
     this.service.CreateDocument(formData).subscribe(
       (data: any) => {
         if(data.isSuccessed){
-
+          this.dialogRef.close();
+          this.toastr.success("Chia sẻ tài liệu thành công");
         } else {
           this.toastr.error("Lỗi: " + data.message);
         }
@@ -65,4 +70,16 @@ export class CreatedocumentComponent {
       }
     )
   }
+  checkSize(file: any):boolean {
+    const fileSize = file.size; 
+    const maxSize = 8 * 1024 * 1024; 
+  
+    if (fileSize > maxSize) {
+      this.toastr.warning('Kích thước file không được vượt quá 5MB.');
+      return true;
+    } 
+    return false;
+  }
+  
 }
+

@@ -10,9 +10,9 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class PublicserviceService {
-
+  
   constructor(private http: HttpClient, private datePipe: DatePipe ,private authservice: AuthService) { }
-  url = "https://toiyeulichsu.com";
+  url = "https://toiyeulichsu.com/#";
   apiurl = this.authservice.getApiUrl();
   
   CreateDocument(data: FormData){
@@ -44,6 +44,10 @@ export class PublicserviceService {
   }
   DocumentDetail(id: string){
     return this.http.get(this.apiurl + '/Document/' + id);
+  }
+  documentSearch(keyWord: string){
+    keyWord = encodeURIComponent(keyWord);
+    return this.http.get(this.apiurl + '/Document/Search?keyWord=' + keyWord);
   }
   getChatSignRl(): string{
     return this.apiurl + '/commentHub';
@@ -157,6 +161,9 @@ export class PublicserviceService {
   qusestionSearch(keyWord: string){
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Question/Search?keyWord=' + keyWord);
+  }
+  readFilePdf(filePath: string) {
+    return this.http.get(filePath, { responseType: 'arraybuffer' } );
   }
   ReportPost(data: any){
     return this.http.post(`${this.apiurl}/Post/Report`, data);
