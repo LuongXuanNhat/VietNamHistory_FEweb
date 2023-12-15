@@ -211,6 +211,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .ml {
     margin-left: 8px;
 }
+.mlr-1 {
+    margin: 0 16px;
+}
 .mlr-12 {
     margin: 0 12px;
 }

@@ -60,6 +60,10 @@ import { SearchquestionComponent } from './forum/searchquestion/searchquestion.c
 import { DocumentdetailComponent } from './document/documentdetail/documentdetail.component';
 import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { UpdatedocumentComponent } from './document/updatedocument/updatedocument.component';
+import { MydocumentsavedComponent } from './mycategory/mydocumentsaved/mydocumentsaved.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+
 
 @NgModule({
   declarations: [
@@ -105,7 +109,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     NewsComponent,
     SearchquestionComponent,
     DocumentdetailComponent,
-    CreatedocumentComponent ,
+    CreatedocumentComponent,
+    UpdatedocumentComponent,
+    MydocumentsavedComponent
   ],
   imports: [
     PdfViewerModule,
@@ -137,7 +143,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ReactiveFormsModule,
     IgxCarouselModule,
 	  IgxSliderModule,
-
+    NgxDocViewerModule,
+    
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},

@@ -25,7 +25,7 @@
     ]
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
+    "enableI18nLegacyMessageIdFormat": false, 
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "allowSyntheticDefaultImports": true,
@@ -33,6 +33,6 @@
   },
   "types": [
     "hammerjs",
-    "node"
+    ""
   ]  
 }

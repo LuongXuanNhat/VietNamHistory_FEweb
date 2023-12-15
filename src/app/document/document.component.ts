@@ -33,6 +33,7 @@ export class DocumentComponent {
   getDocuments() {
     this.service.GetDocument().subscribe(
       (result: any) => {
+        
         this.documents = result.resultObj;
         this.ConvertDate();
       },
@@ -96,4 +97,5 @@ export class DocumentComponent {
     const documentId = post.subId;
     this.router.navigate(['/document', documentId]);
   }
+  
 }

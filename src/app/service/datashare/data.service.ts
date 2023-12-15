@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  
   private postDataSubject = new BehaviorSubject<any>(null);
 
   setPostData(postData: any) {

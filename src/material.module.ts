@@ -22,6 +22,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatChipsModule} from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
     exports: [
@@ -46,7 +47,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatAutocompleteModule,
         MatFormFieldModule,
         MatChipsModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatProgressBarModule
     ],
     imports: [
         MatRippleModule,

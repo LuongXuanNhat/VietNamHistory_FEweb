@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2,ElementRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -80,7 +80,8 @@ export class QuestionComponent implements OnInit{
 
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private route: ActivatedRoute,private dialog: MatDialog,
-    private clipboardService: ClipboardService, private location: Location, private animation: AnimationService ){
+    private clipboardService: ClipboardService, private location: Location, private animation: AnimationService,
+    private el: ElementRef, private renderer: Renderer2 ){
       this.route.params.subscribe(params => {
         this.subQuestionId = params['id'] ?? '';
       });
@@ -594,5 +595,12 @@ export class QuestionComponent implements OnInit{
       this.viewComment = '';
     else
     this.viewComment = id;
+  }
+
+  scrollToAnswerCard() {
+    const answerCardElement = this.el.nativeElement.querySelector('#answerCard');
+    if (answerCardElement) {
+      answerCardElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

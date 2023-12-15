@@ -76,6 +76,9 @@ export class PublicserviceService {
   GetMyPost(){
     return this.http.get(this.apiurl + '/Post/MyPost');
   }
+  GetMyDocument(){
+    return this.http.get(this.apiurl + '/Document/MyDocument');
+  }
   GetMyQuestion(){
     return this.http.get(this.apiurl + '/Question/MyQuestion');
   }

@@ -11,11 +11,16 @@
     <form [formGroup]="createdocumentform">
         <div class="mt"></div>
         <div  class="w-100 specific-border flex-center-h" appearance="outline">
-            <label class="image-upload-container btn btn-bwm font">
+            <label class="image-upload-container btn btn-bwm font" (click)="toggleProgressing()" (focusout)="onFileInputBlur()">
                 <span class="mb inputfile">Tải file tài liệu</span>
                 <input #imageInput class="font" type="file" accept=".pdf, .docx" (change)="onFileSelected(imageInput)">
             </label>
+
             <div class="ml-1 pl" style="border-left: 2px solid rgb(31, 31, 31) ;">{{fileName}}</div>
+            <div class="ml-1 pl" *ngIf="progessing" style="color: blue;">
+                <i>Vui lòng chờ, đang tải ... </i>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
         </div>
         <div style="font-size: 12px;" class="mb">
             <i>* File tải lên yêu cầu là file pdf hoặc file word</i>

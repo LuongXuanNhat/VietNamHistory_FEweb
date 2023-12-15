@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "mserve": "set NODE_OPTIONS=--max_old_space_size=8192 & ng serve --open",
+    "ng-high-memory": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration=production"
   },
   "private": true,
   "dependencies": {
@@ -33,13 +35,16 @@
     "@ckeditor/ckeditor5-watchdog": "^40.0.0",
     "@igniteui/material-icons-extended": "^3.0.0",
     "@microsoft/signalr": "^8.0.0",
+    "@syncfusion/ej2": "^23.2.7",
     "date-fns": "^2.30.0",
     "fflate": "^0.7.3",
     "hammerjs": "^2.0.8",
     "igniteui-angular": "^16.1.8",
+    "mammoth": "^1.6.0",
     "minireset.css": "~0.0.4",
     "ng2-pdf-viewer": "^10.0.0",
     "ngx-clipboard": "^16.0.0",
+    "ngx-doc-viewer": "^15.0.1",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

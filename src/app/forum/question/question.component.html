@@ -19,7 +19,7 @@
                     </div>
                 </button>
             </ng-template>
-            <button id="answer" matTooltip="Câu trả lời" matTooltipPosition="right" mat-icon-button class="btn-interact">
+            <button (click)="scrollToAnswerCard()" matTooltip="Đến câu trả lời" matTooltipPosition="right" mat-icon-button class="btn-interact">
                 <span class="material-symbols-outlined">
                     forum
                 </span>
@@ -109,7 +109,7 @@
             </mat-chip-set>
         </div>
         
-        <div #answercard >
+        <div id="answerCard" >
             <div class="flex-center-sb">
                 <h6 class="card-answer pb-1"><strong>Trả lời</strong></h6>
                 <button class="flex-center-h"  [matMenuTriggerFor]="menu1" aria-label="Sắp xếp" matTooltip="Sắp xếp" style="border: none; background-color: transparent;">

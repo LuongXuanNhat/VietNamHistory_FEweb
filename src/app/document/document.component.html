@@ -12,20 +12,30 @@
                 <div class="po-ab" *ngIf="countResult; " style="right: 24px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> bài viết được tìm thấy</i></div>
             </div>
         </div>
-        <div>
+        <div class="mt-1">
             <ul>
-                <li *ngFor="let document of documents" class="mb-1 cursor-p">
-                    <a (click)="DocumentDetail(document)">
+                <li *ngFor="let document of documents" class="mb-1 cursor-p card-hover-blue plr-1">
+                    <a (click)="DocumentDetail(document)" class="underline-none text-black ">
                         <div>
-                            <strong style="font-size: 16px;">🗎 {{document.title}}</strong>
-                            <span class="dis-block">{{document.description}}</span>
-                            <div class="flex-center-h">
-                                <img src="{{document.userShort.image != '' ? document.userShort.image : 'assets/Icon/user.png'}}" class="img-24" alt="">
-                                <div class="pl"><span>{{document.userShort.fullName}}</span></div>
-                            </div>
-                            <div class="flex-center-sb">
-                                <div>{{document.view}} luợt xem</div>
-                                <div>{{document.downloadNumber}} lượt tải xuống</div>
+                            <strong style="font-size: 18px;">📑 {{document.title}}</strong>
+                            <span class="dis-block text-2-line mt">{{document.description}}</span>
+                            <div class="flex-center-sb pb">
+                                <div class="flex-center-h mt">
+                                    <img src="{{document.userShort.image != '' ? document.userShort.image : 'assets/Icon/user.png'}}" class="img-24" alt="">
+                                    <div class="pl"><span>{{document.userShort.fullName}}</span></div>
+                                </div>
+                                <div class="flex-center-h">
+                                    <div matTooltip="lượt xem" class="flex-center-h">
+                                        <span class="material-symbols-outlined">
+                                            visibility
+                                        </span> 
+                                        {{document.view}}</div>
+                                    <div matTooltip="lượt tải xuống" class="pl flex-center-h">
+                                        <span class="material-symbols-outlined">
+                                            download
+                                        </span>
+                                        {{document.downloadNumber}} </div>
+                                </div>
                             </div>
                         </div>
                     </a>

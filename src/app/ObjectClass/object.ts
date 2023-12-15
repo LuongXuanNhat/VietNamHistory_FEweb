@@ -132,6 +132,7 @@ export interface DocumentResponseDto {
   title?: string;
   description: string;
   fileName: string;
+  type: string;
   filePath: string;
   createdAt?: string ; 
   updatedAt?: string | null; 

@@ -32,8 +32,22 @@ export class IntroduceComponent implements OnInit {
   avatar: any;
   username: any;
   description: any;
+
+  checkSize(file: any):boolean {
+    const fileSize = file.size; 
+    const maxSize = 1024 * 1024; 
+  
+    if (fileSize > maxSize) {
+      this.toastr.warning('Kích thước ảnh không được vượt quá 1MB.');
+      return true;
+    } 
+    return false;
+  }
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    if(this.checkSize(file)){
+      return;
+    }
     const formData: FormData = new FormData();
     formData.append('image', file);
     this.userService.UpdateAvatar(formData).subscribe(

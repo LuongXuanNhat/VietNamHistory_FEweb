@@ -1,13 +1,12 @@
 <div class="mt-60 plr-300 h-page">
     <div>
-        <span style="font-size: 20px;" class="pt-1 pb-1 dis-block">{{document.title}}</span>
+        <span style="font-size: 20px;" class="pt-1 pb-1 dis-block">📒 {{document.title}}</span>
         <span class="mt-1">{{document.description}}</span>
         <div class="flex-center-sb">
-            <div class="flex-center-h">
-                <span class="material-symbols-outlined pr">
-                    visibility
+            <div matTooltip="Lưu xem sau" (click)="SaveDocument(document)">
+                <span class="material-symbols-outlined">
+                    add
                 </span>
-                {{document.view}}
             </div>
             <div class="pl flex-center-h">
                 <span class="material-symbols-outlined pr">
@@ -17,9 +16,22 @@
             </div>
         </div>
     </div>
-    <div #viewer style="height: 900px;">
-        <pdf-viewer [src]="pdfSrc">
-        </pdf-viewer>
+    <div *ngIf="document.type === 'pdf'">
+        <ngx-doc-viewer
+            [url]="document.filePath"
+            viewer="url"
+            style="width:100%;height:100vh;"
+            >
+        </ngx-doc-viewer>
     </div>
+    <div *ngIf="document.type === 'docx'" id="viewer" style="width:100%;height:100vh;"> 
+        <ngx-doc-viewer
+            [url]="document.filePath"
+            viewer="google"
+            style="width:100%;height:100vh;"
+            >
+        </ngx-doc-viewer>
+    </div>
+    
 </div>
 
