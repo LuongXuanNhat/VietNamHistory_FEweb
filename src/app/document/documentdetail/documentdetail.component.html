@@ -1,13 +1,51 @@
+<div class="po-re">
+    <div style="position: fixed; ">
+        <div class="interact">
+            <button matTooltip="Lưu xem sau" matTooltipPosition="right" mat-icon-button *ngIf="!isSave; else saved" (click)="IsSave()" class="btn-interact">
+                <span class="material-symbols-outlined">
+                    bookmark_add
+                </span>
+                <div class="likeNumber">
+                    {{saveNumber}}
+                </div>
+            </button>
+            <ng-template #saved >
+                <button matTooltip="Bỏ lưu" matTooltipPosition="right" mat-icon-button (click)="IsSave()" class="selected btn-interact">
+                    <span class="material-symbols-outlined selected-icon">
+                        bookmark_added
+                    </span>
+                    <div class="likeNumber">
+                        {{saveNumber}}
+                    </div>
+                </button>
+            </ng-template>
+            <button class="dis-flex" matTooltip="Copy" matTooltipPosition="right" mat-icon-button title="Chia sẻ link bài viết" (click)="copyToClipboard()">
+                <span class="material-symbols-outlined">
+                    content_copy
+                </span>
+            </button>
+            <div *ngIf="canEditDelete()">
+                <button class="dis-flex" matTooltip="Sửa bài" matTooltipPosition="right" mat-icon-button (click)="updateDocument()">
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </button>
+                <button class="dis-flex" matTooltip="Xóa bài" matTooltipPosition="right" mat-icon-button  style="display: block;">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>  
+</div>
 <div class="mt-60 plr-300 h-page">
+   
     <div>
         <span style="font-size: 20px;" class="pt-1 pb-1 dis-block">📒 {{document.title}}</span>
         <span class="mt-1">{{document.description}}</span>
         <div class="flex-center-sb">
-            <div matTooltip="Lưu xem sau" (click)="SaveDocument(document)">
-                <span class="material-symbols-outlined">
-                    add
-                </span>
-            </div>
+            <div></div>
             <div class="pl flex-center-h">
                 <span class="material-symbols-outlined pr">
                     calendar_month

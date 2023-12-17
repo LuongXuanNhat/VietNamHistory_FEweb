@@ -88,6 +88,9 @@ export class PublicserviceService {
   GetMyQuestionSaved(){
     return this.http.get(this.apiurl + '/Question/MyQuestionSaved');
   }
+  GetMyDocumentSaved(){
+    return this.http.get(this.apiurl + '/Document/MySave');
+  }
   GetNews(){
     return this.http.get(this.apiurl + '/News');
   }
@@ -135,6 +138,13 @@ export class PublicserviceService {
     };
     return this.http.get(`${this.apiurl}/Question/Save`, { params });
   }
+  GetSaveDoc(documentId: string, userId: string){
+    const params = {
+      DocumentId: documentId,
+      UserId: userId
+    };
+    return this.http.get(`${this.apiurl}/Document/Save`, { params });
+  }
   GetTopic(){
     return this.http.get(this.apiurl + "/Topic");
   }
@@ -179,6 +189,12 @@ export class PublicserviceService {
   }
   SaveOrUnSaveQuestion(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Question/Save`, data);
+  }
+  SaveOrUnSaveDocument(data: FormData): Observable<any>{
+    return this.http.post(`${this.apiurl}/Document/Save`, data);
+  }
+  UpdateDocument(data: FormData){
+    return this.http.put(this.apiurl + '/Document', data);
   }
   UpdatePost(data: FormData){
     return this.http.put(this.apiurl + '/Post', data);

@@ -30,6 +30,7 @@ import { NewsComponent } from './news/news.component';
 import { DocumentComponent } from './document/document.component';
 import { DocumentdetailComponent } from './document/documentdetail/documentdetail.component';
 import { SearchquestionComponent } from './forum/searchquestion/searchquestion.component';
+import { MydocumentsavedComponent } from './mycategory/mydocumentsaved/mydocumentsaved.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -59,6 +60,7 @@ const routes: Routes = [
       { path: 'questionsaved', component: MyquestionsavedComponent },
       { path: 'document', component: MydocumentComponent },
       { path: 'postsaved', component: MypostsavedComponent },
+      { path: 'documentsaved', component: MydocumentsavedComponent },
     ]
   },
   {path: 'forum', 

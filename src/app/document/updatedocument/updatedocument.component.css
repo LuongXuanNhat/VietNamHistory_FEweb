@@ -1,0 +1,31 @@
+.image-upload-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    padding: 8px 0px;
+}
+
+/* Style for the input inside the container */
+.image-upload-container input[type="file"] {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Style for the label inside the container */
+.image-upload-container span {
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 10px;
+}
+.inputfile {
+    background-color: #007bff;
+}
+/* Hover effect for the label */
+.inputfile:hover {
+    background-color: #0056b3 !important;
+}

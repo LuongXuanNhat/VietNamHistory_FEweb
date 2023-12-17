@@ -1,1 +1,49 @@
-<p>mydocumentsaved works!</p>
+<div class="plr-200 flex-center-h ">
+    <div class="interact-save">
+        <button matTooltip="Câu hỏi của tôi" matTooltipPosition="right"
+            mat-icon-button class="btn-interact " style="top: 100px;" routerLink="/mycategory/document">
+            <span class="material-symbols-outlined " > 
+                indeterminate_question_box
+            </span>
+        </button>
+        <button matTooltip="Câu hỏi đã lưu" matTooltipPosition="right" 
+            mat-icon-button class="btn-interact seleted" style="top: 148px;" >
+            <span class="material-symbols-outlined"> 
+                bookmark_added
+            </span>
+        </button>
+        
+    </div>
+    <div style="text-align: center; margin-top: 48px;">
+        <div *ngFor="let document of documents" class="mb-1" style="display: inline-flex;">
+            <div style="z-index: 10;">
+                <button matTooltip="Bỏ lưu" matTooltipPosition="above" mat-mini-fab (click)="IsSave(document, $event)" class=" po-ab" style="margin-top: 4px; margin-left: 12px;background-color: #00000073 ;height: 24px;
+                width: 24px; box-shadow: none !important;">
+                    <mat-icon class="material-symbols-outlined text-white">
+                        close
+                    </mat-icon>
+                </button>
+            </div>
+            <a class="card-question font pt-1" (click)="documentDetail(document)" style="padding: 0 10px;">
+                <strong class="text-5-line" style="text-align: start;     margin-top: 4px;">
+                    <ng-container *ngFor="let space of [1, 2, 3, 4, 5,6,7,8,9]">&nbsp;</ng-container>{{document.title}}
+                </strong>
+                
+                <div class="son-question">
+                    <div class="dis-flex mt" >
+                        <img *ngIf="document.userShort.image !== ''; else avaterdefault" src="{{document.userShort.image}}" alt="" class="icon-24">
+                        <ng-template #avaterdefault >
+                            <img class="icon-24" src="assets/Icon/user.png" alt="">
+                        </ng-template>
+                        <span class="pl-1 w-80 of-h">{{document?.userShort?.fullName}}</span>
+                    </div>
+                    <div class="flex-center-sb">
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div  class="plr-1 pt pb text-white tag-category">
+        Tài liệu đã lưu
+    </div>
+</div>
