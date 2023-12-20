@@ -24,7 +24,7 @@ export class DocumentdetailComponent {
   saveNumber: number = 0;
   isSave: boolean | null = null;
 
-  constructor(private session: SessionService, private router: Router,private route: ActivatedRoute, 
+  constructor(private session: SessionService,private route: ActivatedRoute, 
     private service: PublicserviceService, private  toastr: ToastrService,private clipboardService: ClipboardService,
     private location: Location,  private dataService: DataService, private dialog: MatDialog ){
     this.route.params.subscribe(params => {

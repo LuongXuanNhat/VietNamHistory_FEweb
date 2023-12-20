@@ -316,9 +316,11 @@
   <div class=" category-menu" >
     <nav mat-tab-nav-bar [tabPanel]="tabPanel">
       <a mat-tab-link *ngFor="let obj of objectList" 
-      [routerLink]="[obj.url]" routerLinkActive #rla="routerLinkActive"
-      [routerLinkActiveOptions]="{exact:true}"
-      [active]="rla.isActive">
+        [disabled]="obj.categoryname === 'Học sử'"
+        [routerLink]="[obj.url]" 
+        routerLinkActive #rla="routerLinkActive" 
+        [routerLinkActiveOptions]="{exact:true}"
+        [active]="rla.isActive">
         {{ obj.categoryname }}
       </a>
     </nav>
@@ -343,6 +345,10 @@
       <button mat-menu-item (click)="createDocument()">
         <mat-icon>receipt_long</mat-icon>
         <span>Chia sẻ tài liệu</span>
+      </button>
+      <button *ngIf="isCheckAdmin()" mat-menu-item (click)="createExam()">
+        <span>✨</span>
+        <span class="pl-1">Tạo bài thi </span>
       </button>
     </mat-menu>
 

@@ -18,6 +18,9 @@ export class PublicserviceService {
   CreateDocument(data: FormData){
     return this.http.post(this.apiurl + '/Document', data);
   }
+  CreateExam(data: FormData){
+    return this.http.post(this.apiurl + '/MultipleChoice', data);
+  }
   CreatePost(data: FormData){
     return this.http.post(this.apiurl + '/Post', data);
   }
@@ -49,6 +52,13 @@ export class PublicserviceService {
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Document/Search?keyWord=' + keyWord);
   }
+  ExamDetail(id: string){
+    return this.http.get(this.apiurl + '/MultipleChoice/' + id);
+  }
+  ExamSearch(keyWord: string){
+    keyWord = encodeURIComponent(keyWord);
+    return this.http.get(this.apiurl + '/MultipleChoice/Search?keyWord=' + keyWord);
+  }
   getChatSignRl(): string{
     return this.apiurl + '/commentHub';
   }
@@ -58,6 +68,9 @@ export class PublicserviceService {
   }
   GetDocument(){
     return this.http.get(this.apiurl + '/Document');
+  }
+  GetExam(){
+    return this.http.get(this.apiurl + '/MultipleChoice');
   }
   getLike(postId: string, userId: string) {
     const params = {

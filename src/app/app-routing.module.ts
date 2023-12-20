@@ -31,6 +31,8 @@ import { DocumentComponent } from './document/document.component';
 import { DocumentdetailComponent } from './document/documentdetail/documentdetail.component';
 import { SearchquestionComponent } from './forum/searchquestion/searchquestion.component';
 import { MydocumentsavedComponent } from './mycategory/mydocumentsaved/mydocumentsaved.component';
+import { ExamComponent } from './exam/exam.component';
+import { ExamdetailComponent } from './exam/examdetail/examdetail.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -74,12 +76,12 @@ const routes: Routes = [
     ]
   },
   {path: 'searchquestion', component: SearchquestionComponent},
-
   {path: 'forum/:id', component: QuestionComponent},
   {path: 'news', component:NewsComponent},
   {path: 'document', component:DocumentComponent},
   {path: 'document/:documentId', component: DocumentdetailComponent},
-
+  {path: 'exam', component:ExamComponent},
+  {path: 'exam/:examId', component: ExamdetailComponent},
 ];
 
 @NgModule({

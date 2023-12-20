@@ -38,10 +38,7 @@
                     
                     <strong class="text-2-line" style="text-align: start;">{{post.title}}</strong>
                     <div class="dis-flex mt" >
-                        <img *ngIf="post.userShort.image !== ''; else avaterdefault" src="{{post.userShort.image}}" alt="" class="icon-24">
-                        <ng-template #avaterdefault >
-                            <img class="icon-24" src="assets/Icon/user.png" alt="">
-                        </ng-template>
+                        <img src="{{post.userShort.image === '' ? 'assets/Icon/user.png': post.userShort.image}}" alt="" class="icon-24">
                         <span class="pl-1 w-90 of-h" *ngIf="post.userShort.fullName !== ''; else fullname">{{post.userShort.fullName}}</span>
                         <ng-template class="pl-1" #fullname>{{post.userShort.fullName}}</ng-template>
                     </div>

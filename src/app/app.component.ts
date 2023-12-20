@@ -12,6 +12,7 @@ import { MatMenu } from '@angular/material/menu';
 import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
 import { AnimationService } from './service/animations/animation.service';
 import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
+import { CreateexamComponent } from './exam/createexam/createexam.component';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit, DoCheck{
     { categoryname: 'Trang chủ', url: '/home' },
     { categoryname: 'Khám phá', url: '/discover' },
     { categoryname: 'Học sử', url: '/course' },
-    { categoryname: 'Luyện tập', url: '/practice' },
+    { categoryname: 'Luyện tập', url: '/exam' },
     { categoryname: 'Tài liệu', url: '/document' },
     { categoryname: 'Diễn đàn', url: '/forum' },
     { categoryname: 'Tin tức', url: '/news' }
@@ -41,7 +42,6 @@ export class AppComponent implements OnInit, DoCheck{
   constructor(private router : Router, private service: AuthService,
     private toastr: ToastrService, private sessionService: SessionService,
     private dialog: MatDialog,private animationService: AnimationService){
-
   }
 
   ngOnInit() {
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit, DoCheck{
     }
   }
   openDialog(enteranimation: any, exitanimation: any){
-    const popup = this.dialog.open(CreatepostComponent, {
+    this.dialog.open(CreatepostComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '60%'
@@ -97,7 +97,7 @@ export class AppComponent implements OnInit, DoCheck{
     }
   }
   openQuestionDialog(enteranimation: string, exitanimation: string) {
-    const popup = this.dialog.open(ForumCreateComponent, {
+    this.dialog.open(ForumCreateComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '50%'
@@ -113,12 +113,23 @@ export class AppComponent implements OnInit, DoCheck{
     }
   }
   openDocumentDialog(enteranimation: string, exitanimation: string) {
-    const popup = this.dialog.open(CreatedocumentComponent, {
+    this.dialog.open(CreatedocumentComponent, {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '60%'
     });
   }
+  createExam(){
+    this.openExamDialog('100ms', '600ms');
+  }
+  openExamDialog(enteranimation: string, exitanimation: string) {
+    this.dialog.open(CreateexamComponent, {
+      enterAnimationDuration: enteranimation,
+      exitAnimationDuration: exitanimation,
+      width: '60%'
+    });
+  }
+
   isLoggedIn(){
     this.token = this.sessionService.getToken();
     if(this.token){
@@ -129,7 +140,9 @@ export class AppComponent implements OnInit, DoCheck{
     }
     return this.service.IsLoggedIn();
   }
-
+  isCheckAdmin(){
+    return this.sessionService.getRole() === 'admin'
+  }
   logout(){
     this.service.LogOut().subscribe( (res: any) => {
       this.sessionService.clearSessionStorage();

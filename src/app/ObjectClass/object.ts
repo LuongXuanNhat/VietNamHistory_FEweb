@@ -147,3 +147,28 @@ export interface DocumentFpkDto {
   documentId: string;
   userId: string;
 }
+
+
+export interface QuizAnswerDto {
+  id: string;
+  content: string;
+  isCorrect: boolean;
+}
+
+export interface QuizDto {
+  id: string;
+  content: string;
+  selected: string | null;
+  quizAnswers?: QuizAnswerDto[];
+}
+
+export interface MultipleChoiceResponseDto {
+  id: string;
+  title: string;
+  description: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+  workTime: number;
+  userShort?: UserShortDto;
+  quizs?: QuizDto[];
+}

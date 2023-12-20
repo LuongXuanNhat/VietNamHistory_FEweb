@@ -1,30 +1,31 @@
-import { Component, NgZone} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 
 @Component({
-  selector: 'app-createdocument',
-  templateUrl: './createdocument.component.html',
-  styleUrls: ['./createdocument.component.css']
+  selector: 'app-createexam',
+  templateUrl: './createexam.component.html',
+  styleUrls: ['./createexam.component.css']
 })
-export class CreatedocumentComponent {
+export class CreateexamComponent {
   questionId: string = '';
   selectedFile: File | null = null;
   fileName: string = '';
   progessing: boolean = false;
-  createdocumentform = this._formBuilder.group({
+  createExamForm = this._formBuilder.group({
     Title: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(10)]],
     Description: [''],
     Document: [null, Validators.required],
+    Time: [null, Validators.required]
   });
 
   constructor(private _formBuilder: FormBuilder, public service: PublicserviceService,
-    private router: Router, private  toastr: ToastrService, private dialogRef: MatDialogRef<CreatedocumentComponent>,
-    private ngZone: NgZone) {
+    private router: Router, private  toastr: ToastrService, private dialogRef: MatDialogRef<CreateexamComponent>,
+    
+   ) {
 
     
   }
@@ -43,7 +44,7 @@ export class CreatedocumentComponent {
       }
       
 
-      this.createdocumentform.get('Document')?.setValue(file);
+      this.createExamForm.get('Document')?.setValue(file);
       this.progessing = false;
       this.fileName = file.name;
     } else {
@@ -56,23 +57,25 @@ export class CreatedocumentComponent {
       this.progessing = false;
   }
   private isValidFileType(file: File): boolean {
-    const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    const allowedTypes = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
     return allowedTypes.includes(file.type);
   }
-  CreateDocument(){
+  CreateExam(){
     const formData = new FormData();
-    const createDocument = this.createdocumentform;
-  
-    formData.append('Title', createDocument.get('Title')?.value?.trim() || '');
-    formData.append('Description', createDocument.get('Description')?.value?.trim() || '');
-    formData.append('FileName', createDocument.get('Document')?.value || '');
+    const createExam = this.createExamForm;
+    var time = createExam.get('Time')?.value;
 
-    this.service.CreateDocument(formData).subscribe(
+    formData.append('Title', createExam.get('Title')?.value?.trim() || '');
+    formData.append('Description', createExam.get('Description')?.value?.trim() || '');
+    formData.append('File', createExam.get('Document')?.value || '');
+    formData.append('WorkTime', time || '30');
+
+    this.service.CreateExam(formData).subscribe(
       (data: any) => {
         if(data.isSuccessed){
           this.dialogRef.close();
-          this.toastr.success("Chia sẻ tài liệu thành công");
+          this.toastr.success("Tạo bài thi thành công");
         } else {
           this.toastr.error("Lỗi: " + data.message);
         }
@@ -83,9 +86,9 @@ export class CreatedocumentComponent {
   }
   checkSize(file: any):boolean {
     const fileSize = file.size; 
-    const maxSize = 10 * 1024 * 1024; 
+    const maxSize = 8 * 1024 * 1024; 
   
-    if (fileSize > maxSize) { 
+    if (fileSize > maxSize) {
       this.toastr.warning('Kích thước file không được vượt quá 8MB.');
       return true;
     } 
@@ -93,4 +96,3 @@ export class CreatedocumentComponent {
   }
   
 }
-

@@ -14,12 +14,11 @@
             </mat-error>
         </mat-form-field>
         <div>
-            <ckeditor
+            <ckeditor id="editor"
                 style="max-height: 650px; overflow: auto;"
                 [editor]="Editor"
                 [config]="editorConfig"
                 formControlName="Content"
-                (change)="onEditorChange($event)"
             ></ckeditor>
         </div>
         <mat-form-field class=" w-100 specific-border mt-1" appearance="outline">

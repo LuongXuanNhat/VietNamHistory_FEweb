@@ -1,0 +1,32 @@
+option {
+    padding: 8px; /* padding cho mỗi option */
+    margin: 2px 0; /* margin top và bottom giữa các option */
+    display: block; /* đảm bảo mỗi option hiển thị trên một dòng */
+}
+.header-banner {
+    margin-top: 16px;
+    height: 300px;
+    width: 100%;
+    text-align: center;
+}
+.header-banner .b-exam{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.exam-card {
+    width: 24%;
+    max-width: 264px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.exam-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.tag-free{
+    border-radius: 12px;
+    font-size: 10px;
+    padding:2px 6px 4px;
+    display: flex;
+    background-color: #7286e4;
+    color: white;
+}

@@ -8,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { format, parseISO } from 'date-fns';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import viLocale from 'date-fns/locale/vi';
 

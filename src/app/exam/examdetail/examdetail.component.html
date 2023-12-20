@@ -1,0 +1,75 @@
+<div class="po-re" *ngIf="isShowQuestion()">
+    <div style="position: fixed; ">
+        <div class="show-seleted" style="width: 216px;">
+            <div>
+                
+            </div>
+            <div *ngFor="let q of exam.quizs;let i = index">
+                <div class="card-q cursor-p" (click)="move('q'+i)" 
+                [class.selected]="isSelected(q.id)">
+                    {{ i+1 }}
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+<div class="plr-300 mt-60">
+    <div class="flex-center-sb">
+        <div class="dis-flex mt-1" >
+            <ng-template #avaterdefault >
+                <img class="icon-24" src="assets/Icon/user.png" alt="avatar">
+            </ng-template>
+            <img *ngIf="exam?.userShort?.image !== ''; else avaterdefault" src="{{exam.userShort?.image}}" alt="avatar" class="icon-24" style="margin-right: 8px;">
+            <span  class="pl">{{exam.userShort?.fullName}}</span> 
+        </div>
+        <div class="flex-center-h cursor-d" matTooltip="{{exam.updatedAt == null ? 'Ngày tạo' : 'Ngày cập nhập'}}" matTooltipPosition="right">
+            <mat-icon matSuffix >today</mat-icon>
+            {{exam.updatedAt ?? exam.createdAt}} 
+        </div>
+    </div>
+    <div>
+        <div style="text-align: center;">
+            <h5>
+                {{ exam.title }}
+            </h5>
+        </div>
+        <div class="mt-1">
+            <span class="use-space">
+                {{ exam.description }}
+            </span>
+            <br>
+            <span>
+                Thời gian thi: <strong>{{ exam.workTime }}</strong> phút
+            </span>
+        </div>
+    </div>
+    <div>
+        <div style="text-align: center;">
+            <button mat-raised-button color="primary" (click)="start()">Bắt đầu thi</button>
+        </div>
+        <div *ngIf="isShowQuestion()" class="mt-1">
+            <div *ngFor="let q of exam.quizs; let i = index">
+                <div class="mt-1" style="font-size: 16px;" id="q{{ i }}">
+                    <div class="mb">
+                        <strong>Câu hỏi {{ i+1 }}: </strong>
+                        <span>{{ q.content }}</span>
+                    </div>
+                    <div>
+                        <div>
+                            <mat-radio-group [(ngModel)]="q.selected">
+                                <ng-container *ngFor="let a of q.quizAnswers; let j = index;trackBy: trackByFn">
+                                  <mat-radio-button class="" [value]="a.id">
+                                    <span style="font-size: 16px;">
+                                        {{ getLetter(j) }}. {{ a.content }}
+                                    </span>
+                                  </mat-radio-button>
+                                  <br>
+                                </ng-container>
+                              </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

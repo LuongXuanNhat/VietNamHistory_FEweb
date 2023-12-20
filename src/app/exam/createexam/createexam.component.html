@@ -1,0 +1,47 @@
+<div class="plr-1 create-document">
+    <div class="flex-center-sb mt">
+        <span style="font-size: 24px;">
+            Tạo đề thi trắc nghiệm
+        </span>
+        <div matTooltip="{{createExamForm.invalid  ? 'Vui lòng nhập đầy đủ thông tin' : ''}}">
+            <button mat-raised-button color="primary" [disabled]="createExamForm.invalid" 
+            (click)="CreateExam()" matTooltip="Chia sẻ">Tạo</button>
+        </div>
+    </div>
+    <form [formGroup]="createExamForm">
+        <div class="mt"></div>
+        <div  class="w-100 specific-border flex-center-h" appearance="outline">
+            <label class="image-upload-container btn btn-bwm font" (click)="toggleProgressing()" (focusout)="onFileInputBlur()">
+                <span class="mb inputfile">Chọn file</span>
+                <input #imageInput class="font" type="file" accept=".pdf, .docx" (change)="onFileSelected(imageInput)">
+            </label>
+
+            <div class="ml-1 pl" style="border-left: 2px solid rgb(31, 31, 31) ;">{{fileName}}</div>
+            <div class="ml-1 pl" *ngIf="progessing" style="color: blue;">
+                <i>Vui lòng chờ, đang tải ... </i>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+        </div>
+        <div style="font-size: 12px;" class="mb">
+            <i>* File tải lên yêu cầu là file word(.docx)</i>
+        </div>
+        <mat-form-field class="w-100">
+            <input style="font-size: 1.2em;line-height: 0;" class="fw-5" matInput formControlName="Title" placeholder="Nhập tiêu đề ở đây..." required>
+            <mat-error *ngIf="createExamForm.get('Title')?.hasError('required')">
+                Tiêu đề là bắt buộc
+            </mat-error>
+            <mat-error *ngIf="createExamForm.get('Title')?.hasError('maxlength')">
+                Tiêu đề không được quá dài hay quá ngắn
+            </mat-error>
+            <mat-error *ngIf="createExamForm.get('Title')?.hasError('minlength')">
+                Tiêu đề không được quá ngắn
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100" style="max-height: 170px;">
+            <textarea class="fw-5" style="max-height: 126px;" matInput formControlName="Description" placeholder="Nhập mô tả tài liệu..." required></textarea>
+        </mat-form-field>
+        <mat-form-field class="w-100" style="max-height: 170px;">
+            <input class="fw-5" style="max-height: 126px;" matInput formControlName="Time" placeholder="Nhập thời gian thi... (phút)" required>
+        </mat-form-field>
+    </form>
+</div>

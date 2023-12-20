@@ -165,7 +165,11 @@ export class CreatepostComponent {
   }
   onFileSelected(input: any): void {
     const file = input.files[0];
+    
     if (file) {
+      if(this.checkSize(file)){
+        return;
+      }
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result as string;
@@ -230,5 +234,15 @@ export class CreatepostComponent {
   }
   triggerReloadDetailPage() {
     this.dataService.triggerReloadDetailPage(this.postId);
+  }
+  checkSize(file: any):boolean {
+    const fileSize = file.size; 
+    const maxSize = 2 * 1024 * 1024; 
+  
+    if (fileSize > maxSize) {
+      this.toastr.warning('Kích thước file không được vượt quá 2MB.');
+      return true;
+    } 
+    return false;
   }
 }

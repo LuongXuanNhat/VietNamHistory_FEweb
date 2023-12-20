@@ -11,7 +11,6 @@ import { RegisterComponent } from './account/account/register/register.component
 import { LoginComponent } from './account/account/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { IntroduceComponent } from './account/introduce/introduce.component';
 import { IndexComponent } from './home/index/index.component';
 import { AccountComponent } from './account/account/account.component';
@@ -59,11 +58,14 @@ import { RouterModule } from '@angular/router';
 import { SearchquestionComponent } from './forum/searchquestion/searchquestion.component';
 import { DocumentdetailComponent } from './document/documentdetail/documentdetail.component';
 import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { UpdatedocumentComponent } from './document/updatedocument/updatedocument.component';
 import { MydocumentsavedComponent } from './mycategory/mydocumentsaved/mydocumentsaved.component';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
-
+import { ExamComponent } from './exam/exam.component';
+import { CreateexamComponent } from './exam/createexam/createexam.component';
+import { UpdateexamComponent } from './exam/updateexam/updateexam.component';
+import { ExamdetailComponent } from './exam/examdetail/examdetail.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -111,10 +113,13 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
     DocumentdetailComponent,
     CreatedocumentComponent,
     UpdatedocumentComponent,
-    MydocumentsavedComponent
+    MydocumentsavedComponent,
+    ExamComponent,
+    CreateexamComponent,
+    UpdateexamComponent,
+    ExamdetailComponent
   ],
   imports: [
-    PdfViewerModule,
     RouterModule,
     BrowserModule,
     AppRoutingModule,

@@ -15,8 +15,7 @@
           "options": {
             "baseHref": "/VietNamHistory_FEweb/",
             "allowedCommonJsDependencies": 
-              ["@ckeditor/ckeditor5-build-classic", 
-              "@grapecity/gcpdfviewer"],
+              ["@grapecity/gcpdfviewer"],
             "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -106,6 +105,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],

@@ -23,7 +23,7 @@ export class DocumentComponent {
   documentSaved: DocumentResponseDto[] = [];
   countResult!: number;
 
-  constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
+  constructor(private router: Router, private service: PublicserviceService,
     private session: SessionService, private toastr: ToastrService){
       this.getDocuments();
       if(this.session.getUserId()){
@@ -38,7 +38,7 @@ export class DocumentComponent {
         this.ConvertDate();
       },
       (error) => {
-        console.error('Error fetching posts:', error);
+        console.error('Lỗi lấy danh sách:', error);
       }
     )
   }
@@ -61,7 +61,6 @@ export class DocumentComponent {
     if(this.keyWord?.trim()){
       this.service.documentSearch(this.keyWord).subscribe(
         (data: any)=>{
-          console.log(data);
           if(data.isSuccessed){
             this.documents = data.resultObj;
             if(this.session.getUserId()){

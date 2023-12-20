@@ -1,0 +1,49 @@
+<div class="plr-200 mt-60 h-page">
+    <div>
+        <div class="flex-center">
+            <div style="left: 20px;" class="po-ab">
+                <label for="dropdown" class="mr">Sắp xếp</label>
+                <select id="dropdown" name="dropdown" style="height: 30px; border-radius: 2px; border: 1px solid #ccc;">
+                    <option value="1">Mới nhất</option>
+                    <option value="2">Nhiều lượt thi nhất</option>
+                    <option value="3">Đã làm</option>
+                </select> 
+            </div>
+            <div class="search-container">
+                <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
+                <button class="btn-search" (click)="search()">
+                    <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
+                </button>
+            </div>
+            <div>
+                <div class="po-ab" *ngIf="countResult; " style="right: 24px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> bài tập được tìm thấy</i></div>
+            </div>
+        </div>
+    </div>
+    <div class="header-banner">
+        <img src="assets/Icon/banner_exam.jpg" alt="" class="b-exam">
+    </div>
+    <div class="flex-center-h">
+        <a *ngFor="let exam of exams" (click)="GetExamDetail(exam)"
+            class="underline-none exam-card mlr mt-1 plr pt pb cursor-p">
+            <div class="flex-center-h">
+                <img src="assets/Icon/exam.png" alt="" style="width: 64px;">
+                <div style="display: grid;">
+                    <span>{{ exam.quizs?.length }} câu</span>
+                    <span>Thời gian: {{ exam.workTime }}'</span>
+                </div>
+                <div class="po-re" style="margin-left:auto ;top:-24px;">
+                    <span class="tag-free">miễn phí</span>
+                </div>
+            </div>
+            <div>
+                <span class="text-3-line mt">{{ exam.title }}</span>
+            </div>
+            <div class="dis-flex mt" >
+                <img src="{{exam.userShort?.image === '' ? 'assets/Icon/user.png': exam.userShort?.image}}" alt="" class="icon-24">
+                <span class="pl-1 w-90 of-h" *ngIf="exam.userShort?.fullName !== ''; else fullname">{{exam.userShort?.fullName}}</span>
+                <ng-template class="pl-1" #fullname>{{exam.userShort?.fullName}}</ng-template>
+            </div>
+        </a>
+    </div>
+</div>

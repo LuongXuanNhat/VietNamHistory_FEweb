@@ -1,7 +1,6 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Component,ViewChild, inject, ElementRef } from '@angular/core';
+import { Component,ViewChild, inject, ElementRef, OnInit } from '@angular/core';
 import { FormControl,FormBuilder, Validators } from '@angular/forms';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
@@ -13,13 +12,15 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from 'src/app/service/datashare/data.service';
+import { AuthService } from 'src/app/service/auth.service';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-forum-create',
   templateUrl: './forum-create.component.html',
   styleUrls: ['./forum-create.component.css'] 
 })
-export class ForumCreateComponent {
+export class ForumCreateComponent implements OnInit{
   questionId: string = '';
   
   createquestionform = this._formBuilder.group({
@@ -29,7 +30,14 @@ export class ForumCreateComponent {
   });
   currentDate = this.service.getCurrentDate();
   isEditable = true;
+
+  public editorConfig = {
+    toolbar: ['undo','redo', '|','heading', '|', 'bold', 'italic', 'link','insertTable','blockQuote','mediaEmbed'],
+    placeholder: 'Miêu tả thêm ở đây... (không bắt buộc)',
+    language: 'vi',
+  }
   public Editor = ClassicEditor;
+
   topicCtrl = new FormControl('');
   announcer = inject(LiveAnnouncer);
 
@@ -41,17 +49,12 @@ export class ForumCreateComponent {
   separatorKeysCodesTag: number[] = [ENTER, COMMA];
   @ViewChild('TagInput') TagInput!: ElementRef<HTMLInputElement>;
 
-  public editorConfig = {
-    toolbar: ['undo','redo', '|','heading', '|', 'bold', 'italic','bulletedList', 'numberedList', 'link','insertTable','blockQuote','mediaEmbed',],
-    placeholder: 'Miêu tả thêm ở đây... (không bắt buộc)',
-    language: 'vi',
-  };
   onEditorChange( { editor }: ChangeEvent )  {
     // const data = editor.getData();
     // this.createpostform.get('Content')?.setValue(data);
   }
 
-  constructor(private _formBuilder: FormBuilder, public service: PublicserviceService,
+  constructor(private _formBuilder: FormBuilder, public service: PublicserviceService,private authService: AuthService,
     private router: Router, private  toastr: ToastrService, private dialogRef: MatDialogRef<ForumCreateComponent>,
     private dataService: DataService) {
 
@@ -60,6 +63,9 @@ export class ForumCreateComponent {
       startWith(null),
       map((topic: string | null) => (topic ? this._filterTag(topic) : this.listTag.slice())),
     );
+  }
+  ngOnInit(): void {
+
   }
 
   addTag(event: MatChipInputEvent): void {
