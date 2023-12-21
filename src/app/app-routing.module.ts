@@ -33,6 +33,7 @@ import { SearchquestionComponent } from './forum/searchquestion/searchquestion.c
 import { MydocumentsavedComponent } from './mycategory/mydocumentsaved/mydocumentsaved.component';
 import { ExamComponent } from './exam/exam.component';
 import { ExamdetailComponent } from './exam/examdetail/examdetail.component';
+import { MyexamComponent } from './mycategory/myexam/myexam.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent},
@@ -63,6 +64,7 @@ const routes: Routes = [
       { path: 'document', component: MydocumentComponent },
       { path: 'postsaved', component: MypostsavedComponent },
       { path: 'documentsaved', component: MydocumentsavedComponent },
+      { path: 'exam', component: MyexamComponent },
     ]
   },
   {path: 'forum', 

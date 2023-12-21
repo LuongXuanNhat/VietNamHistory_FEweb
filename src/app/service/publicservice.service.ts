@@ -13,6 +13,7 @@ export class PublicserviceService {
   
   constructor(private http: HttpClient, private datePipe: DatePipe ,private authservice: AuthService) { }
   url = "https://toiyeulichsu.com/#";
+  // url = "http://localhost:4200/VietNamHistory_FEweb/#";
   apiurl = this.authservice.getApiUrl();
   
   CreateDocument(data: FormData){
@@ -196,6 +197,9 @@ export class PublicserviceService {
   }
   ReportQuestion(data: any){
     return this.http.post(`${this.apiurl}/Question/Report`, data);
+  }
+  SaveMyExam(data: FormData){
+    return this.http.post(this.apiurl + '/ExamHistory', data);
   }
   SaveOrUnSave(data: FormData): Observable<any>{
     return this.http.post(`${this.apiurl}/Post/Save`, data);

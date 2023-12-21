@@ -4,9 +4,15 @@
     grid-gap: 8px;
     margin-left: 24px;
     margin-top: 12px;
+    max-height: 750px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-
+.show-seleted::-webkit-scrollbar {
+    width: 2px;
+}
 .card-q {
+    border-radius: 4px;
     border: 1px solid #ccc;
     width: 40px;
     height: 30px;
@@ -15,5 +21,24 @@
     text-align: center;
 }
 .card-q.selected {
+    color: white;
+}
+.countdown {
+    margin-left: 24px;
+}
+.correct {
+    color: black !important;
+    background-color: yellow;
+    padding: 0 4px;
+}
+.iscorrect {
+    color: red !important;
+}
+.qtrue {
+    background-color: green;
+    color: white;
+}
+.qfalse {
+    background-color: red;
     color: white;
 }

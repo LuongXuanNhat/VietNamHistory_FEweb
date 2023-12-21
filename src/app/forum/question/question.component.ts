@@ -108,7 +108,7 @@ export class QuestionComponent implements OnInit{
         this.question = this.ConvertDate(data.resultObj);
         this.questionId = this.question.id;
         this.userIdOfPost = data.resultObj.userShort.id;
-
+        this.commentNum = this.question.commentNumber;
         this.GetAnswers();
         this.getInteract();
       }, (error: any) => {
@@ -120,7 +120,7 @@ export class QuestionComponent implements OnInit{
     this.service.GetAnswers(this.questionId).subscribe(
       (data: any) => {
         this.answers = this.ConvertListDate(data.resultObj);
-        this.commentNum = this.answers.length;
+        // this.commentNum = this.answers.length;
       }, (error: any) => {
         this.toastr.error("Lỗi: "+ error);
       }

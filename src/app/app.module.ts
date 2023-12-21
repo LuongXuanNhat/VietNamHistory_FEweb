@@ -66,6 +66,7 @@ import { CreateexamComponent } from './exam/createexam/createexam.component';
 import { UpdateexamComponent } from './exam/updateexam/updateexam.component';
 import { ExamdetailComponent } from './exam/examdetail/examdetail.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MyexamComponent } from './mycategory/myexam/myexam.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ExamComponent,
     CreateexamComponent,
     UpdateexamComponent,
-    ExamdetailComponent
+    ExamdetailComponent,
+    MyexamComponent
   ],
   imports: [
     RouterModule,

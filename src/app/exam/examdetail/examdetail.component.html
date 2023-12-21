@@ -1,17 +1,25 @@
 <div class="po-re" *ngIf="isShowQuestion()">
     <div style="position: fixed; ">
-        <div class="show-seleted" style="width: 216px;">
-            <div>
-                
-            </div>
+        <div class="countdown flex-center" >
+            <span class="material-symbols-outlined">
+                schedule
+                </span>
+            {{ formatTime(countdown) }}
+        </div>
+        <div *ngIf="isSubmit" style="margin-left: 24px;margin-top: 4px;" class="flex-center-h">
+            Số điểm đạt được: {{ score.toFixed(2) }}
+        </div>
+        <div class="show-seleted" style="width: 220px;">
             <div *ngFor="let q of exam.quizs;let i = index">
                 <div class="card-q cursor-p" (click)="move('q'+i)" 
-                [class.selected]="isSelected(q.id)">
+                [class.selected]="isSelected(q.id) && !submited()"
+                [class.qtrue]="submited() && checkAnswer(q)"
+                [class.qfalse]="submited() && !checkAnswer(q)">
                     {{ i+1 }}
                 </div>
             </div>
         </div>
-    </div> 
+    </div>  
 </div>
 <div class="plr-300 mt-60">
     <div class="flex-center-sb">
@@ -41,11 +49,13 @@
             <span>
                 Thời gian thi: <strong>{{ exam.workTime }}</strong> phút
             </span>
+            <br>
+            <span>Số câu hỏi: <strong>{{ exam.quizs?.length }}</strong></span>
         </div>
     </div>
     <div>
         <div style="text-align: center;">
-            <button mat-raised-button color="primary" (click)="start()">Bắt đầu thi</button>
+            <button *ngIf="!isShowQuestion()" mat-raised-button color="primary" (click)="start()">Bắt đầu thi</button>
         </div>
         <div *ngIf="isShowQuestion()" class="mt-1">
             <div *ngFor="let q of exam.quizs; let i = index">
@@ -57,19 +67,28 @@
                     <div>
                         <div>
                             <mat-radio-group [(ngModel)]="q.selected">
-                                <ng-container *ngFor="let a of q.quizAnswers; let j = index;trackBy: trackByFn">
-                                  <mat-radio-button class="" [value]="a.id">
-                                    <span style="font-size: 16px;">
+                                <ng-container *ngFor="let a of q.quizAnswers; let j = index;trackBy: trackByFn" >
+                                  <mat-radio-button class="answer" 
+                                    [value]="a.id" 
+                                    [disabled]="submited()"
+                                    >
+                                    <span style="font-size: 16px;" 
+                                    [class.correct]="submited() && a.isCorrect"
+                                    [class.iscorrect]="submited() && a.id == q.selected && !a.isCorrect">
                                         {{ getLetter(j) }}. {{ a.content }}
                                     </span>
+                                    
                                   </mat-radio-button>
                                   <br>
                                 </ng-container>
-                              </mat-radio-group>
+                            </mat-radio-group>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div style="text-align: center;">
+            <button *ngIf="btnSubmit" mat-raised-button color="primary" (click)="submit()">Nộp bài</button>
         </div>
     </div>
 </div>

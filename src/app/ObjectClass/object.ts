@@ -171,4 +171,5 @@ export interface MultipleChoiceResponseDto {
   workTime: number;
   userShort?: UserShortDto;
   quizs?: QuizDto[];
+  numberQuiz: number;
 }
