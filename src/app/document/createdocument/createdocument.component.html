@@ -37,8 +37,11 @@
                 Tiêu đề không được quá ngắn
             </mat-error>
         </mat-form-field>
-        <mat-form-field class="w-100" style="max-height: 170px;">
-            <textarea class="fw-5" style="max-height: 126px;" matInput formControlName="Description" placeholder="Nhập mô tả tài liệu..." required></textarea>
+        <mat-form-field class="w-100" style="max-height: 224px;">
+            <textarea class="fw-5" style="max-height: 180px;" matInput formControlName="Description" placeholder="Nhập mô tả tài liệu..." required></textarea>
+            <mat-error *ngIf="createdocumentform.get('Description')?.hasError('maxlength')">
+                Mô tả không được quá dài
+            </mat-error>
         </mat-form-field>
     </form>
 </div>

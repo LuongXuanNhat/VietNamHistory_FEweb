@@ -173,3 +173,11 @@ export interface MultipleChoiceResponseDto {
   quizs?: QuizDto[];
   numberQuiz: number;
 }
+
+export interface CreateExamHistoryDto {
+  MultipleChoiceId: string;
+  UserId: string;
+  Scores: number;
+  CompletionTime: number;
+  StarDate: string;
+}

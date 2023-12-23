@@ -110,4 +110,21 @@ export class DocumentdetailComponent {
       },
     });
   }
+  downloadPdfFile(){
+    this.service.downloadDocumentFile(this.document.filePath).subscribe((response) => {
+      const blob = new Blob([response.body ?? ''], { type: 'application/pdf' });
+      const downloadLink = document.createElement('a');
+      const url = window.URL.createObjectURL(blob);
+
+      downloadLink.href = url;
+      downloadLink.download = this.document.filePath;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    });
+    this.service.SaveDownloadDocument(this.documentId);
+  }
+  downloadWordFile(){
+    this.service.SaveDownloadDocument(this.documentId);
+  }
 }

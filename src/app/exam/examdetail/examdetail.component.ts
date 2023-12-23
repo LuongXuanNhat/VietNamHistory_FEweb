@@ -1,11 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { format, parseISO } from 'date-fns';
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
-import { MultipleChoiceResponseDto, QuizDto } from 'src/app/ObjectClass/object';
+import { CreateExamHistoryDto, MultipleChoiceResponseDto, QuizDto } from 'src/app/ObjectClass/object';
 import { DataService } from 'src/app/service/datashare/data.service';
 import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { SessionService } from 'src/app/service/session/session.service';
@@ -17,6 +18,7 @@ import { SessionService } from 'src/app/service/session/session.service';
 })
 export class ExamdetailComponent implements OnDestroy {
   currentUrl: any;
+  formData!: CreateExamHistoryDto;
   exam !: MultipleChoiceResponseDto;
   examId: any;
   startTime!: string; 
@@ -27,7 +29,7 @@ export class ExamdetailComponent implements OnDestroy {
   isSubmit: boolean;
   score: number;
   btnSubmit:boolean;
-  constructor(private session: SessionService,private route: ActivatedRoute, 
+  constructor(private session: SessionService,private route: ActivatedRoute,
     private service: PublicserviceService, private  toastr: ToastrService,private clipboardService: ClipboardService,
     private location: Location, private el: ElementRef, private renderer: Renderer2 , private dialog: MatDialog,
     private router: Router,  ){
@@ -142,16 +144,13 @@ export class ExamdetailComponent implements OnDestroy {
     this.SaveExam();
   }
   SaveExam() {
-    const formData = new FormData();
-    console.log(this.score.toFixed(2));
     this.CompletionTime = Math.ceil(this.CompletionTime / 60);
-    formData.append('MultipleChoiceId', this.exam.id);
-    formData.append('UserId', this.session.getUserId() ?? '');
-    formData.append('Scores', this.score.toFixed(2));
-    formData.append('CompletionTime', this.CompletionTime.toString());
-    formData.append('StarDate', this.startTime);
+    this.formData.CompletionTime = this.CompletionTime;
+    this.formData.MultipleChoiceId = this.exam.id;
+    this.formData.Scores = parseFloat(this.score.toFixed(2));
+    this.formData.StarDate = this.startTime;
 
-    this.service.SaveMyExam(formData).subscribe(
+    this.service.SaveMyExam(this.formData).subscribe(
       (data: any) => {
         if(data.isSuccessed){
 

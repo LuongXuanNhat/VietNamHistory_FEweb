@@ -18,7 +18,7 @@ export class CreatedocumentComponent {
   progessing: boolean = false;
   createdocumentform = this._formBuilder.group({
     Title: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(10)]],
-    Description: [''],
+    Description: ['',[Validators.required, Validators.maxLength(500)]],
     Document: [null, Validators.required],
   });
 

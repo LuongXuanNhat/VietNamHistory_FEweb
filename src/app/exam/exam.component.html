@@ -23,7 +23,7 @@
     <div class="header-banner">
         <img src="assets/Icon/banner_exam.jpg" alt="" class="b-exam">
     </div>
-    <div class="flex-center-h">
+    <div class="flex-center-h" style="flex-wrap: wrap;">
         <a *ngFor="let exam of exams" (click)="GetExamDetail(exam)"
             class="underline-none exam-card mlr mt-1 plr pt pb cursor-p">
             <div class="flex-center-h">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div>
-                <span class="text-3-line mt">{{ exam.title }}</span>
+                <strong class="text-3-line mt fs16" >{{ exam.title }}</strong>
             </div>
             <div class="dis-flex mt" >
                 <img src="{{exam.userShort?.image === '' ? 'assets/Icon/user.png': exam.userShort?.image}}" alt="" class="icon-24">

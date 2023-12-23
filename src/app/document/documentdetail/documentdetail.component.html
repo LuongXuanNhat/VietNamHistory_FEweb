@@ -44,10 +44,17 @@
     <div>
         <span style="font-size: 20px;" class="pt-1 pb-1 dis-block">📒 {{document.title}}</span>
         <span class="use-space">{{ document.description }}</span>
-        <div class="dis-flex mb-1" style="float: right;">
-            <div class="flex-center-h">
-                <img src="{{ document.type === 'pdf' ? 'assets/Icon/pdf.png':'assets/Icon/docx.png' }}" alt="type file" class="img-20">
+        <div class="dis-flex mb mt-1" style="float: right;">
+            <div class="flex-center-h" *ngIf="document.type === 'pdf'; else docx" matTooltip="Tải tài liệu" matTooltipPosition="left">
+                <a (click)="downloadPdfFile()">
+                    <img src="assets/Icon/pdf.png" alt="type file" class="img-20">
+                </a>
             </div>
+            <ng-template #docx matTooltip="Tải tài liệu" matTooltipPosition="left">
+                <a href="{{ document.filePath }}" (click)="downloadWordFile()" class="underline-none">
+                    <img src="assets/Icon/docx.png" alt="type file" class="img-20">
+                </a>
+            </ng-template>
             <div class="pl flex-center-h" matTooltip="{{ document.updatedAt == '' ? 'Ngày tạo' : 'Ngày cập nhập' }}">
                 <span class="material-symbols-outlined pr">
                     calendar_month
@@ -71,9 +78,6 @@
             style="width:100%;height:100vh;"
             >
         </ngx-doc-viewer>
-        <div class="dis-flex" style="float: right;">
-            <a href="{{ document.filePath }}" class="underline-none"><strong>Tải xuống</strong></a>
-        </div>
     </div>
     
 </div>

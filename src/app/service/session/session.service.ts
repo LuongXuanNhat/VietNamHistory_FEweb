@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SessionService {
+  
   private emailSubject = new BehaviorSubject<string>(''); 
   email$ = this.emailSubject.asObservable();
   private descriptionUserSubject = new BehaviorSubject<string>(''); 
@@ -13,6 +14,9 @@ export class SessionService {
 
   constructor() { }
 
+  getKeyWordDocument(): string | null {
+    return sessionStorage.getItem('keyword_document');
+  }
   getName(){
     return sessionStorage.getItem('name');
   }
@@ -34,7 +38,9 @@ export class SessionService {
   getDescriptionUser(){
     return sessionStorage.getItem('descriptionuser');
   }
-
+  setKeyWordDocument(keyWord: string) {
+    sessionStorage.setItem('keyword_document', keyWord);
+  }
   setName(name: string) {
     sessionStorage.setItem('name', name);
   }

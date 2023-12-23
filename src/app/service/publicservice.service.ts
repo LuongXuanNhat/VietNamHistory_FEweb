@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AnswerFpkDto, AnswerQuestionDto, CommentPostDto, SubAnswerQuestionDto } from '../ObjectClass/object';
+import { AnswerFpkDto, AnswerQuestionDto, CommentPostDto, CreateExamHistoryDto, SubAnswerQuestionDto } from '../ObjectClass/object';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -52,6 +52,9 @@ export class PublicserviceService {
   documentSearch(keyWord: string){
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Document/Search?keyWord=' + keyWord);
+  }
+  downloadDocumentFile(url: string): Observable<HttpResponse<Blob>> {
+    return this.http.get(url, { observe: 'response', responseType: 'blob' });
   }
   ExamDetail(id: string){
     return this.http.get(this.apiurl + '/MultipleChoice/' + id);
@@ -198,7 +201,10 @@ export class PublicserviceService {
   ReportQuestion(data: any){
     return this.http.post(`${this.apiurl}/Question/Report`, data);
   }
-  SaveMyExam(data: FormData){
+  SaveDownloadDocument(documentId: string){
+    this.http.post(this.apiurl + '/Document/SaveDownloads?documentId=' + documentId, null);
+  }
+  SaveMyExam(data: CreateExamHistoryDto){
     return this.http.post(this.apiurl + '/ExamHistory', data);
   }
   SaveOrUnSave(data: FormData): Observable<any>{

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PublicserviceService } from '../service/publicservice.service';
 import { MultipleChoiceResponseDto } from '../ObjectClass/object';
 import { Router } from '@angular/router';
+import { SessionService } from '../service/session/session.service';
 
 @Component({
   selector: 'app-exam',
@@ -13,18 +14,22 @@ export class ExamComponent {
   exams!: MultipleChoiceResponseDto[];
   countResult!: number;
 
-  constructor(private service: PublicserviceService, private router: Router, ){
-    this.getExams();
+  constructor(private service: PublicserviceService, private router: Router,private session: SessionService ){
+    this.keyWord = session.getKeyWordDocument();
+    if(this.keyWord)
+      this.search();
+    else
+      this.getExams();
   }
 
 
   search(){
-    if(this.keyWord?.trim()){
+    if(this.keyWord && this.keyWord.trim()){
       this.service.ExamSearch(this.keyWord).subscribe(
         (data: any)=>{
           if(data.isSuccessed){
+            this.session.setKeyWordDocument(this.keyWord ?? '');
             this.exams = data.resultObj;
-            this.countResult = this.exams.length;
           }
         }
       )

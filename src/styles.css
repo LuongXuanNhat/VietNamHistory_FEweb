@@ -328,6 +328,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .fs{
     font-size: 14px;
 }
+.fs16 {
+    font-size: 1.2em ;
+}
 .right-aligned-dialog{
     margin-left: auto !important;
 }
