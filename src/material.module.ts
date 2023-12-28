@@ -21,6 +21,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule,MatRippleModule } from '@angular/material/core';
 import {  } from '@angular/material/form-field';
 
@@ -56,7 +57,7 @@ import {  } from '@angular/material/form-field';
         MatTooltipModule,
         MatButtonModule,
         MatSortModule,
-
+        MatBadgeModule
       ],
 })
 export class MaterialModule {

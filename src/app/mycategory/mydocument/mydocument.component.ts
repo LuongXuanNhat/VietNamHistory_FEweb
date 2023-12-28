@@ -81,7 +81,7 @@ export class MydocumentComponent {
       (data: any) => {
         if(data.isSuccessed){
           this.toastr.success("Đã xóa tài liệu");
-          location.reload();
+          window.location.reload();
         } else {
           this.toastr.error("Lỗi: " + data.message);
         }

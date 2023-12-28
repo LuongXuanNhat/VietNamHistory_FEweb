@@ -9,6 +9,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angula
 import { ForgetpassComponent } from '../../forgetpass/forgetpass.component';
 import { SessionService } from 'src/app/service/session/session.service';
 import { Location } from '@angular/common';
+import { DataService } from 'src/app/service/datashare/data.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ import { Location } from '@angular/common';
 export class LoginComponent {
   constructor (private builder: FormBuilder, private  toastr: ToastrService,private userService: UserService,
     private service: AuthService, private router: Router,private jwtHelper: JwtHelperService 
-    ,private dialog: MatDialog, private sessionService: SessionService, private location: Location){
+    ,private dialog: MatDialog, private sessionService: SessionService, private location: Location,
+    private dataService: DataService, ){
   }
   userdata: any;
   hide = true;

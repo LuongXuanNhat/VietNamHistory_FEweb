@@ -76,7 +76,7 @@ export class MyexamComponent {
       (data: any) => {
         if(data.isSuccessed){
           this.toastr.success("Đã xóa bài viết");
-          location.reload();
+          window.location.reload();
         } else {
           this.toastr.error("Lỗi: " + data.message);
         }

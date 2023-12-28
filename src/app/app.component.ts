@@ -1,7 +1,7 @@
-import { Component, OnInit , DoCheck, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit , DoCheck, ElementRef, ViewChild, OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
-import { AccountList, Category } from './ObjectClass/object';
+import { AccountList, Category, NotificationDto } from './ObjectClass/object';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './service/user.service';
@@ -14,6 +14,12 @@ import { AnimationService } from './service/animations/animation.service';
 import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
 import { CreateexamComponent } from './exam/createexam/createexam.component';
 import { Constant } from './service/constant';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { PublicserviceService } from './service/publicservice.service';
+import { format, parseISO } from 'date-fns';
+import viLocale from 'date-fns/locale/vi';
+import { Subscription } from 'rxjs';
+import { DataService } from './service/datashare/data.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +28,8 @@ import { Constant } from './service/constant';
 })
 
 export class AppComponent implements OnInit, DoCheck{
+  newNoti!: boolean;
+  checkLoginOne!: boolean;
   title = 'VietNamHistory';
   username: any;
   email: any;
@@ -39,20 +47,41 @@ export class AppComponent implements OnInit, DoCheck{
     { categoryname: 'Diễn đàn', url: '/forum' },
     { categoryname: 'Tin tức', url: '/news' }
   ];
-  
+  notifications: NotificationDto[] = [];
+  numberNotiNotSeen: number = 0;
+  private hubConnection!: HubConnection;
   
   constructor(private router : Router, private service: AuthService,
     private toastr: ToastrService, private sessionService: SessionService,
     private dialog: MatDialog,private animationService: AnimationService,
-    private breakpointObserver: BreakpointObserver){
-  }
+    private breakpointObserver: BreakpointObserver, private publicService: PublicserviceService){
 
+  }
   ngOnInit() {
     this.animationService.attachAnimationListener();
     this.animationService.attachAnimationListener_btn2();
     this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
       this.isScreenWideEnough = !result.matches;
     });
+    this.checkLoginOne = true;
+    this.newNoti = false;
+  }
+  getNotification() {
+    if(this.sessionService.getUserId() && this.checkLoginOne){
+      this.checkLoginOne = false;
+      this.publicService.GetMyNotification().subscribe(
+        (data: any) => {
+          if(data.isSuccessed){
+            this.notifications = this.ConvertNotisDate(data.resultObj);
+            this.getConnecttion();
+          } else {
+            this.toastr.error("Lỗi: " + data.message);
+          }
+        }, (error: any) => {
+          this.toastr.error("Lỗi: "+ error);
+        }
+      )
+    }
   }
   
   isMenuOpen = false;
@@ -143,8 +172,33 @@ export class AppComponent implements OnInit, DoCheck{
       this.username = this.sessionService.getName();
       this.email = this.sessionService.getEmail();
       this.avatar = this.avatar === '' ? null : this.avatar;
+      this.getNotification();
     }
     return this.service.IsLoggedIn();
+  }
+  getConnecttion() {
+    this.hubConnection = new HubConnectionBuilder()
+        .withUrl(this.publicService.getChatSignRl())
+        .build();
+  
+    this.hubConnection
+      .start()
+      .then(() => {
+        console.log('Kết nối thành công!');
+        this.hubConnection.invoke('AddToGroup', this.sessionService.getUserId());
+      })
+      .catch(err => console.error('Lỗi khi thiết lập kết nối:', err));
+
+    this.hubConnection.on('ReceiveNoti', (data: any) => {
+      if (data.userId === this.sessionService.getUserId()) {
+        this.notifications.push(this.ConvertNotiDate(data));
+        this.numberNotiNotSeen += 1;
+        this.newNoti = true;
+      }
+    });
+  }
+  openNotification(){
+    this.newNoti = false;
   }
   isCheckAdmin(){
     return this.sessionService.getRole() === Constant.adminRole;
@@ -154,6 +208,7 @@ export class AppComponent implements OnInit, DoCheck{
       this.sessionService.clearSessionStorage();
       this.service.logout();
       this.avatar = null;
+      this.notifications = [];
       this.router.navigate(['/login']);
     },
     (error: any) => {
@@ -177,5 +232,24 @@ export class AppComponent implements OnInit, DoCheck{
     if(this.sessionService.getRole() === Constant.studentRole){
       this.router.navigate(['/mycategory/examhistory']);
     }
+  }
+
+  ConvertNotiDate(notification: NotificationDto): NotificationDto{
+
+      const parsedDate = parseISO(notification.date ?? "");
+      if (!isNaN(parsedDate.getTime())) {
+        notification.date = format(parsedDate, 'dd-MM-yyyy hh:mm', { locale: viLocale });
+      }
+    return notification;
+  }
+
+  ConvertNotisDate(notifications: NotificationDto[]): NotificationDto[]{
+    notifications?.forEach(element => {
+      const parsedDate = parseISO(element.date ?? "");
+      if (!isNaN(parsedDate.getTime())) {
+        element.date = format(parsedDate, 'dd-MM-yyyy hh:mm', { locale: viLocale });
+      }
+    });
+    return notifications;
   }
 }

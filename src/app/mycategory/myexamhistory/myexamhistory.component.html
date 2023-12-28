@@ -20,7 +20,7 @@
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef mat-sort-header > Bài thi </th>
               <td mat-cell *matCellDef="let examhistory" style="cursor: pointer;" class="font"> 
-                <a (click)="ExamDetail(examhistory)" class="text-3-line">
+                <a (click)="ExamDetail(examhistory.multipleChoiceResponseDto)" class="text-3-line">
                     <strong>{{ examhistory.multipleChoiceResponseDto.title }}</strong>
                 </a>
               </td>

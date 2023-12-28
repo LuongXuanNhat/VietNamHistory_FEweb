@@ -33,6 +33,13 @@
   
 @media screen and (max-width: 600px) {
     .category-menu {
-      display: none; /* Ẩn thanh navbar khi chiều rộng màn hình nhỏ hơn 600px */
+      display: none;
     }
+}
+.new-notification {
+    color: #ff3e3e; 
+}
+
+.default-notification {
+    color: #7d7d7d;
 }

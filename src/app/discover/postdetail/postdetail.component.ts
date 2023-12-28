@@ -210,6 +210,20 @@ export class PostdetailComponent implements OnInit{
       width: '60%'
     });
   }
+  deletePost(){
+    this.service.DeletePost(this.postData?.id ?? '').subscribe(
+      (data: any) => {
+        if(data.isSuccessed){
+          this.toastr.success("Xóa bài thành công");
+          this.router.navigate(['/discover']);
+        } else {
+          this.toastr.error("Lỗi: " + data.message);
+        }
+      }, (error: any) => {
+        this.toastr.error("Lỗi: "+ error);
+      }
+    )
+  }
   copyToClipboard() {
     this.clipboardService.copy(this.service.getUrl() + this.currentUrl);
     this.toastr.info("Đã sao chép đường link");

@@ -3,6 +3,7 @@ import { PublicserviceService } from '../service/publicservice.service';
 import { MultipleChoiceResponseDto } from '../ObjectClass/object';
 import { Router } from '@angular/router';
 import { SessionService } from '../service/session/session.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-exam',
@@ -13,6 +14,10 @@ export class ExamComponent {
   keyWord!: string | null;
   exams!: MultipleChoiceResponseDto[];
   countResult!: number;
+  examNews: MultipleChoiceResponseDto[] = [];
+  currentPage: number = 1;
+  pageSize: number = 16;
+
 
   constructor(private service: PublicserviceService, private router: Router,private session: SessionService ){
     this.keyWord = session.getKeyWordDocument();
@@ -50,5 +55,16 @@ export class ExamComponent {
   GetExamDetail(exam: MultipleChoiceResponseDto) {
     const examId = exam.id;
     this.router.navigate(['/exam', examId]);
+  }
+
+  pageEvent(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.updatePagedExams();
+  }
+  updatePagedExams() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.examNews = this.exams.slice(startIndex, endIndex);
   }
 }

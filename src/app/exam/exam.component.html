@@ -24,7 +24,7 @@
         <img src="assets/Icon/banner_exam.jpg" alt="" class="b-exam">
     </div>
     <div class="flex-center-h" style="flex-wrap: wrap;">
-        <a *ngFor="let exam of exams" (click)="GetExamDetail(exam)"
+        <a *ngFor="let exam of examNews" (click)="GetExamDetail(exam)"
             class="underline-none exam-card mlr mt-1 plr pt pb cursor-p">
             <div class="flex-center-h">
                 <img src="assets/Icon/exam.png" alt="" style="width: 64px;">
@@ -45,5 +45,10 @@
                 <ng-template class="pl-1" #fullname>{{exam.userShort?.fullName}}</ng-template>
             </div>
         </a>
+        <mat-paginator [pageSize]="pageSize" 
+                        [pageIndex]="currentPage - 1" 
+                        [length]="exams.length" 
+                        [pageSizeOptions]="[16,32,48]"
+                        (page)="pageEvent($event)"></mat-paginator>
     </div>
 </div>

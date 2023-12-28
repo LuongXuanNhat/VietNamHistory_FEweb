@@ -64,9 +64,9 @@ export class ChatComponent {
     this.hubConnection
       .start()
       .then(() => {
-        console.log('Connection started!');
+        console.log('Kết nối thành công!');
       })
-      .catch(err => console.error('Error while establishing connection:', err));
+      .catch(err => console.error('Lỗi khi thiết lập kết nối:', err));
 
     // Listen to SignalR events
       this.hubConnection.on('ReceiveComment', (data: any) => {

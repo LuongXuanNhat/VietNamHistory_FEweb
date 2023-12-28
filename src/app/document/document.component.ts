@@ -25,7 +25,7 @@ export class DocumentComponent {
   countResult!: number;
   documentNews: DocumentResponseDto[] = [];
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 10;
 
   constructor(private router: Router, private service: PublicserviceService,
     private session: SessionService, private toastr: ToastrService){

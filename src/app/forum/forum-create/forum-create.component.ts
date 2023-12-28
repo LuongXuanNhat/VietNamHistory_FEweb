@@ -33,7 +33,7 @@ export class ForumCreateComponent implements OnInit{
 
   public editorConfig = {
     toolbar: ['undo','redo', '|','heading', '|', 'bold', 'italic', 'link','insertTable','blockQuote','mediaEmbed'],
-    placeholder: 'Miêu tả thêm ở đây... (không bắt buộc)',
+    placeholder: 'Miêu tả thêm ở đây... (bắt buộc)',
     language: 'vi',
   }
   public Editor = ClassicEditor;

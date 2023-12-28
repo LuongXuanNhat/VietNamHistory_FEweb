@@ -191,3 +191,13 @@ export interface ExamHistoryResponseDto {
   completionTime: number;
   starDate:  string;
 }
+
+export interface NotificationDto {
+  id?: string | null;
+  userId: string;
+  notificationId?: string | null;
+  idObject?: string | null;
+  content?: string | null;
+  date?: string | null;
+  url?: string | null;
+}

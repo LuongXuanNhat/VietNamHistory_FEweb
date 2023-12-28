@@ -25,7 +25,7 @@ export class SearchquestionComponent implements OnInit{
 
   questionNews: PostResponse[] = [];
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 10;
   
   constructor(private router: Router,private service: PublicserviceService, private dataService: DataService,private session: SessionService,
     private toastr: ToastrService ){
@@ -66,7 +66,8 @@ export class SearchquestionComponent implements OnInit{
           this.ConvertDate();
         }
       )
-    }
+    } 
+    this.router.navigate(['/forum/foryou']);
   }
   containsOnlySpaces(str: string): boolean {
     const trimmedStr = str.trim();

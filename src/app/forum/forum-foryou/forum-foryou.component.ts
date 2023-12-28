@@ -17,7 +17,7 @@ export class ForumForyouComponent implements OnInit {
   questions!: PostResponse[];
   questionNews: PostResponse[] = [];
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 10;
   
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService,private animationService: AnimationService,

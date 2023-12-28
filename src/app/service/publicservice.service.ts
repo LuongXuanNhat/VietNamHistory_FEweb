@@ -49,6 +49,9 @@ export class PublicserviceService {
   DeleteExam(id: string){
     return this.http.delete(this.apiurl + '/MultipleChoice?idMultipleChoice=' + id);
   }
+  DeletePost(id: string){
+    return this.http.delete(this.apiurl + '/Post/Delete?Id=' + id);
+  }
   deleteSubAnswer(idAnswer: string){
     return this.http.delete(this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer);
   }
@@ -119,6 +122,9 @@ export class PublicserviceService {
   }
   GetMyDocumentSaved(){
     return this.http.get(this.apiurl + '/Document/MySave');
+  }
+  GetMyNotification(){
+    return this.http.get(this.apiurl + '/Notification');
   }
   GetNews(){
     return this.http.get(this.apiurl + '/News');

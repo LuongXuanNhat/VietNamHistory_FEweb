@@ -360,11 +360,24 @@
       </button>
     </mat-menu>
 
-<!-- <button class="bubbly-button">Hello</button>
-<button class="bubbly-button-1">Hello</button> -->
-    <button class="dis-flex" mat-icon-button matTooltip="Thông báo" matTooltipPosition="below">
-      <mat-icon matBadge="1" matBadgeColor="warn" style="color: #7d7d7d;">notifications</mat-icon>
+    <!-- NOTIFICATION -->
+    <button class="dis-flex" (click)="openNotification()"
+            matBadgeSize="small"  [matMenuTriggerFor]="menuNotification" 
+            mat-icon-button matTooltip="Thông báo" matTooltipPosition="below">
+            <mat-icon [ngClass]="{'new-notification': newNoti, 'default-notification': !newNoti}">notifications</mat-icon>
     </button>
+    <mat-menu #menuNotification="matMenu">
+      <span style="text-align: center;" class="dis-block mb">Thông báo</span>
+      <ul style="max-height: 400px;">
+        <li *ngFor="let noti of notifications" routerLink="" class="plr cursor-d mt mb" style="font-size: 14px;">
+          {{ noti.content }}
+          <span>{{ noti.date }}</span>
+        </li>
+        <hr>
+      </ul>
+    </mat-menu>
+
+    <!-- ACCOUNT -->
     <button mat-icon-button [matMenuTriggerFor]="menuUser" *ngIf="isLoggedIn(); else loginLink" class="btn-user" >
       <img *ngIf="avatar; else avatarcommon" [src]="avatar" alt="ảnh đại diện" class="img-user-small">
 

@@ -74,4 +74,18 @@ export class MypostComponent implements OnInit{
       width: '60%'
     });
   }
+  deletePost(post: PostResponse){
+    this.service.DeletePost(post.id).subscribe(
+      (data: any) => {
+        if(data.isSuccessed){
+          this.toastr.success("Xóa bài thành công");
+          window.location.reload();
+        } else {
+          this.toastr.error("Lỗi: " + data.message);
+        }
+      }, (error: any) => {
+        this.toastr.error("Lỗi: "+ error);
+      }
+    )
+  }
 }
