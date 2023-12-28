@@ -181,3 +181,13 @@ export interface CreateExamHistoryDto {
   CompletionTime: number;
   StarDate: string;
 }
+
+export interface ExamHistoryResponseDto {
+  id?: string;
+  multipleChoiceResponseDto?: MultipleChoiceResponseDto;
+  userShortDto?: UserShortDto;
+  numberQuiz: number;
+  scores: number;
+  completionTime: number;
+  starDate:  string;
+}

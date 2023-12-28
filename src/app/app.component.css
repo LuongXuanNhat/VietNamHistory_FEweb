@@ -31,3 +31,8 @@
     text-overflow: ellipsis;
 }
   
+@media screen and (max-width: 600px) {
+    .category-menu {
+      display: none; /* Ẩn thanh navbar khi chiều rộng màn hình nhỏ hơn 600px */
+    }
+}

@@ -18,7 +18,6 @@ import { SessionService } from 'src/app/service/session/session.service';
 })
 export class ExamdetailComponent implements OnDestroy {
   currentUrl: any;
-  formData!: CreateExamHistoryDto;
   exam !: MultipleChoiceResponseDto;
   examId: any;
   startTime!: string; 
@@ -131,6 +130,7 @@ export class ExamdetailComponent implements OnDestroy {
     this.stopCountdown();
     this.calculatescore();
     this.btnSubmit = false;
+    this.SaveExam();
     if(this.score > 4){
       this.toastr.success("Chúc mừng bạn đã hoàn thành tốt bài thi","Điểm số của bạn là: "+this.score.toFixed(2), {
         timeOut: 6000
@@ -140,20 +140,22 @@ export class ExamdetailComponent implements OnDestroy {
         timeOut: 6000
       });
     }
-
-    this.SaveExam();
   }
   SaveExam() {
+    const formData = new FormData();
     this.CompletionTime = Math.ceil(this.CompletionTime / 60);
-    this.formData.CompletionTime = this.CompletionTime;
-    this.formData.MultipleChoiceId = this.exam.id;
-    this.formData.Scores = parseFloat(this.score.toFixed(2));
-    this.formData.StarDate = this.startTime;
+    const parsedScore = parseFloat(this.score.toFixed(2));
 
-    this.service.SaveMyExam(this.formData).subscribe(
+    formData.append('UserId', this.session.getUserId() ?? '');
+    formData.append('CompletionTime', this.CompletionTime.toString());
+    formData.append('MultipleChoiceId', this.exam.id.toString());
+    formData.append('Scores', parsedScore.toString().replace('.',','));
+    formData.append('StarDate', this.startTime.toString());
+
+    this.service.SaveMyExam(formData).subscribe(
       (data: any) => {
         if(data.isSuccessed){
-
+          console.log("Đã lưu điểm");
         } else {
           this.toastr.error(data.message);
         }

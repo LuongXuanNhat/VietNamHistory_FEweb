@@ -37,6 +37,9 @@
             ],
             "scripts": [
               "src/style.js",
+              "src/js/jquery-1.9.1.min.js",
+              "src/js/jquery.countdown.js",
+              "src/js/global.js",
               "./node_modules/hammerjs/hammer.min.js"
             ],
             "stylePreprocessorOptions": {

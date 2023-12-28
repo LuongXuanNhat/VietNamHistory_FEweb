@@ -18,7 +18,7 @@
             <button style="margin-left: 8px;" mat-icon-button class="scroll-button" (click)="scrollRight()"><span class="material-symbols-outlined">keyboard_arrow_right</span></button>
         </div>
         <div style="text-align: center;">
-            <div *ngFor="let post of posts" class="" style="display: inline-flex;" loading="lazy">
+            <div *ngFor="let post of postNews" style="display: inline-flex;">
                 <div>
                     <button matTooltip="Lưu vào xem sau" matTooltipPosition="right" mat-mini-fab *ngIf="!post.isSaved; else saved" (click)="IsSave(post, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;background-color: #00000073 ;">
                         <mat-icon class="material-symbols-outlined text-white">
@@ -53,6 +53,12 @@
                     </div>
                 </a>
             </div>
+            <mat-paginator [pageSize]="pageSize" 
+                        [pageIndex]="currentPage - 1" 
+                        [length]="posts.length" 
+                        [pageSizeOptions]="[3,5, 10]"
+                        (page)="pageEvent($event)"></mat-paginator>
+
         </div>
     </div>
     <div>

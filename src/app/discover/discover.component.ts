@@ -6,13 +6,14 @@ import { DataService } from  '../service/datashare/data.service'
 import { format, parseISO } from 'date-fns';
 import { SessionService } from '../service/session/session.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-discover',
   templateUrl: './discover.component.html',
   styleUrls: ['./discover.component.css'],
 })
-export class DiscoverComponent  {
+export class DiscoverComponent {
   keyWord!: string | null;
   @ViewChild('innerContainer') innerContainer!: ElementRef;
   posts: PostResponse[] = [];
@@ -25,6 +26,10 @@ export class DiscoverComponent  {
   }
   postSaved: PostResponse[] = [];
 
+  postNews: PostResponse[] = [];
+  currentPage: number = 1;
+  pageSize: number = 3;
+  
   constructor(private router: Router, private service: PublicserviceService, private dataService: DataService,
     private session: SessionService, private toastr: ToastrService) {
     this.getPosts();
@@ -43,6 +48,7 @@ export class DiscoverComponent  {
       this.service.getpostbytag(tag).subscribe(
         (result: any) => {
           this.posts = result.resultObj;
+          this.updatePagedPosts();
           this.posts.forEach(element => {
             if(element){
               const parsedDate = parseISO(element.createdAt);
@@ -90,6 +96,7 @@ export class DiscoverComponent  {
       (result: any) => {
         this.posts = result.resultObj;
         this.ConvertDate();
+        this.updatePagedPosts();
       },
       (error) => {
         console.error('Error fetching posts:', error);
@@ -147,7 +154,18 @@ export class DiscoverComponent  {
   search(){
     if(this.keyWord?.trim()){
       this.dataService.changeKeyword(this.keyWord);
-      this.router.navigate(['/search-posts']);
+      this.router.navigate(['/searchposts']);
     }
+  }
+  
+  pageEvent(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.updatePagedPosts();
+  }
+  updatePagedPosts() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.postNews = this.posts.slice(startIndex, endIndex);
   }
 }

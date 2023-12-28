@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { format, parseISO } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
@@ -21,6 +22,11 @@ export class SearchquestionComponent implements OnInit{
   questionSaved: PostResponse[] = [];
   isSave: boolean | null = null;
   selectedTag: string | null = null;
+
+  questionNews: PostResponse[] = [];
+  currentPage: number = 1;
+  pageSize: number = 3;
+  
   constructor(private router: Router,private service: PublicserviceService, private dataService: DataService,private session: SessionService,
     private toastr: ToastrService ){
       
@@ -37,6 +43,7 @@ export class SearchquestionComponent implements OnInit{
       this.service.questionSearch(this.keyWord).subscribe(
         (data: any)=>{
           this.questions = data.resultObj;
+          this.updatePagedQuestions();
           if(this.session.getUserId()){
             this.GetSaved();
           }
@@ -51,6 +58,7 @@ export class SearchquestionComponent implements OnInit{
       this.service.questionSearch(this.keyWord).subscribe(
         (data: any)=>{
           this.questions = data.resultObj;
+          this.updatePagedQuestions();
           if(this.session.getUserId()){
             this.GetSaved();
           }
@@ -90,6 +98,7 @@ export class SearchquestionComponent implements OnInit{
       this.service.getQuestionByTag(tag).subscribe(
         (result: any) => {
           this.questions = result.resultObj;
+          this.updatePagedQuestions();
           this.questions.forEach(element => {
             if(element){
               const parsedDate = parseISO(element.createdAt);
@@ -114,6 +123,7 @@ export class SearchquestionComponent implements OnInit{
     this.service.GetQuestionForYou().subscribe(
       (result: any) => {
         this.questions = result.resultObj;
+        this.GetSaved();
         if(this.questions.length > 0){
           this.ConvertDate();
         }
@@ -174,5 +184,16 @@ export class SearchquestionComponent implements OnInit{
       return true;
     }
     return false;
+  }
+
+  pageEvent(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.updatePagedQuestions();
+  }
+  updatePagedQuestions() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.questionNews = this.questions.slice(startIndex, endIndex);
   }
 }

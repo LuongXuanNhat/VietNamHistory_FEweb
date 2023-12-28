@@ -6,3 +6,11 @@
     padding: 16px 200px;
     justify-content: space-between;
 }
+.logo {
+    width: 32px;
+    height: 32px; 
+    object-fit: contain;
+    background-color: white;
+    padding: 4px;
+    border-radius: 50%;
+}

@@ -1,0 +1,23 @@
+.card-mypost {
+    object-fit: cover;
+    height: 130px;
+    width: 200px;
+}
+.seleted{
+    background-color: #3E50CA;
+    color: white;
+}
+.btn-interact{
+    display: flex !important;
+    left: 22px; position: fixed;
+}
+.text-6-line{
+    width: 200px;
+    line-height: 21px;
+    min-width: 40px;
+    height: 130px;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

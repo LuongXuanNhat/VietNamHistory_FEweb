@@ -305,18 +305,26 @@
 <!-- Toolbar -->
 <div class="toolbar body font" role="banner">
   <a routerLink="/home">
-    <img
-    width="40"
-    alt="Angular Logo"
-    src="assets/NguoiKeSu_min.png"
-  />
+    <img width="40" alt="Angular Logo" src="assets/Icon/pagoda64.png"/>
   </a>
 <a *ngIf="isadminuser" routerLink="/user" title="User">User</a>
-<div style="display: flex; justify-content: space-between; width: 100%;">
-  <div class=" category-menu" >
+<div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+
+  <!-- MENU -->
+  <button mat-button [matMenuTriggerFor]="menu" *ngIf="!isScreenWideEnough">
+    <mat-icon>menu</mat-icon>
+  </button>
+  
+  <mat-menu #menu="matMenu">
+    <ng-container *ngFor="let obj of objectList">
+      <button mat-menu-item [routerLink]="[obj.url]" routerLinkActive #rla="routerLinkActive" [class.active]="rla.isActive">
+        {{ obj.categoryname }}
+      </button>      
+    </ng-container>
+  </mat-menu>
+  <div class=" category-menu" *ngIf="isScreenWideEnough">
     <nav mat-tab-nav-bar [tabPanel]="tabPanel">
       <a mat-tab-link *ngFor="let obj of objectList" 
-        [disabled]="obj.categoryname === 'Học sử'"
         [routerLink]="[obj.url]" 
         routerLinkActive #rla="routerLinkActive" 
         [routerLinkActiveOptions]="{exact:true}"
@@ -357,7 +365,7 @@
     <button class="dis-flex" mat-icon-button matTooltip="Thông báo" matTooltipPosition="below">
       <mat-icon matBadge="1" matBadgeColor="warn" style="color: #7d7d7d;">notifications</mat-icon>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn(); else loginLink" class="btn-user" >
+    <button mat-icon-button [matMenuTriggerFor]="menuUser" *ngIf="isLoggedIn(); else loginLink" class="btn-user" >
       <img *ngIf="avatar; else avatarcommon" [src]="avatar" alt="ảnh đại diện" class="img-user-small">
 
       <ng-template #avatarcommon>
@@ -365,7 +373,7 @@
       </ng-template>
     </button>
   </div>
-    <mat-menu #menu="matMenu" >
+    <mat-menu #menuUser="matMenu" >
       <div style="padding: 8px 16px; border-bottom: 1px solid #e6e6e6;" class="flex-center fs">
         <img *ngIf="avatar; else avatarBig"  src="{{avatar}}" class="img-user">
         <ng-template #avatarBig >
@@ -388,8 +396,8 @@
         <mat-icon>logout</mat-icon>
         <a class="fs co-red" >Đăng xuất</a>
       </button>
-      
     </mat-menu>
+
     <mat-menu #category="matMenu">
       <button mat-menu-item routerLink="/mycategory/post">
         <mat-icon>menu_book</mat-icon>
@@ -399,9 +407,9 @@
         <mat-icon>local_library</mat-icon>
         <span class="fs">Bài học</span>
       </button>
-      <button mat-menu-item routerLink="/mycategory/myexam">
+      <button mat-menu-item (click)="checkRoute()">
         <mat-icon>edit_square</mat-icon>
-        <span class="fs">Bài tập</span>
+        <span class="fs">Trắc nghiệm</span>
       </button>
       <button mat-menu-item routerLink="/mycategory/question">
         <mat-icon>live_help</mat-icon>

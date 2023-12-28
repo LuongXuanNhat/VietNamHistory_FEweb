@@ -21,7 +21,10 @@ export class MycategoryComponent {
     
   ];
   defaultLink = this.objectList[0].url;
-  constructor(private router: Router){
+  constructor(private router: Router, private sessionService: SessionService){
 
+  }
+  isCheckAdmin(){
+    return this.sessionService.getRole() === 'admin'
   }
 }

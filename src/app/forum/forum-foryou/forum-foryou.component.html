@@ -1,5 +1,5 @@
 <div class="mt-1 mh-page">
-    <a *ngFor="let q of questions" (click)="redirectToQuestion(q)" >
+    <a *ngFor="let q of questionNews" (click)="redirectToQuestion(q)" >
         <div class="question-card">
             <strong class="text-3-line fs16">🔖{{q.title}}</strong>
             <div class="flex-center-h">
@@ -36,4 +36,9 @@
             </div>
         </div>
     </a>
+    <mat-paginator [pageSize]="pageSize" 
+                        [pageIndex]="currentPage - 1" 
+                        [length]="questions.length" 
+                        [pageSizeOptions]="[3,5, 10]"
+                        (page)="pageEvent($event)"></mat-paginator>
 </div>

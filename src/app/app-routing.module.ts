@@ -34,13 +34,17 @@ import { MydocumentsavedComponent } from './mycategory/mydocumentsaved/mydocumen
 import { ExamComponent } from './exam/exam.component';
 import { ExamdetailComponent } from './exam/examdetail/examdetail.component';
 import { MyexamComponent } from './mycategory/myexam/myexam.component';
+import { CourseComponent } from './course/course.component';
+import { MyexamhistoryComponent } from './mycategory/myexamhistory/myexamhistory.component';
+import { PermissionGuard } from './service/guard/permission.guard';
+import { UpdateexamComponent } from './exam/updateexam/updateexam.component';
 
 const routes: Routes = [
-  {path: 'home', component:HomeComponent},
+  {path: '', component:HomeComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'discover', component:DiscoverComponent},
-  {path: 'search-posts', component: SearchpageComponent},
+  {path: 'searchposts', component: SearchpageComponent},
   {path: 'discover/:postId', component: PostdetailComponent},
   {
     path: 'account',
@@ -64,7 +68,8 @@ const routes: Routes = [
       { path: 'document', component: MydocumentComponent },
       { path: 'postsaved', component: MypostsavedComponent },
       { path: 'documentsaved', component: MydocumentsavedComponent },
-      { path: 'exam', component: MyexamComponent },
+      { path: 'exam', component: MyexamComponent,canActivate: [PermissionGuard] }, 
+      { path: 'examhistory', component: MyexamhistoryComponent }, 
     ]
   },
   {path: 'forum', 
@@ -84,6 +89,8 @@ const routes: Routes = [
   {path: 'document/:documentId', component: DocumentdetailComponent},
   {path: 'exam', component:ExamComponent},
   {path: 'exam/:examId', component: ExamdetailComponent},
+  {path: 'exam/edit/:examId', component: UpdateexamComponent, canActivate: [PermissionGuard]},
+  {path: 'course', component: CourseComponent},
 ];
 
 @NgModule({

@@ -8,7 +8,7 @@ export class AuthService {
 
   constructor(private http: HttpClient ) { }
    apiurl = 'https://tyls.fun';
-  //  apiurl = 'https://localhost:7138';
+  // apiurl = 'https://localhost:7138';
   // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
   getApiUrl(){
     return this.apiurl;

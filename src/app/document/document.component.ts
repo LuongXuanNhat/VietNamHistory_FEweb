@@ -6,6 +6,7 @@ import { DataService } from '../service/datashare/data.service';
 import { ToastrService } from 'ngx-toastr';
 import { SessionService } from '../service/session/session.service';
 import { format, parseISO } from 'date-fns';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-document',
@@ -22,6 +23,9 @@ export class DocumentComponent {
   }
   documentSaved: DocumentResponseDto[] = [];
   countResult!: number;
+  documentNews: DocumentResponseDto[] = [];
+  currentPage: number = 1;
+  pageSize: number = 3;
 
   constructor(private router: Router, private service: PublicserviceService,
     private session: SessionService, private toastr: ToastrService){
@@ -33,9 +37,9 @@ export class DocumentComponent {
   getDocuments() {
     this.service.GetDocument().subscribe(
       (result: any) => {
-        
         this.documents = result.resultObj;
         this.ConvertDate();
+        this.updatePagedDocuments();
       },
       (error) => {
         console.error('Lỗi lấy danh sách:', error);
@@ -63,6 +67,7 @@ export class DocumentComponent {
         (data: any)=>{
           if(data.isSuccessed){
             this.documents = data.resultObj;
+            this.updatePagedDocuments();
             if(this.session.getUserId()){
               this.GetSaved();
             }
@@ -97,4 +102,14 @@ export class DocumentComponent {
     this.router.navigate(['/document', documentId]);
   }
   
+  pageEvent(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.updatePagedDocuments();
+  }
+  updatePagedDocuments() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.documentNews = this.documents.slice(startIndex, endIndex);
+  }
 }

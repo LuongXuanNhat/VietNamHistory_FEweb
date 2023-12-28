@@ -15,7 +15,7 @@
 }
 
 h1, h2, h3, h4, h5, h6, p, div, strong, a, button {
-    font-family: Be Vietnam !important;
+    font-family: 'Be Vietnam Pro', sans-serif !important;
 }
 p {
     margin: 0px !important;
@@ -137,6 +137,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .fw-5{
     font-weight: 500;
 }
+.fw-6{
+    font-weight: 600;
+}
 
 .dis-block{
     display: block;
@@ -149,6 +152,14 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 }
 .dis-grid{
     display: grid !important;
+}
+.exam-card {
+    width: 23.5%;
+    max-width: 264px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.exam-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .flex-center{
     display: flex;
@@ -319,6 +330,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .pb-1{
     padding-bottom: 16px;
 }
+.pb-2{
+    padding-bottom: 16px;
+}
 .pr{
     padding-right: 8px;
 }
@@ -329,6 +343,9 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     font-size: 14px;
 }
 .fs16 {
+    font-size: 1.2em ;
+}
+.fs18 {
     font-size: 1.2em ;
 }
 .right-aligned-dialog{
@@ -343,6 +360,15 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     border-radius: 4px;
     margin-bottom: auto;
     margin-top: 4px;
+}
+.tag-free{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 12px;
+    font-size: 10px;
+    padding:0px 6px 1px;
+    display: flex;
+    background-color: #7286e4;
+    color: white;
 }
 .text-2-line{
     height: 41.6px;
@@ -382,15 +408,6 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
 .use-space {
     white-space: pre-line;
 }
-.w-100 {
-    width: 100%;
-}
-.w-50 {
-    width: 50%;
-}
-.w-40 {
-    width: 40%;
-}
 
 .selected{
     background-color: #7989f4 !important;
@@ -418,13 +435,32 @@ body { margin: 0; font-family: Be Vietnam, "Montserrat", sans-serif !important; 
     width: 30em;
     height: 30px;
 }
+.w-100 {
+    width: 100%;
+}
+
+
 .w-90 {
     width: 90%;
 }
 .w-80 {
     width: 80%;
 }
-
+.w-75 {
+    width: 75%;
+}
+.w-50 {
+    width: 50%;
+}
+.w-40 {
+    width: 40%;
+}
+.w-25 {
+    width: 25%;
+}
+.w-10 {
+    width: 10%;
+}
 
 /* COLOR  */
 .co-primary {

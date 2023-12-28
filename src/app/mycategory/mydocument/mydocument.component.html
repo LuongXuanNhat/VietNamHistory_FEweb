@@ -19,13 +19,13 @@
             <!-- Title Column -->
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef mat-sort-header > Tiêu đề </th>
-              <td mat-cell *matCellDef="let question" style="cursor: pointer;" class="font"> 
-                <a (click)="QuestionDetail(question)" class="text-5-line">
-                <strong>{{ question.title }}</strong>
+              <td mat-cell *matCellDef="let document" style="cursor: pointer;" class="font"> 
+                <a (click)="DocumentDetail(document)" class="text-5-line">
+                <strong>{{ document.title }}</strong>
                 </a>
                 <div class="mb">
-                    <button class="mr text-white" style="border-radius: 2px; background-color:#ED7D2D ; border: none;" (click)="updateQuestion(question)">Sửa</button>
-                <button class="text-white" style="border-radius: 2px; background-color:#DE3B40 ; border: none;">Xóa</button>
+                    <button class="mr text-white" style="border-radius: 2px; background-color:#ED7D2D ; border: none;" (click)="UpdateQuestion(document)">Sửa</button>
+                <button class="text-white" style="border-radius: 2px; background-color:#DE3B40 ; border: none;" (click)="DeleteDocument(document)">Xóa</button>
                 </div>
               </td>
             </ng-container>

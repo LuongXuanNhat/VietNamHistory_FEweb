@@ -6,6 +6,7 @@ import { PublicserviceService } from 'src/app/service/publicservice.service';
 import { format, parseISO } from 'date-fns';
 import { SessionService } from 'src/app/service/session/session.service';
 import { ToastrService } from 'ngx-toastr';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -23,6 +24,10 @@ export class SearchpageComponent implements OnInit{
   isSave: boolean | null = null;
   selectedTag: string | null = null;
 
+  postNews: PostResponse[] = [];
+  currentPage: number = 1;
+  pageSize: number = 3;
+
   constructor(private router: Router,private service: PublicserviceService,private route: ActivatedRoute
     , private dataService: DataService,private session: SessionService,private toastr: ToastrService){
     this.getTags(20);
@@ -39,6 +44,7 @@ export class SearchpageComponent implements OnInit{
       this.service.postSearch(this.keyWord).subscribe(
         (data: any)=>{
           this.posts = data.resultObj;
+          this.updatePagedPosts();
           if(this.session.getUserId()){
             this.GetSaved();
           }
@@ -53,6 +59,7 @@ export class SearchpageComponent implements OnInit{
       this.service.postSearch(this.keyWord).subscribe(
         (data: any)=>{
           this.posts = data.resultObj;
+          this.updatePagedPosts();
           if(this.session.getUserId()){
             this.GetSaved();
           }
@@ -61,6 +68,7 @@ export class SearchpageComponent implements OnInit{
         }
       )
     }
+    this.router.navigate(['/discover']);
   }
   containsOnlySpaces(str: string): boolean {
     const trimmedStr = str.trim();
@@ -92,6 +100,7 @@ export class SearchpageComponent implements OnInit{
       this.service.getpostbytag(tag).subscribe(
         (result: any) => {
           this.posts = result.resultObj;
+          this.updatePagedPosts();
           this.posts.forEach(element => {
             if(element){
               const parsedDate = parseISO(element.createdAt);
@@ -116,6 +125,7 @@ export class SearchpageComponent implements OnInit{
     this.service.GetPost().subscribe(
       (result: any) => {
         this.posts = result.resultObj;
+        this.updatePagedPosts();
         if(this.posts.length > 0){
           this.ConvertDate();
         }
@@ -178,4 +188,14 @@ export class SearchpageComponent implements OnInit{
     return false;
   }
 
+  pageEvent(event: PageEvent) {
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.updatePagedPosts();
+  }
+  updatePagedPosts() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.postNews = this.posts.slice(startIndex, endIndex);
+  }
 }

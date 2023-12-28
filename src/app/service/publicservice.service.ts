@@ -37,11 +37,17 @@ export class PublicserviceService {
   CreateForumSubAnswer(data: SubAnswerQuestionDto){
     return this.http.post(this.apiurl + '/Answer/SubAnswer', data);
   }
+  deleteAnswer(idAnswer: string){
+    return this.http.delete(this.apiurl + '/Answer/delete?idAnswer=' + idAnswer);
+  }
   deleteComment(id: string){
     return this.http.delete(this.apiurl + '/Post/Chat?idComment=' + id);
   }
-  deleteAnswer(idAnswer: string){
-    return this.http.delete(this.apiurl + '/Answer/delete?idAnswer=' + idAnswer);
+  DeleteDocument(id: string){
+    return this.http.delete(this.apiurl + '/Document/Delete?id=' + id);
+  }
+  DeleteExam(id: string){
+    return this.http.delete(this.apiurl + '/MultipleChoice?idMultipleChoice=' + id);
   }
   deleteSubAnswer(idAnswer: string){
     return this.http.delete(this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer);
@@ -95,6 +101,12 @@ export class PublicserviceService {
   }
   GetMyDocument(){
     return this.http.get(this.apiurl + '/Document/MyDocument');
+  }
+  GetMyExam(){
+    return this.http.get(this.apiurl + '/MultipleChoice/MyMultipleChoice');
+  }
+  GetMyExamHistory(){
+    return this.http.get(this.apiurl + '/ExamHistory/GetMyExamHistory');
   }
   GetMyQuestion(){
     return this.http.get(this.apiurl + '/Question/MyQuestion');
@@ -204,7 +216,7 @@ export class PublicserviceService {
   SaveDownloadDocument(documentId: string){
     this.http.post(this.apiurl + '/Document/SaveDownloads?documentId=' + documentId, null);
   }
-  SaveMyExam(data: CreateExamHistoryDto){
+  SaveMyExam(data: FormData){
     return this.http.post(this.apiurl + '/ExamHistory', data);
   }
   SaveOrUnSave(data: FormData): Observable<any>{
@@ -219,6 +231,9 @@ export class PublicserviceService {
   UpdateDocument(data: FormData){
     return this.http.put(this.apiurl + '/Document', data);
   }
+  UpdateExam(data: FormData){
+    return this.http.put(this.apiurl + '/MultipleChoice', data);
+  }
   UpdatePost(data: FormData){
     return this.http.put(this.apiurl + '/Post', data);
   }
@@ -227,6 +242,9 @@ export class PublicserviceService {
   }
   UpdateQuestion(data: FormData){
     return this.http.put(this.apiurl + '/Question', data);
+  }
+  UpdateQuizOfExam(data: any){
+    return this.http.put(this.apiurl + '/MultipleChoice/QuizById', data);
   }
   UpdateForumAnswer(data: AnswerQuestionDto){
     return this.http.put(this.apiurl + '/Answer', data);

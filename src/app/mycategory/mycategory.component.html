@@ -18,9 +18,9 @@
           <mat-icon>local_library</mat-icon>
           <span class="fs">Bài học</span>
         </button>
-        <button mat-menu-item disabled routerLink="/mycategory/post">
+        <button *ngIf="isCheckAdmin()" mat-menu-item routerLink="/mycategory/exam">
           <mat-icon>edit_square</mat-icon>
-          <span class="fs">Bài tập</span>
+          <span class="fs">Trắc nghiệm</span>
         </button>
         <button mat-menu-item routerLink="/mycategory/question">
           <mat-icon>live_help</mat-icon>

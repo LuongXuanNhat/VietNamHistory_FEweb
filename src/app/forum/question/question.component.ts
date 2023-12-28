@@ -232,7 +232,7 @@ export class QuestionComponent implements OnInit{
   }
   findByTag(tagName: string){
     this.dataService.changeKeyword('#'+tagName);
-      this.router.navigate(['/search-posts']);
+      this.router.navigate(['/searchquestion']);
   }
   toggleThumb() {
     if(!this.session.getUserId()){

@@ -12,67 +12,156 @@
         </div>
     </div>
     <div>
-        <div class="mt-60">
+        <div class="mt-60 pt-2 pb-2 mlr" style="background-color: #000000b8;" matTooltip="SẮP RA MẮT">
             <div class="flex-center-sb">
-                <h5>Khóa học</h5>
-                <p style="font-size: 12px;"><i>xem thêm</i></p>
+                <h5 class="card-title text-white">Khóa học</h5>
+                <p style="font-size: 12px;"><i class="text-white">xem thêm</i></p>
             </div>
             <div class="flex-center-sb">
-                <a href="" class="underline-none text-black po-re dis-flex" style="width: 270px;">
-                    <img src="assets/Icon/contest1.png" alt="" class="po-ab" style="width: 100%; object-fit: contain;">
+                <a href="" class="underline-none text-black card-course" >
+                    <img src="assets/Icon/contest1.png" alt="" class="" style="width: 100%; object-fit: contain;">
                     <div class="mt flex-center-sb plr">
                         <div>⭐⭐⭐⭐⭐</div>
-                        <div style="font-size: 12px; background-color: #4069E5; border-radius: 4px;">Miễn phí</div>
+                        <div class="tag-free">Miễn phí</div>
                     </div>
-                    <div class="text-2-line">Lịch sử Việt Nam ( giai đoạn 1945 -1954 )</div>
-                    <div class="flex-center-h">
-                        <div>🖊️</div>
+                    <div class="text-title-line text-white plr pt">Lịch sử Việt Nam ( giai đoạn 1945 -1954 )</div>
+                    <div class="flex-center-h text-white plr">
+                        <div>📝</div>
                         <div class="pl">Nguyễn Văn Nam</div>
                     </div>
                 </a>
-                <a href="" class="underline-none text-black po-re dis-flex" style="width: 270px;">
-                    <img src="assets/Icon/contest2.png" alt="" class="po-ab" style="width: 100%; object-fit: contain;">
+                <a href="" class="underline-none text-black card-course">
+                    <img src="assets/Icon/contest2.png" alt="" class="" style="width: 100%; object-fit: contain;">
+                    <div class="dis-block">
+                        <div class="mt flex-center-sb plr">
+                            <div>⭐⭐⭐⭐⭐</div>
+                            <div  class="tag-free">Miễn phí</div>
+                        </div>
+                        <div class="text-title-line text-white plr pt">Các cuộc khởi nghĩa trong thời gian 1000 năm Bắc thuộc</div>
+                        <div class="flex-center-h text-white plr">
+                            <div>📝</div>
+                            <div class="pl">Nguyễn Xuân Văn Tài</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="underline-none text-black card-course">
+                    <img src="assets/Icon/contest3.png" alt="" class="" style="width: 100%; object-fit: contain;">
                     <div class="mt flex-center-sb plr">
                         <div>⭐⭐⭐⭐⭐</div>
-                        <div style="font-size: 12px; background-color: #4069E5; border-radius: 4px;">Miễn phí</div>
+                        <div  class="tag-free">Miễn phí</div>
                     </div>
-                    <div class="text-2-line">Các cuộc khởi nghĩa trong thời gian 1000 năm Bắc thuộc</div>
-                    <div class="flex-center-h">
-                        <div>🖊️</div>
-                        <div class="pl">Nguyễn Xuân Văn Tài</div>
-                    </div>
-                </a><a href="" class="underline-none text-black po-re dis-flex" style="width: 270px;">
-                    <img src="assets/Icon/contest3.png" alt="" class="po-ab" style="width: 100%; object-fit: contain;">
-                    <div class="mt flex-center-sb plr">
-                        <div>⭐⭐⭐⭐⭐</div>
-                        <div style="font-size: 12px; background-color: #4069E5; border-radius: 4px;">Miễn phí</div>
-                    </div>
-                    <div class="text-2-line">HỌC LỊCH SỬ THEO CHỦ ĐỀ - NHỮNG VẤN ĐỀ THƯỜNG GẶP TRONG ĐỀ THI ...</div>
-                    <div class="flex-center-h">
-                        <div>🖊️</div>
+                    <div class="text-title-line text-white plr pt">HỌC LỊCH SỬ THEO CHỦ ĐỀ - NHỮNG VẤN ĐỀ THƯỜNG GẶP TRONG ĐỀ THI ...</div>
+                    <div class="flex-center-h text-white plr ">
+                        <div>📝</div>
                         <div class="pl">Đặng Mai Hương</div>
                     </div>
                 </a>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="flex-center-sb">
-            <h5>Luyện tập</h5>
-            <p style="font-size: 12px;"><i>xem thêm</i></p>
-        </div>
-        <div class="flex-center-sb">
-            <h5>Cuộc thi</h5>
-            <p style="font-size: 12px;"><i>xem thêm</i></p>
-        </div>
-        <div>
+        <div class="mt-2 mb-2">
             <div class="flex-center-sb">
-                <h5>Tham gia diễn đàn</h5>
-                <p style="font-size: 12px;"><i>Truy cập</i></p>
+                <h5 class="card-title">Luyện tập</h5>
+                <p style="font-size: 12px;" class="cursor-p" routerLink="/exam"><i>xem thêm</i></p>
             </div>
-            <img src="assets/Icon/Forum.jpg" alt="">
+            <div class="flex-center-h" style="flex-wrap: wrap;">
+                <a *ngFor="let exam of exams" (click)="GetExamDetail(exam)"
+                    class="underline-none exam-card mlr mt-1 plr pt pb cursor-p">
+                    <div class="flex-center-h">
+                        <img src="assets/Icon/exam.png" alt="" style="width: 64px;">
+                        <div style="display: grid;">
+                            <span>{{ exam.numberQuiz }} câu</span>
+                            <span>Thời gian: {{ exam.workTime }}'</span>
+                        </div>
+                        <div class="po-re" style="margin-left:auto ;top:-24px;">
+                            <span class="tag-free">miễn phí</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-3-line mt fs16 fw-6" >{{ exam.title }}</span>
+                    </div>
+                    <div class="dis-flex mt" >
+                        <img src="{{exam.userShort?.image === '' ? 'assets/Icon/user.png': exam.userShort?.image}}" alt="" class="icon-24">
+                        <span class="pl-1 w-90 of-h" *ngIf="exam.userShort?.fullName !== ''; else fullname">{{exam.userShort?.fullName}}</span>
+                        <ng-template class="pl-1" #fullname>{{exam.userShort?.fullName}}</ng-template>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="mt-2 mb-2">
+            <div class="flex-center-sb">
+                <h5 class="card-title">Tham gia diễn đàn</h5>
+                <p style="font-size: 12px;"  class="cursor-p" routerLink="/forum"><i>Truy cập</i></p>
+            </div>
+            <img src="assets/Icon/Forum.jpg" alt="" routerLink="/forum">
+        </div>
+        <div class="mt-2 mb-2">
+            <div class="flex-center-sb">
+                <h5 class="card-title">Bản tin lịch sử tổng hợp</h5>
+                <p style="font-size: 12px;"  class="cursor-p" routerLink="/news"><i>xem thêm</i></p>
+            </div>
+            <div class="dis-block">
+                <div >
+                    <div class="dis-flex">
+                        <a [href]="news[0].url" target="_blank" class="underline-none w-50 dis-block">
+                            <img class="img-news" src="{{news[0].image}}" loading="lazy" alt="ảnh tin tức">
+                            <div class="text-2-line">
+                                <strong class="fs16 ">
+                                    {{news[0].title}}
+                                </strong>
+                            </div>
+                            <div >
+                                {{news[0].createdAt}}
+                            </div>
+                        </a>
+                        <div class="dis-block w-50">
+                            <div class=" ml-1 mb-1">
+                                <a [href]="news[1].url" target="_blank" class="underline-none" class="dis-flex underline-none">
+                                    <img class="img-news-50" src="{{news[1].image}}" loading="lazy" alt="ảnh tin tức">
+                                    <div class="dis-block mlr mt text-black">
+                                        <div class="text-6-line">
+                                            <strong class="fs16 ">
+                                                {{news[1].title}}
+                                            </strong>
+                                        </div>
+                                        <div style="margin-left: auto; text-align: right;">
+                                            {{news[1].createdAt}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <div class=" ml-1 mb-1">
+                                <a [href]="news[2].url" target="_blank" class="underline-none" class="dis-flex underline-none">
+                                    <img class="img-news-50" src="{{news[2].image}}" loading="lazy" alt="ảnh tin tức">
+                                    <div class="dis-block mlr mt text-black">
+                                        <div class="text-6-line">
+                                            <strong class="fs16 ">
+                                                {{news[2].title}}
+                                            </strong>
+                                        </div>
+                                        <div style="margin-left: auto; text-align: right;">
+                                            {{news[2].createdAt}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>        
+                                <!-- <a [href]="news[3].url" target="_blank" class="underline-none" class="dis-flex underline-none">
+                                    <img class="img-news-50" src="{{news[3].image}}" loading="lazy" alt="ảnh tin tức">
+                                    <div class="dis-block">
+                                        <div>
+                                            <strong class="fs16">
+                                                {{news[3].title}}
+                                            </strong>
+                                        </div>
+                                        <div >
+                                            {{news[3].createdAt}}
+                                        </div>
+                                    </div>
+                                </a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

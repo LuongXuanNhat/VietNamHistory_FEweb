@@ -43,7 +43,6 @@ export class PostdetailComponent implements OnInit{
         this.postId = params['postId'] ?? '';
       });
       this.getDetail();
-      this.getPosts();
       this.getInteract();
       this.currentUrl = this.location.path();
   }
@@ -75,6 +74,7 @@ export class PostdetailComponent implements OnInit{
             this.postData.updatedAt = format(parsedDate2, 'dd-MM-yyyy');
           }
         }
+        this.getPosts();
       }
     )
   }
@@ -105,9 +105,10 @@ export class PostdetailComponent implements OnInit{
     }
   }
   getPosts(){
-    this.service.GetPost().subscribe(
+    this.service.getRandomPost(8).subscribe(
       (result: any) => {
-        this.posts = result.resultObj;
+        const stamps = result.resultObj as PostResponse[];
+        this.posts = stamps.filter(post => post.id !== this.postData?.id);
       },
       (error) => {
         console.error('Lỗi: ', error);
@@ -116,7 +117,7 @@ export class PostdetailComponent implements OnInit{
   }
   findByTag(tagName: string){
     this.dataService.changeKeyword('#'+tagName);
-      this.router.navigate(['/search-posts']);
+      this.router.navigate(['/searchposts']);
   }
   toggleThumb() {
     if(!this.session.getUserId()){

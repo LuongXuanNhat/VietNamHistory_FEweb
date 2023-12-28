@@ -59,20 +59,35 @@ export class MydocumentComponent {
       }
     });
   }
-  QuestionDetail(question: PostResponse) {
-    const questionId = question.subId;
-    this.router.navigate(['/forum', questionId]);
+  DocumentDetail(document: PostResponse) {
+    const documentId = document.subId;
+    this.router.navigate(['/document', documentId]);
   }
-  updateQuestion(question: PostResponse){
-    this.dataService.changeSubId(question.subId);
+  UpdateQuestion(document: PostResponse){
+    this.dataService.changeSubId(document.subId);
     this.openDialogUpdateQuestion('100ms', '600ms');
   }
   openDialogUpdateQuestion(enteranimation: any, exitanimation: any){
-    const popup = this.dialog.open(UpdatedocumentComponent
+    this.dialog.open(UpdatedocumentComponent
       , {
       enterAnimationDuration: enteranimation,
       exitAnimationDuration: exitanimation,
       width: '50%'
     });
+  }
+  DeleteDocument(document: PostResponse){
+    const documentId = document.subId;
+    this.service.DeleteDocument(documentId).subscribe(
+      (data: any) => {
+        if(data.isSuccessed){
+          this.toastr.success("Đã xóa tài liệu");
+          location.reload();
+        } else {
+          this.toastr.error("Lỗi: " + data.message);
+        }
+      }, (error: any) => {
+        this.toastr.error("Lỗi: "+ error);
+      }
+    )
   }
 }

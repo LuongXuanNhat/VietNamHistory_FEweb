@@ -11,7 +11,7 @@
         </div>
         <div class="show-seleted" style="width: 220px;">
             <div *ngFor="let q of exam.quizs;let i = index">
-                <div class="card-q cursor-p" (click)="move('q'+i)" 
+                <div class="card-q cursor-p flex-center" (click)="move('q'+i)" 
                 [class.selected]="isSelected(q.id) && !submited()"
                 [class.qtrue]="submited() && checkAnswer(q)"
                 [class.qfalse]="submited() && !checkAnswer(q)">

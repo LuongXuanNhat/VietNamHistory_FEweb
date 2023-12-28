@@ -1,1 +1,63 @@
-<p>updateexam works!</p>
+<div class="mt-60 plr-200">
+    <div class="flex-center-sb mt">
+        <span style="font-size: 24px;">
+            Cập nhập bài thi trắc nghiệm
+        </span>
+        <div matTooltip="{{updateExamForm.invalid  ? 'Vui lòng nhập đầy đủ thông tin' : ''}}">
+            <button mat-raised-button color="primary" [disabled]="updateExamForm.invalid" 
+            (click)="UpdateExam()" matTooltip="Chia sẻ">Cập nhập</button>
+        </div>
+    </div>
+    <form [formGroup]="updateExamForm">
+        <div class="mt"></div>
+        <mat-form-field class="w-100">
+            <input style="font-size: 1.2em;line-height: 0;" class="fw-5" matInput 
+                formControlName="Title" placeholder="Nhập tiêu đề ở đây..." value="{{ updateExamForm.value.Title }}" required >
+            <mat-error *ngIf="updateExamForm.get('Title')?.hasError('required')">
+                Tiêu đề là bắt buộc
+            </mat-error>
+            <mat-error *ngIf="updateExamForm.get('Title')?.hasError('maxlength')">
+                Tiêu đề không được quá dài hay quá ngắn
+            </mat-error>
+            <mat-error *ngIf="updateExamForm.get('Title')?.hasError('minlength')">
+                Tiêu đề không được quá ngắn
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100" style="max-height: 224px;">
+            <textarea class="fw-5" style="max-height: 180px;height: 180px;" matInput formControlName="Description" 
+                placeholder="Nhập mô tả tài liệu..." value="{{ updateExamForm.value.Description }}" required >
+            </textarea>
+            <mat-error *ngIf="updateExamForm.get('Description')?.hasError('maxlength')">
+                Mô tả không được quá dài
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100" style="max-height: 170px;">
+            <input class="fw-5" style="max-height: 126px;" matInput formControlName="Time" 
+                placeholder="Nhập thời gian thi... (phút)" value="{{ updateExamForm.value.Time }}" required >
+        </mat-form-field>
+    </form>
+    <div class="mt-2">
+        <span style="font-size: 24px;">Cập nhập câu hỏi và đáp án ({{ exam.quizs?.length }} câu)</span>
+        <div *ngFor="let quiz of exam.quizs; let i = index">
+            <form [formGroup]="quizForms[i]" (ngSubmit)="updateQuiz(i)">
+                <div>
+                    <div class="flex-center-sb mt">
+                        <span class="fs16">Câu hỏi {{ i+1 }}</span>
+                    </div>
+                    <mat-form-field class="w-100">
+                        <input matInput formControlName="content" />
+                    </mat-form-field>
+                    <div *ngFor="let a of quiz.quizAnswers; let j = index" class="ml-2">
+                        <mat-form-field class="w-90">
+                            <input matInput [formControl]="getAnswerControl(i, j)" />
+                        </mat-form-field>
+                        <mat-checkbox [formControl]="getIsCorrectControl(i, j)">
+                        </mat-checkbox>
+                    </div>
+                    <button type="submit"  mat-raised-button color="primary">Cập nhập câu hỏi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -8,11 +8,12 @@ import { UserService } from './service/user.service';
 import { SessionService } from './service/session/session.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatepostComponent } from './discover/createpost/createpost.component';
-import { MatMenu } from '@angular/material/menu';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ForumCreateComponent } from './forum/forum-create/forum-create.component';
 import { AnimationService } from './service/animations/animation.service';
 import { CreatedocumentComponent } from './document/createdocument/createdocument.component';
 import { CreateexamComponent } from './exam/createexam/createexam.component';
+import { Constant } from './service/constant';
 
 @Component({
   selector: 'app-root',
@@ -28,8 +29,9 @@ export class AppComponent implements OnInit, DoCheck{
   ismenurequired = false;
   isadminuser = false;
   token: any;
+  isScreenWideEnough: boolean = true;
   objectList: Category[] = [
-    { categoryname: 'Trang chủ', url: '/home' },
+    { categoryname: 'Trang chủ', url: '/' },
     { categoryname: 'Khám phá', url: '/discover' },
     { categoryname: 'Học sử', url: '/course' },
     { categoryname: 'Luyện tập', url: '/exam' },
@@ -41,12 +43,16 @@ export class AppComponent implements OnInit, DoCheck{
   
   constructor(private router : Router, private service: AuthService,
     private toastr: ToastrService, private sessionService: SessionService,
-    private dialog: MatDialog,private animationService: AnimationService){
+    private dialog: MatDialog,private animationService: AnimationService,
+    private breakpointObserver: BreakpointObserver){
   }
 
   ngOnInit() {
     this.animationService.attachAnimationListener();
     this.animationService.attachAnimationListener_btn2();
+    this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      this.isScreenWideEnough = !result.matches;
+    });
   }
   
   isMenuOpen = false;
@@ -141,7 +147,7 @@ export class AppComponent implements OnInit, DoCheck{
     return this.service.IsLoggedIn();
   }
   isCheckAdmin(){
-    return this.sessionService.getRole() === 'admin'
+    return this.sessionService.getRole() === Constant.adminRole;
   }
   logout(){
     this.service.LogOut().subscribe( (res: any) => {
@@ -163,5 +169,13 @@ export class AppComponent implements OnInit, DoCheck{
   loginUser(){
     const currentUrl = this.router.url;
     this.router.navigate(['/login'], { state: { redirect: currentUrl } });
+  }
+  checkRoute(){
+    if(this.isCheckAdmin()){
+      this.router.navigate(['/mycategory/exam']);
+    }
+    if(this.sessionService.getRole() === Constant.studentRole){
+      this.router.navigate(['/mycategory/examhistory']);
+    }
   }
 }

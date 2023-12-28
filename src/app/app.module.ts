@@ -67,6 +67,11 @@ import { UpdateexamComponent } from './exam/updateexam/updateexam.component';
 import { ExamdetailComponent } from './exam/examdetail/examdetail.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MyexamComponent } from './mycategory/myexam/myexam.component';
+import { CourseComponent } from './course/course.component';
+import { CountdownService } from './service/countdown-service.service';
+import { MyexamhistoryComponent } from './mycategory/myexamhistory/myexamhistory.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MyPaginatorIntl } from './service/MatPaginatorIntl';
 
 @NgModule({
   declarations: [
@@ -119,7 +124,9 @@ import { MyexamComponent } from './mycategory/myexam/myexam.component';
     CreateexamComponent,
     UpdateexamComponent,
     ExamdetailComponent,
-    MyexamComponent
+    MyexamComponent,
+    CourseComponent,
+    MyexamhistoryComponent
   ],
   imports: [
     RouterModule,
@@ -160,6 +167,8 @@ import { MyexamComponent } from './mycategory/myexam/myexam.component';
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
     { provide: ScrollStrategyOptions, useClass: ScrollStrategyOptions },
     [AnimationService],
+    CountdownService,
+    { provide: MatPaginatorIntl, useClass: MyPaginatorIntl }
   ],
   bootstrap: [AppComponent]
 })
