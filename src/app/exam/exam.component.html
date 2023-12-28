@@ -45,7 +45,7 @@
                 <ng-template class="pl-1" #fullname>{{exam.userShort?.fullName}}</ng-template>
             </div>
         </a>
-        <mat-paginator [pageSize]="pageSize" 
+        <mat-paginator [pageSize]="pageSize" class="mt-1"
                         [pageIndex]="currentPage - 1" 
                         [length]="exams.length" 
                         [pageSizeOptions]="[16,32,48]"

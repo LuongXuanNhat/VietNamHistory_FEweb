@@ -35,6 +35,7 @@ export class ExamComponent {
           if(data.isSuccessed){
             this.session.setKeyWordDocument(this.keyWord ?? '');
             this.exams = data.resultObj;
+            this.updatePagedExams();
           }
         }
       )
@@ -46,6 +47,7 @@ export class ExamComponent {
     this.service.GetExam().subscribe(
       (result: any) => {
         this.exams = result.resultObj;
+        this.updatePagedExams();
       },
       (error) => {
         console.error('Lỗi lấy danh sách:', error);
