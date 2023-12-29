@@ -14,7 +14,7 @@ export class AnimationService {
     this.renderer.addClass(target, 'animate');
     setTimeout(() => {
       this.renderer.removeClass(target, 'animate');
-    }, 700);
+    }, 1000);
   };
 
   attachAnimationListener() {
@@ -29,7 +29,7 @@ export class AnimationService {
     this.renderer.addClass(target, 'animate1');
     setTimeout(() => {
       this.renderer.removeClass(target, 'animate1');
-    }, 700);
+    }, 1000);
   };
 
   attachAnimationListener_btn2() {

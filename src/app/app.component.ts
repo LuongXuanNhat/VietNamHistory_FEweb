@@ -74,6 +74,7 @@ export class AppComponent implements OnInit, DoCheck{
           if(data.isSuccessed){
             this.notifications = this.ConvertNotisDate(data.resultObj);
             this.getConnecttion();
+            // this.SortNoti();
           } else {
             this.toastr.error("Lỗi: " + data.message);
           }
@@ -83,6 +84,13 @@ export class AppComponent implements OnInit, DoCheck{
       )
     }
   }
+  // SortNoti() {
+  //   this.notifications.sort((a, b) => {
+  //     const dateA = new Date(a.date || '');
+  //     const dateB = new Date(b.date || '');
+  //     return dateB.getTime() - dateA.getTime();
+  //   });
+  // }
   
   isMenuOpen = false;
 
@@ -191,7 +199,8 @@ export class AppComponent implements OnInit, DoCheck{
 
     this.hubConnection.on('ReceiveNoti', (data: any) => {
       if (data.userId === this.sessionService.getUserId()) {
-        this.notifications.push(this.ConvertNotiDate(data));
+        this.notifications.unshift(this.ConvertNotiDate(data));
+        // this.SortNoti();
         this.numberNotiNotSeen += 1;
         this.newNoti = true;
       }
@@ -238,7 +247,7 @@ export class AppComponent implements OnInit, DoCheck{
 
       const parsedDate = parseISO(notification.date ?? "");
       if (!isNaN(parsedDate.getTime())) {
-        notification.date = format(parsedDate, 'dd-MM-yyyy hh:mm', { locale: viLocale });
+        notification.date = format(parsedDate, 'dd-MM-yyyy HH:mm');
       }
     return notification;
   }
@@ -247,7 +256,7 @@ export class AppComponent implements OnInit, DoCheck{
     notifications?.forEach(element => {
       const parsedDate = parseISO(element.date ?? "");
       if (!isNaN(parsedDate.getTime())) {
-        element.date = format(parsedDate, 'dd-MM-yyyy hh:mm', { locale: viLocale });
+        element.date = format(parsedDate, 'dd-MM-yyyy HH:mm');
       }
     });
     return notifications;

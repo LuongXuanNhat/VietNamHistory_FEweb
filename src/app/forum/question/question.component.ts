@@ -575,7 +575,7 @@ export class QuestionComponent implements OnInit{
           this.animation.animateButton(target);
           setTimeout(() => {
             this.GetAnswers();
-          }, 5);
+          }, 1000);
 
         } else {
           this.toastr.error("Lỗi: " + data.message);
