@@ -17,12 +17,7 @@
 .ie body {
 	filter: dropshadow(color=#000000, offx=0, offy=1);	
 }
-h1 {
-	font-size:50px !important;
-	letter-spacing:-2px;	
-	line-height:40px; 
-	text-align:center;  
-}
+
 .ie h1 {
 	filter: dropshadow(color=#000000, offx=0, offy=3);
 	padding-bottom:12px;	
@@ -62,7 +57,8 @@ border-radius: 180px;
 .logo h1{
 color:#0f66b1;
 font-weight:600;
-
+margin-top: 32px;
+margin-bottom: 16px;
 }
 .logo img {
 width: 80px;

@@ -42,8 +42,8 @@
 <div class="mt-60 plr-300 h-page">
    
     <div>
-        <span style="font-size: 20px;" class="pt-1 pb-1 dis-block">📒 {{document.title}}</span>
-        <span class="use-space">{{ document.description }}</span>
+        <h1 class="pt-1 pb-1 dis-block fw-6">📒 {{document.title}}</h1>
+        <p class="use-space">{{ document.description }}</p>
         <div class="dis-flex mb mt-1" style="float: right;">
             <div class="flex-center-h" *ngIf="document.type === 'pdf'; else docx" matTooltip="Tải tài liệu" matTooltipPosition="left">
                 <a (click)="downloadPdfFile()">

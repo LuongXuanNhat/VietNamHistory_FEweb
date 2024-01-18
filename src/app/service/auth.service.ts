@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   loginWithFacebook(){
-    const redirectUri = "https://localhost:7138/FacebookCallback";
+    const redirectUri = "https://tyls/FacebookCallback";
     const facebookAuthUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=885411713156137&scope=email&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&state=12345agd`;
 
     const width = 400;

@@ -88,9 +88,9 @@
             </div>
         </div>
         <div>
-            <h5 class="font">{{postData?.title}}</h5>
+            <h1 class="font fw-6">{{postData?.title}}</h1>
             <div>
-                <div class="font" [innerHTML]="postData?.content" style="margin: 16px 0px;"></div>
+                <p class="font" [innerHTML]="postData?.content" style="margin: 16px 0px;"></p>
                 <div class="flex-center-sb">
                     <div ><strong>Lượt xem: {{postData?.viewNumber}}</strong> </div>
                     <div class="flex-center-h cursor-d" matTooltip="{{postData?.updatedAt ? 'Ngày cập nhập':'Ngày tạo'}}" matTooltipPosition="left">
@@ -117,8 +117,8 @@
             <p style="margin-top: 4px;"><strong>Các bài viết liên quan</strong></p>
         </div>
         <div>
-            <div *ngFor="let post of posts"  style="display:flex;">
-                <a class="small-post-card plr-12 font pt pb" (click)="postDetail(post)" >
+            <div *ngFor="let post of posts"  class="dis-flex">
+                <a class="small-post-card plr-12 font pt pb " (click)="postDetail(post)" >
                     <img src="{{post.image}}" alt="" class="post-img" loading="lazy">
                     <div style="display: inline-block;" class="pl">
                         <span class="text-3-line">{{post.title}}</span>

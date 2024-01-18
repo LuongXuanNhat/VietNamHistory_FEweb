@@ -1,15 +1,17 @@
 <div class="plr-200 mt-60 h-page">
     <div>
-        <div class="flex-center">
-            
-            <div class="search-container">
-                <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
-                <button class="btn-search" (click)="search()">
-                    <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
-                </button>
-            </div>
+        <div class="flex-center-sb">
+            <h1 class="card-title">Tài liệu lịch sử</h1>
             <div>
-                <div class="po-ab" *ngIf="countResult; " style="right: 24px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> tài liệu được tìm thấy</i></div>
+                <div class="search-container">
+                    <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
+                    <button class="btn-search" (click)="search()">
+                        <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    <div class="po-ab" *ngIf="countResult; " style="right: 24px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> tài liệu được tìm thấy</i></div>
+                </div>
             </div>
         </div>
         <div class="mt-1">

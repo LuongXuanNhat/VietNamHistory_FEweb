@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { format, parseISO } from 'date-fns';
@@ -11,7 +12,7 @@ import { SessionService } from 'src/app/service/session/session.service';
 @Component({
   selector: 'app-searchquestion',
   templateUrl: './searchquestion.component.html',
-  styleUrls: ['./searchquestion.component.css']
+  styleUrls: ['./searchquestion.component.css'],
 })
 export class SearchquestionComponent implements OnInit{
   @ViewChild('innerContainer') innerContainer!: ElementRef;
@@ -43,6 +44,7 @@ export class SearchquestionComponent implements OnInit{
       this.service.questionSearch(this.keyWord).subscribe(
         (data: any)=>{
           this.questions = data.resultObj;
+          console.log(data);
           this.updatePagedQuestions();
           if(this.session.getUserId()){
             this.GetSaved();
@@ -66,8 +68,8 @@ export class SearchquestionComponent implements OnInit{
           this.ConvertDate();
         }
       )
-    } 
-    this.router.navigate(['/forum/foryou']);
+    } else
+     this.router.navigate(['/forum/foryou']);
   }
   containsOnlySpaces(str: string): boolean {
     const trimmedStr = str.trim();

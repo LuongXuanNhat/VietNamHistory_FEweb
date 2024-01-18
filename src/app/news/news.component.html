@@ -1,20 +1,20 @@
 <div class="mt-60 plr-300 mh-page">
-    <h5 class="mt mb" style="text-align: center;">
-        📻 Bản tin lịch sử tổng hợp
-    </h5>
+    <h1 class="mt mb card-title">
+        📻 Bản tin lịch sử tổng hợp 
+    </h1>
     <div class="mt-1">
         <a *ngFor="let new of pagedNews" [href]="new.url" 
             class="flex-center-h mt text-black underline-none" target="_blank">
             <img class="img-news" src="{{new.image}}" loading="lazy" alt="ảnh tin tức">
             <div class="ml-1 dis-block">
                 <div>
-                    <strong style="font-size: 20px;">
+                    <h1 class="title">
                         {{new.title}}
-                    </strong>
+                    </h1>
                 </div>
-                <div>
+                <p>
                     {{new.description}}
-                </div>
+                </p>
                 <div style="float: inline-end;">
                     {{new.createdAt}}
                 </div>

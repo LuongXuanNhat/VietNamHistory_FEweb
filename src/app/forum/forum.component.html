@@ -1,6 +1,8 @@
 <div class="mt-60">
     <div>
-        <div style="width: 374px;" class="fixed-menu dis-flex" appScroll>
+        
+        <div class="fixed-menu dis-flex menu-forum" appScroll>
+          <h1 class="card-title">Diễn đàn lịch sử</h1>
             <nav mat-tab-nav-bar [tabPanel]="tabPanel">
               <a *ngFor="let cate of category" mat-tab-link class="pl-1"
               [routerLink]="cate.url" routerLinkActive #rla="routerLinkActive"
@@ -16,7 +18,7 @@
                       <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
                   </button>
               </div>
-          </div>
+              </div>
           </div> 
     </div>
     <div class="plr-200" >

@@ -45,7 +45,7 @@ const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'discover', component:DiscoverComponent},
   {path: 'searchposts', component: SearchpageComponent},
-  {path: 'discover/:postId', component: PostdetailComponent},
+  {path: 'discover/:postId', component: PostdetailComponent}, 
   {
     path: 'account',
     component: AccountComponent, canActivate: [AuthGuard] ,

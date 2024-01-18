@@ -35,12 +35,14 @@ export class ExamComponent {
           if(data.isSuccessed){
             this.session.setKeyWordDocument(this.keyWord ?? '');
             this.exams = data.resultObj;
+            this.countResult = this.exams.length;
             this.updatePagedExams();
           }
         }
       )
     } else {
       this.getExams();
+      this.countResult = 0;
     }
   }
   getExams() {

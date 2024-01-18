@@ -33,7 +33,7 @@ export class UpdateuserinforComponent implements OnInit {
 
   userform = this.builder.group({
     Email: this.builder.control('', Validators.required),
-    Fullname: this.builder.control('') ,
+    Fullname: this.builder.control('', Validators.required),
     Sex: this.builder.control(''),
     Gender: this.builder.control(0),
     DateOfBirth: this.builder.control(new Date()),

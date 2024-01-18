@@ -1,22 +1,25 @@
 <div class="plr-200 mt-60 h-page">
     <div>
-        <div class="flex-center">
-            <div style="left: 20px;" class="po-ab">
+        <div class="flex-center-sb">
+            <h1 class="card-title">Trắc nghiệm lịch sử</h1>
+            <!-- <div style="left: 20px;" class="po-ab">
                 <label for="dropdown" class="mr">Sắp xếp</label>
                 <select id="dropdown" name="dropdown" style="height: 30px; border-radius: 2px; border: 1px solid #ccc;">
                     <option value="1">Mới nhất</option>
                     <option value="2">Nhiều lượt thi nhất</option>
                     <option value="3">Đã làm</option>
                 </select> 
-            </div>
-            <div class="search-container">
-                <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
-                <button class="btn-search" (click)="search()">
-                    <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
-                </button>
-            </div>
+            </div> -->
             <div>
-                <div class="po-ab" *ngIf="countResult; " style="right: 24px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> bài tập được tìm thấy</i></div>
+                <div class="search-container">
+                    <input type="text" matInput [(ngModel)]="keyWord" placeholder="Tìm kiếm" class="input-search font" (keyup.enter)="search()">
+                    <button class="btn-search" (click)="search()">
+                        <mat-icon matSuffix matRipple class="mr btn-search-icon">search</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    <div class="po-ab" *ngIf="countResult > 0; " style="right: 24px;font-size: 12px; font-weight: 500;"><i><strong>{{countResult}}</strong> bài tập được tìm thấy</i></div>
+                </div>
             </div>
         </div>
     </div>

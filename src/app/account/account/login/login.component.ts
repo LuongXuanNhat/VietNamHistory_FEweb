@@ -37,8 +37,8 @@ export class LoginComponent {
     if(this.loginform.valid){
       this.service.Login(this.loginform.value).subscribe( (res: any) => {
         const resultObj = res.resultObj;
-        this.sessionService.setToken(resultObj);
         if(res.isSuccessed){
+          this.sessionService.setToken(resultObj);
           const decodedToken = this.jwtHelper.decodeToken(res.resultObj);
           const email = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
           const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];

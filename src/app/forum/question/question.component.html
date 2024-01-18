@@ -85,9 +85,9 @@
             </div>
         </div>
         <div>
-            <p class="font fs-20"> <strong>{{question?.title}}</strong></p>
+            <h1 class="fs-20 fw-6">{{question?.title}}</h1>
             <div>
-                <div class="font content-question mt-1 mb-1" [innerHTML]="question?.content" style="overflow: auto;"></div>
+                <p class="font content-question mt-1 mb-1" [innerHTML]="question?.content" style="overflow: auto;"></p>
                 <span class="flex-center-sb">
                     <div ><strong>Lượt xem: {{question?.viewNumber}}</strong></div>
                     <div class="flex-center-h cursor-d" matTooltip="{{question?.updatedAt == null ? 'Đã tạo' : 'Đã sửa'}}" matTooltipPosition="right">

@@ -22,14 +22,14 @@
         </div>
         <div >
             <div *ngFor="let question of questionNews" class="">
-                <div style="z-index: 1; margin-left: -3em;" class="po-re">
-                    <button matTooltip="Lưu vào xem sau" mat-mini-fab *ngIf="!question.isSaved; else saved" (click)="IsSave(question, $event)" class="btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;background-color: #00000073 !important;">
+                <div style="z-index: 1;margin-left: -4em;" class="po-re">
+                    <button matTooltip="Lưu vào xem sau" mat-mini-fab *ngIf="!question.isSaved; else saved" (click)="IsSave(question, $event)" class="btn-interact po-ab" style="margin-top: 16px;background-color: #00000073 !important;">
                         <mat-icon class="material-symbols-outlined text-white">
                             bookmark_add
                         </mat-icon>
                     </button>
                     <ng-template #saved >
-                        <button mat-mini-fab (click)="IsSave(question, $event)" class="selected btn-interact po-ab" style="margin-top: 16px; margin-left: 12px;">
+                        <button mat-mini-fab (click)="IsSave(question, $event)" class="selected btn-interact po-ab" style="margin-top: 16px;">
                             <mat-icon color="primary" class="material-symbols-outlined selected-icon text-white">
                                 bookmark_added
                             </mat-icon>
@@ -37,8 +37,8 @@
                     </ng-template>
                 </div>
                 <a (click)="questionDetail(question)" >
-                    <div class="question-card">
-                        <h6 class="text-3-line">🔖<strong >{{question.title}}</strong></h6>
+                    <div class="question-card" style="margin-top: 16px; ">
+                        <h2 class="text-3-line">🔖<strong >{{question.title}}</strong></h2>
                         <div class="flex-center-h">
                             <div class="flex-center-h plr-12">
                                 <span class="material-symbols-outlined pr">
