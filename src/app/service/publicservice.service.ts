@@ -3,267 +3,290 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AnswerFpkDto, AnswerQuestionDto, CommentPostDto, CreateExamHistoryDto, SubAnswerQuestionDto } from '../ObjectClass/object';
+import {
+  AnswerFpkDto,
+  AnswerQuestionDto,
+  CommentPostDto,
+  CreateExamHistoryDto,
+  SubAnswerQuestionDto,
+} from '../ObjectClass/object';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PublicserviceService {
-  
-  constructor(private http: HttpClient, private datePipe: DatePipe ,private authservice: AuthService) { }
-  url = "https://toiyeulichsu.com/#";
+  constructor(
+    private http: HttpClient,
+    private datePipe: DatePipe,
+    private authservice: AuthService
+  ) {}
+  url = 'https://toiyeulichsu.com/#';
   // url = "http://localhost:4200/VietNamHistory_FEweb/#";
   apiurl = this.authservice.getApiUrl();
-  
-  CreateDocument(data: FormData){
+
+  CreateDocument(data: FormData) {
     return this.http.post(this.apiurl + '/Document', data);
   }
-  CreateExam(data: FormData){
+  CreateExam(data: FormData) {
     return this.http.post(this.apiurl + '/MultipleChoice', data);
   }
-  CreatePost(data: FormData){
+  CreatePost(data: FormData) {
     return this.http.post(this.apiurl + '/Post', data);
   }
-  CreateQuestion(data: FormData){
+  CreateQuestion(data: FormData) {
     return this.http.post(this.apiurl + '/Question', data);
   }
-  CreatePostComment(data: CommentPostDto){
+  CreatePostComment(data: CommentPostDto) {
     return this.http.post(this.apiurl + '/Post/Chat', data);
   }
-  CreateForumAnswer(data: AnswerQuestionDto){
+  CreateForumAnswer(data: AnswerQuestionDto) {
     return this.http.post(this.apiurl + '/Answer', data);
   }
-  CreateForumSubAnswer(data: SubAnswerQuestionDto){
+  CreateForumSubAnswer(data: SubAnswerQuestionDto) {
     return this.http.post(this.apiurl + '/Answer/SubAnswer', data);
   }
-  deleteAnswer(idAnswer: string){
-    return this.http.delete(this.apiurl + '/Answer/delete?idAnswer=' + idAnswer);
+  deleteQuestion(id: string) {
+    return this.http.delete(this.apiurl + '/Question/Delete?Id=' + id);
   }
-  deleteComment(id: string){
+  deleteAnswer(idAnswer: string) {
+    return this.http.delete(
+      this.apiurl + '/Answer/delete?idAnswer=' + idAnswer
+    );
+  }
+  deleteComment(id: string) {
     return this.http.delete(this.apiurl + '/Post/Chat?idComment=' + id);
   }
-  DeleteDocument(id: string){
+  DeleteDocument(id: string) {
     return this.http.delete(this.apiurl + '/Document/Delete?id=' + id);
   }
-  DeleteExam(id: string){
-    return this.http.delete(this.apiurl + '/MultipleChoice?idMultipleChoice=' + id);
+  DeleteExam(id: string) {
+    return this.http.delete(
+      this.apiurl + '/MultipleChoice?idMultipleChoice=' + id
+    );
   }
-  DeletePost(id: string){
+  DeletePost(id: string) {
     return this.http.delete(this.apiurl + '/Post/Delete?Id=' + id);
   }
-  deleteSubAnswer(idAnswer: string){
-    return this.http.delete(this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer);
+  deleteSubAnswer(idAnswer: string) {
+    return this.http.delete(
+      this.apiurl + '/Answer/DeleteSub?idSubAnswer=' + idAnswer
+    );
   }
-  DocumentDetail(id: string){
+  DocumentDetail(id: string) {
     return this.http.get(this.apiurl + '/Document/' + id);
   }
-  documentSearch(keyWord: string){
+  documentSearch(keyWord: string) {
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Document/Search?keyWord=' + keyWord);
   }
   downloadDocumentFile(url: string): Observable<HttpResponse<Blob>> {
     return this.http.get(url, { observe: 'response', responseType: 'blob' });
   }
-  ExamDetail(id: string){
+  ExamDetail(id: string) {
     return this.http.get(this.apiurl + '/MultipleChoice/' + id);
   }
-  ExamSearch(keyWord: string){
+  ExamSearch(keyWord: string) {
     keyWord = encodeURIComponent(keyWord);
-    return this.http.get(this.apiurl + '/MultipleChoice/Search?keyWord=' + keyWord);
+    return this.http.get(
+      this.apiurl + '/MultipleChoice/Search?keyWord=' + keyWord
+    );
   }
-  getChatSignRl(): string{
+  getChatSignRl(): string {
     return this.apiurl + '/commentHub';
   }
   getCurrentDate(): string {
     const currentDate = new Date();
     return this.datePipe.transform(currentDate, 'dd/MM/yyyy') || '';
   }
-  GetDocument(){
+  GetDocument() {
     return this.http.get(this.apiurl + '/Document');
   }
-  GetExam(){
+  GetExam() {
     return this.http.get(this.apiurl + '/MultipleChoice');
   }
   getLike(postId: string, userId: string) {
     const params = {
-        PostId: postId,
-        UserId: userId
+      PostId: postId,
+      UserId: userId,
     };
     return this.http.get(`${this.apiurl}/Post/Like`, { params });
   }
   getLikeQuestion(questionId: string, userId: string) {
     const params = {
       QuestionId: questionId,
-      UserId: userId
+      UserId: userId,
     };
     return this.http.get(`${this.apiurl}/Question/Like`, { params });
   }
-  GetMyPost(){
+  GetMyPost() {
     return this.http.get(this.apiurl + '/Post/MyPost');
   }
-  GetMyDocument(){
+  GetMyDocument() {
     return this.http.get(this.apiurl + '/Document/MyDocument');
   }
-  GetMyExam(){
+  GetMyExam() {
     return this.http.get(this.apiurl + '/MultipleChoice/MyMultipleChoice');
   }
-  GetMyExamHistory(){
+  GetMyExamHistory() {
     return this.http.get(this.apiurl + '/ExamHistory/GetMyExamHistory');
   }
-  GetMyQuestion(){
+  GetMyQuestion() {
     return this.http.get(this.apiurl + '/Question/MyQuestion');
   }
-  GetMyPostSaved(){
+  GetMyPostSaved() {
     return this.http.get(this.apiurl + '/Post/MyPostSaved');
   }
-  GetMyQuestionSaved(){
+  GetMyQuestionSaved() {
     return this.http.get(this.apiurl + '/Question/MyQuestionSaved');
   }
-  GetMyDocumentSaved(){
+  GetMyDocumentSaved() {
     return this.http.get(this.apiurl + '/Document/MySave');
   }
-  GetMyNotification(){
+  GetMyNotification() {
     return this.http.get(this.apiurl + '/Notification');
   }
-  GetNews(){
+  GetNews() {
     return this.http.get(this.apiurl + '/News');
   }
-  getpostbytag(tag: string){
+  getpostbytag(tag: string) {
     return this.http.get(this.apiurl + '/Post/FindByTag?tag=' + tag);
   }
-  GetPostDetail(postId: string){
+  GetPostDetail(postId: string) {
     return this.http.get(this.apiurl + '/Post/' + postId);
   }
-  GetQuestionDetail(subId: string){
+  GetQuestionDetail(subId: string) {
     return this.http.get(this.apiurl + '/Question/Detail?subId=' + subId);
   }
-  getQuestionByTag(tag: string){
+  getQuestionByTag(tag: string) {
     return this.http.get(this.apiurl + '/Question/FindByTag?tag=' + tag);
   }
-  GetAnswers(questionId: string){
+  GetAnswers(questionId: string) {
     return this.http.get(this.apiurl + '/Answer?questionId=' + questionId);
   }
-  getRandomPost(quantity: number){
-    return this.http.get(this.apiurl + '/Post/RandomArticle?quantity=' + quantity);
+  getRandomPost(quantity: number) {
+    return this.http.get(
+      this.apiurl + '/Post/RandomArticle?quantity=' + quantity
+    );
   }
-  GetTopTags(number: number){
+  GetTopTags(number: number) {
     return this.http.get(this.apiurl + '/HashTag/TopTag?numberTag=' + number);
   }
-  getUrl(): string{
+  getUrl(): string {
     return this.url;
   }
-  GetAllTag(){
+  GetAllTag() {
     return this.http.get(this.apiurl + '/HashTag');
   }
-  GetQuestionForYou(){
+  GetQuestionForYou() {
     return this.http.get(this.apiurl + '/Question');
   }
   getSave(postId: string, userId: string) {
     const params = {
-        PostId: postId,
-        UserId: userId
+      PostId: postId,
+      UserId: userId,
     };
     return this.http.get(`${this.apiurl}/Post/Save`, { params });
   }
   getSaveQuestion(questionId: string, userId: string) {
     const params = {
       QuestionId: questionId,
-      UserId: userId
+      UserId: userId,
     };
     return this.http.get(`${this.apiurl}/Question/Save`, { params });
   }
-  GetSaveDoc(documentId: string, userId: string){
+  GetSaveDoc(documentId: string, userId: string) {
     const params = {
       DocumentId: documentId,
-      UserId: userId
+      UserId: userId,
     };
     return this.http.get(`${this.apiurl}/Document/Save`, { params });
   }
-  GetTopic(){
-    return this.http.get(this.apiurl + "/Topic");
+  GetTopic() {
+    return this.http.get(this.apiurl + '/Topic');
   }
-  GetPost(){
+  GetPost() {
     return this.http.get(this.apiurl + '/Post/Discover');
   }
-  getPostComment(postId: any){
+  getPostComment(postId: any) {
     return this.http.get(this.apiurl + '/Post/Chat?PostId=' + postId);
   }
-  getReport(){
+  getReport() {
     return this.http.get(this.apiurl + '/Report');
   }
-  LikeOrUnlike(data: FormData): Observable<any>{
+  LikeOrUnlike(data: FormData): Observable<any> {
     return this.http.post(`${this.apiurl}/Post/Like`, data);
   }
-  LikeOrUnlikeQuestion(data: FormData): Observable<any>{
+  LikeOrUnlikeQuestion(data: FormData): Observable<any> {
     return this.http.post(`${this.apiurl}/Question/Like`, data);
   }
-  postSearch(keyWord: string){
+  postSearch(keyWord: string) {
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Post/Search?keyWord=' + keyWord);
   }
-  questionSearch(keyWord: string){
+  questionSearch(keyWord: string) {
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Question/Search?keyWord=' + keyWord);
   }
-  qusestionSearch(keyWord: string){
+  qusestionSearch(keyWord: string) {
     keyWord = encodeURIComponent(keyWord);
     return this.http.get(this.apiurl + '/Question/Search?keyWord=' + keyWord);
   }
   readFilePdf(filePath: string) {
-    return this.http.get(filePath, { responseType: 'arraybuffer' } );
+    return this.http.get(filePath, { responseType: 'arraybuffer' });
   }
-  ReportPost(data: any){
+  ReportPost(data: any) {
     return this.http.post(`${this.apiurl}/Post/Report`, data);
   }
-  ReportQuestion(data: any){
+  ReportQuestion(data: any) {
     return this.http.post(`${this.apiurl}/Question/Report`, data);
   }
-  SaveDownloadDocument(documentId: string){
-    this.http.post(this.apiurl + '/Document/SaveDownloads?documentId=' + documentId, null);
+  SaveDownloadDocument(documentId: string) {
+    this.http.post(
+      this.apiurl + '/Document/SaveDownloads?documentId=' + documentId,
+      null
+    );
   }
-  SaveMyExam(data: FormData){
+  SaveMyExam(data: FormData) {
     return this.http.post(this.apiurl + '/ExamHistory', data);
   }
-  SaveOrUnSave(data: FormData): Observable<any>{
+  SaveOrUnSave(data: FormData): Observable<any> {
     return this.http.post(`${this.apiurl}/Post/Save`, data);
   }
-  SaveOrUnSaveQuestion(data: FormData): Observable<any>{
+  SaveOrUnSaveQuestion(data: FormData): Observable<any> {
     return this.http.post(`${this.apiurl}/Question/Save`, data);
   }
-  SaveOrUnSaveDocument(data: FormData): Observable<any>{
+  SaveOrUnSaveDocument(data: FormData): Observable<any> {
     return this.http.post(`${this.apiurl}/Document/Save`, data);
   }
-  UpdateDocument(data: FormData){
+  UpdateDocument(data: FormData) {
     return this.http.put(this.apiurl + '/Document', data);
   }
-  UpdateExam(data: FormData){
+  UpdateExam(data: FormData) {
     return this.http.put(this.apiurl + '/MultipleChoice', data);
   }
-  UpdatePost(data: FormData){
+  UpdatePost(data: FormData) {
     return this.http.put(this.apiurl + '/Post', data);
   }
-  UpdatePostComment(data: CommentPostDto){
+  UpdatePostComment(data: CommentPostDto) {
     return this.http.put(this.apiurl + '/Post/Chat', data);
   }
-  UpdateQuestion(data: FormData){
+  UpdateQuestion(data: FormData) {
     return this.http.put(this.apiurl + '/Question', data);
   }
-  UpdateQuizOfExam(data: any){
+  UpdateQuizOfExam(data: any) {
     return this.http.put(this.apiurl + '/MultipleChoice/QuizById', data);
   }
-  UpdateForumAnswer(data: AnswerQuestionDto){
+  UpdateForumAnswer(data: AnswerQuestionDto) {
     return this.http.put(this.apiurl + '/Answer', data);
   }
-  UpdateForumSubAnswer(data: SubAnswerQuestionDto){
+  UpdateForumSubAnswer(data: SubAnswerQuestionDto) {
     return this.http.put(this.apiurl + '/Answer/SubAnswer', data);
   }
-  VoteAnswer(data: AnswerFpkDto){
+  VoteAnswer(data: AnswerFpkDto) {
     return this.http.post(this.apiurl + '/Answer/Vote', data);
   }
-  VoteAnswerByQuestioner(data: AnswerFpkDto){
+  VoteAnswerByQuestioner(data: AnswerFpkDto) {
     return this.http.post(this.apiurl + '/Answer/Confirm', data);
   }
-  
-  
 }

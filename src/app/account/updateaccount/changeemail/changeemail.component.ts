@@ -38,8 +38,6 @@ export class ChangeemailComponent {
         (res: any) => {
             const resultObj = res.resultObj;
             this.toastr.success('Vui lòng nhập mã xác nhận được gửi đến email của bạn','Thay đổi email thành công');
-            this.sessionService.setEmail(this.email);
-            this.sessionService.setName(this.email);
             this.sessionService.setToken(resultObj);
             
             this.emailcurrent = this.email;

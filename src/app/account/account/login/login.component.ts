@@ -3,7 +3,6 @@ import { FormBuilder, Validators} from '@angular/forms'
 import { ToastrService} from 'ngx-toastr'
 import { AuthService } from '../../../service/auth.service';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from '../../../service/user.service';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { ForgetpassComponent } from '../../forgetpass/forgetpass.component';
@@ -18,7 +17,7 @@ import { DataService } from 'src/app/service/datashare/data.service';
 })
 export class LoginComponent {
   constructor (private builder: FormBuilder, private  toastr: ToastrService,private userService: UserService,
-    private service: AuthService, private router: Router,private jwtHelper: JwtHelperService 
+    private service: AuthService, private router: Router
     ,private dialog: MatDialog, private sessionService: SessionService, private location: Location,
     private dataService: DataService, ){
   }
@@ -39,16 +38,6 @@ export class LoginComponent {
         const resultObj = res.resultObj;
         if(res.isSuccessed){
           this.sessionService.setToken(resultObj);
-          const decodedToken = this.jwtHelper.decodeToken(res.resultObj);
-          const email = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
-          const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-          const name = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname'];
-          const id = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-          // Lưu thông tin vào sessionStorage
-          this.sessionService.setEmail(email);
-          this.sessionService.setName(name);
-          this.sessionService.setRole(role);
-          this.sessionService.setUserId(id);
           this.userService.GetImage().subscribe(
             (data: any) => {
               if(data !== ''){

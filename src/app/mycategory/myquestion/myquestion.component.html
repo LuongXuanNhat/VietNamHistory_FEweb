@@ -1,47 +1,50 @@
 <div class="plr-200 flex-center-h">
     <div class="interact-save">
-        <button matTooltip="Câu hỏi của tôi" matTooltipPosition="right"
-            mat-icon-button class="btn-interact seleted" style="top: 100px;">
-            <span class="material-symbols-outlined " > 
+        <button matTooltip="Câu hỏi của tôi" matTooltipPosition="right" mat-icon-button class="btn-interact seleted"
+            style="top: 100px;">
+            <span class="material-symbols-outlined ">
                 indeterminate_question_box
             </span>
         </button>
-        <button matTooltip="Câu hỏi đã lưu" matTooltipPosition="right" 
-            mat-icon-button class="btn-interact" style="top: 148px;" routerLink="/mycategory/questionsaved">
-            <span class="material-symbols-outlined"> 
+        <button matTooltip="Câu hỏi đã lưu" matTooltipPosition="right" mat-icon-button class="btn-interact"
+            style="top: 148px;" routerLink="/mycategory/questionsaved">
+            <span class="material-symbols-outlined">
                 bookmark_added
             </span>
         </button>
-        
+
     </div>
     <div style="min-width: 400px; max-width: 1000px;">
         <table mat-table [dataSource]="dataSource" matSort class="font">
             <!-- Title Column -->
             <ng-container matColumnDef="title">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header > Tiêu đề </th>
-              <td mat-cell *matCellDef="let question" style="cursor: pointer;" class="font"> 
-                <a (click)="QuestionDetail(question)" class="text-5-line">
-                <strong>{{ question.title }}</strong>
-                </a>
-                <div class="mb">
-                    <button class="mr text-white" style="border-radius: 2px; background-color:#ED7D2D ; border: none;" (click)="updateQuestion(question)">Sửa</button>
-                <button class="text-white" style="border-radius: 2px; background-color:#DE3B40 ; border: none;">Xóa</button>
-                </div>
-              </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiêu đề </th>
+                <td mat-cell *matCellDef="let question" style="cursor: pointer;" class="font">
+                    <a (click)="QuestionDetail(question)" class="text-5-line">
+                        <strong>{{ question.title }}</strong>
+                    </a>
+                    <div class="mb">
+                        <button class="mr text-white"
+                            style="border-radius: 2px; background-color:#ED7D2D ; border: none;"
+                            (click)="updateQuestion(question)">Sửa</button>
+                        <button class="text-white" style="border-radius: 2px; background-color:#DE3B40 ; border: none;"
+                            (click)="deleteQuestion(question.id)">Xóa</button>
+                    </div>
+                </td>
             </ng-container>
-      
+
             <!-- Created At Column -->
             <ng-container matColumnDef="createdAt">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 110px;"> Ngày viết </th>
-              <td mat-cell *matCellDef="let post"> {{ post.createdAt }} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 110px;"> Ngày viết </th>
+                <td mat-cell *matCellDef="let post"> {{ post.createdAt }} </td>
             </ng-container>
-      
+
             <!-- Updated At Column -->
             <ng-container matColumnDef="updatedAt">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 110px;"> Ngày sửa </th>
-              <td mat-cell *matCellDef="let post"> {{ post.updatedAt }} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 110px;"> Ngày sửa </th>
+                <td mat-cell *matCellDef="let post"> {{ post.updatedAt }} </td>
             </ng-container>
-            
+
             <!-- View Number Column -->
             <ng-container matColumnDef="viewNumber">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Lượt xem </th>
@@ -67,9 +70,9 @@
             </ng-container>
             <tr style="height: 48px;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+        </table>
     </div>
-    <div  class="tag-category plr-1 pt pb text-white">
+    <div class="tag-category plr-1 pt pb text-white">
         Câu hỏi
     </div>
 </div>

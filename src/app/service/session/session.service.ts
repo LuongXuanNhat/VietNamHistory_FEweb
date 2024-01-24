@@ -1,61 +1,78 @@
 import { I } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionService {
-  
-  private emailSubject = new BehaviorSubject<string>(''); 
+  private emailSubject = new BehaviorSubject<string>('');
   email$ = this.emailSubject.asObservable();
-  private descriptionUserSubject = new BehaviorSubject<string>(''); 
+  private descriptionUserSubject = new BehaviorSubject<string>('');
   descriptionUser$ = this.descriptionUserSubject.asObservable();
 
-  constructor() { }
+  constructor(private jwtHelper: JwtHelperService) {}
 
   getKeyWordDocument(): string | null {
     return sessionStorage.getItem('keyword_document');
   }
-  getName(){
+  getName() {
     return sessionStorage.getItem('name');
   }
-  getToken(){
-    return sessionStorage.getItem('access_token');
+  getToken() {
+    return sessionStorage.getItem('access_token') ?? '';
   }
-  getEmail(){
-    return sessionStorage.getItem('email');
+  decode() {
+    return this.jwtHelper.decodeToken(this.getToken());
   }
-  getRole(){
-    return sessionStorage.getItem('role');
+  getEmail() {
+    if (this.getToken())
+      return (
+        this.decode()[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+        ] ?? ''
+      );
+    return '';
   }
-  getUserId(){
-    return sessionStorage.getItem('id');
+  getRole() {
+    if (this.getToken())
+      return (
+        this.decode()[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ] ?? ''
+      );
+    return '';
   }
-  getAvatar(){
+  getUserName() {
+    if (this.getToken())
+      return (
+        this.decode()[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname'
+        ] ?? ''
+      );
+    return '';
+  }
+  getUserId() {
+    if (this.getToken())
+      return (
+        this.decode()[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        ] ?? ''
+      );
+    return '';
+  }
+  getAvatar() {
     return sessionStorage.getItem('avatar');
   }
-  getDescriptionUser(){
+  getDescriptionUser() {
     return sessionStorage.getItem('descriptionuser');
   }
   setKeyWordDocument(keyWord: string) {
     sessionStorage.setItem('keyword_document', keyWord);
   }
-  setName(name: string) {
-    sessionStorage.setItem('name', name);
-  }
   setToken(token: string) {
     sessionStorage.setItem('access_token', token);
-  }
-  setEmail(email: string) {
-    sessionStorage.setItem('email', email);
-    this.emailSubject.next(email);
-  }
-  setRole(role: string) {
-    sessionStorage.setItem('role', role);
-  }
-  setUserId(id: string){
-    sessionStorage.setItem('id', id);
   }
   setAvatar(avatar: string) {
     sessionStorage.setItem('avatar', avatar);
@@ -68,19 +85,9 @@ export class SessionService {
   removeToken() {
     sessionStorage.removeItem('access_token');
   }
-  removeName() {
-    sessionStorage.removeItem('name');
-  }
-  removeEmail() {
-    sessionStorage.removeItem('email');
-  }
   removeAvatar() {
     sessionStorage.removeItem('avatar');
   }
-  removeRole() {
-    sessionStorage.removeItem('role');
-  }
-
 
   clearSessionStorage() {
     sessionStorage.clear();

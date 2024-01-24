@@ -603,4 +603,20 @@ export class QuestionComponent implements OnInit{
       answerCardElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+  deleteQuestion(){
+    this.service.deleteQuestion(this.questionId).subscribe(
+      (data: any) => {
+        if(data.isSuccessed){
+          this.toastr.success("Xóa câu hỏi thành công");
+          // this.questions = this.questions.filter(question => question.id !== id);
+          this.router.navigate(['/forum/foryou']);
+        } else {
+          this.toastr.error("Lỗi: " + data.message);
+        }
+      }, (error: any) => {
+        this.toastr.error("Lỗi: "+ error);
+      }
+    )
+  }
 }
