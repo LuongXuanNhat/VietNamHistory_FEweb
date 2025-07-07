@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor(private http: HttpClient ) { }
-   apiurl = 'https://tyls.fun';
+   apiurl = 'http://xuannhat01-001-site1.jtempurl.com';
   // apiurl = 'https://localhost:7138';
   // apiurl = 'https://vuanhpham25-001-site1.gtempurl.com';
   getApiUrl(){
